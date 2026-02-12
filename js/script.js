@@ -115,30 +115,76 @@ function toggleCart() {
   document.getElementById("cartSidebar").classList.toggle("active");
 }
 
-function enviarWhatsApp() {
+async function enviarWhatsApp() {
   const nome = document.getElementById("c-nome").value;
   const mesa = document.getElementById("c-mesa").value;
-  if (!nome || !mesa || carrinho.length === 0)
-    return alert("Preencha Nome e Mesa!");
+  const pagamento = document.getElementById("c-pagto").value;
 
-  const numP = Math.floor(100000 + Math.random() * 900000);
-  let msg = `${nome}, seu pedido Nº ${numP} está em análise.\n\n*Pedido nº ${numP}*\n\n*Itens:*\n`;
+  if (!nome || !mesa || carrinho.length === 0) {
+    alert("Preencha Nome, Mesa e adicione itens!");
+    return;
+  }
+
   let total = 0;
 
-  carrinho.forEach((item) => {
-    let sub = item.precoUn * item.qtd;
-    total += sub;
-    msg += `➡️ *${item.qtd}x ${item.nome}*\n`;
-    if (item.adicionais.length > 0)
-      msg += `   _Adicionais: ${item.adicionais.join(", ")}_\n`;
-    if (item.obs) msg += `   _Obs: ${item.obs}_\n`;
+  const itensFormatados = carrinho.map((item) => {
+    const subtotal = item.precoUn * item.qtd;
+    total += subtotal;
+
+    return {
+      nome: item.nome,
+      descricao: item.desc,
+      quantidade: item.qtd,
+      precoUnitario: item.precoUn,
+      subtotal: subtotal,
+      adicionais: item.adicionais,
+      observacao: item.obs || "",
+    };
   });
 
-  msg += `\n💵 *${document.getElementById("c-pagto").value}*\n📍 Mesa: ${mesa}\n⏱️ Estimativa: 30~60 min\n\n*Total: R$ ${total.toFixed(2)}*\n\nObrigado! 😉`;
-  window.open(
-    `https://api.whatsapp.com/send?phone=559885301953&text=${encodeURIComponent(msg)}`,
-    "_blank",
-  );
+  try {
+    // 🔥 SALVAR NO FIRESTORE
+    const pedidoRef = await db.collection("pedidos").add({
+      userId: auth.currentUser.uid,
+      nomeCliente: nome,
+      telefone: auth.currentUser.phoneNumber,
+      mesa: mesa,
+      pagamento: pagamento,
+      itens: itensFormatados,
+      total: total,
+      status: "Em análise",
+      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    const numeroPedido = pedidoRef.id.substring(0, 6).toUpperCase();
+
+    // 📲 MENSAGEM WHATSAPP
+    let msg = `*Pedido Nº ${numeroPedido}*\n\n`;
+    msg += `👤 ${nome}\n📍 Mesa: ${mesa}\n💳 ${pagamento}\n\n*Itens:*\n`;
+
+    itensFormatados.forEach((item) => {
+      msg += `➡️ ${item.quantidade}x ${item.nome}\n`;
+      if (item.adicionais.length > 0)
+        msg += `   + ${item.adicionais.join(", ")}\n`;
+      if (item.observacao) msg += `   Obs: ${item.observacao}\n`;
+    });
+
+    msg += `\n💰 Total: R$ ${total.toFixed(2)}\n\nObrigado! 🍔`;
+
+    window.open(
+      `https://api.whatsapp.com/send?phone=559885301953&text=${encodeURIComponent(msg)}`,
+      "_blank",
+    );
+
+    // 🧹 Limpar carrinho
+    carrinho = [];
+    renderCarrinho();
+
+    alert("Pedido enviado com sucesso!");
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao salvar pedido. Verifique Firebase.");
+  }
 }
 
 // ================= LOGIN =================
@@ -180,4 +226,69 @@ function fazerLogin() {
 
   document.getElementById("loginScreen").style.display = "none";
   document.getElementById("c-nome").value = nome;
+}
+
+// ================= LOGIN SMS =================
+
+window.onload = function () {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      document.getElementById("loginScreen").style.display = "none";
+      carregarDadosUsuario(user);
+    }
+  });
+};
+
+function enviarCodigo() {
+  const telefone = document.getElementById("telefoneUser").value;
+
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+    "recaptcha-container",
+    { size: "normal" },
+  );
+
+  auth
+    .signInWithPhoneNumber(telefone, window.recaptchaVerifier)
+    .then((confirmationResult) => {
+      window.confirmationResult = confirmationResult;
+      document.getElementById("codigoSMS").style.display = "block";
+      document.getElementById("btnConfirmar").style.display = "block";
+      alert("Código enviado!");
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
+
+function confirmarCodigo() {
+  const codigo = document.getElementById("codigoSMS").value;
+  const nome = document.getElementById("nomeUser").value;
+
+  window.confirmationResult
+    .confirm(codigo)
+    .then((result) => {
+      const user = result.user;
+
+      db.collection("usuarios").doc(user.uid).set({
+        nome: nome,
+        telefone: user.phoneNumber,
+        criadoEm: new Date(),
+      });
+
+      document.getElementById("loginScreen").style.display = "none";
+    })
+    .catch(() => {
+      alert("Código inválido!");
+    });
+}
+
+function carregarDadosUsuario(user) {
+  db.collection("usuarios")
+    .doc(user.uid)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        document.getElementById("c-nome").value = doc.data().nome;
+      }
+    });
 }
