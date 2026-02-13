@@ -186,35 +186,83 @@ function toggleCart() {
 // ================= FINALIZAR PEDIDO =================
 
 function finalizarPedido() {
-  const user = auth.currentUser;
+  const user = firebase.auth().currentUser;
+  if (!user) return;
 
-  if (!user || carrinho.length === 0) {
+  const nome = document.getElementById("c-nome").value;
+  const numero = document.getElementById("c-numero").value;
+  const observacao = document.getElementById("c-obs").value;
+  const pagamento = document.getElementById("c-pagto").value;
+
+  if (!nome || !numero) {
+    alert("Preencha nome e número!");
+    return;
+  }
+
+  if (carrinho.length === 0) {
     alert("Carrinho vazio!");
     return;
   }
 
-  const nome = document.getElementById("c-nome").value;
-  const numero = document.getElementById("c-numero").value;
-  const obsGeral = document.getElementById("c-obs-geral")?.value || "";
+  let total = 0;
+  let textoItens = "";
 
-  let total = carrinho.reduce((acc, item) => acc + item.precoUn * item.qtd, 0);
+  carrinho.forEach((item, index) => {
+    const subtotal = item.preco * item.quantidade;
+    total += subtotal;
 
-  db.collection("pedidos")
+    textoItens += `\n${index + 1}. ${item.nome}
+Qtd: ${item.quantidade}
+Obs: ${item.obs || "Nenhuma"}
+Subtotal: R$ ${subtotal.toFixed(2)}\n`;
+  });
+
+  // 🔥 SALVA NO FIRESTORE
+  firebase
+    .firestore()
+    .collection("pedidos")
     .add({
       uid: user.uid,
-      nome,
-      numero,
-      observacaoGeral: obsGeral,
+      nome: nome,
+      numero: numero,
+      observacaoGeral: observacao,
+      pagamento: pagamento,
       itens: carrinho,
-      total,
+      total: total,
       status: "Recebido",
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
-      alert("Pedido enviado com sucesso!");
+      // 🔥 MONTA MENSAGEM WHATSAPP
+      const mensagem = `🍔 *NOVO PEDIDO*
+
+Cliente: ${nome}
+Número: ${numero}
+
+Itens:${textoItens}
+
+Observação Geral:
+${observacao || "Nenhuma"}
+
+Pagamento: ${pagamento}
+
+💰 Total: R$ ${total.toFixed(2)}
+`;
+
+      const numeroLanchonete = "5598985301953";
+      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
+
+      // Limpa carrinho
       carrinho = [];
-      renderCarrinho();
-      toggleCart();
+      atualizarCarrinho();
+
+      // Abre WhatsApp
+      window.open(url, "_blank");
+
+      alert("Pedido enviado com sucesso!");
+    })
+    .catch((error) => {
+      console.error("Erro ao salvar pedido:", error);
     });
 }
 
