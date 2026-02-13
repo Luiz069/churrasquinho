@@ -6,260 +6,161 @@
     <title>Cardápio Digital - Lanchonete</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
+
   <body>
-    <!-- ---------------------------------------------------------------------- -->
-    <!-- TELA LOGIN -->
-    <!-- <div
-      id="loginScreen"
-      style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #e61919;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      "
-    >
-      <div
-        style="
-          background: white;
-          width: 95%;
-          max-width: 400px;
-          padding: 30px;
-          border-radius: 20px;
-          text-align: center;
-          border: 4px solid black;
-        "
-      >
-        <h2>Login com Celular 📱</h2>
-
-        <input type="text" id="nomeUser" placeholder="Seu nome completo" />
-        <input type="tel" id="telefoneUser" placeholder="+55 98 99999-9999" />
-
-        <div id="recaptcha-container"></div>
-
-        <button
-          onclick="enviarCodigo()"
-          id="btnEnviarCodigo"
-          class="btn-add-main"
-        >
-          Enviar Código
-        </button>
-
-        <input
-          type="text"
-          id="codigoSMS"
-          placeholder="Digite o código"
-          style="display: none"
-        />
-        <button
-          onclick="confirmarCodigo()"
-          id="btnConfirmar"
-          style="display: none"
-          class="btn-add-main"
-        >
-          Confirmar Código
-        </button>
-      </div>
-    </div> -->
-
-    <input type="text" id="telefone" placeholder="+5598999999999" />
-    <button id="btnEnviar">Enviar Código</button>
-
-    <input
-      type="text"
-      id="codigo"
-      placeholder="Digite o código"
-      style="display: none"
-    />
-    <button id="btnConfirmar" style="display: none">Confirmar</button>
-
-    <div id="recaptcha-container"></div>
-
-    <button onclick="confirmarCodigo()" id="btnConfirmar" style="display: none">
-      Confirmar
-    </button>
-
-    <!-- ---------------------------------------------------------------------- -->
-
+    <!-- ========================================================= -->
+    <!-- TOPO -->
     <header>
       <h1>LANCHONETE</h1>
       <p>Peça e receba em casa ou na mesa!</p>
+
+      <div
+        style="
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <button onclick="abrirHistorico()" class="btn-historico">
+          📋 Histórico
+        </button>
+
+        <button onclick="sair()" class="btn-logout">🚪 Sair</button>
+      </div>
     </header>
 
-    <div class="container">
-      <div class="categoria-box">
-        <h3 style="color: var(--vermelho)">🍔 Hambúrgueres</h3>
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span> <span>R$ 25,00</span>
-          </div>
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25.0,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar ao Carrinho
-          </button>
-        </div>
+    <!-- ========================================================= -->
+    <!-- MODAL HISTÓRICO -->
+    <div id="modalHistorico" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>📋 Meus Pedidos</h2>
+        <div id="listaHistorico"></div>
+        <button onclick="fecharHistorico()">Fechar</button>
       </div>
     </div>
 
+    <!-- ========================================================= -->
+    <!-- MODAL PRODUTO -->
     <div id="modalItem" class="modal">
       <div class="modal-content">
         <h2 id="m-nome" style="color: var(--vermelho); margin: 0">Nome</h2>
         <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
 
-        <label><b>Quantidade do Item:</b></label>
+        <label><b>Quantidade:</b></label>
         <div class="qtd-control" style="margin: 10px 0">
           <button class="btn-qtd" onclick="mudarQtdModal(-1)">-</button>
-          <span
-            id="m-qtd-val"
-            style="font-weight: bold; width: 30px; text-align: center"
-            >1</span
-          >
+          <span id="m-qtd-val">1</span>
           <button class="btn-qtd" onclick="mudarQtdModal(1)">+</button>
         </div>
 
         <div class="adicionais-container">
-          <p><b>Deseja Adicionais?</b></p>
+          <p><b>Adicionais:</b></p>
 
           <div class="add-item-row">
-            <div class="add-info">
-              <span class="add-nome">Queijo Extra</span
-              ><span class="add-preco">+ R$ 3,00</span>
-            </div>
+            <span>Queijo Extra (+ R$ 3,00)</span>
             <div class="qtd-control">
-              <button class="btn-qtd" onclick="mudarAdd('queijo', -1)">
-                -
-              </button>
-              <span
-                id="qtd-add-queijo"
-                style="font-weight: bold; width: 20px; text-align: center"
-                >0</span
-              >
-              <button class="btn-qtd" onclick="mudarAdd('queijo', 1)">+</button>
+              <button onclick="mudarAdd('queijo', -1)">-</button>
+              <span id="qtd-add-queijo">0</span>
+              <button onclick="mudarAdd('queijo', 1)">+</button>
             </div>
           </div>
 
           <div class="add-item-row">
-            <div class="add-info">
-              <span class="add-nome">Ovo Extra</span
-              ><span class="add-preco">+ R$ 2,00</span>
-            </div>
+            <span>Ovo Extra (+ R$ 2,00)</span>
             <div class="qtd-control">
-              <button class="btn-qtd" onclick="mudarAdd('ovo', -1)">-</button>
-              <span
-                id="qtd-add-ovo"
-                style="font-weight: bold; width: 20px; text-align: center"
-                >0</span
-              >
-              <button class="btn-qtd" onclick="mudarAdd('ovo', 1)">+</button>
+              <button onclick="mudarAdd('ovo', -1)">-</button>
+              <span id="qtd-add-ovo">0</span>
+              <button onclick="mudarAdd('ovo', 1)">+</button>
             </div>
           </div>
 
           <div class="add-item-row">
-            <div class="add-info">
-              <span class="add-nome">Carne Extra</span
-              ><span class="add-preco">+ R$ 8,00</span>
-            </div>
+            <span>Carne Extra (+ R$ 8,00)</span>
             <div class="qtd-control">
-              <button class="btn-qtd" onclick="mudarAdd('carne', -1)">-</button>
-              <span
-                id="qtd-add-carne"
-                style="font-weight: bold; width: 20px; text-align: center"
-                >0</span
-              >
-              <button class="btn-qtd" onclick="mudarAdd('carne', 1)">+</button>
+              <button onclick="mudarAdd('carne', -1)">-</button>
+              <span id="qtd-add-carne">0</span>
+              <button onclick="mudarAdd('carne', 1)">+</button>
             </div>
           </div>
         </div>
 
         <label><b>Observações</b></label>
-        <textarea
-          id="m-obs"
-          rows="2"
-          placeholder="Ex: Sem maionese, sem picles..."
-        ></textarea>
+        <textarea id="m-obs" rows="2"></textarea>
 
         <div class="subtotal-tag">
           Subtotal: R$ <span id="m-subtotal">0,00</span>
         </div>
 
-        <button
-          class="btn-add-main"
-          style="background: #28a745"
-          onclick="addAoCarrinho()"
-        >
-          ✅ Adicionar
+        <button class="btn-add-main" onclick="addAoCarrinho()">
+          ✅ Adicionar ao Carrinho
         </button>
-        <button
-          onclick="fecharModal()"
-          style="
-            width: 100%;
-            border: none;
-            background: none;
-            margin-top: 10px;
-            cursor: pointer;
-          "
-        >
-          Cancelar
-        </button>
+
+        <button onclick="fecharModal()">Cancelar</button>
       </div>
     </div>
 
+    <!-- ========================================================= -->
+    <!-- CARDÁPIO -->
+    <div class="container">
+      <div class="categoria-box">
+        <h3 style="color: var(--vermelho)">🍔 Hambúrgueres</h3>
+
+        <div class="item">
+          <div class="item-row">
+            <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span>
+          </div>
+
+          <p style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Tudo Especial',
+                25,
+                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- CARRINHO -->
     <div id="cartSidebar" class="cart-sidebar">
-      <h2 style="color: var(--vermelho)">Seu Carrinho</h2>
+      <h2 style="color: var(--vermelho)">🛒 Seu Carrinho</h2>
+
       <div id="lista-carrinho"></div>
-      <div
-        style="
-          font-size: 22px;
-          font-weight: bold;
-          margin: 20px 0;
-          border-top: 2px solid #eee;
-          padding-top: 15px;
-        "
-      >
+
+      <div style="font-size: 22px; font-weight: bold; margin: 20px 0">
         Total: R$ <span id="total-final">0,00</span>
       </div>
+
       <input type="text" id="c-nome" placeholder="Seu nome completo *" />
-      <input type="text" id="c-mesa" placeholder="Local/Mesa *" />
+      <input type="text" id="c-numero" placeholder="Seu número *" />
+      <textarea
+        id="c-obs"
+        placeholder="Observações gerais do pedido"
+      ></textarea>
+
       <select id="c-pagto">
         <option value="Dinheiro">Dinheiro</option>
         <option value="Pix">Pix</option>
         <option value="Cartão">Cartão</option>
       </select>
-      <button
-        class="btn-add-main"
-        style="padding: 18px"
-        onclick="enviarWhatsApp()"
-      >
+
+      <button class="btn-add-main" onclick="finalizarPedido()">
         📲 Finalizar Pedido
       </button>
-      <button
-        onclick="toggleCart()"
-        style="
-          width: 100%;
-          border: none;
-          background: none;
-          margin-top: 20px;
-          cursor: pointer;
-        "
-      >
-        Voltar
-      </button>
+
+      <button onclick="toggleCart()">Voltar</button>
     </div>
 
     <div class="footer-btn">
@@ -268,7 +169,8 @@
       </button>
     </div>
 
-    <!-- Firebase -->
+    <!-- ========================================================= -->
+    <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>

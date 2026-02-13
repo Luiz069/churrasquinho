@@ -17,7 +17,7 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// ================= PROTEÇÃO DE ROTA (PASSO 4) =================
+// ================= PROTEÇÃO DE ROTA =================
 
 auth.onAuthStateChanged((user) => {
   if (!user) {
@@ -34,12 +34,11 @@ function carregarDadosUsuario(user) {
     .doc(user.uid)
     .get()
     .then((doc) => {
-      if (doc.exists) {
-        const nomeInput = document.getElementById("c-nome");
-        if (nomeInput) {
-          nomeInput.value = doc.data().nome || user.displayName || "";
-        }
-      }
+      const nomeInput = document.getElementById("c-nome");
+      const numeroInput = document.getElementById("c-numero");
+
+      if (nomeInput) nomeInput.value = user.displayName || "";
+      if (numeroInput) numeroInput.value = user.phoneNumber || "";
     });
 }
 
@@ -58,6 +57,8 @@ let itemAtual = {};
 let qtdModal = 1;
 let extras = { queijo: 0, ovo: 0, carne: 0 };
 const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
+
+// ===== MODAL PRODUTO =====
 
 function abrirModal(nome, preco, desc) {
   itemAtual = { nome, preco, desc };
@@ -105,6 +106,8 @@ function fecharModal() {
   document.getElementById("modalItem").style.display = "none";
 }
 
+// ===== ADICIONAR AO CARRINHO =====
+
 function addAoCarrinho() {
   let listaExtras = [];
 
@@ -129,6 +132,8 @@ function addAoCarrinho() {
   fecharModal();
 }
 
+// ===== RENDER CARRINHO =====
+
 function renderCarrinho() {
   const lista = document.getElementById("lista-carrinho");
   lista.innerHTML = "";
@@ -140,37 +145,23 @@ function renderCarrinho() {
 
     lista.innerHTML += `
       <div class="cart-item-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-          <div style="flex:1">
-            <b>${item.nome}</b><br>
-            <small>${item.desc}</small>
-            ${
-              item.adicionais.length > 0
-                ? `<div style="font-size:0.8rem; color:#d61b1b; margin-top:5px;"><b>+ ${item.adicionais.join(", ")}</b></div>`
-                : ""
-            }
-            ${
-              item.obs
-                ? `<div style="color:red; font-size:0.85rem; margin-top:5px;">Obs: ${item.obs}</div>`
-                : ""
-            }
-          </div>
-          <b style="color:var(--vermelho)">R$ ${sub.toFixed(2)}</b>
-        </div>
-
-        <div style="display:flex; justify-content:flex-end; gap:12px; align-items:center; margin-top:15px;">
-          <div class="qtd-control">
-            <button class="btn-qtd" onclick="alterarQtdCarrinho(${i}, -1)">-</button>
-            <span>${item.qtd}</span>
-            <button class="btn-qtd" onclick="alterarQtdCarrinho(${i}, 1)">+</button>
-          </div>
-          <button onclick="removerItem(${i})" style="border:none; background:none; cursor:pointer; font-size:1.2rem;">🗑️</button>
+        <b>${item.nome}</b><br>
+        ${item.desc}<br>
+        ${item.adicionais.join(", ")}<br>
+        ${item.obs ? "Obs: " + item.obs : ""}
+        <br><b>R$ ${sub.toFixed(2)}</b>
+        <div>
+          <button onclick="alterarQtdCarrinho(${i}, -1)">-</button>
+          ${item.qtd}
+          <button onclick="alterarQtdCarrinho(${i}, 1)">+</button>
+          <button onclick="removerItem(${i})">🗑️</button>
         </div>
       </div>
     `;
   });
 
   document.getElementById("total-final").innerText = totalGeral.toFixed(2);
+
   document.getElementById("cart-count").innerText = carrinho.length;
 }
 
@@ -190,4 +181,72 @@ function removerItem(i) {
 
 function toggleCart() {
   document.getElementById("cartSidebar").classList.toggle("active");
+}
+
+// ================= FINALIZAR PEDIDO =================
+
+function finalizarPedido() {
+  const user = auth.currentUser;
+
+  if (!user || carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  const nome = document.getElementById("c-nome").value;
+  const numero = document.getElementById("c-numero").value;
+  const obsGeral = document.getElementById("c-obs-geral")?.value || "";
+
+  let total = carrinho.reduce((acc, item) => acc + item.precoUn * item.qtd, 0);
+
+  db.collection("pedidos")
+    .add({
+      uid: user.uid,
+      nome,
+      numero,
+      observacaoGeral: obsGeral,
+      itens: carrinho,
+      total,
+      status: "Recebido",
+      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(() => {
+      alert("Pedido enviado com sucesso!");
+      carrinho = [];
+      renderCarrinho();
+      toggleCart();
+    });
+}
+
+// ================= HISTÓRICO =================
+
+function abrirHistorico() {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  db.collection("pedidos")
+    .where("uid", "==", user.uid)
+    .orderBy("criadoEm", "desc")
+    .get()
+    .then((snapshot) => {
+      let html = "";
+
+      snapshot.forEach((doc) => {
+        const pedido = doc.data();
+        html += `
+          <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+            <strong>${pedido.nome}</strong><br>
+            Total: R$ ${pedido.total}<br>
+            Status: ${pedido.status}
+          </div>
+        `;
+      });
+
+      document.getElementById("listaHistorico").innerHTML = html;
+      document.getElementById("modalHistorico").style.display = "block";
+    });
+}
+
+function fecharHistorico() {
+  document.getElementById("modalHistorico").style.display = "none";
 }
