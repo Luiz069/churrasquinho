@@ -9,7 +9,7 @@
   <body>
     <!-- ---------------------------------------------------------------------- -->
     <!-- TELA LOGIN -->
-    <div
+    <!-- <div
       id="loginScreen"
       style="
         position: fixed;
@@ -42,7 +42,11 @@
 
         <div id="recaptcha-container"></div>
 
-        <button onclick="enviarCodigo()" class="btn-add-main">
+        <button
+          onclick="enviarCodigo()"
+          id="btnEnviarCodigo"
+          class="btn-add-main"
+        >
           Enviar Código
         </button>
 
@@ -61,7 +65,24 @@
           Confirmar Código
         </button>
       </div>
-    </div>
+    </div> -->
+
+    <input type="text" id="telefone" placeholder="+5598999999999" />
+    <button id="btnEnviar">Enviar Código</button>
+
+    <input
+      type="text"
+      id="codigo"
+      placeholder="Digite o código"
+      style="display: none"
+    />
+    <button id="btnConfirmar" style="display: none">Confirmar</button>
+
+    <div id="recaptcha-container"></div>
+
+    <button onclick="confirmarCodigo()" id="btnConfirmar" style="display: none">
+      Confirmar
+    </button>
 
     <!-- ---------------------------------------------------------------------- -->
 
@@ -247,7 +268,32 @@
       </button>
     </div>
 
-    <script src="js/firebase.js" type="module"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCSCPTNBvh7Aln21o18nhmcoyhLKh6SsS8",
+        authDomain: "churrasquinho-durans.firebaseapp.com",
+        projectId: "churrasquinho-durans",
+        storageBucket: "churrasquinho-durans.firebasestorage.app",
+        messagingSenderId: "955795329849",
+        appId: "1:955795329849:web:7977212ba4d0ffbf9f4ee8",
+      };
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (!user) {
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+
     <script src="js/script.js"></script>
   </body>
 </html>
