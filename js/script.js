@@ -1,5 +1,3 @@
-// ================= FIREBASE CONFIG =================
-
 const firebaseConfig = {
   apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
   authDomain: "churrasquinho-7b2d2.firebaseapp.com",
@@ -19,13 +17,13 @@ const db = firebase.firestore();
 
 // ================= PROTEÇÃO DE ROTA =================
 
-// auth.onAuthStateChanged((user) => {
-//   if (!user) {
-//     window.location.href = "login.html";
-//   } else {
-//     carregarDadosUsuario(user);
-//   }
-// });
+auth.onAuthStateChanged((user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  } else {
+    carregarDadosUsuario(user);
+  }
+});
 
 // ================= CARREGAR DADOS DO USUÁRIO =================
 
