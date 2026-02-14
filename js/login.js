@@ -16,7 +16,7 @@ const db = firebase.firestore();
 // Se já estiver logado → vai para index
 auth.onAuthStateChanged((user) => {
   if (user) {
-    window.location.href = "index.html";
+    window.location.href = "inicio.html";
   }
 });
 
@@ -39,7 +39,7 @@ document.getElementById("btnGoogleLogin").addEventListener("click", () => {
         { merge: true },
       );
 
-      window.location.href = "index.html";
+      window.location.href = "inicio.html";
     })
     .catch((error) => {
       alert(error.message);
