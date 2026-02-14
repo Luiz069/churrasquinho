@@ -45,7 +45,7 @@ function carregarDadosUsuario(user) {
 
 function sair() {
   auth.signOut().then(() => {
-    window.location.href = "inicio.htm";
+    window.location.href = "inicio.html";
   });
 }
 
