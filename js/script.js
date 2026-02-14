@@ -18,13 +18,13 @@ const db = firebase.firestore();
 
 // ================= PROTEÇÃO DE ROTA =================
 
-// auth.onAuthStateChanged((user) => {
-//   if (!user) {
-//     window.location.href = "inicio.htm.html";
-//   } else {
-//     carregarDadosUsuario(user);
-//   }
-// });
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    carregarDadosUsuario(user);
+  } else {
+    window.location.href = "index.html";
+  }
+});
 
 // ================= CARREGAR DADOS DO USUÁRIO =================
 
@@ -45,7 +45,7 @@ function carregarDadosUsuario(user) {
 
 function sair() {
   auth.signOut().then(() => {
-    window.location.href = "index.html";
+    window.location.href = "inicio.html";
   });
 }
 
