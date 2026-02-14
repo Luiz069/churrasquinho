@@ -1,13 +1,13 @@
 // ================= FIREBASE CONFIG =================
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCSCPTNBvh7Aln21o18nhmcoyhLKh6SsS8",
-  authDomain: "churrasquinho-durans.firebaseapp.com",
-  projectId: "churrasquinho-durans",
-  storageBucket: "churrasquinho-durans.firebasestorage.app",
-  messagingSenderId: "955795329849",
-  appId: "1:955795329849:web:7977212ba4d0ffbf9f4ee8",
-  measurementId: "G-7MPZM4N3E8",
+  apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
+  authDomain: "churrasquinho-7b2d2.firebaseapp.com",
+  projectId: "churrasquinho-7b2d2",
+  storageBucket: "churrasquinho-7b2d2.firebasestorage.app",
+  messagingSenderId: "506815282983",
+  appId: "1:506815282983:web:92d14f09bafa15e2d03302",
+  measurementId: "G-V0TWG5Y0H8",
 };
 
 if (!firebase.apps.length) {

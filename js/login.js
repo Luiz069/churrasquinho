@@ -1,7 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCSCPTNBvh7Aln21o18nhmcoyhLKh6SsS8",
-  authDomain: "churrasquinho-durans.firebaseapp.com",
-  projectId: "churrasquinho-durans",
+  apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
+  authDomain: "churrasquinho-7b2d2.firebaseapp.com",
+  projectId: "churrasquinho-7b2d2",
+  storageBucket: "churrasquinho-7b2d2.firebasestorage.app",
+  messagingSenderId: "506815282983",
+  appId: "1:506815282983:web:92d14f09bafa15e2d03302",
+  measurementId: "G-V0TWG5Y0H8",
 };
 
 firebase.initializeApp(firebaseConfig);
