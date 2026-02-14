@@ -207,11 +207,11 @@ function finalizarPedido() {
   let textoItens = "";
 
   carrinho.forEach((item, index) => {
-    const subtotal = item.preco * item.quantidade;
+    const subtotal = item.precoUn * item.qtd;
     total += subtotal;
 
     textoItens += `\n${index + 1}. ${item.nome}
-Qtd: ${item.quantidade}
+Qtd: ${item.qtd}
 Obs: ${item.obs || "Nenhuma"}
 Subtotal: R$ ${subtotal.toFixed(2)}\n`;
   });
@@ -253,7 +253,7 @@ Pagamento: ${pagamento}
 
       // Limpa carrinho
       carrinho = [];
-      atualizarCarrinho();
+      renderCarrinho();
 
       // Abre WhatsApp
       window.open(url, "_blank");
