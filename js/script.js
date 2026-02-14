@@ -20,7 +20,7 @@ const db = firebase.firestore();
 
 // auth.onAuthStateChanged((user) => {
 //   if (!user) {
-//     window.location.href = "index.html";
+//     window.location.href = "inicio.htm.html";
 //   } else {
 //     carregarDadosUsuario(user);
 //   }
@@ -45,7 +45,7 @@ function carregarDadosUsuario(user) {
 
 function sair() {
   auth.signOut().then(() => {
-    window.location.href = "index.html";
+    window.location.href = "inicio.htm.html";
   });
 }
 
@@ -206,11 +206,11 @@ function finalizarPedido() {
   let total = 0;
   let textoItens = "";
 
-  carrinho.forEach((item, index) => {
+  carrinho.forEach((item, inicio.htm) => {
     const subtotal = item.precoUn * item.qtd;
     total += subtotal;
 
-    textoItens += `\n${index + 1}. ${item.nome}
+    textoItens += `\n${inicio.htm + 1}. ${item.nome}
 Qtd: ${item.qtd}
 Obs: ${item.obs || "Nenhuma"}
 Subtotal: R$ ${subtotal.toFixed(2)}\n`;

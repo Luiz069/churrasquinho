@@ -74,7 +74,7 @@ header {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2000;
+  z-inicio.htm: 2000;
   justify-content: center;
   align-items: center;
 }
@@ -152,7 +152,7 @@ header {
   max-width: 480px;
   height: 100%;
   background: white;
-  z-index: 3000;
+  z-inicio.htm: 3000;
   transition: 0.3s;
   padding: 20px;
   overflow-y: auto;
