@@ -206,11 +206,11 @@ function finalizarPedido() {
   let total = 0;
   let textoItens = "";
 
-  carrinho.forEach((item, inicio.htm) => {
+  carrinho.forEach((item, inicio) => {
     const subtotal = item.precoUn * item.qtd;
     total += subtotal;
 
-    textoItens += `\n${inicio.htm + 1}. ${item.nome}
+    textoItens += `\n${inicio + 1}. ${item.nome}
 Qtd: ${item.qtd}
 Obs: ${item.obs || "Nenhuma"}
 Subtotal: R$ ${subtotal.toFixed(2)}\n`;
