@@ -271,27 +271,13 @@ function abrirHistorico() {
   const user = auth.currentUser;
   if (!user) return;
 
-  db.collection("pedidos")
-    .where("uid", "==", user.uid)
-    .orderBy("criadoEm", "desc")
-    .get()
-    .then((snapshot) => {
-      let html = "";
-
-      snapshot.forEach((doc) => {
-        const pedido = doc.data();
-        html += `
-          <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-            <strong>${pedido.nome}</strong><br>
-            Total: R$ ${pedido.total}<br>
-            Status: ${pedido.status}
-          </div>
-        `;
-      });
-
-      document.getElementById("listaHistorico").innerHTML = html;
-      document.getElementById("modalHistorico").style.display = "block";
-    });
+  db.collection("pedidos").add({
+    nome: nomeCliente,
+    total: totalPedido,
+    pagamento: formaPagamento,
+    criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+    status: "pendente", // 🔥 sempre começa assim
+  });
 }
 
 function fecharHistorico() {
