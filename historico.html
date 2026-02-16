@@ -55,7 +55,7 @@
   <body>
     <div class="topo">
       <h2>📜 Meu Histórico</h2>
-      <button onclick="window.close()">Fechar</button>
+      <button onclick="voltar()">Voltar</button>
     </div>
 
     <div id="listaPedidos"></div>
@@ -92,6 +92,10 @@
       const auth = getAuth(app);
 
       const lista = document.getElementById("listaPedidos");
+
+      function voltar() {
+        window.location.href = "index.html";
+      }
 
       function corStatus(status) {
         if (status == "pendente") return "pendente";
