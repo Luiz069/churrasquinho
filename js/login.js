@@ -12,50 +12,42 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
-
 const provider = new firebase.auth.GoogleAuthProvider();
 
-// ===============================
 // 🔥 BOTÃO LOGIN
-// ===============================
 document.getElementById("btnGoogleLogin").addEventListener("click", () => {
   auth.signInWithRedirect(provider);
 });
 
-// ===============================
-// 🔥 RETORNO DO GOOGLE
-// ===============================
+// 🔥 TRATAMENTO DO REDIRECT
 auth
   .getRedirectResult()
   .then((result) => {
-    if (!result.user) return;
-
-    const user = result.user;
-
-    // cria/atualiza usuário no banco
-    db.collection("usuarios").doc(user.uid).set(
-      {
-        nome: user.displayName,
-        email: user.email,
-        foto: user.photoURL,
-        criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
-      },
-      { merge: true },
-    );
-
-    // entra no sistema
-    window.location.href = "inicio.html";
+    if (result.user) {
+      salvarUsuario(result.user);
+      window.location.href = "inicio.html";
+    }
   })
   .catch((error) => {
-    console.error("Erro login:", error);
-    alert("Erro ao entrar com Google");
+    console.error(error);
   });
 
-// ===============================
-// 🔥 JÁ LOGADO
-// ===============================
+// 🔥 SE JÁ ESTIVER LOGADO
 auth.onAuthStateChanged((user) => {
   if (user) {
     window.location.href = "inicio.html";
   }
 });
+
+// 🔥 FUNÇÃO SALVAR USUÁRIO
+function salvarUsuario(user) {
+  db.collection("usuarios").doc(user.uid).set(
+    {
+      nome: user.displayName,
+      email: user.email,
+      foto: user.photoURL,
+      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true },
+  );
+}
