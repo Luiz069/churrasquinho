@@ -19,10 +19,8 @@ const db = firebase.firestore();
 // ================= PROTEÇÃO DE ROTA =================
 
 firebase.auth().onAuthStateChanged((user) => {
-  if (user === undefined) return;
-
   if (!user) {
-    window.location.replace("inicio.html");
+    window.location.href = "index.html";
   }
 });
 

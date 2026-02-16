@@ -12,42 +12,36 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-// ================= BOTÃO LOGIN =================
+// 🔥 mantém login mesmo fechando navegador (IMPORTANTE)
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+// ================= LOGIN =================
 function loginGoogle() {
-  auth.signInWithRedirect(provider);
-}
+  auth
+    .signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
 
-// ================= RETORNO DO GOOGLE =================
-auth
-  .getRedirectResult()
-  .then((result) => {
-    // voltou do google agora
-    if (result.user) {
-      salvarUsuario(result.user);
-      window.location.replace("inicio.html");
-      return;
-    }
+      db.collection("usuarios").doc(user.uid).set(
+        {
+          nome: user.displayName,
+          email: user.email,
+          foto: user.photoURL,
+          criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
 
-    // já estava logado anteriormente
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        window.location.replace("inicio.html");
-      }
+      window.location.href = "inicio.html";
+    })
+    .catch((error) => {
+      alert(error.message);
     });
-  })
-  .catch((error) => {
-    console.error("Erro login:", error);
-  });
-
-// ================= SALVAR USUÁRIO =================
-function salvarUsuario(user) {
-  db.collection("usuarios").doc(user.uid).set(
-    {
-      nome: user.displayName,
-      email: user.email,
-      foto: user.photoURL,
-      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
-    },
-    { merge: true },
-  );
 }
+
+// ================= SE JÁ LOGADO =================
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    window.location.href = "inicio.html";
+  }
+});
