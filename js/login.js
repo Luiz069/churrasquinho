@@ -2,13 +2,11 @@ const firebaseConfig = {
   apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
   authDomain: "churrasquinho-7b2d2.firebaseapp.com",
   projectId: "churrasquinho-7b2d2",
-  storageBucket: "churrasquinho-7b2d2.firebasestorage.app",
-  messagingSenderId: "506815282983",
-  appId: "1:506815282983:web:92d14f09bafa15e2d03302",
-  measurementId: "G-V0TWG5Y0H8",
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -19,27 +17,29 @@ document.getElementById("btnGoogleLogin").addEventListener("click", () => {
   auth.signInWithRedirect(provider);
 });
 
-// 🔥 TRATAMENTO DO REDIRECT
+// 🔥 APENAS AQUI DECIDE O LOGIN
 auth
   .getRedirectResult()
   .then((result) => {
+    // Se voltou do Google
     if (result.user) {
       salvarUsuario(result.user);
-      window.location.href = "inicio.html";
+      window.location.replace("inicio.html");
+      return;
     }
+
+    // Se já estava logado antes de abrir a página
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        window.location.replace("inicio.html");
+      }
+    });
   })
   .catch((error) => {
     console.error(error);
   });
 
-// 🔥 SE JÁ ESTIVER LOGADO
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    window.location.href = "inicio.html";
-  }
-});
-
-// 🔥 FUNÇÃO SALVAR USUÁRIO
+// 🔥 SALVAR USUÁRIO
 function salvarUsuario(user) {
   db.collection("usuarios").doc(user.uid).set(
     {
