@@ -21,27 +21,24 @@ auth.onAuthStateChanged((user) => {
 });
 
 // Login Google
-document.getElementById("btnGoogleLogin").addEventListener("click", () => {
+function loginGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  auth
-    .signInWithPopup(provider)
-    .then((result) => {
-      const user = result.user;
+  // 🔥 NOVO MÉTODO (sem erro COOP)
+  auth.signInWithRedirect(provider);
+}
 
-      db.collection("usuarios").doc(user.uid).set(
-        {
-          nome: user.displayName,
-          email: user.email,
-          foto: user.photoURL,
-          criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true },
-      );
+// 🔥 precisa existir ao carregar a página
+auth
+  .getRedirectResult()
+  .then((result) => {
+    if (result.user) {
+      console.log("Logado:", result.user.email);
 
+      // redireciona depois do login
       window.location.href = "inicio.html";
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
-});
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
