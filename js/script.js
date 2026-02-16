@@ -19,7 +19,6 @@ const db = firebase.firestore();
 // ================= PROTEÇÃO DE ROTA =================
 
 firebase.auth().onAuthStateChanged((user) => {
-  // espera firebase terminar
   if (user === undefined) return;
 
   if (!user) {

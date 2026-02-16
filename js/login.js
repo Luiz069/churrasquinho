@@ -12,23 +12,23 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-// 🔥 BOTÃO LOGIN
-document.getElementById("btnGoogleLogin").addEventListener("click", () => {
+// ================= BOTÃO LOGIN =================
+function loginGoogle() {
   auth.signInWithRedirect(provider);
-});
+}
 
-// 🔥 APENAS AQUI DECIDE O LOGIN
+// ================= RETORNO DO GOOGLE =================
 auth
   .getRedirectResult()
   .then((result) => {
-    // Se voltou do Google
+    // voltou do google agora
     if (result.user) {
       salvarUsuario(result.user);
       window.location.replace("inicio.html");
       return;
     }
 
-    // Se já estava logado antes de abrir a página
+    // já estava logado anteriormente
     auth.onAuthStateChanged((user) => {
       if (user) {
         window.location.replace("inicio.html");
@@ -36,10 +36,10 @@ auth
     });
   })
   .catch((error) => {
-    console.error(error);
+    console.error("Erro login:", error);
   });
 
-// 🔥 SALVAR USUÁRIO
+// ================= SALVAR USUÁRIO =================
 function salvarUsuario(user) {
   db.collection("usuarios").doc(user.uid).set(
     {
