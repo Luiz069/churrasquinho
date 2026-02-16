@@ -268,50 +268,5 @@ Pagamento: ${pagamento}
 // ================= HISTÓRICO =================
 
 function abrirHistorico() {
-  const user = auth.currentUser;
-  if (!user) return;
-
-  const lista = document.getElementById("listaHistorico");
-  lista.innerHTML = "Carregando...";
-
-  db.collection("pedidos")
-    .where("uid", "==", user.uid)
-    .orderBy("criadoEm", "desc")
-    .get()
-    .then((snapshot) => {
-      lista.innerHTML = "";
-
-      if (snapshot.empty) {
-        lista.innerHTML = "<p>Você ainda não fez pedidos.</p>";
-        return;
-      }
-
-      snapshot.forEach((doc) => {
-        const p = doc.data();
-        const status = (p.status || "pendente").toLowerCase();
-
-        lista.innerHTML += `
-          <div style="border:1px solid #ddd;
-          padding:10px;
-          margin-bottom:10px;
-          border-radius:8px;">
-
-            <b>Pedido:</b> ${doc.id.slice(0, 6)}<br>
-            <b>Total:</b> R$ ${Number(p.total || 0).toFixed(2)}<br>
-            <b>Status:</b> ${status}<br>
-            <b>Pagamento:</b> ${p.pagamento}<br>
-          </div>
-        `;
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-      lista.innerHTML = "Erro ao carregar histórico.";
-    });
-
-  document.getElementById("modalHistorico").style.display = "flex";
-}
-
-function fecharHistorico() {
-  document.getElementById("modalHistorico").style.display = "none";
+  window.open("historico.html", "_blank");
 }

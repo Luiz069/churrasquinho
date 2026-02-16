@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meu Histórico</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #f2f2f2;
+        padding: 20px;
+      }
+
+      .topo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .card {
+        background: white;
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .status {
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 6px;
+        color: white;
+      }
+
+      .pendente {
+        background: #ff9800;
+      }
+      .confirmado {
+        background: #2196f3;
+      }
+      .preparo {
+        background: #9c27b0;
+      }
+      .pronto {
+        background: #4caf50;
+      }
+
+      .itens {
+        margin-top: 10px;
+        padding-left: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="topo">
+      <h2>📜 Meu Histórico</h2>
+      <button onclick="window.close()">Fechar</button>
+    </div>
+
+    <div id="listaPedidos"></div>
+
+    <!-- Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        query,
+        where,
+        onSnapshot,
+        orderBy,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      // 🔥 COLE SEU CONFIG AQUI
+      const firebaseConfig = {
+        apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
+        authDomain: "churrasquinho-7b2d2.firebaseapp.com",
+        projectId: "churrasquinho-7b2d2",
+        storageBucket: "churrasquinho-7b2d2.firebasestorage.app",
+        messagingSenderId: "506815282983",
+        appId: "1:506815282983:web:92d14f09bafa15e2d03302",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+
+      const lista = document.getElementById("listaPedidos");
+
+      function corStatus(status) {
+        if (status == "pendente") return "pendente";
+        if (status == "confirmado") return "confirmado";
+        if (status == "preparo") return "preparo";
+        if (status == "pronto") return "pronto";
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          lista.innerHTML = "<h3>Você precisa estar logado</h3>";
+          return;
+        }
+
+        const q = query(
+          collection(db, "pedidos"),
+          where("uid", "==", user.uid),
+          orderBy("data", "desc"),
+        );
+
+        onSnapshot(q, (snap) => {
+          lista.innerHTML = "";
+
+          snap.forEach((doc) => {
+            const pedido = doc.data();
+
+            let itensHTML = "";
+            pedido.itens.forEach((i) => {
+              itensHTML += `<li>${i.nome} x${i.qtd}</li>`;
+            });
+
+            lista.innerHTML += `
+            <div class="card">
+                <div>
+                    <span class="status ${corStatus(pedido.status)}">
+                        ${pedido.status.toUpperCase()}
+                    </span>
+                </div>
+
+                <div class="itens">
+                    <ul>${itensHTML}</ul>
+                </div>
+
+                <small>Pedido #${doc.id}</small>
+            </div>
+            `;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
