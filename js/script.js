@@ -266,7 +266,4 @@ Pagamento: ${pagamento}
 }
 
 // ================= HISTÓRICO =================
-
-function abrirHistorico() {
-  window.open("historico.html", "_blank");
-}
+// A função abrirHistorico() foi movida para o arquivo historico.html, pois faz mais sentido que cada página gerencie suas próprias rotas.

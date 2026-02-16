@@ -55,7 +55,7 @@
   <body>
     <div class="topo">
       <h2>📜 Meu Histórico</h2>
-      <button onclick="voltar()">Voltar</button>
+      <button onclick="location.href = 'index.html'">Voltar</button>
     </div>
 
     <div id="listaPedidos"></div>
@@ -93,9 +93,9 @@
 
       const lista = document.getElementById("listaPedidos");
 
-      function voltar() {
-        window.location.href = "index.html";
-      }
+      //   function voltar() {
+      //     window.location.href = "index.html";
+      //   }
 
       function corStatus(status) {
         if (status == "pendente") return "pendente";
