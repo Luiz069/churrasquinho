@@ -22,7 +22,7 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user === undefined) return;
 
   if (!user) {
-    window.location.replace("index.html");
+    window.location.replace("inicio.html");
   }
 });
 
