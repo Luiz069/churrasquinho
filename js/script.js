@@ -18,11 +18,11 @@ const db = firebase.firestore();
 
 // ================= PROTEÇÃO DE ROTA =================
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "index.html";
-  }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (!user) {
+//     window.location.href = "index.html";
+//   }
+// });
 
 // ================= CARREGAR DADOS DO USUÁRIO =================
 
