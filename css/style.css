@@ -274,6 +274,12 @@ select {
   margin-bottom: 10px;
 }
 
+.linha {
+  border: none;
+  border-top: 2px solid #ddd;
+  margin: 20px 0;
+}
+
 @media screen and (min-width: 375px) {
   .container-fechar {
     display: flex;
