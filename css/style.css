@@ -6,6 +6,8 @@
   --fundo: #fff5f5;
   --preto: #000000;
 
+  --font-principlal: "Fredoka One", sans-serif;
+
   --font-sans:
     ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
@@ -17,6 +19,7 @@
 * {
   box-sizing: border-box;
   font-family: var(--font-sans);
+  text-decoration: none;
 }
 
 /* resto do seu CSS continua aqui */
@@ -27,17 +30,67 @@ body {
   padding-bottom: 100px;
 }
 
+/* ===================== HEADER ========================= */
+
 header {
   background-color: var(--vermelho);
-  background-image: radial-gradient(
+  /* background-image: radial-gradient(
     rgba(255, 255, 255, 0.2) 15%,
     transparent 16%
-  );
+  ); */
   background-size: 30px 30px;
   color: white;
-  padding: 40px 20px;
+  padding: 4px 8px;
   text-align: center;
   border-bottom: 5px solid var(--preto);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.botao-header {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  gap: 12px;
+}
+
+.botao-historico {
+  display: flex;
+  align-items: center;
+}
+
+.svg-historico,
+.svg-sair {
+  width: 24px;
+  height: 24px;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.botao-sair {
+  display: flex;
+  align-items: center;
+}
+
+.botao-sair,
+.botao-historico {
+  padding: 0;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .container {
@@ -73,6 +126,8 @@ header {
   cursor: pointer;
   margin-top: 10px;
 }
+
+/* =================== MODAL =========================  */
 
 /* MODAL */
 .modal {
@@ -265,7 +320,8 @@ path.x-icon {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 12px;
   border: 2px solid var(--preto);

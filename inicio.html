@@ -11,34 +11,54 @@
     <!-- ========================================================= -->
     <!-- TOPO -->
     <header>
-      <h1>LANCHONETE</h1>
-      <p>Peça e receba em casa ou na mesa!</p>
+      <div class="header-container">
+        
+      <img class="logo" src="img/logo-03.png" alt="">
 
-      <div
-        style="
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          flex-wrap: wrap;
-        "
-      >
-        <a href="historico.html">
-          <button>Histórico</button>
-        </a>
+          <div class="botao-header">
+            <div class="historico">
+              <a href="historico.html" class="botao-historico">
+              <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="svg-historico" 
+              data-loc="client/src/pages/Home.tsx:99">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+               <path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path>
+              </svg>
+            </a>
+            </div>
 
-        <button onclick="sair()" class="btn-logout">🚪 Sair</button>
+            <div class="sair">
+              <button onclick="sair()" class="botao-sair">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="svg-sair" 
+              data-loc="client/src/pages/Home.tsx:105">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" x2="9" y1="12" y2="12"></line>
+              </svg>
+            </button>
+            </div>
+          </div>
+
       </div>
     </header>
-
-    <!-- ========================================================= -->
-    <!-- MODAL HISTÓRICO -->
-    <div id="modalHistorico" class="modal" style="display: none">
-      <div class="modal-content">
-        <h2>📋 Meus Pedidos</h2>
-        <div id="listaHistorico"></div>
-        <button onclick="fecharHistorico()">Fechar</button>
-      </div>
-    </div>
 
     <!-- ========================================================= -->
     <!-- MODAL PRODUTO -->
@@ -122,8 +142,7 @@
     <!-- ========================================================= -->
     <!-- CARDÁPIO -->
     <div class="container">
-      
-      <!-- ============================== CATEGORIA 01 ============================== -->
+      <!-- ============== Industrial ============== -->
 
       <div class="categoria-box">
         <!-- industrial 01 -->
@@ -131,764 +150,277 @@
 
         <div class="item">
           <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
+            <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
           </div>
 
-          <p style="font-size: 14px; color: #666">
+        <!-- <p style="font-size: 14px; color: #666">
             Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
+          </p> -->
 
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
+        <button class="btn-add-main">
+          <a
+            href="cardapio/industrial.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
           >
-            Adicionar
-          </button>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============== Artesanal ============== -->
+
+    <div class="categoria-box">
+      <!-- industrial 01 -->
+      <h3 style="color: var(--vermelho)">🍔 Hambúrgueres Artesanal</h3>
+
+      <div class="item">
+        <div class="item-row">
+          <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
         </div>
 
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
+        <!-- <p style="font-size: 14px; color: #666">
             Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
+          </p> -->
 
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
+        <button class="btn-add-main">
+          <a
+            href="cardapio/artesanal.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
           >
-            Adicionar
-          </button>
+        </button>
+      </div>
+    </div>
+
+     <!-- ============== Misto Quente ============== -->
+
+    <div class="categoria-box">
+      <!-- industrial 01 -->
+      <h3 style="color: var(--vermelho)">🌭 Misto  Quente</h3>
+
+      <div class="item">
+        <div class="item-row">
+          <span>Misto Quente Com Ovo</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, queijo, presunto e ovo.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'Misto Quente Com Ovo',
+              25,
+              'Pão, queijo, presunto e ovo.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
 
-      <!-- ============================== CATEGORIA 02 ============================== -->
+      <hr class="linha">
 
-      <div class="categoria-box">
-        <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Hambúrgueres Artesanal</h3>
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+      <div class="item">
+        <div class="item-row">
+          <span>Misto Quente Sem Ovo</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, queijo e presunto.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'Misto Quente Sem Ovo',
+              25,
+              'Pão, queijo e presunto.',
+            )
+          "
+        >
+          Adicionar
+        </button>
+      </div>
+    </div>
 
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
+    <!-- ============== Hot Dog ============== -->
 
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+    <div class="categoria-box">
+      <!-- industrial 01 -->
+      <h3 style="color: var(--vermelho)">🌭 Hot Dogs</h3>
+
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        <hr class="linha">
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
 
-      <!-- ============================== CATEGORIA 03 ============================== -->
+      <hr class="linha">
 
-      <div class="categoria-box">
-        <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Misto Quente</h3>
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
+      </div>
+    </div>
 
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
+    <!-- ============== Batata Frita ============== -->
 
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+    <div class="categoria-box">
+      <!-- industrial 01 -->
+      <h3 style="color: var(--vermelho)">🍟 Batata Frita</h3>
+
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
+
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
 
-      <!-- ============================== CATEGORIA 04 ============================== -->
+      <hr class="linha">
 
-      <div class="categoria-box">
-        <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Batata Frita</h3>
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
 
-      <!-- ============================== CATEGORIA 05 ============================== -->
+      <hr class="linha">
 
-      <div class="categoria-box">
-        <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Hot Dog</h3>
-
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
+    </div>
 
-      <!-- ============================== CATEGORIA 06 ============================== -->
+    <!-- ============== Bebidas ============== -->
 
-      <div class="categoria-box">
-        <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Bebidas</h3>
+    <div class="categoria-box">
+      <!-- industrial 01 -->
+      <h3 style="color: var(--vermelho)">🥤 Bebidas</h3>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
+      <div class="item">
+        <div class="item-row">
+          <span>X-Tudo Especial</span>
+          <span>R$ 25,00</span>
         </div>
 
-        <hr class="linha">
+        <p style="font-size: 14px; color: #666">
+          Pão, carne, queijo, presunto, ovo, bacon e salada.
+        </p>
 
-        <div class="item">
-          <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
-          </div>
-
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p>
-
-          <button
-            class="btn-add-main"
-            onclick="
-              abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-              )
-            "
-          >
-            Adicionar
-          </button>
-        </div>
-
-        
+        <button
+          class="btn-add-main"
+          onclick="
+            abrirModal(
+              'X-Tudo Especial',
+              25,
+              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+            )
+          "
+        >
+          Adicionar
+        </button>
       </div>
-
+    </div>
 
     <!-- ========================================================= -->
     <!-- CARRINHO -->
@@ -926,55 +458,6 @@
         🛒 Carrinho (<span id="cart-count">0</span>)
       </button>
     </div>
-
-    <!-- MODAL HISTÓRICO -->
-    <!-- <div
-      id="modalHistorico"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      "
-    >
-      <div
-        style="
-          background: white;
-          width: 90%;
-          max-width: 500px;
-          max-height: 80vh;
-          overflow-y: auto;
-          border-radius: 12px;
-          padding: 20px;
-          position: relative;
-        "
-      >
-        <h2>📜 Meu Histórico</h2>
-
-        <div id="listaHistorico"></div>
-
-        <button
-          onclick="fecharHistorico()"
-          style="
-            margin-top: 15px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-          "
-        >
-          Fechar
-        </button>
-      </div>
-    </div> -->
 
     <!-- ========================================================= -->
     <!-- FIREBASE -->
