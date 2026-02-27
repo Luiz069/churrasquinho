@@ -62,7 +62,8 @@ header {
   align-items: center;
   background: transparent;
   border: none;
-  gap: 12px;
+  gap: 16px;
+  margin-right: 6px;
 }
 
 .botao-historico {
