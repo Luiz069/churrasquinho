@@ -11,22 +11,19 @@
     <!-- ========================================================= -->
     <!-- TOPO -->
     <header>
-      <h1>LANCHONETE</h1>
-      <p>Peça e receba em casa ou na mesa!</p>
+      <div class="topbar">
 
-      <div
-        style="
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          flex-wrap: wrap;
-        "
-      >
-        <a href="historico.html">
-          <button>Histórico</button>
-        </a>
+  <button onclick="voltarPagina()" class="btn-back">
+    ←
+  </button>
 
-        <button onclick="sair()" class="btn-logout">🚪 Sair</button>
+  <h2 class="titulo-categoria">Hambúrgueres</h2>
+
+  <div class="cart-icon" onclick="toggleCart()">
+    🛒
+    <span id="cart-count">0</span>
+  </div>
+
       </div>
     </header>
 
