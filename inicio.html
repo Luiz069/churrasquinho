@@ -8,59 +8,7 @@
   </head>
 
   <body>
-    <!-- ========================================================= -->
-    <!-- TOPO -->
-    <header>
-      <div class="header-container">
-        
-      <img class="logo" src="img/logo-03.png" alt="">
-
-          <div class="botao-header">
-            <div class="historico">
-              <a href="historico.html" class="botao-historico">
-              <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="svg-historico" 
-              data-loc="client/src/pages/Home.tsx:99">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-               <path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path>
-              </svg>
-            </a>
-            </div>
-
-            <div class="sair">
-              <button onclick="sair()" class="botao-sair">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="svg-sair" 
-              data-loc="client/src/pages/Home.tsx:105">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                <polyline points="16 17 21 12 16 7"></polyline>
-                <line x1="21" x2="9" y1="12" y2="12"></line>
-              </svg>
-            </button>
-            </div>
-          </div>
-
-      </div>
-    </header>
-
-    <!-- ========================================================= -->
+     <!-- ========================================================= -->
     <!-- MODAL PRODUTO -->
     <div id="modalItem" class="modal">
       <div class="modal-content">
@@ -140,8 +88,74 @@
     </div>
 
     <!-- ========================================================= -->
+    <!-- TOPO -->
+    <header>
+      <div class="header-container">
+        
+      <img class="logo" src="img/logo-03.png" alt="">
+
+          <div class="botao-header">
+            <div class="historico">
+              <a href="historico.html" class="botao-historico">
+              <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="svg-historico" 
+              data-loc="client/src/pages/Home.tsx:99">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+               <path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path>
+              </svg>
+            </a>
+            </div>
+
+            <div class="sair">
+              <button onclick="sair()" class="botao-sair">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="svg-sair" 
+              data-loc="client/src/pages/Home.tsx:105">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" x2="9" y1="12" y2="12"></line>
+              </svg>
+            </button>
+            </div>
+          </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- NAVBAR -->
+    
+
+    <!-- <nav class="navbar">
+      <a href="#industrial">Industrial</a>
+      <a href="#artesanal">Artesanal</a>
+      <a href="#misto-quente">Misto Quente</a>
+      <a href="#hot-dog">Hot Dog</a>
+      <a href="#batata-frita">Batata Frita</a>
+      <a href="#bebidas">Bebidas</a>
+    </nav> -->
+
+    <!-- ========================================================= -->
     <!-- CARDÁPIO -->
     <div class="container">
+      
       <!-- ============== Industrial ============== -->
 
       <div class="categoria-box">
@@ -194,121 +208,60 @@
       </div>
     </div>
 
-     <!-- ============== Misto Quente ============== -->
+    <!-- ============== misto-quente ============== -->
 
     <div class="categoria-box">
       <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🌭 Misto  Quente</h3>
+      <h3 style="color: var(--vermelho)">🍔 Misto Quente</h3>
 
       <div class="item">
         <div class="item-row">
-          <span>Misto Quente Com Ovo</span>
-          <span>R$ 25,00</span>
+          <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
         </div>
 
-        <p style="font-size: 14px; color: #666">
-          Pão, queijo, presunto e ovo.
-        </p>
+        <!-- <p style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          </p> -->
 
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'Misto Quente Com Ovo',
-              25,
-              'Pão, queijo, presunto e ovo.',
-            )
-          "
-        >
-          Adicionar
-        </button>
-      </div>
-
-      <hr class="linha">
-
-      <div class="item">
-        <div class="item-row">
-          <span>Misto Quente Sem Ovo</span>
-          <span>R$ 25,00</span>
-        </div>
-
-        <p style="font-size: 14px; color: #666">
-          Pão, queijo e presunto.
-        </p>
-
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'Misto Quente Sem Ovo',
-              25,
-              'Pão, queijo e presunto.',
-            )
-          "
-        >
-          Adicionar
+        <button class="btn-add-main">
+          <a
+            href="cardapio/misto-quente.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
+          >
         </button>
       </div>
     </div>
 
-    <!-- ============== Hot Dog ============== -->
+     <!-- ============== Hot Dog ============== -->
 
     <div class="categoria-box">
       <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🌭 Hot Dogs</h3>
+      <h3 style="color: var(--vermelho)">🌭 Hot Dog</h3>
 
       <div class="item">
         <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
+          <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
         </div>
 
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
+        <!-- <p style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          </p> -->
 
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
-        </button>
-      </div>
-
-      <hr class="linha">
-
-      <div class="item">
-        <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
-        </div>
-
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
-
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
+        <button class="btn-add-main">
+          <a
+            href="cardapio/hot-dog.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
+          >
         </button>
       </div>
     </div>
 
-    <!-- ============== Batata Frita ============== -->
+
+     <!-- ============== Batata Frita ============== -->
 
     <div class="categoria-box">
       <!-- industrial 01 -->
@@ -316,82 +269,25 @@
 
       <div class="item">
         <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
+          <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
         </div>
 
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
+        <!-- <p style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          </p> -->
 
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
-        </button>
-      </div>
-
-      <hr class="linha">
-
-      <div class="item">
-        <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
-        </div>
-
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
-
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
-        </button>
-      </div>
-
-      <hr class="linha">
-
-      <div class="item">
-        <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
-        </div>
-
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
-
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
+        <button class="btn-add-main">
+          <a
+            href="cardapio/batata-frita.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
+          >
         </button>
       </div>
     </div>
 
-    <!-- ============== Bebidas ============== -->
+     <!-- ============== bebidas ============== -->
 
     <div class="categoria-box">
       <!-- industrial 01 -->
@@ -399,28 +295,25 @@
 
       <div class="item">
         <div class="item-row">
-          <span>X-Tudo Especial</span>
-          <span>R$ 25,00</span>
+          <!-- <span>X-Tudo Especial</span>
+            <span>R$ 25,00</span> -->
         </div>
 
-        <p style="font-size: 14px; color: #666">
-          Pão, carne, queijo, presunto, ovo, bacon e salada.
-        </p>
+        <!-- <p style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          </p> -->
 
-        <button
-          class="btn-add-main"
-          onclick="
-            abrirModal(
-              'X-Tudo Especial',
-              25,
-              'Pão, carne, queijo, presunto, ovo, bacon e salada.',
-            )
-          "
-        >
-          Adicionar
+        <button class="btn-add-main">
+          <a
+            href="cardapio/bebidas.html"
+            style="color: white; text-decoration: none"
+            >Adicionar</a
+          >
         </button>
       </div>
     </div>
+
+     
 
     <!-- ========================================================= -->
     <!-- CARRINHO -->

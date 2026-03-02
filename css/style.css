@@ -25,7 +25,8 @@
 /* resto do seu CSS continua aqui */
 
 body {
-  background-color: var(--fundo);
+  /* background-color: var(--fundo); */
+  background-color: blue;
   margin: 0;
   padding-bottom: 100px;
 }
@@ -309,7 +310,9 @@ path.x-icon {
   border-top: 5px solid var(--preto);
   padding: 15px;
   text-align: center;
+  margin-left: -20px;
 }
+
 .btn-carrinho {
   background: var(--vermelho);
   color: white;
@@ -331,11 +334,11 @@ textarea {
   margin-bottom: 10px;
 }
 
-.linha {
+/* .linha {
   border: none;
   border-top: 2px solid #ddd;
   margin: 20px 0;
-}
+} */
 
 @media screen and (min-width: 375px) {
   .container-fechar {

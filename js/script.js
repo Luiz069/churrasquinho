@@ -1,4 +1,5 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// ================= FIREBASE =================
+
 const firebaseConfig = {
   apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
   authDomain: "churrasquinho-7b2d2.firebaseapp.com",
@@ -16,46 +17,23 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// ================= PROTEÇÃO DE ROTA =================
+// ================= CARRINHO (AGORA PERSISTENTE) =================
 
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (!user) {
-//     window.location.href = "index.html";
-//   }
-// });
+// 🔥 Carrega do localStorage
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-// ================= CARREGAR DADOS DO USUÁRIO =================
-
-function carregarDadosUsuario(user) {
-  db.collection("usuarios")
-    .doc(user.uid)
-    .get()
-    .then((doc) => {
-      const nomeInput = document.getElementById("c-nome");
-      const numeroInput = document.getElementById("c-numero");
-
-      if (nomeInput) nomeInput.value = user.displayName || "";
-      if (numeroInput) numeroInput.value = user.phoneNumber || "";
-    });
+function salvarCarrinho() {
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
-// ================= LOGOUT =================
+// ================= VARIÁVEIS DO MODAL =================
 
-function sair() {
-  auth.signOut().then(() => {
-    window.location.href = "inicio.html";
-  });
-}
-
-// ================= SISTEMA DO CARRINHO =================
-
-let carrinho = [];
 let itemAtual = {};
 let qtdModal = 1;
 let extras = { queijo: 0, ovo: 0, carne: 0 };
 const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
 
-// ===== MODAL PRODUTO =====
+// ================= MODAL PRODUTO =================
 
 function abrirModal(nome, preco, desc) {
   itemAtual = { nome, preco, desc };
@@ -103,7 +81,7 @@ function fecharModal() {
   document.getElementById("modalItem").style.display = "none";
 }
 
-// ===== ADICIONAR AO CARRINHO =====
+// ================= ADICIONAR AO CARRINHO =================
 
 function addAoCarrinho() {
   let listaExtras = [];
@@ -125,14 +103,17 @@ function addAoCarrinho() {
     precoUn: itemAtual.preco + custoExtras,
   });
 
+  salvarCarrinho();
   renderCarrinho();
   fecharModal();
 }
 
-// ===== RENDER CARRINHO =====
+// ================= RENDER CARRINHO =================
 
 function renderCarrinho() {
   const lista = document.getElementById("lista-carrinho");
+  if (!lista) return;
+
   lista.innerHTML = "";
   let totalGeral = 0;
 
@@ -158,7 +139,6 @@ function renderCarrinho() {
   });
 
   document.getElementById("total-final").innerText = totalGeral.toFixed(2);
-
   document.getElementById("cart-count").innerText = carrinho.length;
 }
 
@@ -168,11 +148,14 @@ function alterarQtdCarrinho(i, v) {
   } else {
     carrinho.splice(i, 1);
   }
+
+  salvarCarrinho();
   renderCarrinho();
 }
 
 function removerItem(i) {
   carrinho.splice(i, 1);
+  salvarCarrinho();
   renderCarrinho();
 }
 
@@ -184,53 +167,42 @@ function toggleCart() {
 
 function finalizarPedido() {
   const user = firebase.auth().currentUser;
-  if (!user) return;
+  if (!user) return alert("Faça login!");
 
   const nome = document.getElementById("c-nome").value;
   const numero = document.getElementById("c-numero").value;
   const observacao = document.getElementById("c-obs").value;
   const pagamento = document.getElementById("c-pagto").value;
 
-  if (!nome || !numero) {
-    alert("Preencha nome e número!");
-    return;
-  }
-
-  if (carrinho.length === 0) {
-    alert("Carrinho vazio!");
-    return;
-  }
+  if (!nome || !numero) return alert("Preencha nome e número!");
+  if (carrinho.length === 0) return alert("Carrinho vazio!");
 
   let total = 0;
   let textoItens = "";
 
-  carrinho.forEach((item, inicio) => {
+  carrinho.forEach((item, index) => {
     const subtotal = item.precoUn * item.qtd;
     total += subtotal;
 
-    textoItens += `\n${inicio + 1}. ${item.nome}
+    textoItens += `\n${index + 1}. ${item.nome}
 Qtd: ${item.qtd}
 Obs: ${item.obs || "Nenhuma"}
 Subtotal: R$ ${subtotal.toFixed(2)}\n`;
   });
 
-  // 🔥 SALVA NO FIRESTORE
-  firebase
-    .firestore()
-    .collection("pedidos")
+  db.collection("pedidos")
     .add({
       uid: user.uid,
-      nome: nome,
-      numero: numero,
+      nome,
+      numero,
       observacaoGeral: observacao,
-      pagamento: pagamento,
+      pagamento,
       itens: carrinho,
-      total: total,
-      status: "pendente", // 🔥 COMEÇA SEMPRE ASSIM
+      total,
+      status: "pendente",
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
-      // 🔥 MONTA MENSAGEM WHATSAPP
       const mensagem = `🍔 *NOVO PEDIDO*
 
 Cliente: ${nome}
@@ -247,15 +219,15 @@ Pagamento: ${pagamento}
 `;
 
       const numeroLanchonete = "5598985301953";
-      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
+      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(
+        mensagem,
+      )}`;
 
-      // Limpa carrinho
       carrinho = [];
+      salvarCarrinho();
       renderCarrinho();
 
-      // Abre WhatsApp
       window.open(url, "_blank");
-
       alert("Pedido enviado com sucesso!");
     })
     .catch((error) => {
@@ -263,5 +235,8 @@ Pagamento: ${pagamento}
     });
 }
 
-// ================= HISTÓRICO =================
-// A função abrirHistorico() foi movida para o arquivo historico.html, pois faz mais sentido que cada página gerencie suas próprias rotas.
+// ================= AUTO RENDER AO ABRIR =================
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCarrinho();
+});
