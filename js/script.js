@@ -235,6 +235,10 @@ Pagamento: ${pagamento}
     });
 }
 
+function voltarPagina() {
+  window.history.back();
+}
+
 // ================= AUTO RENDER AO ABRIR =================
 
 document.addEventListener("DOMContentLoaded", () => {
