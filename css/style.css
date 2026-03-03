@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
+@import url("inicio.css");
+
 :root {
   --vermelho: #e61919;
   --amarelo: #ffd700;
@@ -26,9 +28,10 @@
 
 body {
   /* background-color: var(--fundo); */
-  background-color: blue;
+  /* background-color: blue; */
   margin: 0;
   padding-bottom: 100px;
+  /* padding-top: 70px; */
 }
 
 /* ===================== HEADER ========================= */
@@ -353,7 +356,7 @@ textarea {
   justify-content: space-between;
   padding: 0 20px;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btn-back {
@@ -375,7 +378,7 @@ textarea {
   font-size: 22px;
 }
 
-#cart-count {
+.numero-cart {
   position: absolute;
   top: -8px;
   right: -10px;

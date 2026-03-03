@@ -1,0 +1,51 @@
+.container-navbar {
+  max-width: 600px;
+  background: url("/img/fundo-bolinha.png");
+  background-position: center;
+  background-size: 150%;
+  background-repeat: no-repeat;
+}
+
+.info {
+  background: rgba(255, 255, 255, 0.297);
+}
+
+.info-funcionamento {
+  background: rgba(255, 1, 1, 0.67);
+  color: white;
+  padding: 25px;
+}
+
+.itens {
+  display: flow-root;
+  gap: 10px;
+}
+
+.info-funcionamento h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--vermelho);
+  margin-bottom: 15px;
+  background-color: var(--fundo);
+  width: 80%;
+  border: 2px solid var(--preto);
+  box-shadow: 2px 2px 0 var(--preto);
+  padding: 10px;
+}
+
+.info-item p {
+  margin: 5px 0 0;
+  color: #ccc;
+}
+
+.status-aberto p {
+  color: #00ff88;
+  font-weight: bold;
+}
