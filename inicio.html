@@ -8,7 +8,7 @@
   </head>
 
   <body>
-     <!-- ========================================================= -->
+    <!-- ========================================================= -->
     <!-- MODAL PRODUTO -->
     <div id="modalItem" class="modal">
       <div class="modal-content">
@@ -91,246 +91,179 @@
     <!-- TOPO -->
     <header>
       <div class="header-container">
-        
-      <img class="logo" src="img/logo-03.png" alt="">
+        <img class="logo" src="img/logo-03.png" alt="" />
 
-          <div class="botao-header">
-            <div class="historico">
-              <a href="historico.html" class="botao-historico">
-              <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="svg-historico" 
-              data-loc="client/src/pages/Home.tsx:99">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-               <path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path>
+        <div class="botao-header">
+          <div class="historico">
+            <a href="historico.html" class="botao-historico">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="svg-historico"
+                data-loc="client/src/pages/Home.tsx:99"
+              >
+                <path
+                  d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                ></path>
+                <path d="M3 3v5h5"></path>
+                <path d="M12 7v5l4 2"></path>
               </svg>
             </a>
-            </div>
+          </div>
 
-            <div class="sair">
-              <button onclick="sair()" class="botao-sair">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="svg-sair" 
-              data-loc="client/src/pages/Home.tsx:105">
+          <div class="sair">
+            <button onclick="sair()" class="botao-sair">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="svg-sair"
+                data-loc="client/src/pages/Home.tsx:105"
+              >
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" x2="9" y1="12" y2="12"></line>
               </svg>
             </button>
-            </div>
-          </div>
-
-      </div>
-    </header>
-
-    <!-- ========================================================= -->
-    <!-- NAVBAR -->
-    <div class="container-navbar">
-      <div class="info">
-        <div class="info-funcionamento">
-          <div class="funcionamento">
-              <h3>Funcionamento</h3>
-
-            <div class="itens">
-              <div class="info-item">
-                <strong>🕒 Horário:</strong>
-                <p>Segunda a Domingo <br> 18:00 às 23:30</p>
-              </div>
-
-              <div class="info-item">
-                <strong>📞 Contato:</strong>
-                <p>(98) 98530-1953</p>
-              </div>
-
-              <div class="info-item status-aberto">
-                <strong>🟢 Status:</strong>
-                <p>Aberto agora</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+    </header>
+
+    <!-- ============== AVISO ============== -->
+    <div class="aviso">
+      <h2>
+        ⚠️ Retirada ou consumo no local <br />
+        • Sem entregas
+      </h2>
     </div>
-     
-    <!-- ========================================================= -->
+
+    <!-- ============== TITULO ============== -->
+    <div class="titulo-cardapio">
+      <h1 style="text-align: center; color: var(--vermelho)">NOSSO CARDÁPIO</h1>
+
+      <hr />
+    </div>
+
+    <!-- ================================================== -->
     <!-- CARDÁPIO -->
     <div class="container">
-      
       <!-- ============== Industrial ============== -->
 
       <div class="categoria-box">
         <!-- industrial 01 -->
-        <h3 style="color: var(--vermelho)">🍔 Hambúrgueres Industrial</h3>
+        <h3 class="titulo-categoria">🍔 Hambúrguer Industrial</h3>
 
         <div class="item">
-          <div class="item-row">
-            <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
+          <div class="item-row"></div>
+
+          <button class="btn-add-main">
+            <a
+              class="button-categoria"
+              href="/cardapio/industrial.html"
+              style="color: white; text-decoration: none"
+              >Ver Categoria</a
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- INFORMAÇÕES DE FUNCIONAMENTO -->
+    <div class="container-info">
+      <h1 class="titulo-info">INFORMAÇÕES</h1>
+
+      <div class="card-info">
+        <div class="card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="red"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="svg-info"
+            data-loc="client/src/pages/Home.tsx:183"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <h2>Horário</h2>
+        </div>
+
+        <a class="card" href="">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="svg-info"
+              data-loc="client/src/pages/Home.tsx:188"
+            >
+              <path
+                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+              ></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <h2>Localização</h2>
           </div>
+        </a>
 
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="/cardapio/industrial.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-         
+        <a class="card" href="">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="svg-info"
+              data-loc="client/src/pages/Home.tsx:193"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
+            </svg>
+            <h2>Contato</h2>
+          </div>
+        </a>
       </div>
     </div>
 
-    <!-- ============== Artesanal ============== -->
-
-    <div class="categoria-box">
-      <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🍔 Hambúrgueres Artesanal</h3>
-
-      <div class="item">
-        <div class="item-row">
-          <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
-        </div>
-
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="cardapio/artesanal.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-      </div>
-    </div>
-
-    <!-- ============== misto-quente ============== -->
-
-    <div class="categoria-box">
-      <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🍔 Misto Quente</h3>
-
-      <div class="item">
-        <div class="item-row">
-          <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
-        </div>
-
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="cardapio/misto-quente.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-      </div>
-    </div>
-
-     <!-- ============== Hot Dog ============== -->
-
-    <div class="categoria-box">
-      <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🌭 Hot Dog</h3>
-
-      <div class="item">
-        <div class="item-row">
-          <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
-        </div>
-
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="cardapio/hot-dog.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-      </div>
-    </div>
-
-
-     <!-- ============== Batata Frita ============== -->
-
-    <div class="categoria-box">
-      <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🍟 Batata Frita</h3>
-
-      <div class="item">
-        <div class="item-row">
-          <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
-        </div>
-
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="cardapio/batata-frita.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-      </div>
-    </div>
-
-     <!-- ============== bebidas ============== -->
-
-    <div class="categoria-box">
-      <!-- industrial 01 -->
-      <h3 style="color: var(--vermelho)">🥤 Bebidas</h3>
-
-      <div class="item">
-        <div class="item-row">
-          <!-- <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span> -->
-        </div>
-
-        <!-- <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
-          </p> -->
-
-        <button class="btn-add-main">
-          <a
-            href="cardapio/bebidas.html"
-            style="color: white; text-decoration: none"
-            >Adicionar</a
-          >
-        </button>
-      </div>
-    </div>
-
-     
+    <!-- ======================================================== -->
+    <!-- FOORTER -->
+    <footer>
+      <p style="color: #666; font-size: 14px">
+        &copy; 2026 Churrasquinho Durans. Todos os direitos reservados.
+      </p>
+    </footer>
 
     <!-- ========================================================= -->
     <!-- CARRINHO -->

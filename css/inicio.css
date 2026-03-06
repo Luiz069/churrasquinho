@@ -1,52 +1,403 @@
-.container-navbar {
-  max-width: 600px;
-  background: url("/img/fundo-bolinha.png");
-  background-position: center;
-  background-size: 150%;
-  background-repeat: no-repeat;
-  margin: 0 auto;
-}
-
-.info {
-  background: rgba(255, 255, 255, 0.297);
-}
-
-.info-funcionamento {
-  background: rgba(255, 1, 1, 0.67);
+/* ===================== HEADER ========================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--vermelho);
+  /* background-image: radial-gradient(
+    rgba(255, 255, 255, 0.2) 15%,
+    transparent 16%
+  ); */
+  background-size: 30px 30px;
   color: white;
-  padding: 25px;
+  padding: 4px 8px;
+  text-align: center;
+  border-bottom: 5px solid var(--preto);
 }
 
-.itens {
-  display: flow-root;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 6px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.botao-header {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  gap: 16px;
+}
+
+.botao-historico {
+  display: flex;
+  align-items: center;
+}
+
+.svg-historico,
+.svg-sair {
+  width: 24px;
+  height: 24px;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.botao-sair {
+  display: flex;
+  align-items: center;
+}
+
+.botao-sair,
+.botao-historico {
+  padding: 0;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ======================== AVISO ======================= */
+.aviso {
+  background-color: var(--amarelo);
+  margin: 0;
+  padding: 6px 20px;
+  text-align: center;
+}
+
+.aviso h2 {
+  display: block;
+  opacity: 1;
+  margin: 0;
+  font-size: 1.1rem;
+  font-family: Poppins, sans-serif;
+}
+
+/* ===================== TITULO ======================== */
+.titulo-cardapio {
+  text-align: center;
+  color: var(--vermelho);
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.titulo-cardapio h1 {
+  margin-bottom: 14px;
+}
+
+hr {
+  border: none;
+  background-color: red;
+  border-top: 2px solid var(--vermelho);
+  border-radius: 5rem;
+  margin: 0 auto;
+  width: 12rem;
+  height: 0.6rem;
+}
+
+/* =====================PRODUTOS======================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto 0 auto; /* margin que separa o header do conteúdo */
+  padding: 20px;
+  font-weight: bold;
+}
+
+.titulo-categoria {
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+.categoria-box {
+  background: white;
+  border: 4px solid var(--preto);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  /* box-shadow: 8px 8px 0 var(--preto); */
+}
+
+.categoria-box h3 {
+  color: var(--vermelho);
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btn-add-main {
+  width: 100%;
+  background: var(--vermelho);
+  color: white;
+  border: 3px solid var(--preto);
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button-categoria {
+  letter-spacing: 0.5px;
+  font-weight: 100;
+}
+
+/* =================== MODAL DE PRODUTO =========================  */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-fechar {
+  display: flex;
+  justify-content: flex-end;
+  height: 5px;
+}
+
+.botao-fechar {
+  position: relative;
+  top: 0.5em;
+  /* right: 4px; */
+  left: 1em;
+  color: white;
+  border: 0;
+  padding: 2px 6px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--branco);
+  display: flex;
+}
+
+path.x-icon {
+  stroke: rgba(186, 186, 186, 0.885);
+  stroke-width: 3px;
+}
+
+#m-nome {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Fredoka One", sans-serif;
+}
+
+#m-desc {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 5px auto 12px auto;
+}
+
+.modal-content {
+  background: white;
+  width: 95%;
+  max-width: 450px;
+  padding: 25px;
+  border-radius: 20px;
+  border: 4px solid var(--preto);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.qtd-control {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.info-funcionamento h3 {
-  margin-bottom: 20px;
-  font-size: 18px;
+#m-qtd-val {
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 40px;
+  text-align: center;
+  border: 1px solid var(--preto);
+  padding: 2px 0 0 0;
+  width: 60px;
+  height: 32px;
+  border-radius: 8px;
   text-align: center;
 }
 
-.info-item {
+.btn-qtd {
+  width: 32px;
+  height: 32px;
+  border: 0px;
+  background: rgba(128, 128, 128, 0.272);
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 3px 0;
+}
+
+/* SEÇÃO ADICIONAIS */
+.adicionais-container {
+  margin: 20px 0;
+  border-top: 2px dashed #ddd;
+  padding-top: 15px;
+}
+.add-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 5px 0;
+}
+.add-info {
+  flex: 1;
+}
+.add-nome {
+  font-weight: bold;
+  display: block;
+}
+.add-preco {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.subtotal-tag {
+  background: #fff9c4;
+  border: 2px solid var(--amarelo);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* OBSERVAÇÃO */
+#m-obs {
+  width: 100%;
+  height: 80px;
+  padding: 12px;
+  border: 2px solid var(--preto);
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+/* =============== MODAL DO CARRINHO =============== */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  background: white;
+  z-index: 3000;
+  transition: 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  border-left: 5px solid var(--preto);
+}
+.cart-sidebar.active {
+  right: 0;
+}
+.cart-item-card {
+  border: 3px solid var(--preto);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 4px 4px 0px #000;
+}
+
+.footer-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--amarelo);
+  border-top: 5px solid var(--preto);
+  padding: 15px;
+  text-align: center;
+  margin-left: -20px;
+}
+
+.btn-carrinho {
+  background: var(--vermelho);
+  color: white;
+  border: 3px solid var(--preto);
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--preto);
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* =============== INFORMAÇOES ADICIONAIS =============== */
+.container-info {
+  padding: 24px 0;
+  background-color: var(--vermelho);
+  margin: auto;
+}
+
+.titulo-info {
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  /* margin-bottom: 30px; */
+  letter-spacing: 2px;
+}
+
+.card-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.card {
+  background: white;
+  border: 4px solid black;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 30px;
   text-align: center;
-  color: var(--vermelho);
-  margin-bottom: 15px;
-  background-color: var(--fundo);
-  width: 80%;
-  border: 2px solid var(--preto);
-  box-shadow: 2px 2px 0 var(--preto);
-  padding: 10px;
+  width: 100%;
 }
 
-.info-item p {
-  margin: 5px 0 0;
-  color: #ccc;
+.svg-info {
+  width: 50px;
+  height: 50px;
+  /* margin-bottom: 10px; */
 }
 
-.status-aberto p {
-  color: #00ff88;
-  font-weight: bold;
+.card h2 {
+  margin: 0;
+  font-size: 24px;
+  color: red;
 }
