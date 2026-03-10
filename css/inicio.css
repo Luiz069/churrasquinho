@@ -25,7 +25,7 @@ header {
 }
 
 .logo {
-  height: 50px;
+  height: 55px;
   width: auto;
 }
 
@@ -102,6 +102,38 @@ hr {
   margin: 0 auto;
   width: 12rem;
   height: 0.6rem;
+}
+
+/* =====================CATEGORIA======================== */
+.categoria-titulo {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.2rem;
+  margin-bottom: 1.3rem;
+}
+
+.categoria-img {
+  display: flex;
+  align-items: center;
+  margin: auto 0;
+}
+
+.categoria-img img {
+  height: 3rem;
+  width: 3rem;
+}
+
+.titulo-categoria {
+  display: flex;
+  align-items: center;
+  font-weight: 200;
+  text-transform: uppercase;
+  font-size: 24px;
+  margin: 0;
+}
+
+strong {
+  color: var(--preto);
 }
 
 /* =====================PRODUTOS======================== */
@@ -300,64 +332,6 @@ path.x-icon {
   resize: none;
 }
 
-/* =============== MODAL DO CARRINHO =============== */
-.cart-sidebar {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  max-width: 480px;
-  height: 100%;
-  background: white;
-  z-index: 3000;
-  transition: 0.3s;
-  padding: 20px;
-  overflow-y: auto;
-  border-left: 5px solid var(--preto);
-}
-.cart-sidebar.active {
-  right: 0;
-}
-.cart-item-card {
-  border: 3px solid var(--preto);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 4px 4px 0px #000;
-}
-
-.footer-btn {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: var(--amarelo);
-  border-top: 5px solid var(--preto);
-  padding: 15px;
-  text-align: center;
-  margin-left: -20px;
-}
-
-.btn-carrinho {
-  background: var(--vermelho);
-  color: white;
-  border: 3px solid var(--preto);
-  padding: 12px 30px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid var(--preto);
-  border-radius: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
 /* =============== INFORMAÇOES ADICIONAIS =============== */
 .container-info {
   padding: 24px 0;
@@ -381,6 +355,9 @@ textarea {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: white;
   border: 4px solid black;
   border-radius: 20px;
@@ -388,6 +365,12 @@ textarea {
   margin-bottom: 30px;
   text-align: center;
   width: 100%;
+  /* gap: 10px; */
+}
+
+.card p {
+  margin: 0;
+  margin-top: 10px;
 }
 
 .svg-info {
