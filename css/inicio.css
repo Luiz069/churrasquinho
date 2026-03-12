@@ -68,7 +68,7 @@ header {
 /* ======================== AVISO ======================= */
 .aviso {
   background-color: var(--amarelo);
-  margin: 0;
+  margin: 0.4rem 0 0 0;
   padding: 6px 20px;
   text-align: center;
 }
@@ -86,7 +86,7 @@ header {
   text-align: center;
   color: var(--vermelho);
   font-size: 18px;
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 10px;
 }
 

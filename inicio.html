@@ -118,6 +118,12 @@
             </a>
           </div>
 
+          <!-- <div class="sair">
+            <button class="botao-sair" onclick="toggleCart()">
+              🛒<span id="cart-count">0</span>
+            </button>
+          </div> -->
+
           <div class="sair">
             <button onclick="sair()" class="botao-sair">
               <svg
@@ -241,7 +247,7 @@
       <div class="categoria-box">
         <div class="categoria-titulo">
           <div class="categoria-img">
-            <img src="img/icons/hot-dog.png" alt="" />
+            <img src="img/icons/cachorro-quente.png" alt="" />
           </div>
           <h3 class="titulo-categoria">Hot Dog</h3>
         </div>
@@ -398,11 +404,11 @@
     <!-- ========================================================= -->
     <!-- CARRINHO -->
     <div id="cartSidebar" class="cart-sidebar">
-      <h2 style="color: var(--vermelho)">🛒 Seu Carrinho</h2>
+      <h2 class="carrinho-titulo">🛒 Seu Carrinho</h2>
 
       <div id="lista-carrinho"></div>
 
-      <div style="font-size: 22px; font-weight: bold; margin: 20px 0">
+      <div class="pedido-total">
         Total: R$ <span id="total-final">0,00</span>
       </div>
 
@@ -428,7 +434,7 @@
 
     <div class="footer-btn">
       <button class="btn-carrinho" onclick="toggleCart()">
-        🛒 Carrinho (<span id="cart-count">0</span>)
+        🛒<span id="cart-count">0</span>
       </button>
     </div>
 

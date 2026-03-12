@@ -62,3 +62,8 @@
   cursor: pointer;
   margin-top: 10px;
 }
+
+/* ===================== CARRINHO ======================== */
+.carrinho {
+  margin-left: -20px !important; /* important para priorizar essa linha */
+}
