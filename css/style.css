@@ -11,7 +11,7 @@
   --preto: #000000;
 
   --font-principlal: "Fredoka One", sans-serif;
-
+  --font-secundaria: "Poppins", sans-serif;
   --font-sans:
     ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
@@ -94,13 +94,12 @@ body {
   right: 0;
 }
 
-.cart-item-card {
+/* .cart-item-card {
   border: 3px solid var(--preto);
   border-radius: 12px;
   padding: 15px;
   margin-bottom: 15px;
-  box-shadow: 4px 4px 0px #000;
-}
+} */
 
 input,
 select,
@@ -116,4 +115,63 @@ textarea {
 /* =============== FOOTER =============== */
 footer {
   margin-top: 50px;
+}
+
+/* =============== CARRINHO =============== */
+.cart-item-card {
+  border: 3px solid var(--preto);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6em;
+  background-color: #ffd700;
+}
+
+.carrinho-nome-produto {
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.carrinho-subtotal-produto {
+  font-size: 16px;
+  font-weight: 800;
+  font-family: var(--font-secundaria);
+}
+
+.carrinho-nome-produto,
+.carrinho-subtotal-produto {
+  margin: 0;
+}
+
+.botoes-add-obs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 200;
+  font-family: var(--font-secundaria);
+  margin-bottom: 0.6em;
+  background-color: aqua;
+}
+
+/* .carrinho-adicional {
+  margin-bottom: 0.4em;
+} */
+
+.carrinho-adicional,
+.carrinho-obs {
+  margin: 0;
+}
+
+.carrinho-card-footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: seagreen;
 }

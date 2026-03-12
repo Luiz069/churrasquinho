@@ -122,20 +122,31 @@ function renderCarrinho() {
     totalGeral += sub;
 
     lista.innerHTML += `
-      <div class="cart-item-card">
-        <b>${item.nome}</b><br>
-        ${item.desc}<br>
-        ${item.adicionais.join(", ")}<br>
-        ${item.obs ? "Obs: " + item.obs : ""}
-        <br><b>R$ ${sub.toFixed(2)}</b>
-        <div>
-          <button onclick="alterarQtdCarrinho(${i}, -1)">-</button>
-          ${item.qtd}
-          <button onclick="alterarQtdCarrinho(${i}, 1)">+</button>
-          <button onclick="removerItem(${i})">🗑️</button>
+        <div class="cart-item-card">
+          <div class="header-card">
+            <h3 class="carrinho-nome-produto">${item.nome}</h3>
+            <p class="carrinho-subtotal-produto">R$ ${sub.toFixed(2)}</p>
+          </div>
+
+          <div class="botoes-add-obs">
+            ${item.adicionais?.length ? `<p class="carrinho-adicional">➕  ${item.adicionais.join(", ")}</p>` : ""}
+            ${item.obs ? `<p class="carrinho-obs">📝 ${item.obs}</p>` : ""}
+          </div>
+
+
+          <div class="carrinho-card-footer">
+            <div class="carrinho-quantidade-produto">
+              <button class="botao-menos" onclick="alterarQtdCarrinho(${i}, -1)">-</button>
+              ${item.qtd}
+              <button class="botao-mais" onclick="alterarQtdCarrinho(${i}, 1)">+</button>
+            </div>
+
+            <div>
+              <button class="botao-excluir" onclick="removerItem(${i})">🗑️</button>
+            </div>
+          </div>
         </div>
-      </div>
-    `;
+      `;
   });
 
   document.getElementById("total-final").innerText = totalGeral.toFixed(2);
