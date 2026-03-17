@@ -409,35 +409,75 @@
       <div id="lista-carrinho"></div>
 
       <div class="pedido-total">
-        Total: R$ <span id="total-final">0,00</span>
+        Total:
+        <div class="total">R$ <span id="total-final">0,00</span></div>
       </div>
 
-      <input type="text" id="c-nome" placeholder="Seu nome completo *" />
-      <input type="text" id="c-numero" placeholder="Seu número *" />
+      <div class="dados-cliente">
+        <div class="dados">
+          <h4 class="titulo-dados">Nome do completo *</h4>
+          <input type="text" id="c-nome" placeholder="Seu nome" />
+        </div>
 
-      <select id="c-pagto">
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Pix">Pix</option>
-        <option value="Cartão">Cartão</option>
-      </select>
+        <div class="dados">
+          <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+          <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+        </div>
 
-      <textarea
-        id="c-obs"
-        placeholder="Observações gerais do pedido"
-      ></textarea>
+        <div class="dados">
+          <h4 class="titulo-dados">Método de pagamento *</h4>
+          <div class="select-custom" id="pagamento-select">
+            <div class="selected">
+              Forma de pagamento
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="options">
+              <div data-value="Dinheiro">Dinheiro</div>
+              <div data-value="Pix">Pix</div>
+              <div data-value="Cartão">Cartão</div>
+            </div>
+          </div>
+        </div>
 
-      <button class="btn-add-main" onclick="finalizarPedido()">
-        📲 Finalizar Pedido
-      </button>
+        <div class="dados">
+          <h4 class="titulo-dados">Observação Gearl</h4>
+          <textarea
+            id="c-obs"
+            placeholder="Observações gerais do pedido"
+          ></textarea>
+        </div>
+      </div>
 
-      <button onclick="toggleCart()">Voltar</button>
+      <div class="finalizar-pedido">
+        <button class="voltar-carrinho" onclick="toggleCart()">Voltar</button>
+
+        <button class="btn-add-main" onclick="finalizarPedido()">
+          📲 Finalizar Pedido
+        </button>
+      </div>
     </div>
 
+    <!-- ======== ICON CARRINHO =============== -->
     <div class="footer-btn">
       <button class="btn-carrinho" onclick="toggleCart()">
         🛒<span id="cart-count">0</span>
       </button>
     </div>
+    <!-- ===================================== -->
 
     <link rel="stylesheet" href="" />
 
@@ -446,33 +486,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-    <!-- <script>
-      lista.innerHTML += `
-        <div class="cart-item-card">
-          <div class="header-card">
-            <h3 class="carrinho-nome-produto">${item.nome}</h3>
-            <p class="carrinho-subtotal-produto">R$ ${sub.toFixed(2)}</p>
-          </div>
-
-          <p class="carrinho-adicional"><strong>Adic:</strong> ${item.adicionais.join(", ")}</p>
-          <p class="carrinho-obs"><strong>OBS:</strong> ${item.obs ? "Obs: " + item.obs : ""}</p>
-
-
-          <div class="carrinho-card-footer">
-            <div class="carrinho-quantidade-produto">
-              <button class="botao-menos" onclick="alterarQtdCarrinho(${i}, -1)">-</button>
-              ${item.qtd}
-              <button class="botao-mais" onclick="alterarQtdCarrinho(${i}, 1)">+</button>
-            </div>
-
-            <div>
-              <button class="botao-excluir" onclick="removerItem(${i})">🗑️</button>
-            </div>
-          </div>
-        </div>
-      `;
-    </script> -->
 
     <script src="js/script.js"></script>
   </body>

@@ -9,6 +9,8 @@
   --amarelo: #ffd700;
   --fundo: #fff5f5;
   --preto: #000000;
+  --cinza: oklch(92.8% 0.006 264.531);
+  --cinza-2: oklch(69.306% 0.00152 285.587);
 
   --font-principlal: "Fredoka One", sans-serif;
   --font-secundaria: "Poppins", sans-serif;
@@ -24,6 +26,7 @@
   box-sizing: border-box;
   font-family: var(--font-principlal);
   text-decoration: none;
+  margin: 0;
 }
 
 body {
@@ -63,7 +66,7 @@ body {
   flex-direction: column;
   position: fixed;
   top: 0;
-  /* right: -100%; */
+  right: -100%;
   width: 100%;
   max-width: 480px;
   height: 100%;
@@ -84,22 +87,9 @@ body {
   color: var(--vermelho);
 }
 
-.pedido-total {
-  font-size: 22px;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
 .cart-sidebar.active {
   right: 0;
 }
-
-/* .cart-item-card {
-  border: 3px solid var(--preto);
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-} */
 
 input,
 select,
@@ -109,7 +99,7 @@ textarea {
   border: 2px solid var(--preto);
   border-radius: 10px;
   margin-top: 5px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 /* =============== FOOTER =============== */
@@ -118,6 +108,10 @@ footer {
 }
 
 /* =============== CARRINHO =============== */
+#lista-carrinho {
+  border-bottom: 3px solid var(--amarelo);
+}
+
 .cart-item-card {
   border: 3px solid var(--preto);
   border-radius: 12px;
@@ -130,7 +124,6 @@ footer {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.3em;
-  /* background-color: #ffd700; */
 }
 
 .carrinho-nome-produto {
@@ -158,16 +151,7 @@ footer {
   font-size: 12px;
   font-weight: 100;
   margin-bottom: 1.5em;
-  /* background-color: aqua; */
 }
-
-/* .carrinho-adicional {
-  font-family: math;
-} */
-
-/* .carrinho-adicional {
-  margin-bottom: 0.4em;
-} */
 
 .carrinho-adicional,
 .carrinho-obs {
@@ -176,35 +160,47 @@ footer {
   text-transform: inherit;
 }
 
+/* Quantidade */
 .carrinho-card-footer {
   display: flex;
   justify-content: space-between;
-  /* background-color: seagreen; */
   align-items: center;
   margin: 0;
 }
 
 .carrinho-quantidade-produto {
   display: flex;
-  gap: 10px;
   text-align: center;
-  align-items: center;
 }
 
 .botao-menos,
 .botao-mais {
-  /* background: none; */
+  background: oklch(92.8% 0.006 264.531);
+  border: 0;
+  border-radius: 10%;
 }
 
-.botao-menos p,
-.botao-mais p {
+.botao-menos-svg,
+.botao-mais-svg {
   display: flex;
-  margin: -5px 0 0 0;
-  font-size: 20px;
-  font-weight: lighter;
+  stroke-width: 50px;
+  margin: 2px auto;
+  /* stroke: 10px !important; */
 }
 
+.numero-qtd {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--preto);
+  margin: 0;
+  width: 31px;
+  height: 23px;
+}
+
+/* LIXEIRA */
 .botao-excluir {
+  display: flex;
   background: none;
   border: 0;
 }
@@ -212,4 +208,100 @@ footer {
 .lixeira {
   fill: var(--preto);
   background: none;
+}
+
+.lixeira path {
+  fill: var(--vermelho);
+}
+
+/* TOTAL */
+.pedido-total {
+  display: flex;
+  opacity: 1;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-secundaria);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0 20px 0;
+}
+
+.total,
+#total-final {
+  font-family: var(--font-secundaria);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--vermelho);
+}
+
+/* =============== DADOS CLIENTE =============== */
+.dados-cliente {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titulo-dados {
+  font-weight: 100;
+}
+
+.dados {
+  margin-bottom: 8px;
+}
+
+/* ========= FORMA DE PAGAMENTO ========== */
+.select-custom {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px;
+  font-family: var(--font-secundaria);
+  color: var(--cinza-2);
+  font-weight: 600;
+  border: 2px solid var(--preto);
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.bi {
+  margin-bottom: -3px;
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  border: 1px solid var(--preto);
+  /* border-top: none; */
+  margin-top: -5.5px;
+  background: white;
+  display: none;
+  z-index: 10;
+}
+
+.options div {
+  padding: 10px;
+  font-family: var(--font-secundaria);
+  font-weight: 600;
+  border: 0.5px solid var(--cinza);
+}
+
+.options div:hover {
+  background: #f0f0f0;
+}
+
+/* quando aberto */
+.select-custom.active .options {
+  display: block;
+}
+
+.finalizar-pedido {
+  display: flex;
+  align-items: center;
 }

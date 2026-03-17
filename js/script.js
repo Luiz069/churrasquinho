@@ -32,6 +32,7 @@ let itemAtual = {};
 let qtdModal = 1;
 let extras = { queijo: 0, ovo: 0, carne: 0 };
 const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
+let valorPagamento = "";
 
 // ================= MODAL PRODUTO =================
 
@@ -136,9 +137,17 @@ function renderCarrinho() {
 
           <div class="carrinho-card-footer">
             <div class="carrinho-quantidade-produto">
-              <button class="botao-menos" onclick="alterarQtdCarrinho(${i}, -1)"><p>-</p></button>
-              ${item.qtd}
-              <button class="botao-mais" onclick="alterarQtdCarrinho(${i}, 1)"><p>+</p></button>
+              <button class="botao-menos" onclick="alterarQtdCarrinho(${i}, -1)">
+                <svg class="botao-menos-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
+                </svg>
+              </button>
+              <p class="numero-qtd">${item.qtd}</p>
+              <button class="botao-mais" onclick="alterarQtdCarrinho(${i}, 1)">
+                <svg class="botao-mais-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+              </button>
             </div>
 
             <div>
@@ -187,9 +196,9 @@ function finalizarPedido() {
   const nome = document.getElementById("c-nome").value;
   const numero = document.getElementById("c-numero").value;
   const observacao = document.getElementById("c-obs").value;
-  const pagamento = document.getElementById("c-pagto").value;
 
   if (!nome || !numero) return alert("Preencha nome e número!");
+  if (!valorPagamento) return alert("Selecione uma forma de pagamento!");
   if (carrinho.length === 0) return alert("Carrinho vazio!");
 
   let total = 0;
@@ -211,7 +220,7 @@ Subtotal: R$ ${subtotal.toFixed(2)}\n`;
       nome,
       numero,
       observacaoGeral: observacao,
-      pagamento,
+      pagamento: valorPagamento,
       itens: carrinho,
       total,
       status: "pendente",
@@ -228,7 +237,7 @@ Itens:${textoItens}
 Observação Geral:
 ${observacao || "Nenhuma"}
 
-Pagamento: ${pagamento}
+Pagamento: ${valorPagamento}
 
 💰 Total: R$ ${total.toFixed(2)}
 `;
@@ -242,6 +251,11 @@ Pagamento: ${pagamento}
       salvarCarrinho();
       renderCarrinho();
 
+      // 🔥 RESET DO SELECT
+      valorPagamento = "";
+      document.querySelector("#pagamento-select .selected").textContent =
+        "Forma de pagamento";
+
       window.open(url, "_blank");
       alert("Pedido enviado com sucesso!");
     })
@@ -252,6 +266,34 @@ Pagamento: ${pagamento}
 
 function voltarPagina() {
   window.history.back();
+}
+
+const select = document.getElementById("pagamento-select");
+
+if (select) {
+  const selected = select.querySelector(".selected");
+  const options = select.querySelectorAll(".options div");
+
+  // abrir/fechar
+  selected.addEventListener("click", () => {
+    select.classList.toggle("active");
+  });
+
+  // selecionar opção
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      selected.textContent = option.textContent;
+      valorPagamento = option.dataset.value;
+      select.classList.remove("active");
+    });
+  });
+
+  // fechar ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!select.contains(e.target)) {
+      select.classList.remove("active");
+    }
+  });
 }
 
 // ================= AUTO RENDER AO ABRIR =================
