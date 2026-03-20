@@ -138,32 +138,77 @@
     <!-- ========================================================= -->
     <!-- CARRINHO -->
     <div id="cartSidebar" class="cart-sidebar">
-      <h2 style="color: var(--vermelho)">🛒 Seu Carrinho</h2>
+      <h2 class="carrinho-titulo">Seu Carrinho</h2>
 
       <div id="lista-carrinho"></div>
 
-      <div style="font-size: 22px; font-weight: bold; margin: 20px 0">
-        Total: R$ <span id="total-final">0,00</span>
+      <div class="pedido-total">
+        Total:
+        <div class="total">R$ <span id="total-final">0,00</span></div>
       </div>
 
-      <input type="text" id="c-nome" placeholder="Seu nome completo *" />
-      <input type="text" id="c-numero" placeholder="Seu número *" />
-      <textarea
-        id="c-obs"
-        placeholder="Observações gerais do pedido"
-      ></textarea>
+      <div class="dados-cliente">
+        <div class="dados">
+          <h4 class="titulo-dados">Nome do completo *</h4>
+          <input type="text" id="c-nome" placeholder="Seu nome" />
+        </div>
 
-      <select id="c-pagto">
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Pix">Pix</option>
-        <option value="Cartão">Cartão</option>
-      </select>
+        <div class="dados">
+          <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+          <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+        </div>
 
-      <button class="btn-add-main" onclick="finalizarPedido()">
-        📲 Finalizar Pedido
-      </button>
+        <div class="dados">
+          <h4 class="titulo-dados">Método de pagamento *</h4>
+          <div class="select-custom" id="pagamento-select">
+            <div class="selected">
+              Forma de pagamento
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="options">
+              <div data-value="Dinheiro">Dinheiro</div>
+              <div data-value="Pix">Pix</div>
+              <div data-value="Cartão">Cartão</div>
+            </div>
+          </div>
+        </div>
 
-      <button onclick="toggleCart()">Voltar</button>
+        <div class="dados">
+          <h4 class="titulo-dados">Observação Gearl</h4>
+          <textarea
+            id="c-obs"
+            placeholder="Observações gerais do pedido"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="finalizar-pedido">
+        <button class="voltar-carrinho" onclick="toggleCart()">
+          Voltar as Compras
+        </button>
+
+        <!-- <button class="btn-add-main" onclick="finalizarPedido()">
+          📲 Finalizar Pedido
+        </button> -->
+
+        <button class="botao-finalizar" onclick="finalizarPedido()">
+          Finalizar Pedido
+        </button>
+      </div>
     </div>
 
     <div class="footer-btn carrinho">

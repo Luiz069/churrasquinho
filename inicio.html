@@ -404,7 +404,7 @@
     <!-- ========================================================= -->
     <!-- CARRINHO -->
     <div id="cartSidebar" class="cart-sidebar">
-      <h2 class="carrinho-titulo">🛒 Seu Carrinho</h2>
+      <h2 class="carrinho-titulo">Seu Carrinho</h2>
 
       <div id="lista-carrinho"></div>
 
@@ -463,10 +463,16 @@
       </div>
 
       <div class="finalizar-pedido">
-        <button class="voltar-carrinho" onclick="toggleCart()">Voltar</button>
+        <button class="voltar-carrinho" onclick="toggleCart()">
+          Voltar as Compras
+        </button>
 
-        <button class="btn-add-main" onclick="finalizarPedido()">
+        <!-- <button class="btn-add-main" onclick="finalizarPedido()">
           📲 Finalizar Pedido
+        </button> -->
+
+        <button class="botao-finalizar" onclick="finalizarPedido()">
+          Finalizar Pedido
         </button>
       </div>
     </div>
@@ -478,8 +484,6 @@
       </button>
     </div>
     <!-- ===================================== -->
-
-    <link rel="stylesheet" href="" />
 
     <!-- ========================================================= -->
     <!-- FIREBASE -->

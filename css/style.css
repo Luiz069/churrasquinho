@@ -304,4 +304,28 @@ footer {
 .finalizar-pedido {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+/* finalizar é voltar*/
+.voltar-carrinho,
+.botao-finalizar {
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid var(--preto);
+  padding: 15px 0;
+  font-family: var(--font-principlal);
+  font-weight: 100;
+  letter-spacing: 0.2px;
+}
+
+.voltar-carrinho {
+  color: var(--preto);
+  background-color: rgba(189, 189, 189, 0.457);
+}
+
+.botao-finalizar {
+  color: var(--fundo);
+  background-color: var(--vermelho);
 }
