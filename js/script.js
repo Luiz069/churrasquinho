@@ -17,6 +17,51 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// ================= PROTEÇÃO DE ROTA =================
+
+// proteção da página
+firebase.auth().onAuthStateChanged((user) => {
+  if (!user) {
+    window.location.replace("index.html");
+  }
+});
+
+// logout
+function sair() {
+  auth.signOut().then(() => {
+    window.location.href = "index.html";
+  });
+}
+
+// ================= BOTÃO PARA SAIR =================
+// function sair() {
+//   firebase
+//     .auth()
+//     .signOut()
+//     .then(() => {
+//       // limpa qualquer controle de sessão (opcional)
+//       sessionStorage.clear();
+
+//       // volta pro login
+//       window.location.href = "index.html";
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       alert("Erro ao sair");
+//     });
+// }
+
+// function sair() {
+//   if (confirm("Deseja realmente sair?")) {
+//     firebase
+//       .auth()
+//       .signOut()
+//       .then(() => {
+//         window.location.href = "index.html";
+//       });
+//   }
+// }
+
 // ================= CARRINHO (AGORA PERSISTENTE) =================
 
 // 🔥 Carrega do localStorage
