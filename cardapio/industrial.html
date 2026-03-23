@@ -9,16 +9,6 @@
 
   <body>
     <!-- ========================================================= -->
-    <!-- TOPO -->
-    <header>
-      <div class="topbar">
-        <button onclick="voltarPagina()" class="btn-back">
-          ←
-        </button>
-      </div>
-    </header>
-
-    <!-- ========================================================= -->
     <!-- MODAL PRODUTO -->
     <div id="modalItem" class="modal">
       <div class="modal-content">
@@ -42,20 +32,20 @@
             </svg>
           </button>
         </div>
-
+  
         <h2 id="m-nome" style="color: var(--vermelho); margin: 0">Nome</h2>
         <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
-
+  
         <label><b>Quantidade:</b></label>
         <div class="qtd-control" style="margin: 10px 0">
           <button class="btn-qtd" onclick="mudarQtdModal(-1)">-</button>
           <span id="m-qtd-val">1</span>
           <button class="btn-qtd" onclick="mudarQtdModal(1)">+</button>
         </div>
-
+  
         <div class="adicionais-container">
           <p><b>Adicionais:</b></p>
-
+  
           <div class="add-item-row">
             <span>Queijo Extra (+ R$ 3,00)</span>
             <div class="qtd-control">
@@ -64,7 +54,7 @@
               <button onclick="mudarAdd('queijo', 1)">+</button>
             </div>
           </div>
-
+  
           <div class="add-item-row">
             <span>Ovo Extra (+ R$ 2,00)</span>
             <div class="qtd-control">
@@ -73,7 +63,7 @@
               <button onclick="mudarAdd('ovo', 1)">+</button>
             </div>
           </div>
-
+  
           <div class="add-item-row">
             <span>Carne Extra (+ R$ 8,00)</span>
             <div class="qtd-control">
@@ -83,18 +73,44 @@
             </div>
           </div>
         </div>
-
+  
         <label><b>Observações (opcional)</b></label>
         <textarea id="m-obs" rows="2"></textarea>
-
+  
         <div class="subtotal-tag">
           Subtotal: R$ <span id="m-subtotal">0,00</span>
         </div>
-
+  
         <button class="btn-add-main" onclick="addAoCarrinho()">
           ✅ Adicionar ao Carrinho
         </button>
       </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TOPO -->
+    <header>
+      <div class="topbar">
+        <button onclick="voltarPagina()" class="btn-back">
+          <svg class="voltar" width="45" height="45" viewBox="0 0 100 100">
+    <polyline 
+      points="60,20 30,50 60,80"
+      fill="none"
+      stroke="#000"
+      stroke-width="7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============== TITULO ============== -->
+    <div class="titulo-cardapio">
+      <h1 style="font-size: 1.8em; text-align: center; color: var(--vermelho); font-weight: 900;">Hambúrguer Industrial</h1>
+
+      <hr class="linha" />
     </div>
 
     <!-- ========================================================= -->
@@ -104,31 +120,276 @@
       <!-- ============== CATEGORIA 01 ============== -->
 
       <div class="categoria-box">
-        <h1 style="color: var(--vermelho)">🍔 Hambúrgueres Industrial</h1>
-
+        <!-- =============== LANCHE 01 =================== -->
         <div class="item">
           <div class="item-row">
-            <span>X-Tudo Especial</span>
-            <span>R$ 25,00</span>
+            <span><h2 class="titulo-produto">X-burguer</h2></span>
+            <span class="preco">R$ 8,00</span>
           </div>
 
-          <p style="font-size: 14px; color: #666">
-            Pão, carne, queijo, presunto, ovo, bacon e salada.
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, queijo, presunto, salada
           </p>
 
           <button
             class="btn-add-main"
             onclick="
               abrirModal(
-                'X-Tudo Especial',
-                25,
-                'Pão, carne, queijo, presunto, ovo, bacon e salada.',
+                'X-burguer',
+                8,
+                'Pão, carne, queijo, presunto, salada',
               )
             "
           >
             Adicionar
           </button>
         </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 02 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Egg-burguer</h2></span>
+            <span class="preco">R$ 8,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, queijo, ovo, salada
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'Egg-burguer',
+                8,
+                'Pão, carne, queijo, ovo, salada',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 03 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Americano</h2></span>
+            <span class="preco">R$ 10,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, queijo, ovo, presunto, salada
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'Americano',
+                10,
+                'Pão, carne, queijo, ovo, presunto, salada',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 04 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Bacon</h2></span>
+            <span class="preco">R$ 13,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, queijo, ovo, presunto, salada, bacon
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Bacon',
+                13,
+                'Pão, carne, queijo, ovo, presunto, salada',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 05 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Bauru</h2></span>
+            <span class="preco">R$ 13,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, queijo, ovo, presunto, salada, calabresa
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'Bauru',
+                13,
+                'Pão, carne, queijo, ovo, presunto, salada, calabresa',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 06 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Tudo</h2></span>
+            <span class="preco">R$ 15,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Tudo',
+                15,
+                'Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 07=================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Frango</h2></span>
+            <span class="preco">R$ 15,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Frango',
+                15,
+                'Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 08 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Burguer Duplo</h2></span>
+            <span class="preco">R$ 16,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, 2 carne, 2 queijo, presunto, salada
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Burguer Duplo',
+                16,
+                'Pão, 2 carne, 2 queijo, presunto, salada',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 09 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Bacon Especial</h2></span>
+            <span class="preco">R$ 19,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Bacon Especial',
+                19,
+                'Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 10 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">X-Tudão</h2></span>
+            <span class="preco">R$ 22,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, 2 carne, 2 ovo, 2 presunto,   2 queijo, salada, file de frango, batata palha, 2 salsicha
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal(
+                'X-Tudão',
+                22,
+                'Pão, 2 carne, 2 ovo, 2 presunto,   2 queijo, salada, file de frango, batata palha, 2 salsicha',
+              )
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        
+        
         
         
         

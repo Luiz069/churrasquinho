@@ -1,14 +1,10 @@
 /* ===================== HEADER ========================= */
-header {
+.header-inicio {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: var(--vermelho);
-  /* background-image: radial-gradient(
-    rgba(255, 255, 255, 0.2) 15%,
-    transparent 16%
-  ); */
   background-size: 30px 30px;
   color: white;
   padding: 4px 8px;
@@ -78,7 +74,7 @@ header {
   opacity: 1;
   margin: 0;
   font-size: 1.1rem;
-  font-family: Poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* ===================== TITULO ======================== */
@@ -94,13 +90,13 @@ header {
   margin-bottom: 14px;
 }
 
-hr {
+.linha {
   border: none;
   background-color: red;
   border-top: 2px solid var(--vermelho);
   border-radius: 5rem;
   margin: 0 auto;
-  width: 12rem;
+  width: 15rem;
   height: 0.6rem;
 }
 
