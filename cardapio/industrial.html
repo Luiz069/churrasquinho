@@ -32,57 +32,87 @@
             </svg>
           </button>
         </div>
-  
+
         <h2 id="m-nome" style="color: var(--vermelho); margin: 0">Nome</h2>
         <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
-  
-        <label><b>Quantidade:</b></label>
-        <div class="qtd-control" style="margin: 10px 0">
-          <button class="btn-qtd" onclick="mudarQtdModal(-1)">-</button>
-          <span id="m-qtd-val">1</span>
-          <button class="btn-qtd" onclick="mudarQtdModal(1)">+</button>
+
+        <label><b class="quantidade">Quantidade:</b></label>
+        <div class="quantidade-produto">
+          <div class="modal-quantidade-produto" style="margin: 10px 0">
+            <button class="botao-menos" onclick="mudarQtdModal(-1)">
+              <svg
+                class="botao-menos-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"
+                />
+              </svg>
+            </button>
+            <span id="m-qtd-val">1</span>
+            <button class="botao-mais" onclick="mudarQtdModal(1)">
+              <svg
+                class="botao-mais-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-  
+
         <div class="adicionais-container">
-          <p><b>Adicionais:</b></p>
-  
+          <p><b class="add">Adicionais:</b></p>
+
           <div class="add-item-row">
-            <span>Queijo Extra (+ R$ 3,00)</span>
+            <span class="add-nome">Queijo Extra (+ R$ 3,00)</span>
             <div class="qtd-control">
               <button onclick="mudarAdd('queijo', -1)">-</button>
-              <span id="qtd-add-queijo">0</span>
+              <span id="qtd-add-queijo"><p></p>0</p></span>
               <button onclick="mudarAdd('queijo', 1)">+</button>
             </div>
           </div>
-  
+
           <div class="add-item-row">
-            <span>Ovo Extra (+ R$ 2,00)</span>
+            <span class="add-nome">Ovo Extra (+ R$ 2,00)</span>
             <div class="qtd-control">
               <button onclick="mudarAdd('ovo', -1)">-</button>
-              <span id="qtd-add-ovo">0</span>
+              <span id="qtd-add-ovo"><p></p>0</p></span>
               <button onclick="mudarAdd('ovo', 1)">+</button>
             </div>
           </div>
-  
+
           <div class="add-item-row">
-            <span>Carne Extra (+ R$ 8,00)</span>
+            <span class="add-nome">Carne Extra (+ R$ 8,00)</span>
             <div class="qtd-control">
               <button onclick="mudarAdd('carne', -1)">-</button>
-              <span id="qtd-add-carne">0</span>
+              <span id="qtd-add-carne"><p>0</p></span>
               <button onclick="mudarAdd('carne', 1)">+</button>
             </div>
           </div>
         </div>
-  
-        <label><b>Observações (opcional)</b></label>
+
+        <label><b class="obsevacao">Observações (opcional)</b></label>
         <textarea id="m-obs" rows="2"></textarea>
-  
+
         <div class="subtotal-tag">
-          Subtotal: R$ <span id="m-subtotal">0,00</span>
+          <p>Total: R$ </p><span id="m-subtotal"> 0,00</span>
         </div>
-  
-        <button class="btn-add-main" onclick="addAoCarrinho()">
-          ✅ Adicionar ao Carrinho
+
+        <button class="add-carrinho" onclick="addAoCarrinho()">
+          <p class="add-carrinho-text">Adicionar ao Carrinho</p>
         </button>
       </div>
     </div>
@@ -93,22 +123,31 @@
       <div class="topbar">
         <button onclick="voltarPagina()" class="btn-back">
           <svg class="voltar" width="45" height="45" viewBox="0 0 100 100">
-    <polyline 
-      points="60,20 30,50 60,80"
-      fill="none"
-      stroke="#000"
-      stroke-width="7"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </svg>
+            <polyline
+              points="60,20 30,50 60,80"
+              fill="none"
+              stroke="#000"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </div>
     </header>
 
     <!-- ============== TITULO ============== -->
     <div class="titulo-cardapio">
-      <h1 style="font-size: 1.8em; text-align: center; color: var(--vermelho); font-weight: 900;">Hambúrguer Industrial</h1>
+      <h1
+        style="
+          font-size: 1.8em;
+          text-align: center;
+          color: var(--vermelho);
+          font-weight: 900;
+        "
+      >
+        Hambúrguer Industrial
+      </h1>
 
       <hr class="linha" />
     </div>
@@ -116,14 +155,13 @@
     <!-- ========================================================= -->
     <!-- CARDÁPIO -->
     <div class="container">
-      
       <!-- ============== CATEGORIA 01 ============== -->
 
       <div class="categoria-box">
         <!-- =============== LANCHE 01 =================== -->
         <div class="item">
           <div class="item-row">
-            <span><h2 class="titulo-produto">X-burguer</h2></span>
+            <span><h2 class="titulo-produto">X-Burguer</h2></span>
             <span class="preco">R$ 8,00</span>
           </div>
 
@@ -134,11 +172,7 @@
           <button
             class="btn-add-main"
             onclick="
-              abrirModal(
-                'X-burguer',
-                8,
-                'Pão, carne, queijo, presunto, salada',
-              )
+              abrirModal('X-Burguer', 8, 'Pão, carne, queijo, presunto, salada')
             "
           >
             Adicionar
@@ -150,7 +184,7 @@
         <!-- =============== LANCHE 02 =================== -->
         <div class="item">
           <div class="item-row">
-            <span><h2 class="titulo-produto">Egg-burguer</h2></span>
+            <span><h2 class="titulo-produto">Egg-Burguer</h2></span>
             <span class="preco">R$ 8,00</span>
           </div>
 
@@ -161,11 +195,7 @@
           <button
             class="btn-add-main"
             onclick="
-              abrirModal(
-                'Egg-burguer',
-                8,
-                'Pão, carne, queijo, ovo, salada',
-              )
+              abrirModal('Egg-Burguer', 8, 'Pão, carne, queijo, ovo, salada')
             "
           >
             Adicionar
@@ -290,7 +320,8 @@
           </div>
 
           <p class="ingredientes" style="font-size: 14px; color: #666">
-            Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha
+            Pão, carne, ovo, presunto, queijo, salada, file de frango, batata
+            palha
           </p>
 
           <button
@@ -344,7 +375,8 @@
           </div>
 
           <p class="ingredientes" style="font-size: 14px; color: #666">
-            Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha
+            Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha,
+            batata palha
           </p>
 
           <button
@@ -371,7 +403,8 @@
           </div>
 
           <p class="ingredientes" style="font-size: 14px; color: #666">
-            Pão, 2 carne, 2 ovo, 2 presunto,   2 queijo, salada, file de frango, batata palha, 2 salsicha
+            Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de frango,
+            batata palha, 2 salsicha
           </p>
 
           <button
@@ -387,15 +420,8 @@
             Adicionar
           </button>
         </div>
-
-        
-        
-        
-        
-        
       </div>
-
-
+    </div>
     <!-- ========================================================= -->
     <!-- CARRINHO -->
     <div id="cartSidebar" class="cart-sidebar">
@@ -410,7 +436,7 @@
 
       <div class="dados-cliente">
         <div class="dados">
-          <h4 class="titulo-dados">Nome do completo *</h4>
+          <h4 class="titulo-dados">Nome *</h4>
           <input type="text" id="c-nome" placeholder="Seu nome" />
         </div>
 
@@ -472,8 +498,16 @@
       </div>
     </div>
 
+    <!-- ======================================================== -->
+    <!-- FOORTER -->
+    <footer>
+      <p style="margin-top: -4.5em; color: #666; font-size: 14px; text-align: center">
+        &copy; 2026 Churrasquinho Durans <br> Todos os direitos reservados
+      </p>
+    </footer>
+
     <div class="footer-btn carrinho">
-      <button class="btn-carrinho " onclick="toggleCart()">
+      <button class="btn-carrinho" onclick="toggleCart()">
         🛒 <span id="cart-count">0</span>
       </button>
     </div>

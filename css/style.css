@@ -5,6 +5,7 @@
 @import url("responsivo.css");
 
 :root {
+  --branco: #fff;
   --vermelho: red;
   --amarelo: #ffd700;
   --fundo: #fff5f5;
@@ -12,7 +13,7 @@
   --cinza: oklch(92.8% 0.006 264.531);
   --cinza-2: oklch(69.306% 0.00152 285.587);
 
-  --font-principlal: "Fredoka One", sans-serif;
+  --font-principal: "Fredoka One", sans-serif;
   --font-secundaria: "Poppins", sans-serif;
   --font-sans:
     ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -24,7 +25,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: var(--font-principlal);
+  font-family: var(--font-principal);
   text-decoration: none;
   margin: 0;
 }
@@ -315,7 +316,7 @@ footer {
   border-radius: 5px;
   border: 2px solid var(--preto);
   padding: 15px 0;
-  font-family: var(--font-principlal);
+  font-family: var(--font-principal);
   font-weight: 100;
   letter-spacing: 0.2px;
 }
