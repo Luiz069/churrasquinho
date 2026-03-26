@@ -282,15 +282,36 @@ function finalizarPedido() {
   let total = 0;
   let textoItens = "";
 
-  carrinho.forEach((item, index) => {
+  carrinho.forEach((item) => {
     const subtotal = item.precoUn * item.qtd;
     total += subtotal;
 
-    textoItens += `\n${index + 1}. ${item.nome}
-Qtd: ${item.qtd}
-Obs: ${item.obs || "Nenhuma"}
-Subtotal: R$ ${subtotal.toFixed(2)}\n`;
+    textoItens += `➡️ ${item.qtd}x ${item.nome}\n`;
+
+    // Sabores / adicionais
+    if (item.adicionais && item.adicionais.length > 0) {
+      textoItens += `_Sabor:_ ${item.adicionais.join(" | ")}\n`;
+    }
+
+    // Observação do item
+    if (item.obs) {
+      textoItens += `Obs: ${item.obs}\n`;
+    }
+
+    textoItens += "\n";
   });
+
+  // 🔥 EMOJIS DINÂMICOS
+  let emojiPagamento = "";
+  let emojiEntrega = "🏪";
+
+  if (valorPagamento.toLowerCase().includes("cart")) {
+    emojiPagamento = "💳";
+  } else if (valorPagamento.toLowerCase().includes("din")) {
+    emojiPagamento = "💵";
+  } else if (valorPagamento.toLowerCase().includes("pix")) {
+    emojiPagamento = "🏦";
+  }
 
   db.collection("pedidos")
     .add({
@@ -305,31 +326,29 @@ Subtotal: R$ ${subtotal.toFixed(2)}\n`;
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
-      const mensagem = `🍔 *NOVO PEDIDO*
+      const mensagem = `Pedido nº ${Math.floor(Math.random() * 1000)}
 
-Cliente: ${nome}
-Número: ${numero}
+      📋 *Itens:*
+      ${textoItens}
 
-Itens:${textoItens}
+      ${emojiPagamento} ${valorPagamento}
 
-Observação Geral:
-${observacao || "Nenhuma"}
+      ${emojiEntrega} Retirada no local
+      (Estimativa: entre 35~45 minutos)
 
-Pagamento: ${valorPagamento}
+      💰 *Total: R$ ${total.toFixed(2)}*
 
-💰 Total: R$ ${total.toFixed(2)}
-`;
+      Obrigado pela preferência, se precisar de algo é só chamar! 😉`;
 
       const numeroLanchonete = "5598985301953";
-      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(
-        mensagem,
-      )}`;
+      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
+      // Limpa carrinho
       carrinho = [];
       salvarCarrinho();
       renderCarrinho();
 
-      // 🔥 RESET DO SELECT
+      // Reset pagamento
       valorPagamento = "";
       document.querySelector("#pagamento-select .selected").textContent =
         "Forma de pagamento";
