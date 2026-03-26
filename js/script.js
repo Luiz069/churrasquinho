@@ -328,9 +328,8 @@ function finalizarPedido() {
     .then(() => {
       const mensagem = `Pedido nº ${Math.floor(Math.random() * 1000)}
 
-      📋 *Itens:*
+      *Itens:*
       ${textoItens}
-
       ${emojiPagamento} ${valorPagamento}
 
       ${emojiEntrega} Retirada no local
