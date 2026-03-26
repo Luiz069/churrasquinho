@@ -97,6 +97,69 @@ function fecharModal() {
   document.getElementById("modalItem").style.display = "none";
 }
 
+// ================ MODAL BEBIDAS ===============
+let bebidaSelecionada = null;
+
+function abrirModalBebidas(nome, opcoes) {
+  itemAtual = { nome };
+  bebidaSelecionada = null;
+
+  document.getElementById("m-nome-bebida").innerText = nome;
+
+  const container = document.getElementById("bebida-opcoes");
+  container.innerHTML = "";
+
+  opcoes.forEach((op) => {
+    container.innerHTML += `
+      <div class="opcao-bebida" onclick="selecionarBebida('${op.nome}', ${op.preco}, this)">
+        <div>${op.nome}</div> 
+        <div>R$ ${op.preco.toFixed(2)}</div>
+      </div>
+    `;
+  });
+
+  document.getElementById("m-total-bebida").innerText = "0.00";
+
+  document.getElementById("modalBebida").style.display = "flex";
+}
+
+function selecionarBebida(nome, preco, el) {
+  bebidaSelecionada = { nome, preco };
+
+  // remove seleção anterior
+  document
+    .querySelectorAll(".opcao-bebida")
+    .forEach((e) => e.classList.remove("ativo"));
+
+  // adiciona seleção
+  el.classList.add("ativo");
+
+  document.getElementById("m-total-bebida").innerText = preco.toFixed(2);
+}
+
+function fecharModalBebida() {
+  document.getElementById("modalBebida").style.display = "none";
+}
+
+function addBebidaCarrinho() {
+  if (!bebidaSelecionada) {
+    alert("Selecione uma bebida!");
+    return;
+  }
+
+  carrinho.push({
+    nome: itemAtual.nome + " (" + bebidaSelecionada.nome + ")",
+    qtd: 1,
+    obs: "",
+    adicionais: [],
+    precoUn: bebidaSelecionada.preco,
+  });
+
+  salvarCarrinho();
+  renderCarrinho();
+  fecharModalBebida();
+}
+
 // ================= ADICIONAR AO CARRINHO =================
 
 function addAoCarrinho() {

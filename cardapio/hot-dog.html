@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardápio Digital - Lanchonete</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <!-- ========================================================= -->
+    <!-- MODAL PRODUTO -->
+    <div id="modalItem" class="modal">
+      <div class="modal-content">
+        <div class="container-fechar">
+          <button onclick="fecharModal()" class="botao-fechar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+              data-loc="client/src/components/ui/dialog.tsx:139"
+            >
+              <path class="x-icon" d="M18 6 6 18"></path>
+              <path class="x-icon" d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="m-nome" style="color: var(--vermelho); margin: 0">Nome</h2>
+        <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
+
+        <label><b class="quantidade">Quantidade:</b></label>
+        <div class="quantidade-produto">
+          <div class="modal-quantidade-produto" style="margin: 10px 0">
+            <button class="botao-menos" onclick="mudarQtdModal(-1)">
+              <svg
+                class="botao-menos-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"
+                />
+              </svg>
+            </button>
+            <span id="m-qtd-val">1</span>
+            <button class="botao-mais" onclick="mudarQtdModal(1)">
+              <svg
+                class="botao-mais-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="adicionais-container">
+          <p><b class="add">Adicionais:</b></p>
+
+          <div class="add-item-row">
+            <span class="add-nome">Queijo Extra (+ R$ 3,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('queijo', -1)">-</button>
+              <span id="qtd-add-queijo"><p></p>0</p></span>
+              <button onclick="mudarAdd('queijo', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="add-item-row">
+            <span class="add-nome">Ovo Extra (+ R$ 2,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('ovo', -1)">-</button>
+              <span id="qtd-add-ovo"><p></p>0</p></span>
+              <button onclick="mudarAdd('ovo', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="add-item-row">
+            <span class="add-nome">Carne Extra (+ R$ 8,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('carne', -1)">-</button>
+              <span id="qtd-add-carne"><p>0</p></span>
+              <button onclick="mudarAdd('carne', 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <label><b class="obsevacao">Observações (opcional)</b></label>
+        <textarea id="m-obs" rows="2"></textarea>
+
+        <div class="subtotal-tag">
+          <p>Total: R$ </p><span id="m-subtotal"> 0,00</span>
+        </div>
+
+        <button class="add-carrinho" onclick="addAoCarrinho()">
+          <p class="add-carrinho-text">Adicionar ao Carrinho</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TOPO -->
+    <header>
+      <div class="topbar">
+        <button onclick="voltarPagina()" class="btn-back">
+          <svg class="voltar" width="45" height="45" viewBox="0 0 100 100">
+            <polyline
+              points="60,20 30,50 60,80"
+              fill="none"
+              stroke="#000"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============== TITULO ============== -->
+    <div class="titulo-cardapio">
+      <h1
+        style="
+          font-size: 1.8em;
+          text-align: center;
+          color: var(--vermelho);
+          font-weight: 500;
+        "
+      >
+        Cachorro Quente
+      </h1>
+
+      <hr class="linha" />
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- CARDÁPIO -->
+    <div class="container">
+      <div class="categoria-box">
+        <!-- =============== LANCHE 01 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Cachorro Quente</h2></span>
+            <span class="preco">R$ 9,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, salsicha, molho, cenoura, beterraba, batata palha
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal('Cachorro Quente', 9, 'Pão, salsicha, molho, cenoura, beterraba, batata palha')
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 02 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Cachorro Quente <br> Com Bacon</h2></span>
+            <span class="preco">R$ 12,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal('Cachorro Quente Com Bacon', 12, 'Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon')
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 03 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Cachorro Quente <br> Na Chapa</h2></span>
+            <span class="preco">R$ 16,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, salsicha, bacon, queijo, milho, batata palha
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal('Cachorro Quente Na Chapa', 16, 'Pão, salsicha, bacon, queijo, milho, batata palha')
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+
+        <hr class="linha-produtos" />
+
+        <!-- =============== LANCHE 04 =================== -->
+        <div class="item">
+          <div class="item-row">
+            <span><h2 class="titulo-produto">Cachorro Quente <br> Especial</h2></span>
+            <span class="preco">R$ 18,00</span>
+          </div>
+
+          <p class="ingredientes" style="font-size: 14px; color: #666">
+            Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo
+          </p>
+
+          <button
+            class="btn-add-main"
+            onclick="
+              abrirModal('Cachorro Quente Especial', 18, 'Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo')
+            "
+          >
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ========================================================= -->
+    <!-- CARRINHO -->
+    <div id="cartSidebar" class="cart-sidebar">
+      <h2 class="carrinho-titulo">Seu Carrinho</h2>
+
+      <div id="lista-carrinho"></div>
+
+      <div class="pedido-total">
+        Total:
+        <div class="total">R$ <span id="total-final">0,00</span></div>
+      </div>
+
+      <div class="dados-cliente">
+        <div class="dados">
+          <h4 class="titulo-dados">Nome *</h4>
+          <input type="text" id="c-nome" placeholder="Seu nome" />
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+          <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Método de pagamento *</h4>
+          <div class="select-custom" id="pagamento-select">
+            <div class="selected">
+              Forma de pagamento
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="options">
+              <div data-value="Dinheiro">Dinheiro</div>
+              <div data-value="Pix">Pix</div>
+              <div data-value="Cartão">Cartão</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Observação Gearl</h4>
+          <textarea
+            id="c-obs"
+            placeholder="Observações gerais do pedido"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="finalizar-pedido">
+        <button class="voltar-carrinho" onclick="toggleCart()">
+          Voltar as Compras
+        </button>
+
+        <!-- <button class="btn-add-main" onclick="finalizarPedido()">
+          📲 Finalizar Pedido
+        </button> -->
+
+        <button class="botao-finalizar" onclick="finalizarPedido()">
+          Finalizar Pedido
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- FOORTER -->
+    <footer>
+      <p style="margin-top: -3.5em; margin-bottom: 1.2em; color: #666; font-size: 14px; text-align: center">
+        &copy; 2026 Churrasquinho Durans <br> Todos os direitos reservados
+      </p>
+    </footer>
+
+    <div class="footer-btn carrinho">
+      <button class="btn-carrinho" onclick="toggleCart()">
+        🛒 <span id="cart-count">0</span>
+      </button>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

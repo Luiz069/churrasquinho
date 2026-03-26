@@ -183,6 +183,32 @@ path.x-icon {
   width: 2em;
 } */
 
+/* BEBIDAS */
+.opcao-bebida {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.tamanho {
+  font-size: 18px;
+  font-weight: 200;
+  margin: 10px 0;
+}
+
+.opcao-bebida.ativo {
+  border-color: red;
+  background: #ffeaea;
+}
+
+.btn-bebidas {
+  margin-top: 16px !important;
+}
+
 /* OBSERVAÇÃO */
 #m-obs {
   width: 100%;
@@ -285,6 +311,7 @@ path.x-icon {
   font-size: 1.5em;
   font-weight: 100;
   text-transform: capitalize;
+  text-align: left;
 }
 
 .preco {
@@ -292,6 +319,7 @@ path.x-icon {
   font-weight: 100;
   letter-spacing: 0.8px;
   color: var(--vermelho);
+  /* text-align: justify; */
 }
 
 .ingredientes {
