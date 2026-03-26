@@ -290,12 +290,12 @@ function finalizarPedido() {
 
     // Sabores / adicionais
     if (item.adicionais && item.adicionais.length > 0) {
-      textoItens += `_Sabor:_ ${item.adicionais.join(" | ")}\n`;
+      textoItens += `_➕_ ${item.adicionais.join(" | ")}\n`;
     }
 
     // Observação do item
     if (item.obs) {
-      textoItens += `Obs: ${item.obs}\n`;
+      textoItens += `📝 ${item.obs}\n`;
     }
 
     textoItens += "\n";
@@ -330,6 +330,7 @@ function finalizarPedido() {
 
       *Itens:*
       ${textoItens}
+
       ${emojiPagamento} ${valorPagamento}
 
       ${emojiEntrega} Retirada no local
