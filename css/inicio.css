@@ -89,7 +89,7 @@
 .titulo-cardapio h1 {
   /* color: red !important; */
   font-weight: 700 !important;
-  font-family: var(--font-terciaria);
+  font-family: var(--font-principal);
 }
 
 .titulo-cardapio h1 {
