@@ -8,49 +8,78 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const auth = firebase.auth();
 const db = firebase.firestore();
+const auth = firebase.auth();
 
+// 🔒 Verifica login
 auth.onAuthStateChanged((user) => {
   if (!user) {
-    location.href = "index.html";
-    return;
+    window.location.href = "index.html";
+  } else {
+    carregarPedidos();
   }
-
-  carregarHistorico(user.uid);
 });
 
-function carregarHistorico(uid) {
+// ================= CARREGAR PEDIDOS =================
+
+function carregarPedidos() {
+  const lista = document.getElementById("lista-pedidos");
+  lista.innerHTML = "Carregando...";
+
   db.collection("pedidos")
-    .where("uid", "==", uid)
     .orderBy("criadoEm", "desc")
     .onSnapshot((snapshot) => {
-      const lista = document.getElementById("lista-historico");
       lista.innerHTML = "";
 
-      snapshot.forEach((doc) => {
-        const pedido = doc.data();
+      snapshot.forEach((doc, index) => {
+        const p = doc.data();
+
+        let data = "";
+        if (p.criadoEm) {
+          const d = p.criadoEm.toDate();
+          data = d.toLocaleString();
+        }
+
+        let itensHTML = "";
+
+        p.itens.forEach((item) => {
+          const subtotal = item.precoUn * item.qtd;
+
+          itensHTML += `
+            <div class="item">
+              <span>${item.qtd}x ${item.nome}</span>
+              <span>R$ ${subtotal.toFixed(2)}</span>
+            </div>
+          `;
+        });
 
         lista.innerHTML += `
-          <div class="pedido-card status-${pedido.status}">
+          <div class="pedido-card">
+            
             <div class="topo">
-              <b>Pedido #${doc.id.substring(0, 6)}</b>
-              <span class="status">${pedido.status}</span>
+              <h2>Pedido #${doc.id.slice(0, 6)}</h2>
+              <span class="preco">R$ ${p.total.toFixed(2)}</span>
             </div>
 
-            <div class="itens">
-              ${pedido.itens
-                .map(
-                  (i) => `
-                ${i.qtd}x ${i.nome} - R$ ${(i.precoUn * i.qtd).toFixed(2)}
-              `,
-                )
-                .join("<br>")}
+            <small>📅 ${data}</small>
+
+            <div class="badges">
+              <span class="badge pendente">⏳ ${p.status}</span>
+              <span class="badge">🏪 Retirada</span>
+              <span class="badge">💳 ${p.pagamento}</span>
             </div>
 
-            <div class="rodape">
-              Total: <b>R$ ${pedido.total.toFixed(2)}</b>
+            <div class="info-box">
+              <strong>📦 Itens:</strong>
+              ${itensHTML}
             </div>
+
+            <div class="info-box">
+              <strong>👤 Cliente:</strong><br>
+              Nome: ${p.nome}<br>
+              Telefone: ${p.numero}
+            </div>
+
           </div>
         `;
       });

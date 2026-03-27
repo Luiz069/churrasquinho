@@ -1,0 +1,84 @@
+.historico-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.pedido-card {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido-header h3 {
+  margin: 0;
+}
+
+.data {
+  font-size: 12px;
+  color: #666;
+}
+
+.total {
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.badges {
+  margin: 10px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status {
+  background: gold;
+}
+
+.entrega {
+  background: #3498db;
+  color: #fff;
+}
+
+.pagamento {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.itens-box {
+  margin-top: 10px;
+}
+
+.item-pedido {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.desc-item {
+  font-size: 12px;
+  color: #777;
+}
+
+.cliente-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}

@@ -20,8 +20,9 @@ const db = firebase.firestore();
 //  🔒 VERIFICA LOGIN
 auth.onAuthStateChanged((user) => {
   if (!user) {
-    // Se NÃO estiver logado → volta pro login
     window.location.href = "index.html";
+  } else {
+    carregarHistorico(); // 👈 AQUI
   }
 });
 
@@ -391,6 +392,78 @@ if (select) {
       select.classList.remove("active");
     }
   });
+}
+
+function carregarHistorico() {
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  const container = document.getElementById("historico");
+
+  db.collection("pedidos")
+    .where("uid", "==", user.uid)
+    .orderBy("criadoEm", "desc")
+    .onSnapshot((snapshot) => {
+      container.innerHTML = "";
+
+      snapshot.forEach((doc) => {
+        const pedido = doc.data();
+
+        let itensHTML = "";
+        pedido.itens.forEach((item) => {
+          itensHTML += `
+            <div class="item-pedido">
+              <div>
+                <strong>${item.qtd}x ${item.nome}</strong>
+                <p class="desc-item">${item.obs || ""}</p>
+              </div>
+              <span>R$ ${(item.precoUn * item.qtd).toFixed(2)}</span>
+            </div>
+          `;
+        });
+
+        // Emoji pagamento
+        let emojiPagamento = "💳";
+        if (pedido.pagamento.includes("Dinheiro")) emojiPagamento = "💵";
+        if (pedido.pagamento.includes("Pix")) emojiPagamento = "🏦";
+
+        const data = pedido.criadoEm
+          ? new Date(pedido.criadoEm.toDate()).toLocaleString()
+          : "Agora";
+
+        container.innerHTML += `
+          <div class="pedido-card">
+            
+            <div class="pedido-header">
+              <div>
+                <h3>Pedido #${doc.id.slice(0, 6)}</h3>
+                <p class="data">${data}</p>
+              </div>
+
+              <div class="total">R$ ${pedido.total.toFixed(2)}</div>
+            </div>
+
+            <div class="badges">
+              <span class="badge status">${pedido.status}</span>
+              <span class="badge entrega">🏪 Retirada</span>
+              <span class="badge pagamento">${emojiPagamento} ${pedido.pagamento}</span>
+            </div>
+
+            <hr>
+
+            <div class="itens-box">
+              ${itensHTML}
+            </div>
+
+            <div class="cliente-box">
+              <p><strong>Nome:</strong> ${pedido.nome}</p>
+              <p><strong>Telefone:</strong> ${pedido.numero}</p>
+            </div>
+
+          </div>
+        `;
+      });
+    });
 }
 
 // ================= AUTO RENDER AO ABRIR =================

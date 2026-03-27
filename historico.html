@@ -2,68 +2,20 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Meu Histórico</title>
-
-    <style>
-      body {
-        font-family: Arial;
-        background: #f2f2f2;
-        padding: 20px;
-      }
-
-      .topo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .card {
-        background: white;
-        padding: 15px;
-        margin-top: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .status {
-        font-weight: bold;
-        padding: 5px 10px;
-        border-radius: 6px;
-        color: white;
-      }
-
-      .pendente {
-        background: #ff9800;
-      }
-      .confirmado {
-        background: #2196f3;
-      }
-      .preparo {
-        background: #9c27b0;
-      }
-      .pronto {
-        background: #4caf50;
-      }
-
-      .itens {
-        margin-top: 10px;
-        padding-left: 15px;
-      }
-    </style>
+    <title>Histórico de Pedidos</title>
+    <link rel="stylesheet" href="css/historico.css" />
   </head>
-
   <body>
-    <h2>Meus pedidos</h2>
+    <div class="historico-container">
+      <h2>📦 Histórico de Pedidos</h2>
+      <div id="historico"></div>
+    </div>
 
-    <a href="inicio.html">
-      <button>Voltar</button>
-    </a>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
-    <div id="lista-historico"></div>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="js/historico.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
