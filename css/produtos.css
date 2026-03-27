@@ -76,6 +76,12 @@ path.x-icon {
   color: var(--vermelho) !important;
 }
 
+#m-nome-bebida {
+  font-weight: 100;
+  color: var(--vermelho);
+  margin: 0;
+}
+
 #m-desc {
   font-size: 0.95rem;
   color: #555;
@@ -312,10 +318,10 @@ path.x-icon {
 
 .titulo-produto {
   font-size: 1.3em;
-  font-weight: 900;
+  font-weight: 100;
   text-transform: capitalize;
   text-align: left;
-  font-family: "Luckiest Guy", cursive;
+  font-family: var(--font-principal);
   line-height: 1.1em;
 }
 

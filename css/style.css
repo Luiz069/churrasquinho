@@ -90,8 +90,8 @@ body {
   margin: 16px auto;
   justify-content: center;
   color: var(--vermelho);
-  font-family: var(--font-terciaria);
-  font-weight: 900;
+  font-family: var(--font-principal);
+  font-weight: bold;
 }
 
 .cart-sidebar.active {
@@ -254,8 +254,8 @@ footer p {
 }
 
 .titulo-dados {
-  font-weight: 900 !important;
-  font-family: var(--font-terciaria);
+  font-weight: 100;
+  font-family: var(--font-principal);
 }
 
 .dados {
