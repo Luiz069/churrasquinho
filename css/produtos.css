@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
+
+  border-bottom: 5px solid var(--cinza);
 }
 
 .btn-back {
@@ -68,9 +70,10 @@ path.x-icon {
 
 #m-nome {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 200 !important;
   margin-bottom: 10px;
   font-family: "Fredoka One", sans-serif;
+  color: var(--vermelho) !important;
 }
 
 #m-desc {
@@ -308,10 +311,12 @@ path.x-icon {
 }
 
 .titulo-produto {
-  font-size: 1.5em;
-  font-weight: 100;
+  font-size: 1.3em;
+  font-weight: 900;
   text-transform: capitalize;
   text-align: left;
+  font-family: "Luckiest Guy", cursive;
+  line-height: 1.1em;
 }
 
 .preco {
