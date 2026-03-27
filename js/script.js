@@ -412,58 +412,96 @@ function carregarHistorico() {
         let itensHTML = "";
         pedido.itens.forEach((item) => {
           itensHTML += `
-            <div class="item-pedido">
+            <div class="item">
               <div>
                 <strong>${item.qtd}x ${item.nome}</strong>
-                <p class="desc-item">${item.obs || ""}</p>
+                <p style="font-size:12px;color:#666;">
+                  ${item.obs || ""}
+                </p>
               </div>
               <span>R$ ${(item.precoUn * item.qtd).toFixed(2)}</span>
             </div>
           `;
         });
 
-        // Emoji pagamento
         let emojiPagamento = "💳";
         if (pedido.pagamento.includes("Dinheiro")) emojiPagamento = "💵";
         if (pedido.pagamento.includes("Pix")) emojiPagamento = "🏦";
 
         const data = pedido.criadoEm
           ? new Date(pedido.criadoEm.toDate()).toLocaleString()
-          : "Agora";
+          : "";
 
         container.innerHTML += `
           <div class="pedido-card">
-            
-            <div class="pedido-header">
-              <div>
-                <h3>Pedido #${doc.id.slice(0, 6)}</h3>
-                <p class="data">${data}</p>
-              </div>
 
+            <div class="pedido-topo">
+              <div>
+                <h2>Pedido #${doc.id.slice(0, 8)}</h2>
+                <div class="data">📅 ${data}</div>
+              </div>
               <div class="total">R$ ${pedido.total.toFixed(2)}</div>
             </div>
 
             <div class="badges">
-              <span class="badge status">${pedido.status}</span>
+              <span class="badge status">⏳ ${pedido.status}</span>
               <span class="badge entrega">🏪 Retirada</span>
               <span class="badge pagamento">${emojiPagamento} ${pedido.pagamento}</span>
             </div>
 
-            <hr>
+            <div class="linha"></div>
 
-            <div class="itens-box">
+            <div class="box">
+              <strong>📦 Itens:</strong>
               ${itensHTML}
             </div>
 
-            <div class="cliente-box">
-              <p><strong>Nome:</strong> ${pedido.nome}</p>
-              <p><strong>Telefone:</strong> ${pedido.numero}</p>
+            <div class="box cliente">
+              <strong>👤 Cliente:</strong>
+              <p>Nome: ${pedido.nome}</p>
+              <p>Telefone: ${pedido.numero}</p>
             </div>
+
+            <button class="btn-repetir" onclick='repetirPedido(${JSON.stringify(pedido.itens)})'>
+              🔁 Repetir pedido
+            </button>
 
           </div>
         `;
       });
     });
+}
+
+function repetirPedido(itens) {
+  carrinho = [...itens];
+
+  salvarCarrinho();
+
+  // 🔥 ativa mensagem ao chegar na home
+  localStorage.setItem("repetirPedido", "true");
+
+  // redireciona
+  window.location.href = "inicio.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCarrinho();
+
+  // 🔥 VERIFICA SE VEIO DO "REPETIR PEDIDO"
+  if (localStorage.getItem("repetirPedido")) {
+    mostrarToast("🔁 Pedido carregado novamente!");
+    localStorage.removeItem("repetirPedido");
+  }
+});
+
+function mostrarToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
 }
 
 // ================= AUTO RENDER AO ABRIR =================
