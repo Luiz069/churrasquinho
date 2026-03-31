@@ -323,7 +323,7 @@ function finalizarPedido() {
       pagamento: valorPagamento,
       itens: carrinho,
       total,
-      status: "pendente",
+      status: "Pendente",
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
@@ -409,18 +409,21 @@ function carregarHistorico() {
       snapshot.forEach((doc) => {
         const pedido = doc.data();
 
+        // ITENS DO PEDIDO
         let itensHTML = "";
         pedido.itens.forEach((item) => {
           itensHTML += `
-            <div class="item">
-              <div>
-                <strong>${item.qtd}x ${item.nome}</strong>
-                <p style="font-size:12px;color:#666;">
+            <div class="item-historico">
+              <div class="item-info">
+                <strong><p class="item-nome-historico">${item.qtd}x ${item.nome}</p></strong>
+                <p class="observacao-historico-item">
                   ${item.obs || ""}
                 </p>
               </div>
-              <span>R$ ${(item.precoUn * item.qtd).toFixed(2)}</span>
+              <span class="item-preco">R$ ${(item.precoUn * item.qtd).toFixed(2)}</span>
             </div>
+
+              <div class="linha-itens"></div>
           `;
         });
 
@@ -438,28 +441,45 @@ function carregarHistorico() {
             <div class="pedido-topo">
               <div>
                 <h2>Pedido #${doc.id.slice(0, 8)}</h2>
-                <div class="data">📅 ${data}</div>
+                <div class="data-historico">📅 ${data}</div>
               </div>
-              <div class="total">R$ ${pedido.total.toFixed(2)}</div>
+              <div class="total-historico">R$ ${pedido.total.toFixed(2)}</div>
             </div>
 
             <div class="badges">
-              <span class="badge status">⏳ ${pedido.status}</span>
+              <span class="status badge">
+                <span class="ampulheta">⏳</span>
+                ${pedido.status}
+              </span>
               <span class="badge entrega">🏪 Retirada</span>
               <span class="badge pagamento">${emojiPagamento} ${pedido.pagamento}</span>
             </div>
 
-            <div class="linha"></div>
+            <div class="linha-historico"></div>
 
             <div class="box">
-              <strong>📦 Itens:</strong>
+              <p class="itens-titulo-historico">📦 Itens:</p>
               ${itensHTML}
+
             </div>
 
+              ${
+                pedido.observacaoGeral
+                  ? `
+                <div class="obs-geral-historico">
+                  <p class="observacao-historico-titulo">📝 Observação Geral:</p>
+                  <p class="observacao-historico">${pedido.observacaoGeral}</p>
+                </div>
+              `
+                  : ""
+              }
+
             <div class="box cliente">
-              <strong>👤 Cliente:</strong>
-              <p>Nome: ${pedido.nome}</p>
-              <p>Telefone: ${pedido.numero}</p>
+              <strong class="cliente-historico"><p>👤 Cliente:</p></strong>
+              <div class="cliente-info">
+                <p><strong>Nome:</strong> ${pedido.nome}</p>
+                <p><strong>Telefone:</strong> ${pedido.numero}</p>
+              </div>
             </div>
 
             <button class="btn-repetir" onclick='repetirPedido(${JSON.stringify(pedido.itens)})'>
