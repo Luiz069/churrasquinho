@@ -467,7 +467,7 @@ function carregarHistorico() {
                 pedido.observacaoGeral
                   ? `
                 <div class="obs-geral-historico">
-                  <p class="observacao-historico-titulo">📝 Observação Geral:</p>
+                  <p class="observacao-historico-titulo">📝 Observação Geral</p>
                   <p class="observacao-historico">${pedido.observacaoGeral}</p>
                 </div>
               `
