@@ -28,6 +28,13 @@
   margin-top: 5px;
 }
 
+.titulo-topbar {
+  text-align: center;
+  font-weight: 100;
+  font-size: 1.2em;
+  /* margin-bottom: 20px; */
+}
+
 /* =================== MODAL DE PRODUTO =========================  */
 
 .modal {

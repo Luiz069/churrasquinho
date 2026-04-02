@@ -9,87 +9,6 @@
 
   <body>
     <!-- ========================================================= -->
-    <!-- MODAL PRODUTO -->
-    <!-- <div id="modalItem" class="modal">
-      <div class="modal-content">
-        <div class="container-fechar">
-          <button onclick="fecharModal()" class="botao-fechar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-x"
-              data-loc="client/src/components/ui/dialog.tsx:139"
-            >
-              <path class="x-icon" d="M18 6 6 18"></path>
-              <path class="x-icon" d="m6 6 12 12"></path>
-            </svg>
-          </button>
-        </div>
-
-        <h2 id="m-nome" style="color: var(--vermelho); margin: 0">Nome</h2>
-        <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
-
-        <label><b>Quantidade:</b></label>
-        <div class="qtd-control" style="margin: 10px 0">
-          <button class="btn-qtd" onclick="mudarQtdModal(-1)">-</button>
-          <span id="m-qtd-val">1</span>
-          <button class="btn-qtd" onclick="mudarQtdModal(1)">+</button>
-        </div>
-
-        <div class="adicionais-container">
-          <p><b>Adicionais:</b></p>
-
-          <div class="add-item-row">
-            <span>Queijo Extra (+ R$ 3,00)</span>
-            <div class="qtd-control">
-              <button onclick="mudarAdd('queijo', -1)">-</button>
-              <span id="qtd-add-queijo">0</span>
-              <button onclick="mudarAdd('queijo', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="add-item-row">
-            <span>Ovo Extra (+ R$ 2,00)</span>
-            <div class="qtd-control">
-              <button onclick="mudarAdd('ovo', -1)">-</button>
-              <span id="qtd-add-ovo">0</span>
-              <button onclick="mudarAdd('ovo', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="add-item-row">
-            <span>Carne Extra (+ R$ 8,00)</span>
-            <div class="qtd-control">
-              <button onclick="mudarAdd('carne', -1)">-</button>
-              <span id="qtd-add-carne">0</span>
-              <button onclick="mudarAdd('carne', 1)">+</button>
-            </div>
-          </div>
-        </div>
-
-        <label><b>Observações (opcional)</b></label>
-        <textarea id="m-obs" rows="2"></textarea>
-
-        <div class="subtotal-tag">
-          Subtotal: R$ <span id="m-subtotal">0,00</span>
-        </div>
-
-        <button class="btn-add-main" onclick="addAoCarrinho()">
-          ✅ Adicionar ao Carrinho
-        </button>
-      </div>
-    </div> -->
-
-    <div id="toast" class="toast"></div>
-
-    <!-- ========================================================= -->
     <!-- TOPO -->
     <header class="header-inicio">
       <div class="header-container">
@@ -122,7 +41,17 @@
 
           <!-- <div class="sair">
             <button class="botao-sair" onclick="toggleCart()">
-              🛒<span id="cart-count">0</span>
+              <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#e3e3e3"
+        >
+          <path
+            d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+          />
+        </svg><span id="cart-count">0</span>
             </button>
           </div> -->
 
@@ -401,8 +330,8 @@
       <p
         style="
           color: #666;
-          margin-top: -4em;
-          margin-bottom: 1.2em;
+          margin-top: -2rem;
+          margin-bottom: 2.2em;
           font-size: 14px;
           text-align: center;
         "
@@ -491,7 +420,18 @@
     <!-- ======== ICON CARRINHO =============== -->
     <div style="width: 100%" class="footer-btn">
       <button class="btn-carrinho" onclick="toggleCart()">
-        🛒<span id="cart-count">0</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#e3e3e3"
+        >
+          <path
+            d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+          />
+        </svg>
+        <span id="cart-count">0</span>
       </button>
     </div>
     <!-- ===================================== -->

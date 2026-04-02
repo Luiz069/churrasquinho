@@ -10,13 +10,6 @@
   gap: 20px;
 }
 
-.titulo-historico {
-  text-align: center;
-  font-weight: 100;
-  font-size: 1.2em;
-  /* margin-bottom: 20px; */
-}
-
 .pedido-card {
   background: #fff;
   border: 3px solid #000;

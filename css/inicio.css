@@ -215,9 +215,10 @@ strong {
 
 /* =============== INFORMAÇOES ADICIONAIS =============== */
 .container-info {
-  padding: 24px 0;
-  /* background-color: var(--vermelho); */
-  margin: auto;
+  /* padding: 24px 0; */
+  max-width: 900px;
+  margin: 1rem auto;
+  max-width: 900px;
 }
 
 .titulo-info {
