@@ -199,6 +199,7 @@ footer p {
   margin: 0;
   font-family: math;
   text-transform: inherit;
+  font-weight: 700;
 }
 
 /* Quantidade */
