@@ -314,51 +314,61 @@ function finalizarPedido() {
     emojiPagamento = "🏦";
   }
 
+  // 1. Gerar o número de 5 dígitos ANTES de salvar, para usar no Firestore e no WhatsApp
+  const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
+
+  // 2. Salvar no Firebase
   db.collection("pedidos")
     .add({
       uid: user.uid,
-      nome,
-      numero,
+      nome: nome,
+      numeroCelular: numero, // Renomeado para clareza (celular do cliente)
+      pedidoNumero: numeroPedidoAleatorio, // O número de 5 dígitos
       observacaoGeral: observacao,
       pagamento: valorPagamento,
       itens: carrinho,
-      total,
-      status: "Pendente",
+      total: total,
+      status: "pendente", // Mantido em minúsculo para bater com os filtros do painel
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
-      const mensagem = `Pedido nº ${Math.floor(Math.random() * 1000)}
+      // 3. Criar a mensagem do WhatsApp usando o MESMO número gerado acima
+      const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
 
-      *Itens:*
-      ${textoItens}
+*Cliente:* ${nome}
+*Itens:*
+${textoItens}
 
-      ${emojiPagamento} ${valorPagamento}
+*Pagamento:* ${valorPagamento}
+*Entrega:* 🛵 Retirada no local
+(Estimativa: 35~45 min)
 
-      ${emojiEntrega} Retirada no local
-      (Estimativa: entre 35~45 minutos)
+💰 *Total: R$ ${total.toFixed(2)}*
 
-      💰 *Total: R$ ${total.toFixed(2)}*
-
-      Obrigado pela preferência, se precisar de algo é só chamar! 😉`;
+Obrigado pela preferência! 😉`;
 
       const numeroLanchonete = "5598985301953";
       const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
-      // Limpa carrinho
+      // 4. Limpeza da interface
       carrinho = [];
-      salvarCarrinho();
-      renderCarrinho();
+      if (typeof salvarCarrinho === "function") salvarCarrinho();
+      if (typeof renderCarrinho === "function") renderCarrinho();
 
-      // Reset pagamento
+      // Reset campo pagamento
       valorPagamento = "";
-      document.querySelector("#pagamento-select .selected").textContent =
-        "Forma de pagamento";
+      const displayPagamento = document.querySelector(
+        "#pagamento-select .selected",
+      );
+      if (displayPagamento) displayPagamento.textContent = "Forma de pagamento";
 
+      // 5. Ações finais
       window.open(url, "_blank");
-      alert("Pedido enviado com sucesso!");
+      alert(`Pedido nº ${numeroPedidoAleatorio} enviado com sucesso!`);
     })
     .catch((error) => {
       console.error("Erro ao salvar pedido:", error);
+      alert("Erro ao processar pedido. Tente novamente.");
     });
 }
 
@@ -478,7 +488,7 @@ function carregarHistorico() {
               <strong class="cliente-historico"><p>👤 Cliente:</p></strong>
               <div class="cliente-info">
                 <p><strong>Nome:</strong> ${pedido.nome}</p>
-                <p><strong>Telefone:</strong> ${pedido.numero}</p>
+                <p><strong>Telefone:</strong> ${pedido.numeroCelular}</p>
               </div>
             </div>
 
