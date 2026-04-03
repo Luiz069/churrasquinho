@@ -106,13 +106,24 @@
 .item-nome-historico {
   font-weight: 100;
   font-family: math;
-  font-size: 0.8em;
+  font-size: 0.7em;
 }
 
-.observacao-historico-item {
+.item-nome-historico strong {
+  font-weight: 100;
+  /* font-family: var(--font-secundaria); */
+  font-family: math;
+  color: var(--preto);
+  font-size: 0.9rem !important;
+}
+
+.observacao-historico-item,
+.item-adicional-historico {
   font-size: 0.6em;
   color: #555;
   margin-top: 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: lowercase;
   /* background-color: #90caf9; */
 }
 

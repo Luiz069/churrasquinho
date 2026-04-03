@@ -425,7 +425,8 @@ function carregarHistorico() {
           itensHTML += `
             <div class="item-historico">
               <div class="item-info">
-                <strong><p class="item-nome-historico">${item.qtd}x ${item.nome}</p></strong>
+                <strong><p class="item-nome-historico">${item.qtd}x <strong>${item.nome}</strong></p></strong>
+                ${item.adicionais?.length ? `<p class="item-adicional-historico"> ${item.adicionais.join(", ")}</p>` : ""}
                 <p class="observacao-historico-item">
                   ${item.obs || ""}
                 </p>
