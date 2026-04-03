@@ -437,6 +437,9 @@ function carregarHistorico() {
           `;
         });
 
+        // 1. Gerar o número de 5 dígitos ANTES de salvar, para usar no Firestore e no WhatsApp
+        const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
+
         let emojiPagamento = "💳";
         if (pedido.pagamento.includes("Dinheiro")) emojiPagamento = "💵";
         if (pedido.pagamento.includes("Pix")) emojiPagamento = "🏦";
@@ -450,7 +453,7 @@ function carregarHistorico() {
 
             <div class="pedido-topo">
               <div>
-                <h2>Pedido #${doc.id.slice(0, 8)}</h2>
+                <h2>Pedido #${numeroPedidoAleatorio}</h2>
                 <div class="data-historico">📅 ${data}</div>
               </div>
               <div class="total-historico">R$ ${pedido.total.toFixed(2)}</div>
