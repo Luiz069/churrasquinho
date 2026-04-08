@@ -49,6 +49,7 @@ let qtdModal = 1;
 let extras = { queijo: 0, ovo: 0, carne: 0 };
 const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
 let valorPagamento = "";
+let metodoConsumo = ""; // 👈 NOVO
 
 // ================= MODAL PRODUTO =================
 
@@ -279,6 +280,7 @@ function finalizarPedido() {
   if (!nome || !numero) return alert("Preencha nome e número!");
   if (!valorPagamento) return alert("Selecione uma forma de pagamento!");
   if (carrinho.length === 0) return alert("Carrinho vazio!");
+  if (!metodoConsumo) return alert("Selecione o método de consumo!");
 
   let total = 0;
   let textoItens = "";
@@ -304,7 +306,7 @@ function finalizarPedido() {
 
   // 🔥 EMOJIS DINÂMICOS
   let emojiPagamento = "";
-  let emojiEntrega = "🏪";
+  let emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🏪";
 
   if (valorPagamento.toLowerCase().includes("cart")) {
     emojiPagamento = "💳";
@@ -326,6 +328,7 @@ function finalizarPedido() {
       pedidoNumero: numeroPedidoAleatorio, // O número de 5 dígitos
       observacaoGeral: observacao,
       pagamento: valorPagamento,
+      consumo: metodoConsumo, // 👈 NOVO CAMPO
       itens: carrinho,
       total: total,
       status: "pendente", // Mantido em minúsculo para bater com os filtros do painel
@@ -340,7 +343,7 @@ function finalizarPedido() {
 ${textoItens}
 
 *Pagamento:* ${valorPagamento}
-*Entrega:* 🛵 Retirada no local
+*Consumo:* ${emojiEntrega} ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
 (Estimativa: 35~45 min)
 
 💰 *Total: R$ ${total.toFixed(2)}*
@@ -362,6 +365,14 @@ Obrigado pela preferência! 😉`;
       );
       if (displayPagamento) displayPagamento.textContent = "Forma de pagamento";
 
+      // 🔥 RESET CONSUMO (COLOCA AQUI)
+      metodoConsumo = "";
+
+      const displayConsumo = document.querySelector(
+        "#consumo-select .selected",
+      );
+      if (displayConsumo) displayConsumo.textContent = "Tipo de consumo";
+
       // 5. Ações finais
       window.open(url, "_blank");
       alert(`Pedido nº ${numeroPedidoAleatorio} enviado com sucesso!`);
@@ -377,6 +388,31 @@ function voltarPagina() {
 }
 
 const select = document.getElementById("pagamento-select");
+
+const selectConsumo = document.getElementById("consumo-select");
+
+if (selectConsumo) {
+  const selected = selectConsumo.querySelector(".selected");
+  const options = selectConsumo.querySelectorAll(".options div");
+
+  selected.addEventListener("click", () => {
+    selectConsumo.classList.toggle("active");
+  });
+
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      selected.childNodes[0].nodeValue = option.textContent;
+      metodoConsumo = option.dataset.value;
+      selectConsumo.classList.remove("active");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!selectConsumo.contains(e.target)) {
+      selectConsumo.classList.remove("active");
+    }
+  });
+}
 
 if (select) {
   const selected = select.querySelector(".selected");
@@ -465,7 +501,9 @@ function carregarHistorico() {
                 <span class="ampulheta">⏳</span>
                 ${pedido.status}
               </span>
-              <span class="badge entrega">🏪 Retirada</span>
+              <span class="badge entrega">
+                ${pedido.consumo === "local" ? "🍽️ Local" : "🏪 Retirada"}
+              </span>
               <span class="badge pagamento">${emojiPagamento} ${pedido.pagamento}</span>
             </div>
 
