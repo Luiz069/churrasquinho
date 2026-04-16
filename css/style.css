@@ -47,28 +47,30 @@ body {
 .footer-btn {
   position: fixed;
   bottom: 0;
-  width: 105%;
+  width: 10%;
   padding: 15px;
   text-align: end;
   margin: 0;
 
   display: flex;
   justify-content: flex-end;
-  z-index: 2000;
+  z-index: 0;
 }
 
 .btn-carrinho {
   background: var(--vermelho);
   color: white;
   font-size: 17px;
-  border: 2px solid var(--preto);
-  border-radius: 80%;
-  padding: 14px 8px;
+  /* border: 2px solid var(--preto); */
+  /* border-radius: 80%; */
+  border: none;
+  /* padding: 14px 8px; */
   font-weight: bold;
   cursor: pointer;
-  height: 4.2rem;
+  /* height: 4.2rem; */
   width: 4.2rem;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
+  margin: 0;
 
   display: flex;
   align-items: center;
