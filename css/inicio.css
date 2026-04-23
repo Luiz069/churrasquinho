@@ -30,7 +30,7 @@
   align-items: center;
   background: transparent;
   border: none;
-  gap: 16px;
+  gap: 1.2rem;
 }
 
 .botao-carrinho {
@@ -38,7 +38,7 @@
   flex-direction: column;
   /* width: 40px; */
   margin: 0;
-  gap: 20px;
+  /* gap: 1rem; */
 }
 
 .botao-historico {
@@ -49,8 +49,8 @@
 .svg-historico,
 .svg-sair,
 .svg-carrinho {
-  width: 2rem !important;
-  height: 2rem !important;
+  width: 1.8rem !important;
+  height: 1.8rem !important;
   stroke: white;
   stroke-width: 2px;
 }
