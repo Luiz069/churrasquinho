@@ -30,9 +30,17 @@
 
 .titulo-topbar {
   text-align: center;
-  font-weight: 100;
-  font-size: 1.2em;
+  font-weight: lighter;
+  font-size: 1.4em;
   /* margin-bottom: 20px; */
+}
+
+.botao-carrinho-produtos {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 1.2rem;
+  margin-right: 0.6rem;
 }
 
 /* =================== MODAL DE PRODUTO =========================  */
