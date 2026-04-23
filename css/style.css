@@ -11,6 +11,8 @@
   --amarelo: #ffd700;
   --fundo: #fff5f5;
   --preto: #000000;
+  --preto-claro: #333333;
+  --cinza-escuro: #2b2c2e;
   --cinza: oklch(92.8% 0.006 264.531);
   --cinza-2: oklch(69.306% 0.00152 285.587);
 
@@ -35,6 +37,9 @@
 
 body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0;
   padding-top: 4.3rem; /* Ajuste para a altura da topbar */
   background-image: url("../img/fundo02.png");

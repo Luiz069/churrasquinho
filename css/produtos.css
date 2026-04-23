@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 4.4rem;
   background: var(--vermelho);
   color: white;
 
@@ -290,9 +290,13 @@ path.x-icon {
 /* =====================PRODUTOS======================== */
 .container {
   max-width: 900px;
-  margin: 0 auto 0 auto; /* margin que separa o header do conteúdo */
+  margin: 0 0.2rem; /* margin que separa o header do conteúdo */
   padding: 20px 18px;
   font-weight: bold;
+
+  /* display: flex;
+  flex-direction: column;
+  align-content: flex-start; */
 }
 
 .categoria-box {
