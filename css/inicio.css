@@ -33,15 +33,24 @@
   gap: 16px;
 }
 
+.botao-carrinho {
+  display: flex;
+  flex-direction: column;
+  /* width: 40px; */
+  margin: 0;
+  gap: 20px;
+}
+
 .botao-historico {
   display: flex;
   align-items: center;
 }
 
 .svg-historico,
-.svg-sair {
-  width: 24px;
-  height: 24px;
+.svg-sair,
+.svg-carrinho {
+  width: 2rem !important;
+  height: 2rem !important;
   stroke: white;
   stroke-width: 2px;
 }
