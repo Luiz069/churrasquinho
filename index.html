@@ -33,11 +33,12 @@
       /* APP */
       .app {
         width: 100%;
-        max-width: 95%; /* AUMENTEI AQUI */
+        max-width: 95%; /*AUMENTEI AQUI*/
         min-height: 100vh;
-        padding: 30px 20px; /* MAIS ESPAÇO */
+        padding: 5rem 1.5rem; /* MAIS ESPAÇO */
         text-align: center;
-        margin-left: 1.45em;
+        /* margin-left: 1.45em; */
+        margin: 0 auto;
 
         display: flex;
         flex-direction: column;
@@ -124,6 +125,14 @@
         font-size: 1.5em;
         color: black;
         text-align: center;
+      }
+
+      @media screen and (min-width: 768px) {
+        .app {
+          margin: 0 auto;
+          width: 100%;
+          max-width: none;
+        }
       }
     </style>
   </head>

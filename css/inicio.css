@@ -36,9 +36,7 @@
 .botao-carrinho {
   display: flex;
   flex-direction: column;
-  /* width: 40px; */
   margin: 0;
-  /* gap: 1rem; */
 }
 
 .botao-historico {
@@ -117,7 +115,6 @@
 }
 
 .titulo-cardapio h1 {
-  /* color: red !important; */
   font-weight: 700 !important;
   font-family: var(--font-principal);
 }
@@ -169,7 +166,7 @@ strong {
 }
 
 /* =====================PRODUTOS======================== */
-.container {
+.container-inicio {
   max-width: 900px;
   margin: 0 auto 0 auto; /* margin que separa o header do conteúdo */
   padding: 20px;
@@ -187,7 +184,6 @@ strong {
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 30px;
-  /* box-shadow: 8px 8px 0 var(--preto); */
 }
 
 .categoria-box h3 {
@@ -224,17 +220,16 @@ strong {
 
 /* =============== INFORMAÇOES ADICIONAIS =============== */
 .container-info {
-  /* padding: 24px 0; */
   max-width: 900px;
-  margin: 1rem 1.2rem;
-  max-width: 900px;
+  margin: 0 auto; /* margin que separa o header do conteúdo */
+  padding: 20px;
+  font-weight: bold;
 }
 
 .titulo-info {
   text-align: center;
   color: white;
   font-size: 32px;
-  /* margin-bottom: 30px; */
   letter-spacing: 2px;
   margin-bottom: 20px;
 }
@@ -257,7 +252,6 @@ strong {
   margin-bottom: 30px;
   text-align: center;
   width: 100%;
-  /* gap: 10px; */
 }
 
 .card p {
@@ -268,7 +262,6 @@ strong {
 .svg-info {
   width: 50px;
   height: 50px;
-  /* margin-bottom: 10px; */
 }
 
 .card h2 {
@@ -279,11 +272,11 @@ strong {
 
 /* ==================== FOOTER ========================= */
 .footer-inicio {
-  margin-top: 30px;
   padding: 0.5rem 1rem;
   text-align: center;
   background: var(--preto);
   color: white;
+  max-height: 100vh;
 }
 
 .footer-img img {
@@ -299,17 +292,18 @@ strong {
 }
 
 .titulo-contato {
-  font-size: 24px;
+  font-family: var(--font-principal);
+  font-size: 0.8rem;
   font-weight: 100;
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
 .rede-social {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-top: 10px;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
 }
 
 .icon-facebook,
@@ -322,16 +316,28 @@ strong {
 
   background-color: var(--cinza-escuro);
   border-radius: 50%;
-  /* border: 2px solid var(--fundo); */
 }
 
 .icon-whatsapp svg,
 .icon-instagram svg,
-.icon-facebook svg {
+.icon-facebook i {
   width: 2.5rem;
   height: 2.5rem;
   fill: white;
-  padding: 10px;
+  color: var(--branco);
+  padding: 12px;
+  margin-top: 0.05rem;
+}
+
+.icon-facebook i {
+  margin-top: 0.01rem;
+}
+
+.linha-footer {
+  margin: 1.5rem auto;
+  border: none;
+  border-top: 1px solid var(--cinza-2);
+  width: 80%;
 }
 
 .direitos {
