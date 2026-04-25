@@ -121,16 +121,18 @@
 
 .titulo-cardapio h1 {
   margin-bottom: 14px;
+  color: var(--branco);
 }
 
 .linha {
   border: none;
-  background-color: var(--branco);
-  border-top: 2px solid var(--branco);
+  background-color: var(--branco) !important;
+  border-top: 2px solid var(--branco) !important;
   border-radius: 5rem;
   margin: 0 auto;
   width: 15rem;
   height: 0.6rem;
+  opacity: 1;
 }
 
 /* =====================CATEGORIA======================== */
@@ -241,7 +243,7 @@ strong {
   padding: 0;
 }
 
-.card {
+.cards {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,9 +254,10 @@ strong {
   margin-bottom: 30px;
   text-align: center;
   width: 100%;
+  text-decoration: none;
 }
 
-.card p {
+.cards p {
   margin: 0;
   margin-top: 10px;
 }
@@ -264,7 +267,7 @@ strong {
   height: 50px;
 }
 
-.card h2 {
+.cards h2 {
   margin: 0;
   font-size: 24px;
   color: red;

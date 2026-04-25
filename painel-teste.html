@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardápio Digital - Lanchonete</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- ========================================================= -->
+    <!-- MODAL PRODUTO -->
+    <div id="modalItem" class="modal">
+      <div class="modal-content">
+        <div class="container-fechar">
+          <button onclick="fecharModal()" class="botao-fechar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+              data-loc="client/src/components/ui/dialog.tsx:139"
+            >
+              <path class="x-icon" d="M18 6 6 18"></path>
+              <path class="x-icon" d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="m-nome" style="color: var(--branco); margin: 0">Nome</h2>
+        <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
+
+        <label><b class="quantidade">Quantidade:</b></label>
+        <div class="quantidade-produto">
+          <div class="modal-quantidade-produto" style="margin: 10px 0">
+            <button class="botao-menos" onclick="mudarQtdModal(-1)">
+              <svg
+                class="botao-menos-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"
+                />
+              </svg>
+            </button>
+            <span id="m-qtd-val">1</span>
+            <button class="botao-mais" onclick="mudarQtdModal(1)">
+              <svg
+                class="botao-mais-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="adicionais-container">
+          <p><b class="add">Adicionais:</b></p>
+
+          <div class="add-item-row">
+            <span class="add-nome">Queijo Extra (+ R$ 3,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('queijo', -1)">-</button>
+              <span id="qtd-add-queijo"><p></p>0</p></span>
+              <button onclick="mudarAdd('queijo', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="add-item-row">
+            <span class="add-nome">Ovo Extra (+ R$ 2,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('ovo', -1)">-</button>
+              <span id="qtd-add-ovo"><p></p>0</p></span>
+              <button onclick="mudarAdd('ovo', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="add-item-row">
+            <span class="add-nome">Carne Extra (+ R$ 8,00)</span>
+            <div class="qtd-control">
+              <button onclick="mudarAdd('carne', -1)">-</button>
+              <span id="qtd-add-carne"><p>0</p></span>
+              <button onclick="mudarAdd('carne', 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <label><b class="obsevacao">Observações (opcional)</b></label>
+        <textarea id="m-obs" rows="2"></textarea>
+
+        <div class="subtotal-tag">
+          <p>Total: R$ </p><span id="m-subtotal"> 0,00</span>
+        </div>
+
+        <button class="add-carrinho" onclick="addAoCarrinho()">
+          <p class="add-carrinho-text">Adicionar ao Carrinho</p>
+        </button>
+      </div>
+    </div>
+    
+    <!-- ========================================================= -->
+    <!-- TOPO -->
+    <header class="header-inicio">
+      <div class="header-container">
+        <img class="logo" src="img/logo-03.png" alt="" />
+
+        <div class="botao-header">
+          <div class="botao-carrinho">
+            <button class="btn-carrinho" onclick="toggleCart()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#e3e3e3"
+                class="svg-carrinho"
+              >
+                <path
+                  d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+                />
+              </svg>
+              <span id="cart-count">0</span>
+            </button>
+          </div>
+
+          <div class="historico">
+            <a href="historico.html" class="botao-historico">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="svg-historico"
+                data-loc="client/src/pages/Home.tsx:99"
+              >
+                <path
+                  d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                ></path>
+                <path d="M3 3v5h5"></path>
+                <path d="M12 7v5l4 2"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="sair">
+            <button onclick="sair()" class="botao-sair">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="svg-sair"
+                data-loc="client/src/pages/Home.tsx:105"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" x2="9" y1="12" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== AVISO ============== -->
+    <div class="aviso">
+      <h2>
+        ⚠️ Retirada ou consumo no local <br />
+        • Sem entregas
+      </h2>
+    </div>
+
+    <!-- ============== TITULO ============== -->
+    <div class="titulo-cardapio">
+      <h1>NOSSO CARDÁPIO</h1>
+
+      <hr class="linha" />
+    </div>
+
+    <!-- ================================================== -->
+    <!-- CARDÁPIO -->
+    <div class="container-inicio">
+      <!-- ============== teste roleta ============== -->
+      <!-- ============== Industrial ============== -->
+
+      <div class="categoria-box">
+        <div class="categoria-titulo">
+          <!-- <div class="categoria-img">
+            <img src="img/icons/hamburgue.png" alt="" />
+          </div> -->
+          <h3 class="titulo-categoria" style="display: block">
+            Hambúrguer Industrial
+          </h3>
+        </div>
+
+        <div class="carrocel">
+          <div class="carrocel-cards">
+            <div class="carrocel-item">
+              <div class="img-lanche">
+                <img src="img/icons/hamburgue.png" alt="" />
+              </div>
+
+              <div class="lanche-info">
+                <span class="titulo-lanche"><h4>X-Burguer</h4></span>
+                <p class="lanche-desc">Pão, carne, queijo, presunto, salada</p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco">R$ 8,00</span>
+                  <button
+                    class="btn-add"
+                    onclick="
+                      abrirModal(
+                        'X-Burguer',
+                        8,
+                        'Pão, carne, queijo, presunto, salada',
+                      )
+                    "
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- lanche -->
+             <div class="carrocel-item">
+              <div class="img-lanche">
+                <img src="img/icons/hamburgue.png" alt="" />
+              </div>
+
+              <div class="lanche-info">
+                <span class="titulo-lanche"><h4>X-Burguer</h4></span>
+                <p class="lanche-desc">Pão, carne, queijo, presunto, salada</p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco">R$ 8,00</span>
+                  <button
+                    class="btn-add"
+                    onclick="
+                      abrirModal(
+                        'X-Burguer',
+                        8,
+                        'Pão, carne, queijo, presunto, salada',
+                      )
+                    "
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carrocel-item">
+              <div class="img-lanche">
+                <img src="img/icons/hamburgue.png" alt="" />
+              </div>
+
+              <div class="lanche-info">
+                <span class="titulo-lanche"><h4>X-Burguer</h4></span>
+                <p class="lanche-desc">Pão, carne, queijo, presunto, salada</p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco">R$ 8,00</span>
+                  <button
+                    class="btn-add"
+                    onclick="
+                      abrirModal(
+                        'X-Burguer',
+                        8,
+                        'Pão, carne, queijo, presunto, salada',
+                      )
+                    "
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carrocel-item">
+              <div class="img-lanche">
+                <img src="img/icons/hamburgue.png" alt="" />
+              </div>
+
+              <div class="lanche-info">
+                <span class="titulo-lanche"><h4>X-Burguer</h4></span>
+                <p class="lanche-desc">Pão, carne, queijo, presunto, salada</p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco">R$ 8,00</span>
+                  <button
+                    class="btn-add"
+                    onclick="
+                      abrirModal(
+                        'X-Burguer',
+                        8,
+                        'Pão, carne, queijo, presunto, salada',
+                      )
+                    "
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carrocel-item">
+              <div class="img-lanche">
+                <img src="img/icons/hamburgue.png" alt="" />
+              </div>
+
+              <div class="lanche-info">
+                <span class="titulo-lanche"><h4>X-Burguer</h4></span>
+                <p class="lanche-desc">Pão, carne, queijo, presunto, salada</p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco">R$ 8,00</span>
+                  <button
+                    class="btn-add"
+                    onclick="
+                      abrirModal(
+                        'X-Burguer',
+                        8,
+                        'Pão, carne, queijo, presunto, salada',
+                      )
+                    "
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="item">
+          <div class="item-row"></div>
+
+          <button
+            class="btn-add-main button-categoria"
+            onclick="window.location.href = '/cardapio/industrial.html'"
+            style="color: white; text-decoration: none"
+          >
+            Ver Categoria
+          </button>
+        </div> -->
+      </div>
+    </div>
+
+     <!-- ================================================== -->
+    <!-- CARDÁPIO -->
+    <div class="container-inicio">
+      <!-- ============== Industrial ============== -->
+
+      <div class="categoria-box">
+        <div class="categoria-titulo">
+          <div class="categoria-img">
+            <img src="img/icons/hamburgue.png" alt="" />
+          </div>
+          <h3 class="titulo-categoria" style="display: block">
+            <strong>Hambúrguer</strong> <br />
+            Industrial
+          </h3>
+        </div>
+
+        <div class="item">
+          <div class="item-row"></div>
+
+          <button
+            class="btn-add-main button-categoria"
+            onclick="window.location.href = '/cardapio/industrial.html'"
+            style="color: white; text-decoration: none"
+          >
+            Ver Categoria
+          </button>
+        </div>
+      </div>
+
+      <!-- ============== Artesanal ============== -->
+
+      <div class="categoria-box">
+        <div class="categoria-titulo">
+          <div class="categoria-img">
+            <img src="img/icons/hamburgue.png" alt="" />
+          </div>
+          <h3 class="titulo-categoria" style="display: block">
+            <strong>Hambúrguer</strong> <br />
+            Artesanal
+          </h3>
+        </div>
+
+        <div class="item">
+          <div class="item-row"></div>
+
+          <button
+            class="btn-add-main button-categoria"
+            onclick="window.location.href = '/cardapio/artesanal.html'"
+            style="color: white; text-decoration: none"
+          >
+            Ver Categoria
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- INFORMAÇÕES DE FUNCIONAMENTO -->
+    <div class="container-info">
+      <h1 class="titulo-info">INFORMAÇÕES</h1>
+
+      <div class="card-info">
+        <div class="cards">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="red"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="svg-info"
+            data-loc="client/src/pages/Home.tsx:183"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <h2>Horário</h2>
+          <p>Terça a Domingo — 19h às 23h</p>
+        </div>
+
+        <a
+          class="cards"
+          href="https://maps.app.goo.gl/t4WR1tT9TWT6bKfA9"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="svg-info"
+              data-loc="client/src/pages/Home.tsx:188"
+            >
+              <path
+                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+              ></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <h2>Localização</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- FOORTER -->
+    <footer class="footer-inicio">
+      <div class="container">
+        <div class="footer-img">
+          <img src="img/logo-footer.png" alt="Logo do Churrasquinho Durans" />
+        </div>
+
+        <div class="info">
+          <h3 class="titulo-contato">SIGA-NOS</h3>
+
+          <div class="rede-social">
+            <!-- WHATSAPP -->
+            <a
+              href="https://wa.me/5598985213506"
+              target="_blank"
+              rel="noreferrer"
+              class="icon-whatsapp"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-whatsapp"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"
+                />
+              </svg>
+            </a>
+
+            <!-- INSTAGRAM -->
+            <a
+              href="https://www.instagram.com/churrasquinhodurans/"
+              target="_blank"
+              rel="noreferrer"
+              class="icon-instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-instagram"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
+                />
+              </svg>
+            </a>
+
+            <!-- FACEBOOK -->
+            <a
+              href="https://www.facebook.com/churrasquinhodurans/"
+              target="_blank"
+              rel="noreferrer"
+              class="icon-facebook"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+
+        <hr class="linha-footer" />
+
+        <div class="direitos">
+          <p>&copy; 2026 Churrasquinho Durans. Todos os direitos reservados.</p>
+        </div>
+
+        <div class="links-footer">
+          <a href="/politica.html"><p>Política</p></a>
+          <a href="/termos.html"><p>Termos</p></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- CARRINHO -->
+    <div id="cartSidebar" class="cart-sidebar">
+      <h2 class="carrinho-titulo">Seu Carrinho</h2>
+
+      <div id="lista-carrinho"></div>
+
+      <div class="pedido-total">
+        Total:
+        <div class="total">R$ <span id="total-final">0,00</span></div>
+      </div>
+
+      <div class="dados-cliente">
+        <div class="dados">
+          <h4 class="titulo-dados">Nome *</h4>
+          <input type="text" id="c-nome" placeholder="Seu nome" />
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+          <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Método de pagamento *</h4>
+          <div class="select-custom" id="pagamento-select">
+            <div class="selected">
+              Forma de pagamento
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="options">
+              <div data-value="Dinheiro">💵 Dinheiro</div>
+              <div data-value="Pix">❖ PIX</div>
+              <div data-value="Cartão">💳 Cartão</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONSUMO -->
+        <div class="dados">
+          <h4 class="titulo-dados">Método de consumo *</h4>
+          <div id="consumo-select" class="select-custom">
+            <div class="selected">
+              Tipo de consumo
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="options">
+              <div data-value="retirada">🏪 Retirada</div>
+              <div data-value="local">🍽️ Comer no local</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dados">
+          <h4 class="titulo-dados">Observação Gearl</h4>
+          <textarea
+            id="c-obs"
+            placeholder="Observações gerais do pedido"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="finalizar-pedido">
+        <button class="voltar-carrinho" onclick="toggleCart()">
+          Voltar as Compras
+        </button>
+
+        <!-- <button class="btn-add-main" onclick="finalizarPedido()">
+          📲 Finalizar Pedido
+        </button> -->
+
+        <button class="botao-finalizar" onclick="finalizarPedido()">
+          Finalizar Pedido
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

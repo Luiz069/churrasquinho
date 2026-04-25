@@ -14,7 +14,7 @@ function loginGoogle() {
   auth
     .signInWithPopup(provider)
     .then(() => {
-      window.location.href = "inicio.html";
+      window.location.href = "painel-teste.html";
     })
     .catch((error) => {
       console.error("Erro no login:", error);
@@ -25,8 +25,8 @@ function loginGoogle() {
 auth.onAuthStateChanged((user) => {
   if (user) {
     // Se já estiver logado, manda direto pro início
-    if (!window.location.pathname.includes("inicio.html")) {
-      window.location.href = "inicio.html";
+    if (!window.location.pathname.includes("painel-teste.html")) {
+      window.location.href = "painel-teste.html";
     }
   }
 });
