@@ -1,0 +1,144 @@
+header {
+  background-color: red;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 6px;
+}
+
+.carrocel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.carrocel-cards {
+  display: flex;
+  gap: 16px;
+}
+.carrocel-item {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--branco);
+  border: 3px solid var(--preto);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 200px;
+}
+
+.img-lanche {
+  display: grid;
+  justify-items: center;
+  grid-row: 1;
+}
+
+.lanche-info {
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* .lanche-info button {
+  grid-column: 2;
+} */
+
+.titulo-lanche {
+  font-size: 18px;
+  font-weight: 900;
+  grid-row: 1;
+}
+
+.lanche-desc {
+  font-family: var(--font-principal);
+  color: var(--cinza-claro02);
+  font-size: 12px;
+  font-weight: 100;
+  grid-row: 2;
+}
+
+.preco-add {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
+.lanche-preco {
+  color: var(--vermelho);
+  font-size: 1.25rem;
+  font-weight: 900;
+  font-family: var(--font-principal);
+  grid-row: 4;
+}
+
+.btn-add {
+  /* width: 100%; */
+  background: var(--vermelho);
+  border: 2px solid var(--preto);
+  padding: 10px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  /* margin-top: 25px; */
+  color: var(--branco);
+  font-weight: 100;
+  letter-spacing: 0.8px;
+  font-size: 16px;
+  font-family: var(--font-principal);
+
+  grid-row: 4;
+  grid-column: 2;
+}
+
+.cliente {
+  background: none !important;
+}
+
+#cliente-nome {
+  font-family: var(--font-secundaria);
+  font-weight: 700;
+  color: var(--branco);
+  font-size: 1.2rem;
+  background: none;
+}
+
+/* ==============titulo da seção ============== */
+.titulo-secao {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ff6a00;
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+.titulo-secao span {
+  padding: 0 15px;
+  letter-spacing: 4px;
+}
+
+/* Linhas */
+.titulo-secao::before,
+.titulo-secao::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ff6a00);
+}
+
+.titulo-secao::after {
+  background: linear-gradient(to left, transparent, #ff6a00);
+}
+
+.titulo-secao::before,
+.titulo-secao::after {
+  transition: 0.3s;
+}
+
+.titulo-secao:hover::before,
+.titulo-secao:hover::after {
+  opacity: 0.5;
+}
+/* ============================================= */

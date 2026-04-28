@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 @import url("inicio.css");
+@import url("inicioNovo.css");
 @import url("historico.css");
 @import url("produtos.css");
 @import url("responsivo.css");
@@ -37,12 +38,35 @@
 }
 
 body {
-  height: 100%;
-  margin: 0;
-  padding-top: 4.3rem; /* Ajuste para a altura da topbar */
-  background-image: url("../img/fundo02.png");
-  background-color: var(--vermelho) !important;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  font-family: Inter, sans-serif;
 }
+
+.hidden {
+  /* display: none; */
+}
+
+/* ============== SCROLLBAR =============== */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge antigo */
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE e Edge antigo */
+body {
+  -ms-overflow-style: none;
+}
+/* ============================================== */
 
 /* =============== ICON DO CARRINHO =============== */
 .footer-btn {
@@ -373,87 +397,4 @@ footer p {
 
 .select-custom.active .options {
   display: block;
-}
-
-/* ********************** TESTE ROLETA ********************** */
-.carrocel {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 16px;
-}
-
-.carrocel-cards {
-  display: flex;
-  gap: 16px;
-}
-.carrocel-item {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  background: var(--branco);
-  border: 3px solid var(--preto);
-  border-radius: 12px;
-  padding: 16px;
-  min-width: 200px;
-}
-
-.img-lanche {
-  display: grid;
-  justify-items: center;
-  grid-row: 1;
-}
-
-.lanche-info {
-  display: grid;
-  gap: 0.5rem;
-}
-
-/* .lanche-info button {
-  grid-column: 2;
-} */
-
-.titulo-lanche {
-  font-size: 18px;
-  font-weight: 900;
-  grid-row: 1;
-}
-
-.lanche-desc {
-  font-family: var(--font-principal);
-  color: var(--cinza-claro02);
-  font-size: 12px;
-  font-weight: 100;
-  grid-row: 2;
-}
-
-.preco-add {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-}
-
-.lanche-preco {
-  color: var(--vermelho);
-  font-size: 1.25rem;
-  font-weight: 900;
-  font-family: var(--font-principal);
-  grid-row: 4;
-}
-
-.btn-add {
-  /* width: 100%; */
-  background: var(--vermelho);
-  border: 2px solid var(--preto);
-  padding: 10px 0;
-  border-radius: 8px;
-  cursor: pointer;
-  /* margin-top: 25px; */
-  color: var(--branco);
-  font-weight: 100;
-  letter-spacing: 0.8px;
-  font-size: 16px;
-  font-family: var(--font-principal);
-
-  grid-row: 4;
-  grid-column: 2;
 }

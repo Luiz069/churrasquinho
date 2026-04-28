@@ -17,21 +17,72 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-//  🔒 VERIFICA LOGIN
-auth.onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "index.html";
-  } else {
-    carregarHistorico(); // 👈 AQUI
-  }
-});
-
 // 🚪 LOGOUT
 function sair() {
   auth.signOut().then(() => {
     window.location.href = "index.html";
   });
 }
+
+// ========== TESTE COD NOVO ==========
+// Máscara inteligente
+const inputTelefone = document.getElementById("telefone");
+
+if (inputTelefone) {
+  inputTelefone.addEventListener("input", (e) => {
+    let v = e.target.value.replace(/\D/g, "");
+    if (v.length > 11) v = v.slice(0, 11);
+
+    if (v.length > 6) v = v.replace(/(\d{2})(\d{5})(\d+)/, "($1) $2-$3");
+    else if (v.length > 2) v = v.replace(/(\d{2})(\d+)/, "($1) $2");
+    else if (v.length > 0) v = v.replace(/(\d+)/, "($1");
+
+    e.target.value = v;
+  });
+}
+// LOGIN
+function entrar() {
+  let nome = document.getElementById("nome").value;
+  let telefone = document.getElementById("telefone").value.replace(/\D/g, "");
+
+  if (!nome || !telefone) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  const user = {
+    nome,
+    telefone,
+    pedidos: JSON.parse(localStorage.getItem("pedidos")) || [],
+  };
+
+  localStorage.setItem("usuario", JSON.stringify(user));
+
+  // 🔥 ESCONDE LOGIN
+  document.getElementById("loginBox").style.display = "none";
+
+  // 🔥 MOSTRA APP
+  document.getElementById("app").classList.remove("hidden");
+
+  iniciarApp();
+}
+// INICIAR APP
+function iniciarApp() {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("app").classList.remove("hidden");
+
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  const spanNome = document.getElementById("cliente-nome");
+  if (spanNome && user) {
+    spanNome.innerText = user.nome;
+  }
+
+  renderCarrinho();
+  renderHistorico();
+}
+
+// ====================================
 
 // ================= CARRINHO (AGORA PERSISTENTE) =================
 
@@ -350,7 +401,7 @@ ${textoItens}
 
 Obrigado pela preferência! 😉`;
 
-      const numeroLanchonete = "5598985301953";
+      const numeroLanchonete = "5598985213506";
       const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
       // 4. Limpeza da interface
