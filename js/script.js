@@ -632,3 +632,13 @@ function mostrarToast(msg) {
 document.addEventListener("DOMContentLoaded", () => {
   renderCarrinho();
 });
+
+// ============== BOTÃO DE RODAR OS CARROCEL ===================
+function scrollCarrossel(id, direction) {
+  const el = document.getElementById(id);
+
+  el.scrollBy({
+    left: direction * 200,
+    behavior: "smooth",
+  });
+}
