@@ -2071,115 +2071,180 @@
       </main>
 
       <nav class="nav-container">
-        <div class="nav">
-          <button class="button-home botao-nav"></button>
-          <button class="button-sacola botao-nav"></button>
-          <button class="button-perfil botao-nav"></button>
+        <div class="nav-opcoes">
+          <button class="button-home botao-nav ativo" onclick="irHome()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-house"
+              data-loc="client/src/pages/Home.tsx:346"
+            >
+              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+              <path
+                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+              ></path>
+            </svg>
+            <span>Home</span>
+          </button>
+
+          <button class="button-sacola botao-nav" onclick="abrirCart()">
+            <div class="butao-svg-nav">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-bag"
+                data-loc="client/src/pages/Home.tsx:359"
+              >
+                <path
+                  d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                ></path>
+                <path d="M3 6h18"></path>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+            <span class="">Sacola</span>
+          </button>
+
+          <button class="button-perfil botao-nav" onclick="abrirPerfil()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-user"
+              data-loc="client/src/pages/Home.tsx:384"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="">Perfil</span>
+          </button>
         </div>
       </nav>
 
       <!-- ========================================================= -->
       <!-- CARRINHO -->
       <div id="cartSidebar" class="cart-sidebar">
-        <h2 class="carrinho-titulo">Seu Carrinho</h2>
+        <div class="sacola">
+          <h2 class="carrinho-titulo">Seu Carrinho</h2>
 
-        <div id="lista-carrinho"></div>
+          <div id="lista-carrinho"></div>
 
-        <div class="pedido-total">
-          Total:
-          <div class="total">R$ <span id="total-final">0,00</span></div>
-        </div>
-
-        <div class="dados-cliente">
-          <div class="dados">
-            <h4 class="titulo-dados">Nome *</h4>
-            <input type="text" id="c-nome" placeholder="Seu nome" />
+          <div class="pedido-total">
+            Total:
+            <div class="total">R$ <span id="total-final">0,00</span></div>
           </div>
 
-          <div class="dados">
-            <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
-            <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
-          </div>
+          <div class="dados-cliente">
+            <div class="dados">
+              <h4 class="titulo-dados">Nome *</h4>
+              <input type="text" id="c-nome" placeholder="Seu nome" />
+            </div>
 
-          <div class="dados">
-            <h4 class="titulo-dados">Método de pagamento *</h4>
-            <div class="select-custom" id="pagamento-select">
-              <div class="selected">
-                Forma de pagamento
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-chevron-down"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                    />
-                  </svg>
+            <div class="dados">
+              <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+              <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+            </div>
+
+            <div class="dados">
+              <h4 class="titulo-dados">Método de pagamento *</h4>
+              <div class="select-custom" id="pagamento-select">
+                <div class="selected">
+                  Forma de pagamento
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-down"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="options">
+                  <div data-value="Dinheiro">💵 Dinheiro</div>
+                  <div data-value="Pix">❖ PIX</div>
+                  <div data-value="Cartão">💳 Cartão</div>
                 </div>
               </div>
-              <div class="options">
-                <div data-value="Dinheiro">💵 Dinheiro</div>
-                <div data-value="Pix">❖ PIX</div>
-                <div data-value="Cartão">💳 Cartão</div>
+            </div>
+
+            <!-- CONSUMO -->
+            <div class="dados">
+              <h4 class="titulo-dados">Método de consumo *</h4>
+              <div id="consumo-select" class="select-custom">
+                <div class="selected">
+                  Tipo de consumo
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-down"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="options">
+                  <div data-value="retirada">🏪 Retirada</div>
+                  <div data-value="local">🍽️ Comer no local</div>
+                </div>
               </div>
+            </div>
+
+            <div class="dados">
+              <h4 class="titulo-dados">Observação Geral</h4>
+              <textarea
+                id="c-obs"
+                placeholder="Observações gerais do pedido"
+              ></textarea>
             </div>
           </div>
 
-          <!-- CONSUMO -->
-          <div class="dados">
-            <h4 class="titulo-dados">Método de consumo *</h4>
-            <div id="consumo-select" class="select-custom">
-              <div class="selected">
-                Tipo de consumo
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-chevron-down"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div class="options">
-                <div data-value="retirada">🏪 Retirada</div>
-                <div data-value="local">🍽️ Comer no local</div>
-              </div>
-            </div>
-          </div>
+          <div class="finalizar-pedido">
+            <button class="voltar-carrinho" onclick="toggleCart()">
+              Voltar às Compras
+            </button>
 
-          <div class="dados">
-            <h4 class="titulo-dados">Observação Geral</h4>
-            <textarea
-              id="c-obs"
-              placeholder="Observações gerais do pedido"
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="finalizar-pedido">
-          <button class="voltar-carrinho" onclick="toggleCart()">
-            Voltar às Compras
-          </button>
-
-          <!-- <button class="btn-add-main" onclick="finalizarPedido()">
+            <!-- <button class="btn-add-main" onclick="finalizarPedido()">
           📲 Finalizar Pedido
         </button> -->
 
-          <button class="botao-finalizar" onclick="finalizarPedido()">
-            Finalizar Pedido
-          </button>
+            <button class="botao-finalizar" onclick="finalizarPedido()">
+              Finalizar Pedido
+            </button>
+          </div>
         </div>
       </div>
     </div>

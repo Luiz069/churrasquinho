@@ -298,10 +298,12 @@ header {
   z-index: 40;
   left: 50%;
   bottom: calc(0.25rem * 0);
-  position: fixed;
+  position: fixed; /* ou sticky */
+  width: 100%;
+  z-index: 9999; /* bem alto pra garantir */
 }
 
-.nav {
+.nav-opcoes {
   padding-block: calc(0.25rem * 2);
   padding-inline: calc(0.25rem * 4);
   justify-content: space-around;
@@ -309,14 +311,13 @@ header {
   display: flex;
   min-width: 0;
   min-height: 0;
+
+  margin: 0;
 }
 
 .botao-nav {
-}
-
-.button-home {
-  color: oklch(0.73 0.17 46);
-  transition-property: all;
+  color: oklch(0.55 0.01 50);
+  transition: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.15s;
   padding-block: calc(0.25rem * 2);
@@ -325,10 +326,48 @@ header {
   border: none;
   gap: calc(0.25rem * 1);
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   display: flex;
+  position: relative;
   min-width: 0;
   min-height: 0;
+  /* cursor: pointer; */
+
+  font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+  /* color: inherit; */
+  /* border-radius: 0; */
+  background-color: transparent;
+  opacity: 1;
+}
+
+.botao-nav {
+  color: #8e8e8e; /* cinza (inativo) */
+}
+
+.botao-nav.ativo {
+  color: #ff6600; /* laranja (ativo) */
+}
+
+.botao-nav.ativo {
+  color: #ff6600;
+  /* transform: translateY(-2px); */
+  /* background: rgba(255, 102, 0, 0.08); */
+}
+
+.botao-nav span {
+  font-size: 12px;
+  margin: 0;
+}
+
+.botao-nav svg {
+  transition: 0.2s;
+}
+
+.button-home {
 }
 
 .button-sacola {

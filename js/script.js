@@ -314,8 +314,20 @@ function removerItem(i) {
   renderCarrinho();
 }
 
-function toggleCart() {
-  document.getElementById("cartSidebar").classList.toggle("active");
+function abrirCart() {
+  document.getElementById("cartSidebar").classList.add("active");
+}
+
+function fecharCart() {
+  document.getElementById("cartSidebar").classList.remove("active");
+}
+
+function abrirPerfil() {
+  document.getElementById("perfilSidebar").classList.add("active");
+}
+
+function fecharPerfil() {
+  document.getElementById("perfilSidebar").classList.remove("active");
 }
 
 // ================= FINALIZAR PEDIDO =================
@@ -642,3 +654,30 @@ function scrollCarrossel(id, direction) {
     behavior: "smooth",
   });
 }
+
+// ============== BOTÃO DE MUDA DE COR A NAVBAR ===================
+
+const botoes = document.querySelectorAll(".botao-nav");
+
+botoes.forEach((botao) => {
+  botao.addEventListener("click", () => {
+    // troca cor (ativo)
+    botoes.forEach((b) => b.classList.remove("ativo"));
+    botao.classList.add("ativo");
+
+    // identifica qual botão foi clicado
+    if (botao.classList.contains("button-home")) {
+      // HOME → fecha tudo
+      fecharCart();
+      fecharPerfil();
+    } else if (botao.classList.contains("button-sacola")) {
+      // SACOLA → fecha perfil e abre sacola
+      fecharPerfil();
+      abrirCart();
+    } else if (botao.classList.contains("button-perfil")) {
+      // PERFIL → fecha sacola e abre perfil
+      fecharCart();
+      abrirPerfil();
+    }
+  });
+});
