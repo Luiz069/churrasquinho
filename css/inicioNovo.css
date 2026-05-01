@@ -284,3 +284,55 @@ header {
 .cliente {
   background: none !important;
 }
+
+/* ====================== NAVBAR ===================== */
+.nav-container {
+  background: oklch(0.14 0.008 30 / 0.97);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid oklch(0.25 0.008 30);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --tw-translate-x: -50%;
+  translate: -50%;
+  max-width: 480px;
+  width: 100%;
+  z-index: 40;
+  left: 50%;
+  bottom: calc(0.25rem * 0);
+  position: fixed;
+}
+
+.nav {
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 4);
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.botao-nav {
+}
+
+.button-home {
+  color: oklch(0.73 0.17 46);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 5);
+  border-radius: calc(0.75rem + 4px);
+  border: none;
+  gap: calc(0.25rem * 1);
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.button-sacola {
+}
+
+.button-perfil {
+}

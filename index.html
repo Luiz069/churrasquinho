@@ -48,7 +48,7 @@
 
     <div id="app" class="hidden painel-inicio">
       <!-- ========================================================= -->
-      <!-- MODAL PRODUTO -->
+      <!-- MODAL PRODUTO LANCHES -->
       <div id="modalItem" class="modal">
         <div class="modal-content">
           <div class="container-fechar">
@@ -152,6 +152,48 @@
           </div>
 
           <button class="add-carrinho" onclick="addAoCarrinho()">
+            <p class="add-carrinho-text">Adicionar ao Carrinho</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- MODAL PRODUTO BEBIDAS -->
+      <div id="modalBebida" class="modal">
+        <div class="modal-content">
+          <div class="container-fechar">
+            <button onclick="fecharModalBebida()" class="botao-fechar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-x"
+                data-loc="client/src/components/ui/dialog.tsx:139"
+              >
+                <path class="x-icon" d="M18 6 6 18"></path>
+                <path class="x-icon" d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <h2 id="m-nome-bebida">Nome</h2>
+
+          <p style="margin: 10px 0"><b class="tamanho">Selecione:</b></p>
+
+          <div id="bebida-opcoes"></div>
+
+          <div class="subtotal-tag" style="margin-top: 15px">
+            <p>Total: R$</p>
+            <span id="m-total-bebida">0.00</span>
+          </div>
+
+          <button class="add-carrinho" onclick="addBebidaCarrinho()">
             <p class="add-carrinho-text">Adicionar ao Carrinho</p>
           </button>
         </div>
@@ -796,18 +838,20 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">Egg-Burguer</p>
-                  <p class="lanche-desc">Pão, carne, queijo, ovo, salada</p>
+                  <p class="titulo-lanche">Egg-Burguer Artesanal</p>
+                  <p class="lanche-desc">
+                    Pão, carne artesanal, queijo, ovo, salada
+                  </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 8,00</span>
+                    <span class="lanche-preco">R$ 12,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'Egg-Burguer',
-                          8,
-                          'Pão, carne, queijo, ovo, salada',
+                          'Egg-Burguer Artesanal',
+                          12,
+                          'Pão, carne artesanal, queijo, ovo, salada',
                         )
                       "
                     >
@@ -839,20 +883,20 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">Americano</p>
+                  <p class="titulo-lanche">Americano Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, queijo, ovo, presunto, salada
+                    Pão, carne artesanal, queijo, ovo, presunto, salada
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 10,00</span>
+                    <span class="lanche-preco">R$ 14,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'Americano',
-                          10,
-                          'Pão, carne, queijo, ovo, presunto, salada',
+                          'Americano Artesanal',
+                          14,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada',
                         )
                       "
                     >
@@ -884,20 +928,20 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Bacon</p>
+                  <p class="titulo-lanche">X-Bacon Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, queijo, ovo, presunto, salada, bacon
+                    Pão, carne artesanal, queijo, ovo, presunto, salada, bacon
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 13,00</span>
+                    <span class="lanche-preco">R$ 17,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Bacon',
-                          13,
-                          'Pão, carne, queijo, ovo, presunto, salada, bacon',
+                          'X-Bacon Artesanal',
+                          17,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada, bacon',
                         )
                       "
                     >
@@ -929,20 +973,21 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">Bauru</p>
+                  <p class="titulo-lanche">Bauru Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, queijo, ovo, presunto, salada, calabresa
+                    Pão, carne artesanal, queijo, ovo, presunto, salada,
+                    calabresa
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 13,00</span>
+                    <span class="lanche-preco">R$ 17,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'Bauru',
-                          13,
-                          'Pão, carne, queijo, ovo, presunto, salada, calabresa',
+                          'Bauru Artesanal',
+                          17,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada, calabresa',
                         )
                       "
                     >
@@ -974,20 +1019,21 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Tudo</p>
+                  <p class="titulo-lanche">X-Tudo Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon
+                    Pão, carne artesanal, ovo, presunto, queijo, salada,
+                    calabresa, bacon
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 15,00</span>
+                    <span class="lanche-preco">R$ 18,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Tudo',
-                          15,
-                          'Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon',
+                          'X-Tudo Artesanal',
+                          18,
+                          'Pão, carne desc, ovo, presunto, queijo, salada, calabresa, bacon',
                         )
                       "
                     >
@@ -1019,21 +1065,21 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Frango</p>
+                  <p class="titulo-lanche">X-Frango Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, ovo, presunto, queijo, salada, file de frango,
-                    batata palha
+                    Pão, carne artesanal, ovo, presunto, queijo, salada, file de
+                    frango, batata palha
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 15,00</span>
+                    <span class="lanche-preco">R$ 18,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Frango',
-                          15,
-                          'Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha',
+                          'X-Frango Artesanal',
+                          18,
+                          'Pão, carne artesanal, ovo, presunto, queijo, salada, file de frango, batata palha',
                         )
                       "
                     >
@@ -1065,20 +1111,20 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Burguer Duplo</p>
+                  <p class="titulo-lanche">X-Burguer Duplo Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, 2 carne, 2 queijo, presunto, salada
+                    Pão, 2 carne artesanal, 2 queijo, presunto, salada
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 16,00</span>
+                    <span class="lanche-preco">R$ 19,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Burguer Duplo',
-                          16,
-                          'Pão, 2 carne, 2 queijo, presunto, salada',
+                          'X-Burguer Duplo Artesanal',
+                          19,
+                          'Pão, 2 carne artesanal, 2 queijo, presunto, salada',
                         )
                       "
                     >
@@ -1110,21 +1156,21 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Bacon Especial</p>
+                  <p class="titulo-lanche">X-Bacon Especial Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, carne, ovo, salada, bacon, milho, queijo presunto,
-                    salsicha, batata palha
+                    Pão, carne artesanal, ovo, salada, bacon, milho, queijo
+                    presunto, salsicha, batata palha
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 19,00</span>
+                    <span class="lanche-preco">R$ 22,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Bacon Especial',
-                          19,
-                          'Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
+                          'X-Bacon Especial Artesanal',
+                          22,
+                          'Pão, carne artesanal, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
                         )
                       "
                     >
@@ -1156,22 +1202,847 @@
                 </div>
 
                 <div class="lanche-info">
-                  <p class="titulo-lanche">X-Tudão</p>
+                  <p class="titulo-lanche">X-Tudão Artesanal</p>
                   <p class="lanche-desc">
-                    Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de
-                    frango, batata palha, 2 salsicha
+                    Pão, 2 carne artesanal, 2 ovo, 2 presunto, 2 queijo, salada,
+                    file de frango, batata palha, 2 salsicha
                   </p>
 
                   <div class="preco-add">
-                    <span class="lanche-preco">R$ 22,00</span>
+                    <span class="lanche-preco">R$ 27,00</span>
                     <button
                       class="btn-add"
                       onclick="
                         abrirModal(
-                          'X-Tudão',
-                          22,
-                          'Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
+                          'X-Tudão Artesanal',
+                          27,
+                          'Pão, 2 carne artesanal, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
                         )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== Misto Quente ============== -->
+          <section class="categoria-box">
+            <div class="categoria-titulo">
+              <h2 class="categoria">Misto Quente</h2>
+              <div class="botoes-carrocel">
+                <button
+                  class="btn-voltar"
+                  onclick="scrollCarrossel('misto', -1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-left"
+                    data-loc="client/src/pages/Home.tsx:142"
+                  >
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg></button
+                ><button
+                  class="btn-rolar"
+                  onclick="scrollCarrossel('misto', 1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-right"
+                    data-loc="client/src/pages/Home.tsx:149"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- ============== Roleta ============== -->
+            <div class="carrocel" id="misto">
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/misto-quente.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Misto Quente Sem Ovo</p>
+                  <p class="lanche-desc">Pão, queijo, presunto</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 5,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Misto Quente Sem Ovo',
+                          5,
+                          'Pão, queijo, presunto',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/misto-com-ovo.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Misto Quente Com Ovo</p>
+                  <p class="lanche-desc">Pão, queijo, presunto, ovo</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 7,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Misto Quente Com Ovo',
+                          7,
+                          'Pão, queijo, presunto, ovo',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== Cachorro Quente ============== -->
+          <section class="categoria-box">
+            <div class="categoria-titulo">
+              <h2 class="categoria">Cachorro Quente</h2>
+              <div class="botoes-carrocel">
+                <button
+                  class="btn-voltar"
+                  onclick="scrollCarrossel('hot-dog', -1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-left"
+                    data-loc="client/src/pages/Home.tsx:142"
+                  >
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg></button
+                ><button
+                  class="btn-rolar"
+                  onclick="scrollCarrossel('hot-dog', 1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-right"
+                    data-loc="client/src/pages/Home.tsx:149"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- ============== Roleta ============== -->
+            <div class="carrocel" id="hot-dog">
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/cachorro-quente.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Cachorro Quente</p>
+                  <p class="lanche-desc">
+                    Pão, salsicha, molho, cenoura, beterraba, batata palha
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 9,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Cachorro Quente',
+                          9,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/cachorro-quente-bacon.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Cachorro Quente Com Bacon</p>
+                  <p class="lanche-desc">
+                    Pão, salsicha, molho, cenoura, beterraba, batata palha,
+                    bacon
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 12,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Cachorro Quente Com Bacon',
+                          12,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/cachorro-quente-chapa.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Cachorro Quente Na Chapa</p>
+                  <p class="lanche-desc">
+                    Pão, salsicha, bacon, queijo, milho, batata palha
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 16,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Cachorro Quente Na Chapa',
+                          16,
+                          'Pão, salsicha, bacon, queijo, milho, batata palha',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/cachorro-quente-especial.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Cachorro Quente Especial</p>
+                  <p class="lanche-desc">
+                    Pão, salsicha, molho, cenoura, beterraba, batata palha, file
+                    de frango, queijo
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 18,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Cachorro Quente Especial',
+                          18,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== Batata Frita ============== -->
+          <section class="categoria-box">
+            <div class="categoria-titulo">
+              <h2 class="categoria">Batata Frita</h2>
+              <div class="botoes-carrocel">
+                <button
+                  class="btn-voltar"
+                  onclick="scrollCarrossel('batata', -1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-left"
+                    data-loc="client/src/pages/Home.tsx:142"
+                  >
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg></button
+                ><button
+                  class="btn-rolar"
+                  onclick="scrollCarrossel('batata', 1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-right"
+                    data-loc="client/src/pages/Home.tsx:149"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- ============== Roleta ============== -->
+            <div class="carrocel" id="batata">
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/batata-frita.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Batata Frita Meia Porção</p>
+                  <p class="lanche-desc">Batata palito crocante</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 10,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Batata Frita Meia Porção',
+                          10,
+                          'Batata palito crocante',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/batata-frita.png" alt="Batata Frita" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Batata Frita uma Porção</p>
+                  <p class="lanche-desc">Batata palito crocante</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 19,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Batata Frita uma Porção',
+                          19,
+                          'Batata palito crocante',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/lanches/batata-frita-especial.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Batata Frita Especial</p>
+                  <p class="lanche-desc">
+                    Batata palito crocante, queijo, bacon, calabresa
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco">R$ 28,00</span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModal(
+                          'Batata Frita Especial',
+                          28,
+                          'Batata palito crocante, queijo, bacon, calabresa',
+                        )
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== Bebidas ============== -->
+          <section class="categoria-box">
+            <div class="categoria-titulo">
+              <h2 class="categoria">Bebidas</h2>
+              <div class="botoes-carrocel">
+                <button
+                  class="btn-voltar"
+                  onclick="scrollCarrossel('bebidas', -1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-left"
+                    data-loc="client/src/pages/Home.tsx:142"
+                  >
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg></button
+                ><button
+                  class="btn-rolar"
+                  onclick="scrollCarrossel('bebidas', 1)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.60 0.01 50)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-right"
+                    data-loc="client/src/pages/Home.tsx:149"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- ============== Roleta ============== -->
+            <div class="carrocel" id="bebidas">
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/bebidas/agua-mineral.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Água Mineral</p>
+                  <p class="lanche-desc">Água Mineral- 500ml</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco"></span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModalBebidas('Suco Natural', [
+                          { nome: 'Água - 500ml', preco: 3 },
+                        ])
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/bebidas/suco-natural.jpg" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Suco Natural</p>
+                  <p class="lanche-desc">Maracuja, Cupuaçu, Acerola</p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco"></span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModalBebidas('Suco Natural', [
+                          { nome: 'Maracuja', preco: 6 },
+                          { nome: 'Cupuaçu', preco: 6 },
+                          { nome: 'Acerola', preco: 6 },
+                        ])
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/bebidas/refrigerante-lata.jpg" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Refrigerante 350ml</p>
+                  <p class="lanche-desc">
+                    Coca Cola, Coca Cola Zero, Jesus, Fanta Laranja, Fanta Uva
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco"></span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModalBebidas('Refrigerante Lata 350ml', [
+                          { nome: 'Coca Cola', preco: 5 },
+                          { nome: 'Coca Cola Zero', preco: 5 },
+                          { nome: 'Jesus', preco: 5 },
+                          { nome: 'Fanta Laranja', preco: 5 },
+                          { nome: 'Fanta Uva', preco: 5 },
+                        ])
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/bebidas/refrigerante-1L.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Refrigerante 1L</p>
+                  <p class="lanche-desc">
+                    Coca Cola, Coca Cola Zero, Guaraná Jesus, Fanta Laranja,
+                    Guaraná Antarctica, Coca Cola LS, Guaraná Jesus LS
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco"></span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModalBebidas('Refrigerante 1L', [
+                          { nome: 'Coca Cola', preco: 10 },
+                          { nome: 'Coca Cola Zero', preco: 10 },
+                          { nome: 'Jesus', preco: 10 },
+                          { nome: 'Fanta Laranja', preco: 10 },
+                          { nome: 'Guaraná Antarctica', preco: 10 },
+                          { nome: 'Coca Cola LS', preco: 6 },
+                          { nome: 'Guaraná Jesus LS', preco: 6 },
+                        ])
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="oklch(0.10 0.01 30)"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus"
+                        data-loc="client/src/pages/Home.tsx:100"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carrocel-item">
+                <div class="img-lanche">
+                  <img src="img/bebidas/refrigerante-2L.png" alt="" />
+                  <div class="booton-img"></div>
+                </div>
+
+                <div class="lanche-info">
+                  <p class="titulo-lanche">Refrigerante 2L</p>
+                  <p class="lanche-desc">
+                    Coca Cola, Guaraná Antarctica, Guaraná Jesus
+                  </p>
+
+                  <div class="preco-add">
+                    <span class="lanche-preco"></span>
+                    <button
+                      class="btn-add"
+                      onclick="
+                        abrirModalBebidas('Refrigerante 2L', [
+                          { nome: 'Coca Cola', preco: 13 },
+                          { nome: 'Guaraná Antarctica', preco: 13 },
+                          { nome: 'Guaraná Jesus', preco: 13 },
+                        ])
                       "
                     >
                       <svg
@@ -1198,6 +2069,14 @@
           </section>
         </div>
       </main>
+
+      <nav class="nav-container">
+        <div class="nav">
+          <button class="button-home botao-nav"></button>
+          <button class="button-sacola botao-nav"></button>
+          <button class="button-perfil botao-nav"></button>
+        </div>
+      </nav>
 
       <!-- ========================================================= -->
       <!-- CARRINHO -->
