@@ -125,8 +125,6 @@ body {
   padding: 20px;
   overflow-y: auto;
   border-left: 5px solid var(--vermelho);
-
-  margin-bottom: 5rem;
 }
 
 .carrinho-titulo {
@@ -364,6 +362,8 @@ footer p {
   justify-content: center;
   gap: 10px;
   text-align: center;
+
+  margin-bottom: 3.5rem;
 }
 /* finalizar é voltar*/
 .voltar-carrinho,
