@@ -125,6 +125,8 @@ body {
   padding: 20px;
   overflow-y: auto;
   border-left: 5px solid var(--vermelho);
+
+  margin-bottom: 1.5rem;
 }
 
 .carrinho-titulo {
