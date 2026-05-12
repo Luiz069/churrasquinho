@@ -125,7 +125,7 @@ body {
   min-width: 0;
   min-width: 0;
 
-  right: -100%;
+  right: 9999px;
 }
 
 .sacola {

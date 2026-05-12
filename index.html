@@ -2094,7 +2094,7 @@
             <span>Home</span>
           </button>
 
-          <button class="button-sacola botao-nav" onclick="toggleCart()">
+          <button class="button-sacola botao-nav" onclick="abrirCart()">
             <div class="butao-svg-nav">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -2144,9 +2144,6 @@
       <!-- ========================================================= -->
       <!-- CARRINHO -->
       <div id="cartSidebar" class="cart-sidebar">
-<<<<<<< HEAD
-      <h2 class="carrinho-titulo">Seu Carrinho</h2>
-=======
         <div class="sacola">
           <div class="sacola-titulo">
             <div class="sacola-nome">
@@ -2191,53 +2188,53 @@
               </svg>
             </button>
           </div>
->>>>>>> e2c746e (add function de sacola)
 
-      <div id="lista-carrinho"></div>
+          <div id="lista-carrinho"></div>
 
-      <div class="pedido-total">
-        Total:
-        <div class="total">R$ <span id="total-final">0,00</span></div>
-      </div>
+          <div class="pedido-total">
+            Total:
+            <div class="total">R$ <span id="total-final">0,00</span></div>
+          </div>
 
-      <div class="dados-cliente">
-        <div class="dados">
-          <h4 class="titulo-dados">Nome *</h4>
-          <input type="text" id="c-nome" placeholder="Seu nome" />
-        </div>
+          <div class="dados-cliente">
+            <div class="dados">
+              <h4 class="titulo-dados">Nome *</h4>
+              <input type="text" id="c-nome" placeholder="Seu nome" />
+            </div>
 
-        <div class="dados">
-          <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
-          <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
-        </div>
+            <div class="dados">
+              <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
+              <input type="text" id="c-numero" placeholder="(99) 99999-9999" />
+            </div>
 
-        <div class="dados">
-          <h4 class="titulo-dados">Método de pagamento *</h4>
-          <div class="select-custom" id="pagamento-select">
-            <div class="selected">
-              Forma de pagamento
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-chevron-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                  />
-                </svg>
+            <div class="dados">
+              <h4 class="titulo-dados">Método de pagamento *</h4>
+              <div class="select-custom" id="pagamento-select">
+                <div class="selected">
+                  Forma de pagamento
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-chevron-down"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="options">
+                  <div data-value="Dinheiro">💵 Dinheiro</div>
+                  <div data-value="Pix">❖ PIX</div>
+                  <div data-value="Cartão">💳 Cartão</div>
+                </div>
               </div>
             </div>
-<<<<<<< HEAD
-            <div class="options">
-              <div data-value="Dinheiro">💵 Dinheiro</div>
-              <div data-value="Pix">❖ PIX</div>
-              <div data-value="Cartão">💳 Cartão</div>
-=======
 
             <!-- CONSUMO -->
             <div class="dados">
@@ -2274,69 +2271,23 @@
                 id="c-obs"
                 placeholder="Observações gerais do pedido"
               ></textarea>
->>>>>>> e2c746e (add function de sacola)
             </div>
           </div>
-        </div>
 
-<<<<<<< HEAD
-        <!-- CONSUMO -->
-        <div class="dados">
-          <h4 class="titulo-dados">Método de consumo *</h4>
-          <div id="consumo-select" class="select-custom">
-            <div class="selected">
-              Tipo de consumo
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-chevron-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="options">
-              <div data-value="retirada">🏪 Retirada</div>
-              <div data-value="local">🍽️ Comer no local</div>
-            </div>
-          </div>
-        </div>
-=======
           <div class="finalizar-pedido">
             <!-- <button class="voltar-carrinho" onclick="toggleCart()">
             Voltar as Compras
           </button> -->
->>>>>>> e2c746e (add function de sacola)
 
-        <div class="dados">
-          <h4 class="titulo-dados">Observação Gearl</h4>
-          <textarea
-            id="c-obs"
-            placeholder="Observações gerais do pedido"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="finalizar-pedido">
-        <button class="voltar-carrinho" onclick="toggleCart()">
-          Voltar as Compras
-        </button>
-
-        <!-- <button class="btn-add-main" onclick="finalizarPedido()">
+            <!-- <button class="btn-add-main" onclick="finalizarPedido()">
           📲 Finalizar Pedido
         </button> -->
 
-        <button class="botao-finalizar" onclick="finalizarPedido()">
-          Finalizar Pedido
-        </button>
-      </div>
+            <button class="botao-finalizar" onclick="finalizarPedido()">
+              Finalizar Pedido
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
