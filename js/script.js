@@ -244,56 +244,122 @@ function addAoCarrinho() {
 
 function renderCarrinho() {
   const lista = document.getElementById("lista-carrinho");
+  const dadosCliente = document.querySelector(".dados-cliente");
+  const finalizarPedido = document.querySelector(".finalizar-pedido");
+  const pedidoTotal = document.querySelector(".pedido-total");
+
   if (!lista) return;
 
   lista.innerHTML = "";
   let totalGeral = 0;
+
+  // ================= SACOLA VAZIA =================
+
+  if (carrinho.length === 0) {
+    // mostra mensagem
+    lista.innerHTML = `
+      <div class="sacola-vazia">
+        <p>Sua sacola está vazia.</p>
+      </div>
+    `;
+
+    // esconde restante do conteúdo
+    dadosCliente.style.display = "none";
+    finalizarPedido.style.display = "none";
+    pedidoTotal.style.display = "none";
+
+    document.getElementById("total-final").innerText = "0,00";
+    document.getElementById("cart-count").innerText = "0";
+
+    return;
+  }
+
+  // ================= MOSTRA CONTEÚDO =================
+
+  dadosCliente.style.display = "flex";
+  finalizarPedido.style.display = "flex";
+  pedidoTotal.style.display = "flex";
+
+  // ================= ITENS =================
 
   carrinho.forEach((item, i) => {
     let sub = item.precoUn * item.qtd;
     totalGeral += sub;
 
     lista.innerHTML += `
-        <div class="cart-item-card">
-          <div class="header-card">
-            <h3 class="carrinho-nome-produto">${item.nome}</h3>
-            <p class="carrinho-subtotal-produto">R$ ${sub.toFixed(2)}</p>
-          </div>
+      <div class="cart-item-card">
 
-          <div class="botoes-add-obs">
-            ${item.adicionais?.length ? `<p class="carrinho-adicional">➕  ${item.adicionais.join(", ")}</p>` : ""}
-            ${item.obs ? `<p class="carrinho-obs">📝 ${item.obs}</p>` : ""}
-          </div>
+        <div class="header-card">
+          <h3 class="carrinho-nome-produto">${item.nome}</h3>
 
-
-          <div class="carrinho-card-footer">
-            <div class="carrinho-quantidade-produto">
-              <button class="botao-menos" onclick="alterarQtdCarrinho(${i}, -1)">
-                <svg class="botao-menos-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
-                </svg>
-              </button>
-              <p class="numero-qtd">${item.qtd}</p>
-              <button class="botao-mais" onclick="alterarQtdCarrinho(${i}, 1)">
-                <svg class="botao-mais-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                </svg>
-              </button>
-            </div>
-
-            <div>
-              <button class="botao-excluir" onclick="removerItem(${i})">
-                <svg class="lixeira" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                </svg>
-              </button>
-            </div>
-          </div>
+          <p class="carrinho-subtotal-produto">
+            R$ ${sub.toFixed(2)}
+          </p>
         </div>
-      `;
+
+        <div class="botoes-add-obs">
+
+          ${
+            item.adicionais?.length
+              ? `
+                <p class="carrinho-adicional">
+                  ➕ ${item.adicionais.join(", ")}
+                </p>
+              `
+              : ""
+          }
+
+          ${
+            item.obs
+              ? `
+                <p class="carrinho-obs">
+                  📝 ${item.obs}
+                </p>
+              `
+              : ""
+          }
+
+        </div>
+
+        <div class="carrinho-card-footer">
+
+          <div class="carrinho-quantidade-produto">
+
+            <button
+              class="botao-menos"
+              onclick="alterarQtdCarrinho(${i}, -1)"
+            >
+              −
+            </button>
+
+            <p class="numero-qtd">${item.qtd}</p>
+
+            <button
+              class="botao-mais"
+              onclick="alterarQtdCarrinho(${i}, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+          <button
+            class="botao-excluir"
+            onclick="removerItem(${i})"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+    `;
   });
 
+  // ================= TOTAL =================
+
   document.getElementById("total-final").innerText = totalGeral.toFixed(2);
+
   document.getElementById("cart-count").innerText = carrinho.length;
 }
 
@@ -314,7 +380,7 @@ function removerItem(i) {
   renderCarrinho();
 }
 
-function toggleCart() {
+function abrirCart() {
   document.getElementById("cartSidebar").classList.toggle("active");
 }
 
@@ -641,4 +707,68 @@ function scrollCarrossel(id, direction) {
     left: direction * 200,
     behavior: "smooth",
   });
+}
+
+// ============== BOTÃO DE MUDA DE COR A NAVBAR ===================
+
+const botoes = document.querySelectorAll(".botao-nav");
+
+const botaoHome = document.querySelector(".button-home");
+const cartSidebar = document.getElementById("cartSidebar");
+const perfilSidebar = document.getElementById("perfilSidebar");
+
+botoes.forEach((botao) => {
+  botao.addEventListener("click", () => {
+    // remove ativo de todos
+    botoes.forEach((b) => b.classList.remove("ativo"));
+
+    // adiciona ativo no clicado
+    botao.classList.add("ativo");
+
+    // HOME
+    if (botao.classList.contains("button-home")) {
+      fecharCart();
+      fecharPerfil();
+    }
+
+    // SACOLA
+    else if (botao.classList.contains("button-sacola")) {
+      fecharPerfil();
+      abrirCart();
+    }
+
+    // PERFIL
+    else if (botao.classList.contains("button-perfil")) {
+      fecharCart();
+      abrirPerfil();
+    }
+  });
+});
+
+// ================= CART =================
+
+function abrirCart() {
+  cartSidebar.classList.add("active");
+}
+
+function fecharCart() {
+  cartSidebar.classList.remove("active");
+
+  // volta botão ativo para HOME
+  botoes.forEach((b) => b.classList.remove("ativo"));
+  botaoHome.classList.add("ativo");
+}
+
+// ================= PERFIL =================
+
+function abrirPerfil() {
+  perfilSidebar.classList.add("active");
+}
+
+function fecharPerfil() {
+  perfilSidebar.classList.remove("active");
+
+  // volta botão ativo para HOME
+  botoes.forEach((b) => b.classList.remove("ativo"));
+  botaoHome.classList.add("ativo");
 }

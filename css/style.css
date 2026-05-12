@@ -39,6 +39,10 @@ body {
   font-family: Inter, sans-serif;
 }
 
+main {
+  margin-bottom: 5rem;
+}
+
 .hidden {
   /* display: none; */
 }
@@ -111,30 +115,90 @@ body {
 
 /* =============== MODAL DO CARRINHO =============== */
 .cart-sidebar {
+  background: oklch(0 0 0 / 0.75);
+  justify-content: center;
+  align-items: flex-end;
   display: flex;
-  flex-direction: column;
+  z-index: 50;
+  inset: calc(0.25rem * 0);
   position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 3000;
-  transition: 0.3s;
-  padding: 20px;
-  overflow-y: auto;
-  border-left: 5px solid var(--vermelho);
+  min-width: 0;
+  min-width: 0;
+
+  right: 9999px;
 }
 
-.carrinho-titulo {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 16px auto;
+.sacola {
+  background: oklch(0.14 0.008 30);
+  max-height: 90vh;
+  box-shadow: oklch(0 0 0 / 0.5) 0px -8px 40px;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  overflow: hidden;
+  flex-direction: column;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.sacola-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid oklch(0.22 0.008 30);
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.sacola-nome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-width: 0;
+}
+
+.sacola-titulo svg {
+  stroke: oklch(0.73 0.17 46);
+  width: 24px;
+  height: 24px;
+}
+
+.sacola-titulo h2 {
+  color: oklch(0.96 0.005 50);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
+  margin: 0;
+}
+
+.fechar-sacola {
+  background: oklch(0.22 0.008 30);
+  border-radius: 3.40282e38px;
+  border: none;
   justify-content: center;
-  color: var(--vermelho);
-  font-family: var(--font-principal);
-  font-weight: bold;
+  align-items: center;
+  width: calc(0.25rem * 8);
+  height: calc(0.25rem * 8);
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.fechar-sacola svg {
+  stroke: oklch(0.6 0.01 50);
+  width: 16px;
+  height: 16px;
 }
 
 .cart-sidebar.active {
@@ -162,7 +226,7 @@ footer p {
 
 /* =============== CARRINHO =============== */
 #lista-carrinho {
-  border-bottom: 3px solid var(--amarelo);
+  /* border-bottom: 3px solid var(--amarelo); */
 }
 
 .cart-item-card {
