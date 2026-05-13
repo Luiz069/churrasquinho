@@ -141,6 +141,7 @@ body {
   display: flex;
   min-height: 0;
   min-width: 0;
+  /* margin-bottom: 4.8rem; */
 }
 
 .sacola-titulo {
@@ -201,6 +202,123 @@ body {
   height: 16px;
 }
 
+.info-sacola {
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.dados-cliente {
+  gap: calc(0.25rem * 6);
+  flex-direction: column;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* =========ITENS DO PEDIDO========= */
+#lista-carrinho {
+  gap: calc(0.25rem * 3);
+  flex-direction: column;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+  margin-bottom: 24px;
+}
+
+.cart-item-card {
+  background-color: oklch(0.18 0.008 30);
+  padding: calc(0.25rem * 3);
+  border-radius: calc(0.75rem + 4px);
+  gap: calc(0.25rem * 3);
+  align-items: flex-start;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.carrinho-quantidade-produto {
+  background: oklch(0.73 0.17 46 / 0.2);
+  color: oklch(0.73 0.17 46);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  border-radius: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: calc(0.25rem * 8);
+  height: calc(0.25rem * 8);
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.lanche-sacola {
+  flex: 1;
+  min-width: calc(0.25rem * 0);
+}
+
+.carrinho-nome-produto {
+  color: oklch(0.96 0.005 50);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  margin: 0;
+}
+
+.carrinho-adicional,
+.carrinho-obs {
+  color: oklch(0.73 0.17 46);
+  font-size: 0.65rem;
+  margin: 0;
+}
+
+.total-e-excluir {
+  /* gap: calc(0.25rem * 1); */
+  align-items: flex-end;
+  flex-direction: column;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.sacola-subtotal-produto {
+  color: oklch(0.73 0.17 46);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+}
+
+.botao-excluir-sacola {
+  color: oklch(0.6 0.22 25);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  padding: 0 0.25rem 0.25rem 0;
+  border-radius: 0.75rem;
+  background: none;
+  border: none;
+  margin: 0;
+}
+
+/* ======= DADOS DO PEDIDO ========== */
+.dados-cliente {
+  gap: calc(0.25rem * 6);
+}
+
+/* =============== FOOTER =============== */
+footer {
+  margin-top: 30px;
+}
+
+footer p {
+  color: #fff !important;
+}
+
+/* ============================ */
+
 .cart-sidebar.active {
   right: 0;
 }
@@ -214,27 +332,16 @@ textarea {
   border-radius: 10px;
   margin-top: 5px;
 }
-
-/* =============== FOOTER =============== */
-footer {
-  margin-top: 30px;
-}
-
-footer p {
-  color: #fff !important;
-}
+/* -============================== */
 
 /* =============== CARRINHO =============== */
-#lista-carrinho {
-  /* border-bottom: 3px solid var(--amarelo); */
-}
 
-.cart-item-card {
+/* .cart-item-card {
   border: 3px solid var(--preto);
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
-}
+} */
 
 .header-card {
   display: flex;
@@ -243,10 +350,10 @@ footer p {
   margin-bottom: 0.3em;
 }
 
-.carrinho-nome-produto {
+/* .carrinho-nome-produto {
   font-size: 18px;
   font-weight: 100;
-}
+} */
 
 .carrinho-subtotal-produto {
   color: var(--vermelho);
@@ -255,10 +362,10 @@ footer p {
   font-family: var(--font-secundaria);
 }
 
-.carrinho-nome-produto,
+/* .carrinho-nome-produto,
 .carrinho-subtotal-produto {
   margin: 0;
-}
+} */
 
 .botoes-add-obs {
   display: flex;
@@ -270,14 +377,6 @@ footer p {
   margin-bottom: 1.5em;
 }
 
-.carrinho-adicional,
-.carrinho-obs {
-  margin: 0;
-  font-family: math;
-  text-transform: inherit;
-  font-weight: 700;
-}
-
 /* Quantidade */
 .carrinho-card-footer {
   display: flex;
@@ -286,10 +385,10 @@ footer p {
   margin: 0;
 }
 
-.carrinho-quantidade-produto {
+/* .carrinho-quantidade-produto {
   display: flex;
   text-align: center;
-}
+} */
 
 .botao-menos,
 .botao-mais {
@@ -306,7 +405,7 @@ footer p {
   /* stroke: 10px !important; */
 }
 
-.numero-qtd {
+/* .numero-qtd {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -314,7 +413,7 @@ footer p {
   margin: 0;
   width: 31px;
   height: 23px;
-}
+} */
 
 /* LIXEIRA */
 .botao-excluir {
@@ -354,11 +453,11 @@ footer p {
 }
 
 /* =============== DADOS CLIENTE =============== */
-.dados-cliente {
+/* .dados-cliente {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
+} */
 
 .titulo-dados {
   font-weight: 100;
@@ -422,7 +521,7 @@ footer p {
 
 .finalizar-pedido {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   gap: 10px;
   text-align: center;

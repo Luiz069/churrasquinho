@@ -56,29 +56,58 @@ function entrar() {
     pedidos: JSON.parse(localStorage.getItem("pedidos")) || [],
   };
 
+  // salva usuário
   localStorage.setItem("usuario", JSON.stringify(user));
 
-  // 🔥 ESCONDE LOGIN
+  // esconde login
   document.getElementById("loginBox").style.display = "none";
 
-  // 🔥 MOSTRA APP
+  // mostra app
   document.getElementById("app").classList.remove("hidden");
 
   iniciarApp();
 }
-// INICIAR APP
+
+// ================= INICIAR APP =================
+
 function iniciarApp() {
   document.getElementById("loginBox").style.display = "none";
+
   document.getElementById("app").classList.remove("hidden");
 
+  // pega usuário salvo
   const user = JSON.parse(localStorage.getItem("usuario"));
 
+  // ================= NOME PERFIL =================
+
   const spanNome = document.getElementById("cliente-nome");
+
   if (spanNome && user) {
     spanNome.innerText = user.nome;
   }
 
+  // ================= INPUTS CARRINHO =================
+
+  const inputNome = document.getElementById("c-nome");
+
+  const inputTelefone = document.getElementById("c-numero");
+
+  if (user) {
+    // preenche nome
+    if (inputNome) {
+      inputNome.value = user.nome;
+    }
+
+    // preenche telefone
+    if (inputTelefone) {
+      inputTelefone.value = user.telefone;
+    }
+  }
+
+  // ================= RENDERS =================
+
   renderCarrinho();
+
   renderHistorico();
 }
 
@@ -244,29 +273,48 @@ function addAoCarrinho() {
 
 function renderCarrinho() {
   const lista = document.getElementById("lista-carrinho");
+
   const dadosCliente = document.querySelector(".dados-cliente");
+
   const finalizarPedido = document.querySelector(".finalizar-pedido");
-  const pedidoTotal = document.querySelector(".pedido-total");
 
   if (!lista) return;
 
   lista.innerHTML = "";
+
   let totalGeral = 0;
 
   // ================= SACOLA VAZIA =================
 
   if (carrinho.length === 0) {
-    // mostra mensagem
     lista.innerHTML = `
       <div class="sacola-vazia">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-shopping-bag"
+        >
+          <path
+            d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+          ></path>
+          <path d="M3 6h18"></path>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+
         <p>Sua sacola está vazia.</p>
       </div>
     `;
 
-    // esconde restante do conteúdo
+    // esconder conteúdo
     dadosCliente.style.display = "none";
     finalizarPedido.style.display = "none";
-    pedidoTotal.style.display = "none";
 
     document.getElementById("total-final").innerText = "0,00";
     document.getElementById("cart-count").innerText = "0";
@@ -274,30 +322,28 @@ function renderCarrinho() {
     return;
   }
 
-  // ================= MOSTRA CONTEÚDO =================
+  // ================= MOSTRAR CONTEÚDO =================
 
   dadosCliente.style.display = "flex";
   finalizarPedido.style.display = "flex";
-  pedidoTotal.style.display = "flex";
 
   // ================= ITENS =================
 
   carrinho.forEach((item, i) => {
     let sub = item.precoUn * item.qtd;
+
     totalGeral += sub;
 
     lista.innerHTML += `
       <div class="cart-item-card">
-
-        <div class="header-card">
-          <h3 class="carrinho-nome-produto">${item.nome}</h3>
-
-          <p class="carrinho-subtotal-produto">
-            R$ ${sub.toFixed(2)}
-          </p>
+        <div class="carrinho-quantidade-produto">
+            ${item.qtd}x
         </div>
 
-        <div class="botoes-add-obs">
+        <div class="lanche-sacola">
+          <p class="carrinho-nome-produto">
+            ${item.nome}
+          </p>
 
           ${
             item.adicionais?.length
@@ -321,33 +367,34 @@ function renderCarrinho() {
 
         </div>
 
-        <div class="carrinho-card-footer">
-
-          <div class="carrinho-quantidade-produto">
-
-            <button
-              class="botao-menos"
-              onclick="alterarQtdCarrinho(${i}, -1)"
-            >
-              −
-            </button>
-
-            <p class="numero-qtd">${item.qtd}</p>
-
-            <button
-              class="botao-mais"
-              onclick="alterarQtdCarrinho(${i}, 1)"
-            >
-              +
-            </button>
-
-          </div>
+        <div class="total-e-excluir">
+         <span class="sacola-subtotal-produto">
+            R$ ${sub.toFixed(2)}
+          </span>
 
           <button
-            class="botao-excluir"
+            class="botao-excluir-sacola"
             onclick="removerItem(${i})"
           >
-            🗑️
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-trash2"
+              data-loc="client/src/components/CartModal.tsx:153"
+            >
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+              <line x1="10" x2="10" y1="11" y2="17"></line>
+              <line x1="14" x2="14" y1="11" y2="17"></line>
+            </svg>
           </button>
 
         </div>
@@ -394,7 +441,7 @@ function finalizarPedido() {
   const numero = document.getElementById("c-numero").value;
   const observacao = document.getElementById("c-obs").value;
 
-  if (!nome || !numero) return alert("Preencha nome e número!");
+  // if (!nome || !numero) return alert("Preencha nome e número!");
   if (!valorPagamento) return alert("Selecione uma forma de pagamento!");
   if (carrinho.length === 0) return alert("Carrinho vazio!");
   if (!metodoConsumo) return alert("Selecione o método de consumo!");
@@ -714,33 +761,40 @@ function scrollCarrossel(id, direction) {
 const botoes = document.querySelectorAll(".botao-nav");
 
 const botaoHome = document.querySelector(".button-home");
+
 const cartSidebar = document.getElementById("cartSidebar");
 const perfilSidebar = document.getElementById("perfilSidebar");
 
+// ================= BOTÕES NAV =================
+
 botoes.forEach((botao) => {
   botao.addEventListener("click", () => {
-    // remove ativo de todos
-    botoes.forEach((b) => b.classList.remove("ativo"));
+    // ================= HOME =================
 
-    // adiciona ativo no clicado
-    botao.classList.add("ativo");
-
-    // HOME
     if (botao.classList.contains("button-home")) {
       fecharCart();
       fecharPerfil();
+
+      botoes.forEach((b) => b.classList.remove("ativo"));
+      botao.classList.add("ativo");
     }
 
-    // SACOLA
+    // ================= SACOLA =================
     else if (botao.classList.contains("button-sacola")) {
       fecharPerfil();
       abrirCart();
+
+      botoes.forEach((b) => b.classList.remove("ativo"));
+      botao.classList.add("ativo");
     }
 
-    // PERFIL
+    // ================= PERFIL =================
     else if (botao.classList.contains("button-perfil")) {
       fecharCart();
       abrirPerfil();
+
+      botoes.forEach((b) => b.classList.remove("ativo"));
+      botao.classList.add("ativo");
     }
   });
 });
@@ -754,9 +808,11 @@ function abrirCart() {
 function fecharCart() {
   cartSidebar.classList.remove("active");
 
-  // volta botão ativo para HOME
-  botoes.forEach((b) => b.classList.remove("ativo"));
-  botaoHome.classList.add("ativo");
+  // só volta HOME se perfil também estiver fechado
+  if (!perfilSidebar.classList.contains("active")) {
+    botoes.forEach((b) => b.classList.remove("ativo"));
+    botaoHome.classList.add("ativo");
+  }
 }
 
 // ================= PERFIL =================
@@ -768,7 +824,9 @@ function abrirPerfil() {
 function fecharPerfil() {
   perfilSidebar.classList.remove("active");
 
-  // volta botão ativo para HOME
-  botoes.forEach((b) => b.classList.remove("ativo"));
-  botaoHome.classList.add("ativo");
+  // só volta HOME se carrinho também estiver fechado
+  if (!cartSidebar.classList.contains("active")) {
+    botoes.forEach((b) => b.classList.remove("ativo"));
+    botaoHome.classList.add("ativo");
+  }
 }
