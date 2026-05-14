@@ -397,3 +397,85 @@ header {
 .sacola-vazia svg {
   opacity: 0.6;
 }
+/* ================== CARRINHO ================== */
+/* .consumo-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.consumo-btn {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+
+  background: oklch(0.18 0.008 30);
+  color: oklch(0.8 0.005 50);
+}
+
+.consumo-btn.active {
+  background: oklch(0.73 0.17 46);
+  color: oklch(0.1 0.01 30);
+} */
+
+/* .pagamento-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-pagamento {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+
+  background: oklch(0.18 0.008 30);
+  color: oklch(0.8 0.005 50);
+}
+
+.btn-pagamento.active {
+  background: oklch(0.73 0.17 46);
+  color: oklch(0.1 0.01 30);
+}
+
+.btn-pagamento:hover {
+  transform: scale(1.02);
+} */
+
+/* .pagamento-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.box-extra-pagamento {
+  padding: 12px;
+  border-radius: 12px;
+  background: oklch(0.16 0.008 30);
+  color: white;
+  font-size: 14px;
+
+  animation: aparecerBox 0.2s ease;
+}
+
+@keyframes aparecerBox {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */

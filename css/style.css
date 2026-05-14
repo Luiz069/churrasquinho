@@ -125,7 +125,7 @@ body {
   min-width: 0;
   min-width: 0;
 
-  right: 9999px;
+  /* right: 9999px; */
 }
 
 .sacola {
@@ -141,7 +141,7 @@ body {
   display: flex;
   min-height: 0;
   min-width: 0;
-  /* margin-bottom: 4.8rem; */
+  margin-bottom: 4.8rem;
 }
 
 .sacola-titulo {
@@ -268,9 +268,14 @@ body {
   margin: 0;
 }
 
-.carrinho-adicional,
+.carrinho-adicional {
+  margin: 2px 0 0 0;
+  color: oklch(0.6 0.01 50);
+  font-size: 0.65rem;
+}
+
 .carrinho-obs {
-  color: oklch(0.73 0.17 46);
+  color: oklch(0.6 0.01 50);
   font-size: 0.65rem;
   margin: 0;
 }
@@ -302,6 +307,172 @@ body {
   border: none;
   margin: 0;
 }
+
+/* ============== NOME É NUMERO============= */
+.nome-number {
+  display: flex;
+  gap: calc(0.25rem * 3);
+  align-items: center;
+}
+
+.titulo-itens-sacola {
+  color: oklch(0.73 0.17 46);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: calc(1 / 0.75);
+  display: block;
+  margin-bottom: calc(0.25rem * 2);
+}
+
+.campo-text {
+  background: oklch(0.2 0.008 30);
+  border: 1px solid oklch(0.28 0.008 30);
+  color: oklch(0.96 0.005 50);
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 4);
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.consumo-buttons {
+  gap: calc(0.25rem * 2);
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.consumo-btn {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+
+  background: oklch(0.18 0.008 30);
+  color: oklch(0.8 0.005 50);
+}
+
+.consumo-btn.active {
+  background: oklch(0.73 0.17 46);
+  color: oklch(0.1 0.01 30);
+}
+/* ======================================== */
+
+/* ============== pagamento ============== */
+.pagamento-botoes {
+  gap: calc(0.25rem * 2);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.btn-pagamento {
+  background: oklch(0.18 0.008 30);
+  color: oklch(0.8 0.005 50);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  text-align: left;
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 3);
+  border: none;
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.btn-pagamento.active {
+  background: oklch(0.73 0.17 46);
+  color: oklch(0.1 0.01 30);
+
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  text-align: left;
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 3);
+  border: none;
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.box-extra-pagamento {
+  border-top: 1px solid oklch(0.22 0.008 30);
+  padding-top: calc(0.25rem * 2);
+  margin-top: calc(0.25rem * 2);
+}
+
+.input-troco {
+  --tw-outline-style: none;
+  outline-style: none;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 4);
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.taxa-cartao {
+  color: oklch(0.6 0.01 50);
+  font-size: 0.75rem;
+  line-height: calc(1 / 0.75);
+  margin-top: calc(0.25rem * 1);
+  margin: 0;
+}
+
+.campo-obs {
+  background: oklch(0.2 0.008 30);
+  border: 1px solid oklch(0.28 0.008 30);
+  color: oklch(0.96 0.005 50);
+  --tw-outline-style: none;
+  outline-style: none;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  padding-block: calc(0.25rem * 2);
+  padding-inline: calc(0.25rem * 4);
+  border-radius: 0.75rem;
+  resize: none;
+  width: 100%;
+}
+
+.finalizar-pedido {
+  border-top: 1px solid oklch(0.22 0.008 30);
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  flex-shrink: 0;
+}
+
+.valor-total {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-bottom: calc(0.25rem * 4);
+  min-height: 0;
+  min-width: 0;
+}
+
+.titulo-total-sacola {
+  color: oklch(0.8 0.005 50);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* ======================================== */
 
 /* ======= DADOS DO PEDIDO ========== */
 .dados-cliente {
@@ -464,9 +635,9 @@ textarea {
   font-family: var(--font-principal);
 }
 
-.dados {
+/* .dados {
   margin-bottom: 8px;
-}
+} */
 
 /* ========= FORMA DE PAGAMENTO ========== */
 .select-custom {
@@ -519,15 +690,6 @@ textarea {
   display: block;
 }
 
-.finalizar-pedido {
-  display: flex;
-  /* align-items: center; */
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-
-  margin-bottom: 4rem;
-}
 /* finalizar é voltar*/
 .voltar-carrinho,
 .botao-finalizar {

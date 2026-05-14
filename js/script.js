@@ -440,6 +440,7 @@ function finalizarPedido() {
   const nome = document.getElementById("c-nome").value;
   const numero = document.getElementById("c-numero").value;
   const observacao = document.getElementById("c-obs").value;
+  const troco = document.getElementById("input-troco")?.value || "";
 
   // if (!nome || !numero) return alert("Preencha nome e número!");
   if (!valorPagamento) return alert("Selecione uma forma de pagamento!");
@@ -507,6 +508,7 @@ function finalizarPedido() {
 ${textoItens}
 
 *Pagamento:* ${valorPagamento}
+${troco ? `💵 Troco para: R$ ${troco}` : ""}
 *Consumo:* ${emojiEntrega} ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
 (Estimativa: 35~45 min)
 
@@ -522,12 +524,18 @@ Obrigado pela preferência! 😉`;
       if (typeof salvarCarrinho === "function") salvarCarrinho();
       if (typeof renderCarrinho === "function") renderCarrinho();
 
-      // Reset campo pagamento
-      valorPagamento = "";
-      const displayPagamento = document.querySelector(
-        "#pagamento-select .selected",
-      );
-      if (displayPagamento) displayPagamento.textContent = "Forma de pagamento";
+      // Reset pagamento
+      valorPagamento = "Pix";
+
+      document.querySelectorAll(".btn-pagamento").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      const btnPix = document.querySelector('.btn-pagamento[data-value="Pix"]');
+
+      if (btnPix) {
+        btnPix.classList.add("active");
+      }
 
       // 🔥 RESET CONSUMO (COLOCA AQUI)
       metodoConsumo = "";
@@ -551,31 +559,61 @@ function voltarPagina() {
   window.history.back();
 }
 
-const select = document.getElementById("pagamento-select");
+function selecionarPagamento(botao) {
+  const botoes = document.querySelectorAll(".btn-pagamento");
 
-const selectConsumo = document.getElementById("consumo-select");
-
-if (selectConsumo) {
-  const selected = selectConsumo.querySelector(".selected");
-  const options = selectConsumo.querySelectorAll(".options div");
-
-  selected.addEventListener("click", () => {
-    selectConsumo.classList.toggle("active");
+  botoes.forEach((btn) => {
+    btn.classList.remove("active");
   });
 
-  options.forEach((option) => {
-    option.addEventListener("click", () => {
-      selected.childNodes[0].nodeValue = option.textContent;
-      metodoConsumo = option.dataset.value;
-      selectConsumo.classList.remove("active");
-    });
-  });
+  botao.classList.add("active");
 
-  document.addEventListener("click", (e) => {
-    if (!selectConsumo.contains(e.target)) {
-      selectConsumo.classList.remove("active");
-    }
-  });
+  valorPagamento = botao.dataset.value;
+
+  // BOXES
+  const boxTroco = document.getElementById("box-troco");
+  const taxaDebito = document.getElementById("taxa-debito");
+  const taxaCredito = document.getElementById("taxa-credito");
+
+  // RESET
+  boxTroco.style.display = "none";
+  taxaDebito.style.display = "none";
+  taxaCredito.style.display = "none";
+
+  // DINHEIRO
+  if (valorPagamento === "Dinheiro") {
+    boxTroco.style.display = "block";
+  }
+
+  // DÉBITO
+  if (valorPagamento === "Débito") {
+    taxaDebito.style.display = "block";
+  }
+
+  // CRÉDITO
+  if (valorPagamento === "Crédito") {
+    taxaCredito.style.display = "block";
+  }
+}
+
+// ================= CONSUMO =================
+
+metodoConsumo = "retirada";
+
+function selecionarConsumo(tipo) {
+  metodoConsumo = tipo;
+
+  const btnRetirada = document.getElementById("btn-retirada");
+  const btnLocal = document.getElementById("btn-local");
+
+  btnRetirada.classList.remove("active");
+  btnLocal.classList.remove("active");
+
+  if (tipo === "retirada") {
+    btnRetirada.classList.add("active");
+  } else {
+    btnLocal.classList.add("active");
+  }
 }
 
 if (select) {

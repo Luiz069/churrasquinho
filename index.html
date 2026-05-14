@@ -2193,82 +2193,147 @@
             <div id="lista-carrinho"></div>
 
             <div class="dados-cliente">
-              <div class="dados">
-                <h4 class="titulo-dados">Nome *</h4>
-                <input type="text" id="c-nome" placeholder="Seu nome" />
-              </div>
+              <div class="nome-number">
+                <div class="dados">
+                  <h4 class="nome-cliente-sacola titulo-itens-sacola">
+                    Nome *
+                  </h4>
+                  <input
+                    type="text"
+                    class="campo-text"
+                    id="c-nome"
+                    placeholder="Seu nome"
+                  />
+                </div>
 
-              <div class="dados">
-                <h4 class="titulo-dados">Telefone/WhatsApp *</h4>
-                <input
-                  type="text"
-                  id="c-numero"
-                  placeholder="(99) 99999-9999"
-                />
-              </div>
-
-              <div class="dados">
-                <h4 class="titulo-dados">Método de pagamento *</h4>
-                <div class="select-custom" id="pagamento-select">
-                  <div class="selected">
-                    Forma de pagamento
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-chevron-down"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="options">
-                    <div data-value="Dinheiro">💵 Dinheiro</div>
-                    <div data-value="Pix">❖ PIX</div>
-                    <div data-value="Cartão">💳 Cartão</div>
-                  </div>
+                <div class="dados">
+                  <h4 class="numero-cliente-sacola titulo-itens-sacola">
+                    Telefone *
+                  </h4>
+                  <input
+                    type="text"
+                    class="campo-text"
+                    id="c-numero"
+                    placeholder="(99) 99999-9999"
+                  />
                 </div>
               </div>
 
               <!-- CONSUMO -->
               <div class="dados">
-                <h4 class="titulo-dados">Método de consumo *</h4>
-                <div id="consumo-select" class="select-custom">
-                  <div class="selected">
-                    Tipo de consumo
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-chevron-down"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                        />
-                      </svg>
+                <h4 class="titulo-itens-sacola">Método de consumo *</h4>
+
+                <div class="consumo-buttons">
+                  <button
+                    id="btn-retirada"
+                    class="consumo-btn active"
+                    onclick="selecionarConsumo('retirada')"
+                  >
+                    Retirada
+                  </button>
+
+                  <button
+                    id="btn-local"
+                    class="consumo-btn"
+                    onclick="selecionarConsumo('local')"
+                  >
+                    Consumir no Local
+                  </button>
+                </div>
+              </div>
+
+              <div class="dados">
+                <h4 class="titulo-itens-sacola">Método de pagamento *</h4>
+
+                <div class="pagamento-botoes">
+                  <!-- PIX -->
+                  <div class="pagamento-item">
+                    <button
+                      type="button"
+                      class="btn-pagamento active"
+                      data-value="Pix"
+                      onclick="selecionarPagamento(this)"
+                    >
+                      PIX
+                    </button>
+                  </div>
+
+                  <!-- DINHEIRO -->
+                  <div class="pagamento-item">
+                    <button
+                      type="button"
+                      class="btn-pagamento"
+                      data-value="Dinheiro"
+                      onclick="selecionarPagamento(this)"
+                    >
+                      Dinheiro
+                    </button>
+
+                    <div
+                      id="box-troco"
+                      class="box-extra-pagamento"
+                      style="display: none"
+                    >
+                      <label class="titulo-itens-sacola">
+                        Troco para quanto?
+                      </label>
+
+                      <input
+                        type="number"
+                        id="input-troco"
+                        placeholder="Ex: 100"
+                        class="campo-text input-troco"
+                      />
                     </div>
                   </div>
-                  <div class="options">
-                    <div data-value="retirada">🏪 Retirada</div>
-                    <div data-value="local">🍽️ Comer no local</div>
+
+                  <!-- DÉBITO -->
+                  <div class="pagamento-item">
+                    <button
+                      type="button"
+                      class="btn-pagamento"
+                      data-value="Débito"
+                      onclick="selecionarPagamento(this)"
+                    >
+                      Débito
+                    </button>
+
+                    <p
+                      id="taxa-debito"
+                      class="taxa-cartao"
+                      style="display: none"
+                    >
+                      Taxa de <strong>5%</strong>
+                    </p>
+                  </div>
+
+                  <!-- CRÉDITO -->
+                  <div class="pagamento-item">
+                    <button
+                      type="button"
+                      class="btn-pagamento"
+                      data-value="Crédito"
+                      onclick="selecionarPagamento(this)"
+                    >
+                      Crédito
+                    </button>
+
+                    <p
+                      id="taxa-credito"
+                      class="taxa-cartao"
+                      style="display: none"
+                    >
+                      Taxa de <strong>10%</strong>
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div class="dados">
-                <h4 class="titulo-dados">Observação Geral</h4>
+                <h4 class="titulo-itens-sacola">Observação Geral</h4>
                 <textarea
                   id="c-obs"
+                  class="campo-text campo-obs"
                   placeholder="Observações gerais do pedido"
                 ></textarea>
               </div>
@@ -2283,7 +2348,7 @@
               class="valor-total"
               style="display: flex; justify-content: space-between"
             >
-              <h3>Total do pedido</h3>
+              <h3 class="titulo-total-sacola">Total do pedido</h3>
               <div class="total">R$ <span id="total-final">0,00</span></div>
             </div>
             <button class="botao-finalizar" onclick="finalizarPedido()">
