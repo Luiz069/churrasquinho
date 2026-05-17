@@ -313,19 +313,37 @@ function renderCarrinho() {
     `;
 
     // esconder conteúdo
-    dadosCliente.style.display = "none";
-    finalizarPedido.style.display = "none";
+    if (dadosCliente) {
+      dadosCliente.style.display = "none";
+    }
 
-    document.getElementById("total-final").innerText = "0,00";
-    document.getElementById("cart-count").innerText = "0";
+    if (finalizarPedido) {
+      finalizarPedido.style.display = "none";
+    }
+
+    const totalFinal = document.getElementById("total-final");
+    const cartCount = document.getElementById("cart-count");
+
+    if (totalFinal) {
+      totalFinal.innerText = "0,00";
+    }
+
+    if (cartCount) {
+      cartCount.innerText = "0";
+    }
 
     return;
   }
 
   // ================= MOSTRAR CONTEÚDO =================
 
-  dadosCliente.style.display = "flex";
-  finalizarPedido.style.display = "flex";
+  if (dadosCliente) {
+    dadosCliente.style.display = "flex";
+  }
+
+  if (finalizarPedido) {
+    finalizarPedido.style.display = "flex";
+  }
 
   // ================= ITENS =================
 
@@ -405,9 +423,16 @@ function renderCarrinho() {
 
   // ================= TOTAL =================
 
-  document.getElementById("total-final").innerText = totalGeral.toFixed(2);
+  const totalFinal = document.getElementById("total-final");
+  const cartCount = document.getElementById("cart-count");
 
-  document.getElementById("cart-count").innerText = carrinho.length;
+  if (totalFinal) {
+    totalFinal.innerText = totalGeral.toFixed(2);
+  }
+
+  if (cartCount) {
+    cartCount.innerText = carrinho.length;
+  }
 }
 
 function alterarQtdCarrinho(i, v) {
@@ -427,41 +452,60 @@ function removerItem(i) {
   renderCarrinho();
 }
 
-function abrirCart() {
-  document.getElementById("cartSidebar").classList.toggle("active");
-}
-
 // ================= FINALIZAR PEDIDO =================
 
 function finalizarPedido() {
-  const user = firebase.auth().currentUser;
-  if (!user) return alert("Faça login!");
+  // ================= USUÁRIO =================
 
-  const nome = document.getElementById("c-nome").value;
-  const numero = document.getElementById("c-numero").value;
-  const observacao = document.getElementById("c-obs").value;
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!user) {
+    alert("Faça login!");
+    return;
+  }
+
+  // ================= CAMPOS =================
+
+  const nome = document.getElementById("c-nome")?.value || "";
+  const numero = document.getElementById("c-numero")?.value || "";
+  const observacao = document.getElementById("c-obs")?.value || "";
   const troco = document.getElementById("input-troco")?.value || "";
 
-  // if (!nome || !numero) return alert("Preencha nome e número!");
-  if (!valorPagamento) return alert("Selecione uma forma de pagamento!");
-  if (carrinho.length === 0) return alert("Carrinho vazio!");
-  if (!metodoConsumo) return alert("Selecione o método de consumo!");
+  // ================= VALIDAÇÕES =================
+
+  if (!valorPagamento) {
+    alert("Selecione uma forma de pagamento!");
+    return;
+  }
+
+  if (!metodoConsumo) {
+    alert("Selecione o método de consumo!");
+    return;
+  }
+
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  // ================= TOTAL =================
 
   let total = 0;
   let textoItens = "";
 
   carrinho.forEach((item) => {
     const subtotal = item.precoUn * item.qtd;
+
     total += subtotal;
 
     textoItens += `➡️ ${item.qtd}x ${item.nome}\n`;
 
-    // Sabores / adicionais
-    if (item.adicionais && item.adicionais.length > 0) {
-      textoItens += `_➕_ ${item.adicionais.join(" | ")}\n`;
+    // adicionais
+    if (item.adicionais?.length > 0) {
+      textoItens += `➕ ${item.adicionais.join(" | ")}\n`;
     }
 
-    // Observação do item
+    // observação
     if (item.obs) {
       textoItens += `📝 ${item.obs}\n`;
     }
@@ -469,62 +513,79 @@ function finalizarPedido() {
     textoItens += "\n";
   });
 
-  // 🔥 EMOJIS DINÂMICOS
-  let emojiPagamento = "";
-  let emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🏪";
+  // ================= EMOJIS =================
 
-  if (valorPagamento.toLowerCase().includes("cart")) {
-    emojiPagamento = "💳";
-  } else if (valorPagamento.toLowerCase().includes("din")) {
-    emojiPagamento = "💵";
-  } else if (valorPagamento.toLowerCase().includes("pix")) {
+  let emojiPagamento = "💳";
+
+  if (valorPagamento.includes("Pix")) {
     emojiPagamento = "🏦";
   }
 
-  // 1. Gerar o número de 5 dígitos ANTES de salvar, para usar no Firestore e no WhatsApp
+  if (valorPagamento.includes("Dinheiro")) {
+    emojiPagamento = "💵";
+  }
+
+  const emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🏪";
+
+  // ================= NÚMERO PEDIDO =================
+
   const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
 
-  // 2. Salvar no Firebase
+  // ================= FIREBASE =================
+
   db.collection("pedidos")
     .add({
-      uid: user.uid,
+      uid: user.telefone,
       nome: nome,
-      numeroCelular: numero, // Renomeado para clareza (celular do cliente)
-      pedidoNumero: numeroPedidoAleatorio, // O número de 5 dígitos
+      numeroCelular: numero,
+      pedidoNumero: numeroPedidoAleatorio,
       observacaoGeral: observacao,
       pagamento: valorPagamento,
-      consumo: metodoConsumo, // 👈 NOVO CAMPO
+      troco: troco || null,
+      consumo: metodoConsumo,
       itens: carrinho,
       total: total,
-      status: "pendente", // Mantido em minúsculo para bater com os filtros do painel
+      status: "pendente",
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
+
     .then(() => {
-      // 3. Criar a mensagem do WhatsApp usando o MESMO número gerado acima
+      // ================= WHATSAPP =================
+
       const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
 
-*Cliente:* ${nome}
-*Itens:*
+👤 *Cliente:* ${nome}
+
+📦 *Itens:*
 ${textoItens}
 
-*Pagamento:* ${valorPagamento}
+${emojiPagamento} *Pagamento:* ${valorPagamento}
 ${troco ? `💵 Troco para: R$ ${troco}` : ""}
-*Consumo:* ${emojiEntrega} ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
-(Estimativa: 35~45 min)
+
+${emojiEntrega} *Consumo:* ${
+        metodoConsumo === "local" ? "Comer no local" : "Retirada"
+      }
+
+⏱️ Estimativa: 35~45 min
 
 💰 *Total: R$ ${total.toFixed(2)}*
 
-Obrigado pela preferência! 😉`;
+Obrigado pela preferência 😉`;
 
       const numeroLanchonete = "5598985213506";
+
       const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
-      // 4. Limpeza da interface
-      carrinho = [];
-      if (typeof salvarCarrinho === "function") salvarCarrinho();
-      if (typeof renderCarrinho === "function") renderCarrinho();
+      // ================= RESET CARRINHO =================
 
-      // Reset pagamento
+      carrinho = [];
+
+      salvarCarrinho();
+
+      renderCarrinho();
+
+      // ================= RESET PAGAMENTO =================
+
       valorPagamento = "Pix";
 
       document.querySelectorAll(".btn-pagamento").forEach((btn) => {
@@ -537,20 +598,57 @@ Obrigado pela preferência! 😉`;
         btnPix.classList.add("active");
       }
 
-      // 🔥 RESET CONSUMO (COLOCA AQUI)
-      metodoConsumo = "";
+      // ================= RESET CONSUMO =================
 
-      const displayConsumo = document.querySelector(
-        "#consumo-select .selected",
-      );
-      if (displayConsumo) displayConsumo.textContent = "Tipo de consumo";
+      metodoConsumo = "retirada";
 
-      // 5. Ações finais
-      window.open(url, "_blank");
-      alert(`Pedido nº ${numeroPedidoAleatorio} enviado com sucesso!`);
+      const btnRetirada = document.getElementById("btn-retirada");
+
+      const btnLocal = document.getElementById("btn-local");
+
+      if (btnRetirada && btnLocal) {
+        btnRetirada.classList.add("active");
+        btnLocal.classList.remove("active");
+      }
+
+      // ================= RESET TROCO =================
+
+      const inputTroco = document.getElementById("input-troco");
+
+      if (inputTroco) {
+        inputTroco.value = "";
+      }
+
+      // ================= ESCONDER BOXES =================
+
+      const boxTroco = document.getElementById("box-troco");
+
+      const taxaDebito = document.getElementById("taxa-debito");
+
+      const taxaCredito = document.getElementById("taxa-credito");
+
+      if (boxTroco) {
+        boxTroco.style.display = "none";
+      }
+
+      if (taxaDebito) {
+        taxaDebito.style.display = "none";
+      }
+
+      if (taxaCredito) {
+        taxaCredito.style.display = "none";
+      }
+
+      // ================= ABRIR WHATSAPP =================
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
     })
+
     .catch((error) => {
       console.error("Erro ao salvar pedido:", error);
+
       alert("Erro ao processar pedido. Tente novamente.");
     });
 }
@@ -614,32 +712,6 @@ function selecionarConsumo(tipo) {
   } else {
     btnLocal.classList.add("active");
   }
-}
-
-if (select) {
-  const selected = select.querySelector(".selected");
-  const options = select.querySelectorAll(".options div");
-
-  // abrir/fechar
-  selected.addEventListener("click", () => {
-    select.classList.toggle("active");
-  });
-
-  // selecionar opção
-  options.forEach((option) => {
-    option.addEventListener("click", () => {
-      selected.textContent = option.textContent;
-      valorPagamento = option.dataset.value;
-      select.classList.remove("active");
-    });
-  });
-
-  // fechar ao clicar fora
-  document.addEventListener("click", (e) => {
-    if (!select.contains(e.target)) {
-      select.classList.remove("active");
-    }
-  });
 }
 
 function carregarHistorico() {
@@ -800,9 +872,6 @@ const botoes = document.querySelectorAll(".botao-nav");
 
 const botaoHome = document.querySelector(".button-home");
 
-const cartSidebar = document.getElementById("cartSidebar");
-const perfilSidebar = document.getElementById("perfilSidebar");
-
 // ================= BOTÕES NAV =================
 
 botoes.forEach((botao) => {
@@ -840,30 +909,46 @@ botoes.forEach((botao) => {
 // ================= CART =================
 
 function abrirCart() {
-  cartSidebar.classList.add("active");
+  const cartSidebar = document.getElementById("cartSidebar");
+
+  if (cartSidebar) {
+    cartSidebar.classList.add("active");
+  }
 }
 
 function fecharCart() {
-  cartSidebar.classList.remove("active");
+  const cartSidebar = document.getElementById("cartSidebar");
+  const perfilSidebar = document.getElementById("perfilSidebar");
+
+  if (cartSidebar) {
+    cartSidebar.classList.remove("active");
+  }
 
   // só volta HOME se perfil também estiver fechado
-  if (!perfilSidebar.classList.contains("active")) {
+  if (perfilSidebar && !perfilSidebar.classList.contains("active")) {
     botoes.forEach((b) => b.classList.remove("ativo"));
     botaoHome.classList.add("ativo");
   }
 }
 
-// ================= PERFIL =================
-
 function abrirPerfil() {
-  perfilSidebar.classList.add("active");
+  const perfilSidebar = document.getElementById("perfilSidebar");
+
+  if (perfilSidebar) {
+    perfilSidebar.classList.add("active");
+  }
 }
 
 function fecharPerfil() {
-  perfilSidebar.classList.remove("active");
+  const perfilSidebar = document.getElementById("perfilSidebar");
+  const cartSidebar = document.getElementById("cartSidebar");
+
+  if (perfilSidebar) {
+    perfilSidebar.classList.remove("active");
+  }
 
   // só volta HOME se carrinho também estiver fechado
-  if (!cartSidebar.classList.contains("active")) {
+  if (cartSidebar && !cartSidebar.classList.contains("active")) {
     botoes.forEach((b) => b.classList.remove("ativo"));
     botaoHome.classList.add("ativo");
   }
