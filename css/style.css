@@ -141,7 +141,7 @@ body {
   display: flex;
   min-height: 0;
   min-width: 0;
-  margin-bottom: 4.8rem;
+  /* margin-bottom: 4.8rem; */
 }
 
 .sacola-titulo {
@@ -364,6 +364,7 @@ body {
   background: oklch(0.73 0.17 46);
   color: oklch(0.1 0.01 30);
 }
+
 /* ======================================== */
 
 /* ============== pagamento ============== */
@@ -470,6 +471,246 @@ body {
   color: oklch(0.8 0.005 50);
   font-weight: 500;
   font-size: 1rem;
+}
+
+.total-sacola,
+.total-final {
+  color: oklch(0.73 0.17 46);
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: calc(2rem / 1.5);
+}
+
+.botao-finalizar {
+  background: linear-gradient(135deg, oklch(0.73 0.17 46), oklch(0.65 0.18 38));
+  color: oklch(0.1 0.01 30);
+  box-shadow: oklch(0.73 0.17 46 / 0.35) 0px 4px 16px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  --tw-font-weight: 700;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-block: calc(0.25rem * 4);
+  border-radius: calc(0.75rem + 4px);
+  border: none;
+  width: 100%;
+}
+
+/* ==================== MODAL PERFIL ===================== */
+.perfil-sidebar {
+  background: oklch(0 0 0 / 0.75);
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  z-index: 50;
+  inset: calc(0.25rem * 0);
+  position: fixed;
+  min-width: 0;
+  min-width: 0;
+
+  /* right: 9999px; */
+}
+
+.perfil-modal {
+  background: oklch(0.14 0.008 30);
+  max-height: 90vh;
+  box-shadow: oklch(0 0 0 / 0.5) 0px -8px 40px;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  overflow: hidden;
+  flex-direction: column;
+  max-width: 32rem;
+  width: 100%;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid oklch(0.22 0.008 30);
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  justify-content: space-between;
+}
+
+.perfil-header h2 {
+  color: oklch(0.96 0.005 50);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
+  margin: 0;
+}
+
+.perfil-content {
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.perfil-user-card {
+  background-color: oklch(0.18 0.008 30);
+  padding: calc(0.25rem * 4);
+  border-radius: 1rem;
+  /* gap: calc(0.25rem * 3); */
+  margin-bottom: calc(0.25rem * 5);
+}
+
+.perfil-dados {
+  gap: calc(0.25rem * 3);
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  /* margin-bottom: calc(0.25rem * 3); */
+  min-height: 0;
+  min-width: 0;
+}
+
+.perfil-avatar {
+  background: linear-gradient(135deg, oklch(0.73 0.17 46), oklch(0.65 0.18 38));
+  color: oklch(0.1 0.01 30);
+  --tw-font-weight: 700;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
+  border-radius: 3.40282e38px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: calc(0.25rem * 12);
+  height: calc(0.25rem * 12);
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.perfil-user-info {
+  flex: 1;
+  align-items: center;
+}
+
+#perfil-nome {
+  color: oklch(0.96 0.005 50);
+  --tw-font-weight: 600;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+}
+
+#perfil-telefone {
+  color: oklch(0.6 0.01 50);
+  --tw-font-weight: 400;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: calc(1.25 / 0.875);
+  margin: 0;
+}
+
+.editar-perfil-btn {
+  background: oklch(0.22 0.008 30);
+  /* color: oklch(0.8 0.005 50); */
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+  border-radius: 3.40282e38px;
+  justify-content: center;
+  align-items: center;
+  width: calc(0.25rem * 8);
+  height: calc(0.25rem * 8);
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+  border: none;
+}
+
+.historico-header {
+  gap: calc(0.25rem * 2);
+  align-items: center;
+
+  display: flex;
+  margin-bottom: calc(0.25rem * 3);
+  min-height: 0;
+  min-width: 0;
+}
+
+.historico-header h3 {
+  color: oklch(0.73 0.17 46);
+  text-transform: uppercase;
+  --tw-tracking: 0.05em;
+  letter-spacing: 0.05em;
+  --tw-font-weight: 600;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  margin: 0;
+}
+
+#historico {
+  gap: calc(0.25rem * 3);
+  flex-direction: column;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+.pedido-card {
+  background-color: oklch(0.18 0.008 30);
+  border-radius: calc(0.75rem + 4px);
+  overflow: hidden;
+}
+
+.pedido-container {
+  padding: calc(0.25rem * 3);
+}
+
+.pedido-topo {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-bottom: calc(0.25rem * 2);
+  min-height: 0;
+  min-width: 0;
+}
+
+.pedido-topo h3 {
+  color: oklch(0.73 0.17 46);
+  --tw-font-weight: 600;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: calc(1 / 0.75);
+  padding-block: calc(0.25rem * 1);
+  padding-inline: calc(0.25rem * 2);
+  border: none;
+  border-radius: 3.40282e38px;
+}
+
+.pedido-topo span {
+  color: oklch(0.6 0.01 50);
+  --tw-font-weight: 400;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: calc(1 / 0.75);
+}
+
+.total-historico {
+  color: oklch(0.96 0.0055 50);
+  --tw-font-weight: 600;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  margin-bottom: calc(0.25rem * 1);
 }
 
 /* ======================================== */
@@ -615,13 +856,13 @@ textarea {
   margin: 12px 0 20px 0;
 }
 
-.total,
+/* .total,
 #total-final {
   font-family: var(--font-secundaria);
   font-size: 22px;
   font-weight: 900;
   color: var(--vermelho);
-}
+} */
 
 /* =============== DADOS CLIENTE =============== */
 /* .dados-cliente {
@@ -690,26 +931,9 @@ textarea {
   display: block;
 }
 
-/* finalizar é voltar*/
-.voltar-carrinho,
-.botao-finalizar {
-  width: 100%;
-  border-radius: 5px;
-  border: 2px solid var(--preto);
-  padding: 15px 0;
-  font-family: var(--font-principal);
-  font-weight: 100;
-  letter-spacing: 0.2px;
-}
-
 .voltar-carrinho {
   color: var(--preto);
   background-color: rgba(189, 189, 189, 0.457);
-}
-
-.botao-finalizar {
-  color: var(--fundo);
-  background-color: var(--vermelho);
 }
 
 /* =============== consumo =============== */

@@ -30,13 +30,13 @@
   margin: 0;
 }
 
-.total-historico {
+/* .total-historico {
   color: red;
   font-family: var(--font-secundaria);
   font-weight: 600;
   font-size: 1.5em;
   align-items: flex-start;
-}
+} */
 
 .data-historico {
   font-size: 13px;

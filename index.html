@@ -200,6 +200,127 @@
       </div>
 
       <!-- ========================================================= -->
+      <!-- MODAL PERFIL -->
+      <div id="perfilSidebar" class="perfil-sidebar">
+        <div class="perfil-modal">
+          <!-- HEADER -->
+          <div class="perfil-header">
+            <h2>Meu Perfil</h2>
+
+            <button onclick="fecharCart()" class="fechar-sacola">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="oklch(0.6 0.01 50)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-x"
+                data-loc="client/src/components/ui/dialog.tsx:139"
+              >
+                <path class="x-icon" d="M18 6 6 18"></path>
+                <path class="x-icon" d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- CONTEÚDO -->
+          <div class="perfil-content">
+            <!-- CARD USUÁRIO -->
+            <div class="perfil-user-card">
+              <div class="perfil-dados">
+                <div class="perfil-avatar" id="avatar-letra">L</div>
+
+                <div class="perfil-user-info">
+                  <h3 id="perfil-nome">Luiz</h3>
+                  <p id="perfil-telefone">(98) 98530-1953</p>
+                </div>
+
+                <button class="editar-perfil-btn" onclick="abrirModalPerfil()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="oklch(0.73 0.17 46)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-pen"
+                    data-loc="client/src/components/ProfileModal.tsx:211"
+                  >
+                    <path
+                      d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="historico-container">
+              <!-- HISTÓRICO -->
+              <div class="historico-header">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="oklch(0.73 0.17 46)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-clock"
+                  data-loc="client/src/components/ProfileModal.tsx:233"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <h3>HISTÓRICO DE PEDIDOS</h3>
+              </div>
+
+              <!-- LISTA -->
+              <div id="historico"></div>
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div class="perfil-footer">
+            <button class="btn-logout" onclick="sair()">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MODAL EDITAR PERFIL ================= -->
+
+      <!-- MODAL -->
+      <div id="modalEditarPerfil" class="modal-editar-perfil">
+        <div class="modal-editar-box">
+          <div class="topo-editar">
+            <h3>Alterar Nome</h3>
+
+            <button onclick="fecharModalPerfil()" class="fechar-modal-perfil">
+              ✕
+            </button>
+          </div>
+
+          <div class="grupo-input">
+            <label>Novo nome</label>
+
+            <input type="text" id="editar-nome" placeholder="Digite seu nome" />
+          </div>
+
+          <button class="btn-salvar-perfil" onclick="salvarPerfilEditado()">
+            Salvar
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================================= -->
       <!-- TOPO -->
       <header class="header-inicio">
         <div class="logo">
@@ -210,9 +331,9 @@
           />
         </div>
 
-        <div class="logout">
+        <!-- <div class="logout">
           <button onclick="sair()" class="btn-logout">Sair</button>
-        </div>
+        </div> -->
 
         <div class="cliente">
           <img src="" alt="" class="foto-cliente" />
@@ -2353,7 +2474,9 @@
               style="display: flex; justify-content: space-between"
             >
               <h3 class="titulo-total-sacola">Total do pedido</h3>
-              <div class="total">R$ <span id="total-final">0,00</span></div>
+              <div class="total-sacola">
+                R$ <span id="total-final">0,00</span>
+              </div>
             </div>
             <button class="botao-finalizar" onclick="finalizarPedido()">
               Finalizar Pedido

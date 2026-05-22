@@ -19,6 +19,8 @@ const db = firebase.firestore();
 
 // 🚪 LOGOUT
 function sair() {
+  localStorage.removeItem("usuario");
+
   auth.signOut().then(() => {
     window.location.href = "index.html";
   });
@@ -107,8 +109,7 @@ function iniciarApp() {
   // ================= RENDERS =================
 
   renderCarrinho();
-
-  renderHistorico();
+  carregarHistorico();
 }
 
 // ====================================
@@ -715,45 +716,98 @@ function selecionarConsumo(tipo) {
 }
 
 function carregarHistorico() {
-  const user = firebase.auth().currentUser;
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
   if (!user) return;
 
   const container = document.getElementById("historico");
 
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="historico-vazio">
+      <p>Carregando pedidos...</p>
+    </div>
+  `;
+
+  // 🔥 BUSCA TODOS OS PEDIDOS
   db.collection("pedidos")
-    .where("uid", "==", user.uid)
     .orderBy("criadoEm", "desc")
     .onSnapshot((snapshot) => {
       container.innerHTML = "";
 
+      // filtra pedidos do usuário
+      const pedidosUsuario = [];
+
       snapshot.forEach((doc) => {
         const pedido = doc.data();
 
-        // ITENS DO PEDIDO
+        // compatibilidade antiga e nova
+        if (
+          pedido.uid === user.telefone ||
+          pedido.numeroCelular === user.telefone
+        ) {
+          pedidosUsuario.push(pedido);
+        }
+      });
+
+      // ================= SEM PEDIDOS =================
+
+      if (pedidosUsuario.length === 0) {
+        container.innerHTML = `
+          <div class="historico-vazio">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="46"
+              height="46"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+
+            <p>Nenhum pedido realizado ainda</p>
+
+          </div>
+        `;
+
+        return;
+      }
+
+      // ================= PEDIDOS =================
+
+      pedidosUsuario.forEach((pedido) => {
         let itensHTML = "";
+
         pedido.itens.forEach((item) => {
           itensHTML += `
             <div class="item-historico">
               <div class="item-info">
-                <strong><p class="item-nome-historico">${item.qtd}x <strong>${item.nome}</strong></p></strong>
-                ${item.adicionais?.length ? `<p class="item-adicional-historico"> ${item.adicionais.join(", ")}</p>` : ""}
-                <p class="observacao-historico-item">
-                  ${item.obs || ""}
-                </p>
-              </div>
-              <span class="item-preco">R$ ${(item.precoUn * item.qtd).toFixed(2)}</span>
-            </div>
+                <p class="item-nome-historico">${item.qtd}x ${item.nome}</p>
 
-              <div class="linha-itens"></div>
+                ${
+                  item.adicionais?.length
+                    ? `
+                <p class="item-adicional-historico">+ ${item.adicionais.join(", ")}</p>
+                `
+                    : ""
+                } ${
+                  item.obs
+                    ? `
+                <p class="observacao-historico-item">Obs: ${item.obs}</p>
+                `
+                    : ""
+                }
+              </div>
+            </div>
           `;
         });
-
-        // 1. Gerar o número de 5 dígitos ANTES de salvar, para usar no Firestore e no WhatsApp
-        const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
-
-        let emojiPagamento = "💳";
-        if (pedido.pagamento.includes("Dinheiro")) emojiPagamento = "💵";
-        if (pedido.pagamento.includes("Pix")) emojiPagamento = "🏦";
 
         const data = pedido.criadoEm
           ? new Date(pedido.criadoEm.toDate()).toLocaleString()
@@ -761,57 +815,25 @@ function carregarHistorico() {
 
         container.innerHTML += `
           <div class="pedido-card">
+            <div class="pedido-container">
+              <div class="pedido-topo">
+                <h3>Aguardando</h3>
 
-            <div class="pedido-topo">
-              <div>
-                <h2>Pedido #${numeroPedidoAleatorio}</h2>
-                <div class="data-historico">📅 ${data}</div>
+                <span class="data-historico"> ${data} </span>
               </div>
+
               <div class="total-historico">R$ ${pedido.total.toFixed(2)}</div>
+
+
+              <div class="itens-box">${itensHTML}</div>
+
+              <button
+                class="btn-repetir"
+                onclick="repetirPedido(${JSON.stringify(pedido.itens)})"
+              >
+                🔁 Repetir pedido
+              </button>
             </div>
-
-            <div class="badges">
-              <span class="status badge">
-                <span class="ampulheta">⏳</span>
-                ${pedido.status}
-              </span>
-              <span class="badge entrega">
-                ${pedido.consumo === "local" ? "🍽️ Local" : "🏪 Retirada"}
-              </span>
-              <span class="badge pagamento">${emojiPagamento} ${pedido.pagamento}</span>
-            </div>
-
-            <div class="linha-historico"></div>
-
-            <div class="box">
-              <p class="itens-titulo-historico">📦 Itens:</p>
-              ${itensHTML}
-
-            </div>
-
-              ${
-                pedido.observacaoGeral
-                  ? `
-                <div class="obs-geral-historico">
-                  <p class="observacao-historico-titulo">📝 Observação Geral</p>
-                  <p class="observacao-historico">${pedido.observacaoGeral}</p>
-                </div>
-              `
-                  : ""
-              }
-
-            <div class="box cliente">
-              <strong class="cliente-historico"><p>👤 Cliente:</p></strong>
-              <div class="cliente-info">
-                <p><strong>Nome:</strong> ${pedido.nome}</p>
-                <p><strong>Telefone:</strong> ${pedido.numeroCelular}</p>
-              </div>
-            </div>
-
-            <button class="btn-repetir" onclick='repetirPedido(${JSON.stringify(pedido.itens)})'>
-              🔁 Repetir pedido
-            </button>
-
           </div>
         `;
       });
@@ -819,26 +841,21 @@ function carregarHistorico() {
 }
 
 function repetirPedido(itens) {
+  // adiciona itens novamente ao carrinho
   carrinho = [...itens];
 
+  // salva carrinho
   salvarCarrinho();
 
-  // 🔥 ativa mensagem ao chegar na home
+  // mostra toast na home
   localStorage.setItem("repetirPedido", "true");
 
-  // redireciona
-  window.location.href = "inicio.html";
+  // fecha perfil
+  fecharPerfil();
+
+  // redireciona para home
+  window.location.href = "index.html";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCarrinho();
-
-  // 🔥 VERIFICA SE VEIO DO "REPETIR PEDIDO"
-  if (localStorage.getItem("repetirPedido")) {
-    mostrarToast("🔁 Pedido carregado novamente!");
-    localStorage.removeItem("repetirPedido");
-  }
-});
 
 function mostrarToast(msg) {
   const toast = document.getElementById("toast");
@@ -849,12 +866,6 @@ function mostrarToast(msg) {
     toast.classList.remove("show");
   }, 3000);
 }
-
-// ================= AUTO RENDER AO ABRIR =================
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCarrinho();
-});
 
 // ============== BOTÃO DE RODAR OS CARROCEL ===================
 function scrollCarrossel(id, direction) {
@@ -918,18 +929,23 @@ function abrirCart() {
 
 function fecharCart() {
   const cartSidebar = document.getElementById("cartSidebar");
-  const perfilSidebar = document.getElementById("perfilSidebar");
 
   if (cartSidebar) {
     cartSidebar.classList.remove("active");
   }
 
-  // só volta HOME se perfil também estiver fechado
-  if (perfilSidebar && !perfilSidebar.classList.contains("active")) {
-    botoes.forEach((b) => b.classList.remove("ativo"));
+  // REMOVE TODOS
+  botoes.forEach((b) => b.classList.remove("ativo"));
+
+  // ATIVA HOME
+  if (botaoHome) {
     botaoHome.classList.add("ativo");
   }
 }
+
+// ====================================================================================
+
+// ================= ABRIR PERFIL =================
 
 function abrirPerfil() {
   const perfilSidebar = document.getElementById("perfilSidebar");
@@ -937,19 +953,182 @@ function abrirPerfil() {
   if (perfilSidebar) {
     perfilSidebar.classList.add("active");
   }
+
+  carregarDadosPerfil();
 }
+
+// ================= FECHAR PERFIL =================
 
 function fecharPerfil() {
   const perfilSidebar = document.getElementById("perfilSidebar");
-  const cartSidebar = document.getElementById("cartSidebar");
 
   if (perfilSidebar) {
     perfilSidebar.classList.remove("active");
   }
 
-  // só volta HOME se carrinho também estiver fechado
-  if (cartSidebar && !cartSidebar.classList.contains("active")) {
-    botoes.forEach((b) => b.classList.remove("ativo"));
+  botoes.forEach((b) => b.classList.remove("ativo"));
+
+  if (botaoHome) {
     botaoHome.classList.add("ativo");
   }
 }
+
+// ================= DADOS PERFIL =================
+
+function carregarDadosPerfil() {
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!user) return;
+
+  const nome = document.getElementById("perfil-nome");
+  const telefone = document.getElementById("perfil-telefone");
+  const avatar = document.getElementById("avatar-letra");
+
+  if (nome) {
+    nome.innerText = user.nome;
+  }
+
+  if (telefone) {
+    telefone.innerText = formatarTelefone(user.telefone);
+  }
+
+  if (avatar) {
+    avatar.innerText = user.nome.charAt(0).toUpperCase();
+  }
+}
+
+// ================= EDITAR PERFIL =================
+
+function editarPerfil() {
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!user) return;
+
+  const novoNome = prompt("Digite seu novo nome:", user.nome);
+
+  if (!novoNome || novoNome.trim() === "") {
+    return;
+  }
+
+  // atualiza objeto
+  user.nome = novoNome.trim();
+
+  // salva
+  localStorage.setItem("usuario", JSON.stringify(user));
+
+  // atualiza modal
+  document.getElementById("perfil-nome").innerText = user.nome;
+
+  // atualiza home
+  const clienteNome = document.getElementById("cliente-nome");
+
+  if (clienteNome) {
+    clienteNome.innerText = user.nome;
+  }
+
+  // atualiza avatar
+  const avatar = document.getElementById("avatar-letra");
+
+  if (avatar) {
+    avatar.innerText = user.nome.charAt(0).toUpperCase();
+  }
+}
+
+// ================= FORMATAR TELEFONE =================
+
+function formatarTelefone(numero) {
+  numero = numero.replace(/\D/g, "");
+
+  return numero.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+}
+
+// ================= AUTO LOGIN =================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const usuarioSalvo = localStorage.getItem("usuario");
+
+  // se tiver usuário salvo
+  if (usuarioSalvo) {
+    iniciarApp();
+  } else {
+    // mostra login
+    const loginBox = document.getElementById("loginBox");
+
+    if (loginBox) {
+      loginBox.style.display = "flex";
+    }
+  }
+
+  // render carrinho
+  renderCarrinho();
+
+  // toast repetir pedido
+  if (localStorage.getItem("repetirPedido")) {
+    mostrarToast("🔁 Pedido carregado novamente!");
+    localStorage.removeItem("repetirPedido");
+  }
+});
+
+// ========================================================
+// ================= ABRIR MODAL =================
+
+function abrirModalPerfil() {
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!user) return;
+
+  document.getElementById("editar-nome").value = user.nome || "";
+
+  document.getElementById("modalEditarPerfil").classList.add("active");
+}
+
+// ================= FECHAR MODAL =================
+
+function fecharModalPerfil() {
+  document.getElementById("modalEditarPerfil").classList.remove("active");
+}
+
+// ================= SALVAR NOME =================
+
+function salvarPerfilEditado() {
+  const novoNome = document.getElementById("editar-nome").value;
+
+  if (!novoNome) {
+    alert("Digite um nome!");
+    return;
+  }
+
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  user.nome = novoNome;
+
+  localStorage.setItem("usuario", JSON.stringify(user));
+
+  // atualiza perfil
+  const perfilNome = document.getElementById("perfil-nome");
+
+  if (perfilNome) {
+    perfilNome.innerText = novoNome;
+  }
+
+  // atualiza input carrinho
+  const inputNome = document.getElementById("c-nome");
+
+  if (inputNome) {
+    inputNome.value = novoNome;
+  }
+
+  fecharModalPerfil();
+
+  mostrarToast("✅ Nome atualizado!");
+}
+
+// ================= FECHAR AO CLICAR FORA =================
+
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("modalEditarPerfil");
+
+  if (e.target === modal) {
+    fecharModalPerfil();
+  }
+});
