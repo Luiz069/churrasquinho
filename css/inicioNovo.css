@@ -23,6 +23,32 @@ header {
   width: auto;
 }
 
+.cliente {
+  display: flex;
+  align-items: center;
+  gap: calc(0.25rem * 2);
+  min-height: 0;
+  min-width: 0;
+}
+
+.perfil-avatar-inicio {
+  background: linear-gradient(135deg, oklch(0.73 0.17 46), oklch(0.65 0.18 38));
+  color: oklch(0.1 0.01 30);
+  --tw-font-weight: 700;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: calc(1.25 / 0.75);
+  border-radius: 3.40282e38px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: calc(0.25rem * 7);
+  height: calc(0.25rem * 7);
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
 .cliente-header {
   font-family: Inter, sans-serif;
   font-weight: 900;
@@ -80,6 +106,7 @@ header {
   line-height: calc(1.75 / 1.25);
   margin: 0;
   margin-bottom: 0.25rem;
+  text-transform: capitalize;
 }
 
 .banner-text-02 {
@@ -365,15 +392,6 @@ header {
 
 .botao-nav svg {
   transition: 0.2s;
-}
-
-.button-home {
-}
-
-.button-sacola {
-}
-
-.button-perfil {
 }
 
 .sacola-vazia {
@@ -712,12 +730,7 @@ header {
   font-weight: 600;
 }
 
-.item-adicional-historico {
-  color: #ff7a2f;
-  font-size: 14px;
 
-  margin-top: 4px;
-}
 
 .observacao-historico-item {
   color: #777;
@@ -880,4 +893,33 @@ header {
   font-weight: 700;
   margin-top: 20px;
   cursor: pointer;
+}
+
+/* ======================================= */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+
+  background: #111;
+  color: #fff;
+
+  padding: 12px 18px;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.3s;
+
+  z-index: 99999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }

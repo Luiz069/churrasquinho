@@ -2,11 +2,17 @@
 
 const firebaseConfig = {
   apiKey: "AIzaSyAcv5sSPj2yUtw0CUJHbZpF0TTfEyshyiQ",
+
   authDomain: "churrasquinho-7b2d2.firebaseapp.com",
+
   projectId: "churrasquinho-7b2d2",
+
   storageBucket: "churrasquinho-7b2d2.firebasestorage.app",
+
   messagingSenderId: "506815282983",
+
   appId: "1:506815282983:web:92d14f09bafa15e2d03302",
+
   measurementId: "G-V0TWG5Y0H8",
 };
 
@@ -15,11 +21,15 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
+
 const db = firebase.firestore();
 
 // 🚪 LOGOUT
+
 function sair() {
   localStorage.removeItem("usuario");
+
+  mostrarToast("Logout realizado!");
 
   auth.signOut().then(() => {
     window.location.href = "index.html";
@@ -27,12 +37,15 @@ function sair() {
 }
 
 // ========== TESTE COD NOVO ==========
+
 // Máscara inteligente
+
 const inputTelefone = document.getElementById("telefone");
 
 if (inputTelefone) {
   inputTelefone.addEventListener("input", (e) => {
     let v = e.target.value.replace(/\D/g, "");
+
     if (v.length > 11) v = v.slice(0, 11);
 
     if (v.length > 6) v = v.replace(/(\d{2})(\d{5})(\d+)/, "($1) $2-$3");
@@ -42,29 +55,40 @@ if (inputTelefone) {
     e.target.value = v;
   });
 }
+
 // LOGIN
+
 function entrar() {
   let nome = document.getElementById("nome").value;
+
   let telefone = document.getElementById("telefone").value.replace(/\D/g, "");
 
   if (!nome || !telefone) {
     alert("Preencha tudo!");
+
     return;
   }
 
   const user = {
     nome,
+
     telefone,
+
     pedidos: JSON.parse(localStorage.getItem("pedidos")) || [],
   };
 
+  mostrarToast("Login realizado com sucesso!");
+
   // salva usuário
+
   localStorage.setItem("usuario", JSON.stringify(user));
 
   // esconde login
+
   document.getElementById("loginBox").style.display = "none";
 
   // mostra app
+
   document.getElementById("app").classList.remove("hidden");
 
   iniciarApp();
@@ -88,6 +112,14 @@ function iniciarApp() {
     spanNome.innerText = user.nome;
   }
 
+  // ================= BANNER NOME =================
+
+  const bannerNome = document.getElementById("banner-nome");
+
+  if (bannerNome && user) {
+    bannerNome.innerText = `${user.nome}! 👋`;
+  }
+
   // ================= INPUTS CARRINHO =================
 
   const inputNome = document.getElementById("c-nome");
@@ -96,19 +128,24 @@ function iniciarApp() {
 
   if (user) {
     // preenche nome
+
     if (inputNome) {
       inputNome.value = user.nome;
     }
 
     // preenche telefone
+
     if (inputTelefone) {
       inputTelefone.value = user.telefone;
     }
   }
 
+  // ==================
+
   // ================= RENDERS =================
 
   renderCarrinho();
+  carregarDadosPerfil();
   carregarHistorico();
 }
 
@@ -117,6 +154,7 @@ function iniciarApp() {
 // ================= CARRINHO (AGORA PERSISTENTE) =================
 
 // 🔥 Carrega do localStorage
+
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 function salvarCarrinho() {
@@ -126,30 +164,41 @@ function salvarCarrinho() {
 // ================= VARIÁVEIS DO MODAL =================
 
 let itemAtual = {};
+
 let qtdModal = 1;
+
 let extras = { queijo: 0, ovo: 0, carne: 0 };
+
 const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
+
 let valorPagamento = "";
+
 let metodoConsumo = ""; // 👈 NOVO
 
 // ================= MODAL PRODUTO =================
 
 function abrirModal(nome, preco, desc) {
   itemAtual = { nome, preco, desc };
+
   qtdModal = 1;
+
   extras = { queijo: 0, ovo: 0, carne: 0 };
 
   document.getElementById("m-nome").innerText = nome;
+
   document.getElementById("m-desc").innerText = desc;
+
   document.getElementById("m-obs").value = "";
 
   atualizarInterfaceModal();
+
   document.getElementById("modalItem").style.display = "flex";
 }
 
 function mudarQtdModal(val) {
   if (qtdModal + val >= 1) {
     qtdModal += val;
+
     atualizarInterfaceModal();
   }
 }
@@ -157,14 +206,18 @@ function mudarQtdModal(val) {
 function mudarAdd(tipo, val) {
   if (extras[tipo] + val >= 0) {
     extras[tipo] += val;
+
     atualizarInterfaceModal();
   }
 }
 
 function atualizarInterfaceModal() {
   document.getElementById("m-qtd-val").innerText = qtdModal;
+
   document.getElementById("qtd-add-queijo").innerText = extras.queijo;
+
   document.getElementById("qtd-add-ovo").innerText = extras.ovo;
+
   document.getElementById("qtd-add-carne").innerText = extras.carne;
 
   let precoExtras =
@@ -173,6 +226,7 @@ function atualizarInterfaceModal() {
     extras.carne * precosExtras.carne;
 
   let total = (itemAtual.preco + precoExtras) * qtdModal;
+
   document.getElementById("m-subtotal").innerText = total.toFixed(2);
 }
 
@@ -181,23 +235,31 @@ function fecharModal() {
 }
 
 // ================ MODAL BEBIDAS ===============
+
 let bebidaSelecionada = null;
 
 function abrirModalBebidas(nome, opcoes) {
   itemAtual = { nome };
+
   bebidaSelecionada = null;
 
   document.getElementById("m-nome-bebida").innerText = nome;
 
   const container = document.getElementById("bebida-opcoes");
+
   container.innerHTML = "";
 
   opcoes.forEach((op) => {
     container.innerHTML += `
+
       <div class="opcao-bebida" onclick="selecionarBebida('${op.nome}', ${op.preco}, this)">
-        <div>${op.nome}</div> 
+
+        <div>${op.nome}</div>
+
         <div>R$ ${op.preco.toFixed(2)}</div>
+
       </div>
+
     `;
   });
 
@@ -210,11 +272,15 @@ function selecionarBebida(nome, preco, el) {
   bebidaSelecionada = { nome, preco };
 
   // remove seleção anterior
+
   document
+
     .querySelectorAll(".opcao-bebida")
+
     .forEach((e) => e.classList.remove("ativo"));
 
   // adiciona seleção
+
   el.classList.add("ativo");
 
   document.getElementById("m-total-bebida").innerText = preco.toFixed(2);
@@ -227,19 +293,26 @@ function fecharModalBebida() {
 function addBebidaCarrinho() {
   if (!bebidaSelecionada) {
     alert("Selecione uma bebida!");
+
     return;
   }
 
   carrinho.push({
     nome: itemAtual.nome + " (" + bebidaSelecionada.nome + ")",
+
     qtd: 1,
+
     obs: "",
+
     adicionais: [],
+
     precoUn: bebidaSelecionada.preco,
   });
 
   salvarCarrinho();
+
   renderCarrinho();
+
   fecharModalBebida();
 }
 
@@ -249,7 +322,9 @@ function addAoCarrinho() {
   let listaExtras = [];
 
   if (extras.queijo > 0) listaExtras.push(`${extras.queijo}x Queijo Extra`);
+
   if (extras.ovo > 0) listaExtras.push(`${extras.ovo}x Ovo Extra`);
+
   if (extras.carne > 0) listaExtras.push(`${extras.carne}x Carne Extra`);
 
   let custoExtras =
@@ -259,14 +334,22 @@ function addAoCarrinho() {
 
   carrinho.push({
     ...itemAtual,
+
     qtd: qtdModal,
+
     obs: document.getElementById("m-obs").value,
+
     adicionais: listaExtras,
+
     precoUn: itemAtual.preco + custoExtras,
   });
 
   salvarCarrinho();
+
   renderCarrinho();
+
+  mostrarToast("Pedido adicionado à sacola!");
+
   fecharModal();
 }
 
@@ -289,31 +372,55 @@ function renderCarrinho() {
 
   if (carrinho.length === 0) {
     lista.innerHTML = `
+
       <div class="sacola-vazia">
+
         <svg
+
           xmlns="http://www.w3.org/2000/svg"
+
           width="40"
+
           height="40"
+
           viewBox="0 0 24 24"
+
           fill="none"
+
           stroke="currentColor"
+
           stroke-width="2"
+
           stroke-linecap="round"
+
           stroke-linejoin="round"
+
           class="lucide lucide-shopping-bag"
+
         >
+
           <path
+
             d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+
           ></path>
+
           <path d="M3 6h18"></path>
+
           <path d="M16 10a4 4 0 0 1-8 0"></path>
+
         </svg>
 
+
+
         <p>Sua sacola está vazia.</p>
+
       </div>
+
     `;
 
     // esconder conteúdo
+
     if (dadosCliente) {
       dadosCliente.style.display = "none";
     }
@@ -323,6 +430,7 @@ function renderCarrinho() {
     }
 
     const totalFinal = document.getElementById("total-final");
+
     const cartCount = document.getElementById("cart-count");
 
     if (totalFinal) {
@@ -331,6 +439,8 @@ function renderCarrinho() {
 
     if (cartCount) {
       cartCount.innerText = "0";
+
+      cartCount.style.display = "none";
     }
 
     return;
@@ -354,77 +464,136 @@ function renderCarrinho() {
     totalGeral += sub;
 
     lista.innerHTML += `
+
       <div class="cart-item-card">
+
         <div class="carrinho-quantidade-produto">
+
             ${item.qtd}x
+
         </div>
 
+
+
         <div class="lanche-sacola">
+
           <p class="carrinho-nome-produto">
+
             ${item.nome}
+
           </p>
+
+
 
           ${
             item.adicionais?.length
               ? `
+
                 <p class="carrinho-adicional">
+
                   ➕ ${item.adicionais.join(", ")}
+
                 </p>
+
               `
               : ""
           }
+
+
 
           ${
             item.obs
               ? `
+
                 <p class="carrinho-obs">
+
                   📝 ${item.obs}
+
                 </p>
+
               `
               : ""
           }
 
+
+
         </div>
+
+
 
         <div class="total-e-excluir">
+
          <span class="sacola-subtotal-produto">
+
             R$ ${sub.toFixed(2)}
+
           </span>
 
+
+
           <button
+
             class="botao-excluir-sacola"
+
             onclick="removerItem(${i})"
+
           >
+
             <svg
+
               xmlns="http://www.w3.org/2000/svg"
+
               width="14"
+
               height="14"
+
               viewBox="0 0 24 24"
+
               fill="none"
+
               stroke="currentColor"
+
               stroke-width="2"
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
               class="lucide lucide-trash2"
+
               data-loc="client/src/components/CartModal.tsx:153"
+
             >
+
               <path d="M3 6h18"></path>
+
               <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+
               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+
               <line x1="10" x2="10" y1="11" y2="17"></line>
+
               <line x1="14" x2="14" y1="11" y2="17"></line>
+
             </svg>
+
           </button>
+
+
 
         </div>
 
+
+
       </div>
+
     `;
   });
 
   // ================= TOTAL =================
 
   const totalFinal = document.getElementById("total-final");
+
   const cartCount = document.getElementById("cart-count");
 
   if (totalFinal) {
@@ -433,6 +602,14 @@ function renderCarrinho() {
 
   if (cartCount) {
     cartCount.innerText = carrinho.length;
+
+    // mostra apenas se tiver item
+
+    if (carrinho.length > 0) {
+      cartCount.style.display = "flex";
+    } else {
+      cartCount.style.display = "none";
+    }
   }
 }
 
@@ -444,12 +621,15 @@ function alterarQtdCarrinho(i, v) {
   }
 
   salvarCarrinho();
+
   renderCarrinho();
 }
 
 function removerItem(i) {
   carrinho.splice(i, 1);
+
   salvarCarrinho();
+
   renderCarrinho();
 }
 
@@ -462,36 +642,44 @@ function finalizarPedido() {
 
   if (!user) {
     alert("Faça login!");
+
     return;
   }
 
   // ================= CAMPOS =================
 
   const nome = document.getElementById("c-nome")?.value || "";
+
   const numero = document.getElementById("c-numero")?.value || "";
+
   const observacao = document.getElementById("c-obs")?.value || "";
+
   const troco = document.getElementById("input-troco")?.value || "";
 
   // ================= VALIDAÇÕES =================
 
   if (!valorPagamento) {
     alert("Selecione uma forma de pagamento!");
+
     return;
   }
 
   if (!metodoConsumo) {
     alert("Selecione o método de consumo!");
+
     return;
   }
 
   if (carrinho.length === 0) {
     alert("Carrinho vazio!");
+
     return;
   }
 
   // ================= TOTAL =================
 
   let total = 0;
+
   let textoItens = "";
 
   carrinho.forEach((item) => {
@@ -502,11 +690,13 @@ function finalizarPedido() {
     textoItens += `➡️ ${item.qtd}x ${item.nome}\n`;
 
     // adicionais
+
     if (item.adicionais?.length > 0) {
       textoItens += `➕ ${item.adicionais.join(" | ")}\n`;
     }
 
     // observação
+
     if (item.obs) {
       textoItens += `📝 ${item.obs}\n`;
     }
@@ -535,18 +725,30 @@ function finalizarPedido() {
   // ================= FIREBASE =================
 
   db.collection("pedidos")
+
     .add({
       uid: user.telefone,
+
       nome: nome,
+
       numeroCelular: numero,
+
       pedidoNumero: numeroPedidoAleatorio,
+
       observacaoGeral: observacao,
+
       pagamento: valorPagamento,
+
       troco: troco || null,
+
       consumo: metodoConsumo,
+
       itens: carrinho,
+
       total: total,
+
       status: "pendente",
+
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
 
@@ -555,21 +757,37 @@ function finalizarPedido() {
 
       const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
 
+
+
 👤 *Cliente:* ${nome}
 
+
+
 📦 *Itens:*
+
 ${textoItens}
 
+
+
 ${emojiPagamento} *Pagamento:* ${valorPagamento}
+
 ${troco ? `💵 Troco para: R$ ${troco}` : ""}
+
+
 
 ${emojiEntrega} *Consumo:* ${
         metodoConsumo === "local" ? "Comer no local" : "Retirada"
       }
 
+
+
 ⏱️ Estimativa: 35~45 min
 
+
+
 💰 *Total: R$ ${total.toFixed(2)}*
+
+
 
 Obrigado pela preferência 😉`;
 
@@ -609,6 +827,7 @@ Obrigado pela preferência 😉`;
 
       if (btnRetirada && btnLocal) {
         btnRetirada.classList.add("active");
+
         btnLocal.classList.remove("active");
       }
 
@@ -640,17 +859,19 @@ Obrigado pela preferência 😉`;
         taxaCredito.style.display = "none";
       }
 
+      mostrarToast("Pedido realizado com sucesso!");
+
       // ================= ABRIR WHATSAPP =================
 
       setTimeout(() => {
         window.location.href = url;
-      }, 300);
+      }, 1500);
     })
 
     .catch((error) => {
       console.error("Erro ao salvar pedido:", error);
 
-      alert("Erro ao processar pedido. Tente novamente.");
+      mostrarToast("Erro ao processar pedido. Tente novamente.", "error");
     });
 }
 
@@ -670,26 +891,35 @@ function selecionarPagamento(botao) {
   valorPagamento = botao.dataset.value;
 
   // BOXES
+
   const boxTroco = document.getElementById("box-troco");
+
   const taxaDebito = document.getElementById("taxa-debito");
+
   const taxaCredito = document.getElementById("taxa-credito");
 
   // RESET
+
   boxTroco.style.display = "none";
+
   taxaDebito.style.display = "none";
+
   taxaCredito.style.display = "none";
 
   // DINHEIRO
+
   if (valorPagamento === "Dinheiro") {
     boxTroco.style.display = "block";
   }
 
   // DÉBITO
+
   if (valorPagamento === "Débito") {
     taxaDebito.style.display = "block";
   }
 
   // CRÉDITO
+
   if (valorPagamento === "Crédito") {
     taxaCredito.style.display = "block";
   }
@@ -703,9 +933,11 @@ function selecionarConsumo(tipo) {
   metodoConsumo = tipo;
 
   const btnRetirada = document.getElementById("btn-retirada");
+
   const btnLocal = document.getElementById("btn-local");
 
   btnRetirada.classList.remove("active");
+
   btnLocal.classList.remove("active");
 
   if (tipo === "retirada") {
@@ -725,24 +957,33 @@ function carregarHistorico() {
   if (!container) return;
 
   container.innerHTML = `
+
     <div class="historico-vazio">
+
       <p>Carregando pedidos...</p>
+
     </div>
+
   `;
 
   // 🔥 BUSCA TODOS OS PEDIDOS
+
   db.collection("pedidos")
+
     .orderBy("criadoEm", "desc")
+
     .onSnapshot((snapshot) => {
       container.innerHTML = "";
 
       // filtra pedidos do usuário
+
       const pedidosUsuario = [];
 
       snapshot.forEach((doc) => {
         const pedido = doc.data();
 
         // compatibilidade antiga e nova
+
         if (
           pedido.uid === user.telefone ||
           pedido.numeroCelular === user.telefone
@@ -755,26 +996,44 @@ function carregarHistorico() {
 
       if (pedidosUsuario.length === 0) {
         container.innerHTML = `
-          <div class="historico-vazio">
 
+          <div class="historico-vazio">
             <svg
+
               xmlns="http://www.w3.org/2000/svg"
+
               width="46"
+
               height="46"
+
               viewBox="0 0 24 24"
+
               fill="none"
+
               stroke="currentColor"
+
               stroke-width="1.8"
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
             >
+
               <circle cx="12" cy="12" r="10"></circle>
+
               <polyline points="12 6 12 12 16 14"></polyline>
+
             </svg>
+
+
 
             <p>Nenhum pedido realizado ainda</p>
 
+
+
           </div>
+
         `;
 
         return;
@@ -787,25 +1046,37 @@ function carregarHistorico() {
 
         pedido.itens.forEach((item) => {
           itensHTML += `
+
             <div class="item-historico">
+
               <div class="item-info">
+
                 <p class="item-nome-historico">${item.qtd}x ${item.nome}</p>
+
+
 
                 ${
                   item.adicionais?.length
                     ? `
+
                 <p class="item-adicional-historico">+ ${item.adicionais.join(", ")}</p>
+
                 `
                     : ""
                 } ${
                   item.obs
                     ? `
+
                 <p class="observacao-historico-item">Obs: ${item.obs}</p>
+
                 `
                     : ""
                 }
+
               </div>
+
             </div>
+
           `;
         });
 
@@ -816,23 +1087,30 @@ function carregarHistorico() {
         container.innerHTML += `
           <div class="pedido-card">
             <div class="pedido-container">
+
               <div class="pedido-topo">
                 <h3>Aguardando</h3>
 
-                <span class="data-historico"> ${data} </span>
+                <span class="data-historico">
+                  ${data}
+                </span>
               </div>
 
-              <div class="total-historico">R$ ${pedido.total.toFixed(2)}</div>
+              <div class="total-historico">
+                R$ ${pedido.total.toFixed(2)}
+              </div>
 
-
-              <div class="itens-box">${itensHTML}</div>
+              <div class="itens-box">
+                ${itensHTML}
+              </div>
 
               <button
                 class="btn-repetir"
-                onclick="repetirPedido(${JSON.stringify(pedido.itens)})"
+                onclick='repetirPedido(${JSON.stringify(pedido.itens)})'
               >
-                🔁 Repetir pedido
+                Repetir pedido
               </button>
+
             </div>
           </div>
         `;
@@ -842,37 +1120,72 @@ function carregarHistorico() {
 
 function repetirPedido(itens) {
   // adiciona itens novamente ao carrinho
+
   carrinho = [...itens];
 
   // salva carrinho
+
   salvarCarrinho();
 
   // mostra toast na home
+
   localStorage.setItem("repetirPedido", "true");
 
   // fecha perfil
+
   fecharPerfil();
 
   // redireciona para home
+
   window.location.href = "index.html";
 }
 
-function mostrarToast(msg) {
+function mostrarToast(msg, tipo = "success") {
   const toast = document.getElementById("toast");
-  toast.textContent = msg;
+  const texto = document.getElementById("toast-text");
+  const icon = document.getElementById("toast-icon");
+
+  if (!toast || !texto || !icon) return;
+
+  // limpa classes
+  toast.classList.remove("success", "warning", "error");
+
+  // adiciona tipo
+  toast.classList.add(tipo);
+
+  // texto
+  texto.textContent = msg;
+
+  // ícones
+  if (tipo === "success") {
+    icon.innerHTML = "✓";
+  }
+
+  if (tipo === "warning") {
+    icon.innerHTML = "!";
+  }
+
+  if (tipo === "error") {
+    icon.innerHTML = "✕";
+  }
+
   toast.classList.add("show");
 
-  setTimeout(() => {
+  clearTimeout(window.toastTimeout);
+
+  window.toastTimeout = setTimeout(() => {
     toast.classList.remove("show");
   }, 3000);
 }
 
 // ============== BOTÃO DE RODAR OS CARROCEL ===================
+
 function scrollCarrossel(id, direction) {
   const el = document.getElementById(id);
 
   el.scrollBy({
     left: direction * 200,
+
     behavior: "smooth",
   });
 }
@@ -891,27 +1204,33 @@ botoes.forEach((botao) => {
 
     if (botao.classList.contains("button-home")) {
       fecharCart();
+
       fecharPerfil();
 
       botoes.forEach((b) => b.classList.remove("ativo"));
+
       botao.classList.add("ativo");
     }
 
     // ================= SACOLA =================
     else if (botao.classList.contains("button-sacola")) {
       fecharPerfil();
+
       abrirCart();
 
       botoes.forEach((b) => b.classList.remove("ativo"));
+
       botao.classList.add("ativo");
     }
 
     // ================= PERFIL =================
     else if (botao.classList.contains("button-perfil")) {
       fecharCart();
+
       abrirPerfil();
 
       botoes.forEach((b) => b.classList.remove("ativo"));
+
       botao.classList.add("ativo");
     }
   });
@@ -935,9 +1254,11 @@ function fecharCart() {
   }
 
   // REMOVE TODOS
+
   botoes.forEach((b) => b.classList.remove("ativo"));
 
   // ATIVA HOME
+
   if (botaoHome) {
     botaoHome.classList.add("ativo");
   }
@@ -982,18 +1303,30 @@ function carregarDadosPerfil() {
 
   const nome = document.getElementById("perfil-nome");
   const telefone = document.getElementById("perfil-telefone");
-  const avatar = document.getElementById("avatar-letra");
 
+  const avatarPerfil = document.getElementById("avatar-letra-perfil");
+  const avatarInicio = document.getElementById("avatar-letra-inicio");
+
+  const inicial = user.nome.charAt(0).toUpperCase();
+
+  // nome
   if (nome) {
     nome.innerText = user.nome;
   }
 
+  // telefone
   if (telefone) {
     telefone.innerText = formatarTelefone(user.telefone);
   }
 
-  if (avatar) {
-    avatar.innerText = user.nome.charAt(0).toUpperCase();
+  // avatar perfil
+  if (avatarPerfil) {
+    avatarPerfil.innerText = inicial;
+  }
+
+  // avatar início
+  if (avatarInicio) {
+    avatarInicio.innerText = inicial;
   }
 }
 
@@ -1011,15 +1344,19 @@ function editarPerfil() {
   }
 
   // atualiza objeto
+
   user.nome = novoNome.trim();
 
   // salva
+
   localStorage.setItem("usuario", JSON.stringify(user));
 
   // atualiza modal
+
   document.getElementById("perfil-nome").innerText = user.nome;
 
   // atualiza home
+
   const clienteNome = document.getElementById("cliente-nome");
 
   if (clienteNome) {
@@ -1027,6 +1364,7 @@ function editarPerfil() {
   }
 
   // atualiza avatar
+
   const avatar = document.getElementById("avatar-letra");
 
   if (avatar) {
@@ -1048,10 +1386,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuarioSalvo = localStorage.getItem("usuario");
 
   // se tiver usuário salvo
+
   if (usuarioSalvo) {
     iniciarApp();
   } else {
     // mostra login
+
     const loginBox = document.getElementById("loginBox");
 
     if (loginBox) {
@@ -1060,9 +1400,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // render carrinho
+
   renderCarrinho();
 
   // toast repetir pedido
+
   if (localStorage.getItem("repetirPedido")) {
     mostrarToast("🔁 Pedido carregado novamente!");
     localStorage.removeItem("repetirPedido");
@@ -1070,6 +1412,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ========================================================
+
 // ================= ABRIR MODAL =================
 
 function abrirModalPerfil() {
@@ -1095,6 +1438,7 @@ function salvarPerfilEditado() {
 
   if (!novoNome) {
     alert("Digite um nome!");
+
     return;
   }
 
@@ -1105,6 +1449,7 @@ function salvarPerfilEditado() {
   localStorage.setItem("usuario", JSON.stringify(user));
 
   // atualiza perfil
+
   const perfilNome = document.getElementById("perfil-nome");
 
   if (perfilNome) {
@@ -1112,6 +1457,7 @@ function salvarPerfilEditado() {
   }
 
   // atualiza input carrinho
+
   const inputNome = document.getElementById("c-nome");
 
   if (inputNome) {
@@ -1119,6 +1465,13 @@ function salvarPerfilEditado() {
   }
 
   fecharModalPerfil();
+
+  // atualiza banner
+  const bannerNome = document.getElementById("banner-nome");
+
+  if (bannerNome) {
+    bannerNome.innerText = `${novoNome}! 👋`;
+  }
 
   mostrarToast("✅ Nome atualizado!");
 }
