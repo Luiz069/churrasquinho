@@ -701,7 +701,7 @@ function finalizarPedido() {
       textoItens += `📝 ${item.obs}\n`;
     }
 
-    textoItens += "\n";
+    textoItens += "";
   });
 
   // ================= EMOJIS =================
@@ -756,38 +756,15 @@ function finalizarPedido() {
       // ================= WHATSAPP =================
 
       const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
-
-
-
 👤 *Cliente:* ${nome}
 
-
-
 📦 *Itens:*
-
 ${textoItens}
-
-
-
 ${emojiPagamento} *Pagamento:* ${valorPagamento}
-
 ${troco ? `💵 Troco para: R$ ${troco}` : ""}
-
-
-
-${emojiEntrega} *Consumo:* ${
-        metodoConsumo === "local" ? "Comer no local" : "Retirada"
-      }
-
-
-
+${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
 ⏱️ Estimativa: 35~45 min
-
-
-
 💰 *Total: R$ ${total.toFixed(2)}*
-
-
 
 Obrigado pela preferência 😉`;
 
