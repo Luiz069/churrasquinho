@@ -759,7 +759,7 @@ function finalizarPedido() {
 👤 *Cliente:* ${nome}
 
 📦 *Itens:*
-${textoItens}
+    ${textoItens}
 ${emojiPagamento} *Pagamento:* ${valorPagamento}
 ${troco ? `💵 Troco para: R$ ${troco}` : ""}
 ${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
