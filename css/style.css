@@ -1064,76 +1064,103 @@ textarea {
   display: block;
 } */
 
-.toast {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-20px);
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;
 
-  min-width: 320px;
-  max-width: 90%;
+  top:85px;
+  left:50%;
+  transform:translateX(-50%) translateY(-15px);
 
-  padding: 16px 18px;
+  width:calc(100% - 32px);
+  max-width:680px;
 
-  border-radius: 14px;
+  min-height:68px;
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  padding:18px 22px;
 
-  font-size: 15px;
-  font-weight: 600;
+  border-radius:18px;
 
-  opacity: 0;
-  pointer-events: none;
+  display:flex;
+  align-items:center;
+  gap:14px;
 
-  transition: 0.25s ease;
+  background:#002d1d;
 
-  z-index: 999999;
+  border:1px solid rgba(61,220,132,.18);
+
+  color:#7CFFB2;
+
+  font-size:1rem;
+  font-weight:600;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.28s ease;
+
+  z-index:999999;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.02);
 }
 
-/* SHOW */
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+/* ===== SHOW ===== */
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
-/* SUCCESS */
-.toast.success {
-  background: #032f1c;
-  border: 1px solid #0a5c38;
-  color: #3ddc84;
+/* ===== ICON ===== */
+.toast-icon{
+  width:30px;
+  height:30px;
+
+  border-radius:50%;
+
+  background:#67f0a0;
+
+  color:#002d1d;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:18px;
+  font-weight:900;
+
+  flex-shrink:0;
 }
 
-/* WARNING */
-.toast.warning {
-  background: #3b2500;
-  border: 1px solid #8a5a00;
-  color: #ffcc4d;
+/* ===== TEXTO ===== */
+#toast-text{
+  flex:1;
+  line-height:1.4;
 }
 
-/* ERROR */
-.toast.error {
-  background: #3a0d0d;
-  border: 1px solid #7f1d1d;
-  color: #ff6b6b;
-}
+/* ===== MOBILE ===== */
+@media(max-width:600px){
 
-.toast-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  .toast{
+    top:90px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width:calc(100% - 24px);
 
-  font-size: 13px;
-  font-weight: bold;
+    padding:16px 18px;
 
-  flex-shrink: 0;
+    border-radius:16px;
 
-  background: rgba(255, 255, 255, 0.15);
+    font-size:.96rem;
+  }
+
+  .toast-icon{
+    width:28px;
+    height:28px;
+
+    font-size:16px;
+  }
+
 }
 
 /* teste de css do login */
