@@ -1135,3 +1135,171 @@ textarea {
 
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* teste de css do login */
+/* ===== CARD ===== */
+.card{
+  width:100%;
+  max-width:420px;
+  background:rgba(15, 5, 5, 0.96);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:30px;
+  padding:40px 30px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 0 40px rgba(255,98,0,0.08),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* BOLAS DO FUNDO */
+.card::before,
+.card::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  z-index:0;
+}
+
+.card::before{
+  width:260px;
+  height:260px;
+  background:rgba(255,98,0,0.08);
+  top:-120px;
+  right:-120px;
+}
+
+.card::after{
+  width:180px;
+  height:180px;
+  background:rgba(255,98,0,0.05);
+  bottom:-80px;
+  left:-80px;
+}
+
+/* CONTEÚDO */
+.card > *{
+  position:relative;
+  z-index:2;
+}
+
+/* ===== LOGO ===== */
+.logo-area{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.logo-circle{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  margin:auto;
+  border:4px solid #7b3b22;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#120707;
+  box-shadow:0 0 25px rgba(255,98,0,0.2);
+}
+
+.logo-circle img{
+  width:90px;
+}
+
+.logo-area h1{
+  color:#ff8757;
+  margin-top:22px;
+  font-size:2rem;
+  font-weight:700;
+}
+
+.logo-area p{
+  color:#7d7171;
+  font-size:1.1rem;
+  margin-top:6px;
+}
+
+/* ===== TITULO ===== */
+.card h2{
+  color:#fff;
+  font-size:2rem;
+  margin-bottom:12px;
+}
+
+.subtexto{
+  color:#7d7171;
+  margin-bottom:30px;
+  line-height:1.5;
+  font-size:1.05rem;
+}
+
+/* ===== LABEL ===== */
+.card label{
+  display:block;
+  color:#ff8757;
+  margin-bottom:12px;
+  margin-top:18px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+
+/* ===== INPUT ===== */
+.card input{
+  width:100%;
+  height:65px;
+  border:none;
+  outline:none;
+  border-radius:20px;
+  padding:0 22px;
+  background:#140b0b;
+  color:#fff;
+  font-size:1.1rem;
+  border:1px solid rgba(255,255,255,0.05);
+  transition:.3s;
+}
+
+.card input::placeholder{
+  color:#7d7171;
+}
+
+.card input:focus{
+  border:1px solid #ff7b42;
+  box-shadow:0 0 15px rgba(255,123,66,0.25);
+}
+
+/* ===== BOTÃO ===== */
+.card button{
+  width:100%;
+  height:68px;
+  border:none;
+  border-radius:22px;
+  margin-top:30px;
+  background:linear-gradient(90deg,#ff7b42,#f25c2d);
+  color:#111;
+  font-size:1.5rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 0 30px rgba(255,123,66,0.35);
+}
+
+.card button:hover{
+  transform:scale(1.02);
+}
+
+/* ===== CAMPO NOME ===== */
+#nomeArea{
+  display:none;
+  animation:fade .4s ease;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
