@@ -1137,47 +1137,80 @@ textarea {
 }
 
 /* teste de css do login */
-/* ===== CARD ===== */
+/* ===== CARD LOGIN ===== */
 .card{
   width:100%;
   max-width:420px;
-  background:rgba(15, 5, 5, 0.96);
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:30px;
   padding:40px 30px;
+  border-radius:32px;
   position:relative;
   overflow:hidden;
+
+  /* BACKGROUND IGUAL DA IMAGEM */
+  background:
+    radial-gradient(circle at top right,
+      rgba(255,120,60,0.18) 0%,
+      transparent 38%),
+
+    radial-gradient(circle at bottom left,
+      rgba(255,90,0,0.12) 0%,
+      transparent 35%),
+
+    linear-gradient(
+      180deg,
+      rgba(18,6,6,0.98),
+      rgba(8,2,2,0.98)
+    );
+
+  border:1px solid rgba(255,255,255,0.05);
+
   box-shadow:
     0 0 40px rgba(255,98,0,0.08),
     inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
-/* BOLAS DO FUNDO */
+/* ===== EFEITOS GRANDES DO FUNDO ===== */
 .card::before,
 .card::after{
   content:"";
   position:absolute;
   border-radius:50%;
   z-index:0;
+  pointer-events:none;
 }
 
+/* BOLA SUPERIOR */
 .card::before{
-  width:260px;
-  height:260px;
-  background:rgba(255,98,0,0.08);
-  top:-120px;
-  right:-120px;
+  width:420px;
+  height:420px;
+  background:radial-gradient(
+    circle,
+    rgba(255,100,40,0.12) 0%,
+    rgba(255,100,40,0.04) 45%,
+    transparent 75%
+  );
+
+  top:-180px;
+  right:-180px;
 }
 
+/* BOLA INFERIOR */
 .card::after{
-  width:180px;
-  height:180px;
-  background:rgba(255,98,0,0.05);
-  bottom:-80px;
-  left:-80px;
+  width:320px;
+  height:320px;
+
+  background:radial-gradient(
+    circle,
+    rgba(255,80,20,0.10) 0%,
+    rgba(255,80,20,0.03) 50%,
+    transparent 75%
+  );
+
+  bottom:-170px;
+  left:-170px;
 }
 
-/* CONTEÚDO */
+/* ===== CONTEÚDO ===== */
 .card > *{
   position:relative;
   z-index:2;
@@ -1186,105 +1219,140 @@ textarea {
 /* ===== LOGO ===== */
 .logo-area{
   text-align:center;
-  margin-bottom:35px;
+  margin-bottom:40px;
 }
 
 .logo-circle{
-  width:130px;
-  height:130px;
+  width:140px;
+  height:140px;
   border-radius:50%;
   margin:auto;
-  border:4px solid #7b3b22;
+
+  border:4px solid #6b321f;
+
+  background:#100606;
+
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#120707;
-  box-shadow:0 0 25px rgba(255,98,0,0.2);
+
+  box-shadow:
+    0 0 30px rgba(255,98,0,0.15),
+    inset 0 0 15px rgba(255,255,255,0.03);
 }
 
 .logo-circle img{
-  width:90px;
+  width:95px;
 }
 
+/* ===== TÍTULO ===== */
 .logo-area h1{
-  color:#ff8757;
-  margin-top:22px;
-  font-size:2rem;
+  margin-top:24px;
+  color:#ff8b5b;
+  font-size:2.2rem;
   font-weight:700;
+  letter-spacing:.5px;
 }
 
 .logo-area p{
-  color:#7d7171;
-  font-size:1.1rem;
-  margin-top:6px;
+  margin-top:8px;
+  color:#756767;
+  font-size:1.15rem;
 }
 
-/* ===== TITULO ===== */
+/* ===== TEXTO ===== */
 .card h2{
   color:#fff;
   font-size:2rem;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 
 .subtexto{
-  color:#7d7171;
-  margin-bottom:30px;
-  line-height:1.5;
-  font-size:1.05rem;
+  color:#7b6e6e;
+  font-size:1.08rem;
+  line-height:1.6;
+  margin-bottom:34px;
 }
 
 /* ===== LABEL ===== */
 .card label{
   display:block;
-  color:#ff8757;
-  margin-bottom:12px;
-  margin-top:18px;
-  font-weight:600;
+  color:#ff8b5b;
+  font-size:.95rem;
+  font-weight:700;
   letter-spacing:1px;
+  margin-bottom:12px;
+  margin-top:20px;
 }
 
 /* ===== INPUT ===== */
 .card input{
   width:100%;
-  height:65px;
+  height:68px;
+
   border:none;
   outline:none;
-  border-radius:20px;
+
+  border-radius:22px;
+
   padding:0 22px;
-  background:#140b0b;
+
+  background:#160b0b;
+
+  border:1px solid rgba(255,255,255,0.04);
+
   color:#fff;
   font-size:1.1rem;
-  border:1px solid rgba(255,255,255,0.05);
+
   transition:.3s;
 }
 
 .card input::placeholder{
-  color:#7d7171;
+  color:#726767;
 }
 
 .card input:focus{
   border:1px solid #ff7b42;
-  box-shadow:0 0 15px rgba(255,123,66,0.25);
+
+  box-shadow:
+    0 0 0 3px rgba(255,123,66,0.08),
+    0 0 20px rgba(255,123,66,0.18);
 }
 
 /* ===== BOTÃO ===== */
 .card button{
   width:100%;
-  height:68px;
+  height:72px;
+
+  margin-top:34px;
+
   border:none;
-  border-radius:22px;
-  margin-top:30px;
-  background:linear-gradient(90deg,#ff7b42,#f25c2d);
+  border-radius:24px;
+
+  cursor:pointer;
+
+  background:linear-gradient(
+    90deg,
+    #ff824d,
+    #f5652d
+  );
+
   color:#111;
+
   font-size:1.5rem;
   font-weight:700;
-  cursor:pointer;
+
   transition:.3s;
-  box-shadow:0 0 30px rgba(255,123,66,0.35);
+
+  box-shadow:
+    0 0 25px rgba(255,120,60,0.35);
 }
 
 .card button:hover{
-  transform:scale(1.02);
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 8px 30px rgba(255,120,60,0.45);
 }
 
 /* ===== CAMPO NOME ===== */
@@ -1298,6 +1366,7 @@ textarea {
     opacity:0;
     transform:translateY(-10px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
