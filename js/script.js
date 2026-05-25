@@ -1462,3 +1462,30 @@ window.addEventListener("click", (e) => {
     fecharModalPerfil();
   }
 });
+
+
+//========== function do login
+function mostrarNome() {
+  const telefone = document.getElementById("telefone").value;
+  const nomeArea = document.getElementById("nomeArea");
+
+  // remove tudo que não for número
+  const numeros = telefone.replace(/\D/g, "");
+
+  // mostra o nome após começar digitar
+  if (numeros.length > 0) {
+    nomeArea.style.display = "block";
+  } else {
+    nomeArea.style.display = "none";
+  }
+
+  // máscara telefone
+  let valor = numeros;
+
+  if (valor.length > 11) valor = valor.slice(0,11);
+
+  valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
+  valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+
+  document.getElementById("telefone").value = valor;
+}
