@@ -1463,8 +1463,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
-
-//========== function do login
+// ========================================================
 function mostrarNome() {
   const telefone = document.getElementById("telefone").value;
   const nomeArea = document.getElementById("nomeArea");
@@ -1482,7 +1481,7 @@ function mostrarNome() {
   // máscara telefone
   let valor = numeros;
 
-  if (valor.length > 11) valor = valor.slice(0,11);
+  if (valor.length > 11) valor = valor.slice(0, 11);
 
   valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
   valor = valor.replace(/(\d{5})(\d)/, "$1-$2");

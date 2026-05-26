@@ -22,46 +22,37 @@
   <!-- LOGIN -->
   <div class="card" id="loginBox">
 
-  <div class="logo-area">
-    <div class="logo-circle">
-      <img src="img/logo-03.png" alt="Logo">
+    <div class="logo-area">
+      <div class="logo-circle">
+        <img src="img/logo-03.png" alt="Logo">
+      </div>
+
+      <h1>Churrasquinho Durans</h1>
+      <p>Sabor que conquista</p>
     </div>
 
-    <h1>Churrasquinho Durans</h1>
-    <p>Sabor que conquista</p>
-  </div>
+    <h2>Bem-vindo!</h2>
 
-  <h2>Bem-vindo!</h2>
+    <p class="subtexto">
+      Informe seu número de telefone para continuar
+    </p>
 
-  <p class="subtexto">
-    Informe seu número de telefone para continuar
-  </p>
+    <!-- TELEFONE -->
+    <label for="telefone">NÚMERO DE TELEFONE</label>
+    <input type="text" id="telefone" placeholder="(11) 99999-9999" oninput="mostrarNome()">
 
-  <!-- TELEFONE -->
-  <label for="telefone">NÚMERO DE TELEFONE</label>
-  <input 
-    type="text"
-    id="telefone"
-    placeholder="(11) 99999-9999"
-    oninput="mostrarNome()"
-  >
+    <!-- NOME APARECE DEPOIS -->
+    <div id="nomeArea">
 
-  <!-- NOME APARECE DEPOIS -->
-  <div id="nomeArea">
+      <label for="nome">NOME</label>
 
-    <label for="nome">NOME</label>
+      <input type="text" id="nome" placeholder="Seu nome">
 
-    <input 
-      type="text"
-      id="nome"
-      placeholder="Seu nome"
-    >
+    </div>
 
-  </div>
-
-  <button type="button" onclick="entrar()">
-    Entrar
-  </button>
+    <button type="button" onclick="entrar()">
+      Entrar
+    </button>
 
   </div>
   <!-- ========================================================= -->
