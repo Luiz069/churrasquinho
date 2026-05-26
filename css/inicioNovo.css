@@ -974,7 +974,7 @@ body {
 
   /* overflow: hidden; */
 
-  background:
+  /* background:
     radial-gradient(
       circle at top right,
       rgba(255, 120, 60, 0.08) 0%,
@@ -985,7 +985,7 @@ body {
       rgba(255, 90, 0, 0.06) 0%,
       transparent 30%
     ),
-    #050101;
+    #050101; */
 }
 
 /* ===== CARD LOGIN ===== */
@@ -1000,6 +1000,7 @@ body {
   justify-content: center;
 
   padding: 40px 30px;
+  margin: 0 auto;
 
   position: relative;
   overflow: hidden;
