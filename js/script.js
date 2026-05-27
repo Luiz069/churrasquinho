@@ -177,16 +177,28 @@ let metodoConsumo = ""; // 👈 NOVO
 
 // ================= MODAL PRODUTO =================
 
-function abrirModal(nome, preco, desc) {
-  itemAtual = { nome, preco, desc };
+function abrirModal(nome, preco, desc, imagem) {
+  itemAtual = {
+    nome,
+    preco,
+    desc,
+    imagem,
+  };
 
   qtdModal = 1;
 
-  extras = { queijo: 0, ovo: 0, carne: 0 };
+  extras = {
+    queijo: 0,
+    ovo: 0,
+    carne: 0,
+  };
 
   document.getElementById("m-nome").innerText = nome;
 
   document.getElementById("m-desc").innerText = desc;
+
+  // IMAGEM
+  document.getElementById("m-img").src = imagem;
 
   document.getElementById("m-obs").value = "";
 

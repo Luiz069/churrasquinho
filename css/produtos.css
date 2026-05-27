@@ -1,5 +1,5 @@
 /* =============== BARRA DE NAVEGAÇÃO ============== */
-.topbar {
+/* .topbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -40,11 +40,11 @@
   padding: 0 10px;
   gap: 1.2rem;
   margin-right: 0.6rem;
-}
+} */
 
 /* =================== MODAL DE PRODUTO =========================  */
 
-.modal {
+/* .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -55,15 +55,15 @@
   z-index: 2000;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.container-fechar {
+/* .container-fechar {
   display: flex;
   justify-content: flex-end;
   height: 5px;
-}
+} */
 
-.botao-fechar {
+/* .botao-fechar {
   position: relative;
   bottom: 8px;
   right: 4px;
@@ -76,14 +76,14 @@
   cursor: pointer;
   background: var(--branco);
   display: flex;
-}
+} */
 
-path.x-icon {
+/* path.x-icon {
   stroke: rgba(186, 186, 186, 0.885);
   stroke-width: 3px;
-}
+} */
 
-#m-nome {
+/* #m-nome {
   font-size: 1.5rem;
   font-weight: 200 !important;
   margin-bottom: 10px;
@@ -95,15 +95,15 @@ path.x-icon {
   font-weight: 100;
   color: var(--vermelho);
   margin: 0;
-}
+} */
 
-#m-desc {
+/* #m-desc {
   font-size: 0.95rem;
   color: #555;
   margin: 5px auto 12px auto;
-}
+} */
 
-.modal-content {
+/* .modal-content {
   background: white;
   width: 95%;
   max-width: 450px;
@@ -112,9 +112,9 @@ path.x-icon {
   border: 4px solid var(--preto);
   max-height: 90vh;
   overflow-y: auto;
-}
+} */
 
-.quantidade-produto {
+/* .quantidade-produto {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -153,10 +153,10 @@ path.x-icon {
   align-items: center;
   justify-content: center;
   padding: 0 0 3px 0;
-}
+} */
 
 /* SEÇÃO ADICIONAIS */
-.adicionais-container {
+/* .adicionais-container {
   margin: 20px 0;
   border-top: 2px dashed #ddd;
   padding-top: 15px;
@@ -201,10 +201,10 @@ path.x-icon {
   width: 2em;
   text-align: center;
   font-weight: 100;
-}
+} */
 
 /* BEBIDAS */
-.opcao-bebida {
+/* .opcao-bebida {
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -227,10 +227,10 @@ path.x-icon {
 
 .btn-bebidas {
   margin-top: 16px !important;
-}
+} */
 
 /* OBSERVAÇÃO */
-#m-obs {
+/* #m-obs {
   width: 100%;
   height: 80px;
   padding: 12px;
@@ -244,10 +244,10 @@ path.x-icon {
 .obsevacao {
   font-size: 18px;
   font-weight: 200;
-}
+} */
 
 /* Sub-Total */
-.subtotal-tag {
+/* .subtotal-tag {
   display: flex;
   background: #fff9c4;
   border: 2px solid var(--amarelo);
@@ -280,15 +280,15 @@ path.x-icon {
   letter-spacing: 0.8px;
   font-size: 16px;
   font-family: var(--font-principal);
-}
+} */
 
 /* =====================PRODUTOS======================== */
-.container {
-  max-width: 900px;
-  margin: 0 auto; /* margin que separa o header do conteúdo */
-  padding: 20px 18px;
-  font-weight: bold;
-}
+/* .container { */
+/* max-width: 900px; */
+/* margin: 0 auto; margin que separa o header do conteúdo */
+/* padding: 20px 18px; */
+/* font-weight: bold; */
+/* } */
 
 /* .categoria-box {
   background: var(--vermelho);
@@ -344,6 +344,85 @@ path.x-icon {
 } */
 
 /* ===================== CARRINHO ======================== */
-.carrinho {
-  margin-left: -20px !important; /* important para priorizar essa linha */
+/* .carrinho { */
+/* margin-left: -20px !important; important para priorizar essa linha */
+/* } */
+
+.modal-produto {
+  background: oklch(0 0 0 / 0.75);
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  z-index: 50;
+  inset: 0;
+  position: fixed;
+  min-height: 0;
+  min-width: 0;
+}
+
+.modal-conteudo {
+  background: oklch(0.14 0.008 30);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: oklch(0 0 0 / 0.5) 0px -8px 40px;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  border: none;
+  overflow: hidden;
+  max-width: 32rem;
+  width: 100%;
+}
+
+.modal-topo {
+  flex-shrink: 0;
+  position: relative;
+  height: calc(0.25rem * 48);
+}
+
+.modal-img {
+  object-fit: cover;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.container-img {
+  background: linear-gradient(transparent 40%, oklch(0.14 0.008 30) 100%);
+  inset: 0;
+  position: absolute;
+}
+
+.botao-fechar {
+  background: oklch(0.22 0.008 30);
+  border-radius: 3.40282e38px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: calc(0.25rem * 8);
+  height: calc(0.25rem * 8);
+  display: flex;
+  right: calc(0.25rem * 4);
+  top: calc(0.25rem * 4);
+  position: absolute;
+  min-height: 0;
+  min-width: 0;
+}
+
+.modal-info {
+  padding-block: calc(0.25rem * 4);
+  padding-inline: calc(0.25rem * 6);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-titulo {
+  color: oklch(0.96 0.005 50);
+  font-family: "Playfair Display", serif;
+  --tw-font-weight: 700;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: calc(1.75 / 1.25);
+  margin-bottom: 0.25rem;
 }
