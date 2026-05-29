@@ -140,7 +140,23 @@ function iniciarApp() {
     }
   }
 
-  // ==================
+  // ==================================================
+  // =========== FECHAR MODAIS AO INICIAR =============
+  const modalItem = document.getElementById("modalItem");
+  const modalBebida = document.getElementById("modalBebida");
+  const modalEditarPerfil = document.getElementById("modalEditarPerfil");
+
+  if (modalItem) {
+    modalItem.style.display = "none";
+  }
+
+  if (modalBebida) {
+    modalBebida.style.display = "none";
+  }
+
+  if (modalEditarPerfil) {
+    modalEditarPerfil.classList.remove("active");
+  }
 
   // ================= RENDERS =================
 
@@ -167,9 +183,27 @@ let itemAtual = {};
 
 let qtdModal = 1;
 
-let extras = { queijo: 0, ovo: 0, carne: 0 };
+let extras = {
+  bacon: false,
+  queijo: false,
+  ovo: false,
+  cebola: false,
+  molho: false,
+  batata: false,
+  catupiry: false,
+  pimenta: false,
+};
 
-const precosExtras = { queijo: 3.0, ovo: 2.0, carne: 8.0 };
+const precosExtras = {
+  bacon: 4.0,
+  queijo: 3.0,
+  ovo: 2.5,
+  cebola: 3.0,
+  molho: 2.0,
+  batata: 2.0,
+  catupiry: 3.5,
+  pimenta: 2.0,
+};
 
 let valorPagamento = "";
 
@@ -188,21 +222,37 @@ function abrirModal(nome, preco, desc, imagem) {
   qtdModal = 1;
 
   extras = {
-    queijo: 0,
-    ovo: 0,
-    carne: 0,
+    bacon: false,
+    queijo: false,
+    ovo: false,
+    cebola: false,
+    molho: false,
+    batata: false,
+    catupiry: false,
+    pimenta: false,
   };
+
+  setTimeout(() => {
+    document
+      .querySelectorAll('.adicionais-container input[type="checkbox"]')
+      .forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+  }, 50);
 
   document.getElementById("m-nome").innerText = nome;
 
   document.getElementById("m-desc").innerText = desc;
 
-  // IMAGEM
   document.getElementById("m-img").src = imagem;
 
   document.getElementById("m-obs").value = "";
 
-  atualizarInterfaceModal();
+  // atualiza apenas quantidade
+  document.getElementById("m-qtd-val").innerText = qtdModal;
+
+  // subtotal inicial
+  document.getElementById("m-subtotal").innerText = itemAtual.preco.toFixed(2);
 
   document.getElementById("modalItem").style.display = "flex";
 }
@@ -215,29 +265,38 @@ function mudarQtdModal(val) {
   }
 }
 
-function mudarAdd(tipo, val) {
-  if (extras[tipo] + val >= 0) {
-    extras[tipo] += val;
+function capturarExtras() {
+  extras.bacon = document.getElementById("extra-bacon")?.checked || false;
 
-    atualizarInterfaceModal();
-  }
+  extras.queijo = document.getElementById("extra-queijo")?.checked || false;
+
+  extras.ovo = document.getElementById("extra-ovo")?.checked || false;
+
+  extras.cebola = document.getElementById("extra-cebola")?.checked || false;
+
+  extras.molho = document.getElementById("extra-molho")?.checked || false;
+
+  extras.batata = document.getElementById("extra-batata")?.checked || false;
+
+  extras.catupiry = document.getElementById("extra-catupiry")?.checked || false;
+
+  extras.pimenta = document.getElementById("extra-pimenta")?.checked || false;
 }
 
 function atualizarInterfaceModal() {
+  capturarExtras();
+
+  let custoExtras = 0;
+
+  Object.keys(extras).forEach((key) => {
+    if (extras[key]) {
+      custoExtras += precosExtras[key];
+    }
+  });
+
+  let total = (itemAtual.preco + custoExtras) * qtdModal;
+
   document.getElementById("m-qtd-val").innerText = qtdModal;
-
-  document.getElementById("qtd-add-queijo").innerText = extras.queijo;
-
-  document.getElementById("qtd-add-ovo").innerText = extras.ovo;
-
-  document.getElementById("qtd-add-carne").innerText = extras.carne;
-
-  let precoExtras =
-    extras.queijo * precosExtras.queijo +
-    extras.ovo * precosExtras.ovo +
-    extras.carne * precosExtras.carne;
-
-  let total = (itemAtual.preco + precoExtras) * qtdModal;
 
   document.getElementById("m-subtotal").innerText = total.toFixed(2);
 }
@@ -246,16 +305,25 @@ function fecharModal() {
   document.getElementById("modalItem").style.display = "none";
 }
 
-// ================ MODAL BEBIDAS ===============
+// ================= MODAL BEBIDAS =================
 
 let bebidaSelecionada = null;
+let qtdBebida = 1;
 
-function abrirModalBebidas(nome, opcoes) {
-  itemAtual = { nome };
+function abrirModalBebidas(nome, imagem, opcoes) {
+  itemAtual = {
+    nome,
+    imagem,
+  };
 
   bebidaSelecionada = null;
+  qtdBebida = 1;
 
   document.getElementById("m-nome-bebida").innerText = nome;
+
+  // document.getElementById("m-img-bebida").src = imagem;
+
+  document.getElementById("bebida-qtd").innerText = qtdBebida;
 
   const container = document.getElementById("bebida-opcoes");
 
@@ -263,12 +331,31 @@ function abrirModalBebidas(nome, opcoes) {
 
   opcoes.forEach((op) => {
     container.innerHTML += `
+    
+      <div 
+        class="add-card"
+        onclick="selecionarBebida(
+          '${op.nome}',
+          ${op.preco},
+          this
+        )"
+      >
 
-      <div class="opcao-bebida" onclick="selecionarBebida('${op.nome}', ${op.preco}, this)">
+        <div class="opcao-topo">
 
-        <div>${op.nome}</div>
+          <p class="opcao-nome">
+            ${op.nome}
+          </p>
 
-        <div>R$ ${op.preco.toFixed(2)}</div>
+          <span class="opcao-preco">
+            R$ ${op.preco.toFixed(2)}
+          </span>
+
+        </div>
+
+        <p class="opcao-info">
+          ${op.info || ""}
+        </p>
 
       </div>
 
@@ -281,21 +368,39 @@ function abrirModalBebidas(nome, opcoes) {
 }
 
 function selecionarBebida(nome, preco, el) {
-  bebidaSelecionada = { nome, preco };
-
-  // remove seleção anterior
+  bebidaSelecionada = {
+    nome,
+    preco,
+  };
 
   document
-
     .querySelectorAll(".opcao-bebida")
-
     .forEach((e) => e.classList.remove("ativo"));
-
-  // adiciona seleção
 
   el.classList.add("ativo");
 
-  document.getElementById("m-total-bebida").innerText = preco.toFixed(2);
+  atualizarTotalBebida();
+}
+
+function alterarQtdBebida(valor) {
+  if (qtdBebida + valor < 1) return;
+
+  qtdBebida += valor;
+
+  document.getElementById("bebida-qtd").innerText = qtdBebida;
+
+  atualizarTotalBebida();
+}
+
+function atualizarTotalBebida() {
+  if (!bebidaSelecionada) {
+    document.getElementById("m-total-bebida").innerText = "0.00";
+    return;
+  }
+
+  const total = bebidaSelecionada.preco * qtdBebida;
+
+  document.getElementById("m-total-bebida").innerText = total.toFixed(2);
 }
 
 function fecharModalBebida() {
@@ -304,26 +409,29 @@ function fecharModalBebida() {
 
 function addBebidaCarrinho() {
   if (!bebidaSelecionada) {
-    alert("Selecione uma bebida!");
-
+    mostrarToast("Selecione uma bebida!", "warning");
     return;
   }
 
   carrinho.push({
-    nome: itemAtual.nome + " (" + bebidaSelecionada.nome + ")",
+    nome: `${itemAtual.nome} - ${bebidaSelecionada.nome}`,
 
-    qtd: 1,
+    qtd: qtdBebida,
 
     obs: "",
 
     adicionais: [],
 
     precoUn: bebidaSelecionada.preco,
+
+    imagem: itemAtual.imagem,
   });
 
   salvarCarrinho();
 
   renderCarrinho();
+
+  mostrarToast("Bebida adicionada!");
 
   fecharModalBebida();
 }
@@ -331,18 +439,50 @@ function addBebidaCarrinho() {
 // ================= ADICIONAR AO CARRINHO =================
 
 function addAoCarrinho() {
+  capturarExtras();
+
   let listaExtras = [];
+  let custoExtras = 0;
 
-  if (extras.queijo > 0) listaExtras.push(`${extras.queijo}x Queijo Extra`);
+  if (extras.bacon) {
+    listaExtras.push("Bacon extra");
+    custoExtras += precosExtras.bacon;
+  }
 
-  if (extras.ovo > 0) listaExtras.push(`${extras.ovo}x Ovo Extra`);
+  if (extras.queijo) {
+    listaExtras.push("Queijo extra");
+    custoExtras += precosExtras.queijo;
+  }
 
-  if (extras.carne > 0) listaExtras.push(`${extras.carne}x Carne Extra`);
+  if (extras.ovo) {
+    listaExtras.push("Ovo frito");
+    custoExtras += precosExtras.ovo;
+  }
 
-  let custoExtras =
-    extras.queijo * precosExtras.queijo +
-    extras.ovo * precosExtras.ovo +
-    extras.carne * precosExtras.carne;
+  if (extras.cebola) {
+    listaExtras.push("Cebola caramelizada");
+    custoExtras += precosExtras.cebola;
+  }
+
+  if (extras.molho) {
+    listaExtras.push("Molho especial");
+    custoExtras += precosExtras.molho;
+  }
+
+  if (extras.batata) {
+    listaExtras.push("Batata palha");
+    custoExtras += precosExtras.batata;
+  }
+
+  if (extras.catupiry) {
+    listaExtras.push("Catupiry");
+    custoExtras += precosExtras.catupiry;
+  }
+
+  if (extras.pimenta) {
+    listaExtras.push("Pimenta jalapeño");
+    custoExtras += precosExtras.pimenta;
+  }
 
   carrinho.push({
     ...itemAtual,
@@ -1375,12 +1515,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuarioSalvo = localStorage.getItem("usuario");
 
   // se tiver usuário salvo
-
   if (usuarioSalvo) {
     iniciarApp();
   } else {
     // mostra login
-
     const loginBox = document.getElementById("loginBox");
 
     if (loginBox) {
@@ -1389,11 +1527,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // render carrinho
-
   renderCarrinho();
 
   // toast repetir pedido
-
   if (localStorage.getItem("repetirPedido")) {
     mostrarToast("🔁 Pedido carregado novamente!");
     localStorage.removeItem("repetirPedido");
@@ -1500,3 +1636,10 @@ function mostrarNome() {
 
   document.getElementById("telefone").value = valor;
 }
+
+// atualizar subtotal automaticamente ao marcar extras
+document.addEventListener("change", (e) => {
+  if (e.target.matches('.adicionais-container input[type="checkbox"]')) {
+    atualizarInterfaceModal();
+  }
+});

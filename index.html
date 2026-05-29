@@ -1197,7 +1197,7 @@
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
                   <button class="btn-add" onclick="
-                        abrirModalBebidas('Água Mineral', [
+                        abrirModalBebidas('Água Mineral', 'img/bebidas/agua-mineral.png', [
                           { nome: 'Água - 500ml', preco: 3 },
                         ])
                       ">
@@ -1544,23 +1544,25 @@
 
         <div class="modal-info">
           <h2 id="m-nome" class="modal-titulo">Nome</h2>
-          <p id="m-desc" style="color: #666; font-size: 0.9rem">Descrição</p>
+          <p id="m-desc" class="modal-desc">Descrição</p>
 
-          <label><b class="quantidade">Quantidade:</b></label>
-          <div class="quantidade-produto">
-            <div class="modal-quantidade-produto" style="margin: 10px 0">
-              <button class="botao-menos" onclick="mudarQtdModal(-1)">
-                <svg class="botao-menos-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="currentColor" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8" />
+          <div class="quantida-lanche">
+            <label><b class="quantidade">Quantidade:</b></label>
+            <div class="quantidade-produto">
+              <button class="botao-qtd" onclick="mudarQtdModal(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
+                  <path d="M5 12h14"></path>
                 </svg>
               </button>
               <span id="m-qtd-val">1</span>
-              <button class="botao-mais" onclick="mudarQtdModal(1)">
-                <svg class="botao-mais-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="currentColor" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+              <button class="botao-qtd" onclick="mudarQtdModal(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
                 </svg>
               </button>
             </div>
@@ -1569,84 +1571,243 @@
           <div class="adicionais-container">
             <p><b class="add">Adicionais:</b></p>
 
-            <div class="add-item-row">
-              <span class="add-nome">Queijo Extra (+ R$ 3,00)</span>
-              <div class="qtd-control">
-                <button onclick="mudarAdd('queijo', -1)">-</button>
-                <span id="qtd-add-queijo">
-                  <p>0</p>
-                </span>
-                <button onclick="mudarAdd('queijo', 1)">+</button>
-              </div>
-            </div>
+            <div class="lista-adicionais">
 
-            <div class="add-item-row">
-              <span class="add-nome">Ovo Extra (+ R$ 2,00)</span>
-              <div class="qtd-control">
-                <button onclick="mudarAdd('ovo', -1)">-</button>
-                <span id="qtd-add-ovo">
-                  <p>0</p>
-                </span>
-                <button onclick="mudarAdd('ovo', 1)">+</button>
-              </div>
-            </div>
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-bacon">
+                    <span></span>
+                  </div>
 
-            <div class="add-item-row">
-              <span class="add-nome">Carne Extra (+ R$ 8,00)</span>
-              <div class="qtd-control">
-                <button onclick="mudarAdd('carne', -1)">-</button>
-                <span id="qtd-add-carne">
-                  <p>0</p>
+                  <span class="add-texto">
+                    Bacon extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 4,00
                 </span>
-                <button onclick="mudarAdd('carne', 1)">+</button>
-              </div>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-queijo">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Queijo extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-ovo">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Ovo frito
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 2,50
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-cebola">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Cebola caramelizada
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-molho">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Molho especial
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 2,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-batata">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Batata palha
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 2,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-catupiry">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Catupiry
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,50
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-pimenta">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Pimenta jalapeño
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 2,00
+                </span>
+              </label>
+
             </div>
           </div>
 
-          <label><b class="obsevacao">Observações (opcional)</b></label>
-          <textarea id="m-obs" rows="2"></textarea>
+          <div class="obs">
+            <h3 class="observacao">Observações (opcional)</h3>
+            <textarea id="m-obs" rows="2" placeholder="Ex: sem cebola, ponto da carne..."></textarea>
+          </div>
         </div>
 
-        <div class="subtotal-tag">
-          <p>Total: R$</p>
-          <span id="m-subtotal"> 0,00</span>
-        </div>
+        <div class="modal-prod-footer">
+          <div class="subtotal-tag">
+            <p class="titulo-subtotal">Total: </p>
+            <p class="subtotal">R$ <span id="m-subtotal" class="subtotal">R$ 0,00</span></p>
+          </div>
 
-        <button class="add-carrinho" onclick="addAoCarrinho()">
-          <p class="add-carrinho-text">Adicionar ao Carrinho</p>
-        </button>
+          <button class="add-carrinho" onclick="addAoCarrinho()">
+            <!-- <p class="add-carrinho-text">Adicionar ao Carrinho</p> -->
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- MODAL PRODUTO BEBIDAS -->
-    <div id="modalBebida" class="modal">
-      <div class="modal-content">
-        <div class="container-fechar">
+    <!-- MODAL BEBIDAS -->
+    <div id="modalBebida" class="modal-produto">
+      <div class="modal-conteudo">
+
+        <div class="modal-topo">
+          <img id="m-img" class="modal-img" src="img/bebidas/agua-mineral.png" alt="Produto">
+          <div class="container-img"></div>
           <button onclick="fecharModalBebida()" class="botao-fechar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-x" data-loc="client/src/components/ui/dialog.tsx:139">
-              <path class="x-icon" d="M18 6 6 18"></path>
-              <path class="x-icon" d="m6 6 12 12"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"
+              data-loc="client/src/components/AddToCartModal.tsx:105">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
             </svg>
           </button>
         </div>
 
-        <h2 id="m-nome-bebida">Nome</h2>
+        <!-- IMAGEM -->
+        <!-- <img id="m-img-bebida" class="modal-bebida-img" src="" /> -->
 
-        <p style="margin: 10px 0"><b class="tamanho">Selecione:</b></p>
+        <div class="modal-info">
+          <!-- NOME -->
+          <h2 id="m-nome-bebida" class="modal-titulo">Nome</h2>
 
-        <div id="bebida-opcoes"></div>
+          <!-- DESCRIÇÃO -->
+          <!-- <p id="m-desc-bebida" class="desc-bebida"></p> -->
 
-        <div class="subtotal-tag" style="margin-top: 15px">
-          <p>Total: R$</p>
-          <span id="m-total-bebida">0.00</span>
+          <!-- QUANTIDADE -->
+          <div class="quantida-lanche">
+            <label>
+              <b class="quantidade">Quantidade:</b>
+            </label>
+            <div class="quantidade-produto">
+              <button class="botao-qtd" onclick="alterarQtdBebida(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-minus btn-qtd">
+                  <path d="M5 12h14"></path>
+                </svg>
+              </button>
+
+              <span id="bebida-qtd">1</span>
+
+              <button class="botao-qtd" onclick="alterarQtdBebida(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-plus btn-qtd">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- OPÇÕES -->
+          <p class="add">Escolha sua bebida</p>
+
+          <div id="bebida-opcoes" class="lista-adicionais"></div>
         </div>
 
+        <!-- TOTAL -->
+        <div class="subtotal-tag">
+          <p>Total:</p>
+          <span>R$ <span id="m-total-bebida">0.00</span></span>
+        </div>
+
+        <!-- BUTTON -->
         <button class="add-carrinho" onclick="addBebidaCarrinho()">
-          <p class="add-carrinho-text">Adicionar ao Carrinho</p>
+          <p class="add-carrinho-text">
+            Adicionar ao Carrinho
+          </p>
         </button>
+
       </div>
     </div>
 
