@@ -1225,7 +1225,7 @@
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
                   <button class="btn-add" onclick="
-                        abrirModalBebidas('Suco Natural', [
+                        abrirModalBebidas('Suco Natural', 'img/bebidas/suco-natural.jpg', [
                           { nome: 'Maracuja', preco: 6 },
                           { nome: 'Cupuaçu', preco: 6 },
                           { nome: 'Acerola', preco: 6 },
@@ -1257,7 +1257,7 @@
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
                   <button class="btn-add" onclick="
-                        abrirModalBebidas('Refrigerante Lata 350ml', [
+                        abrirModalBebidas('Refrigerante Lata 350ml', 'img/bebidas/refrigerante-lata.jpg', [
                           { nome: 'Coca Cola', preco: 5 },
                           { nome: 'Coca Cola Zero', preco: 5 },
                           { nome: 'Jesus', preco: 5 },
@@ -1292,7 +1292,7 @@
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
                   <button class="btn-add" onclick="
-                        abrirModalBebidas('Refrigerante 1L', [
+                        abrirModalBebidas('Refrigerante 1L', 'img/bebidas/refrigerante-1L.png', [
                           { nome: 'Coca Cola', preco: 10 },
                           { nome: 'Coca Cola Zero', preco: 10 },
                           { nome: 'Jesus', preco: 10 },
@@ -1328,7 +1328,7 @@
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
                   <button class="btn-add" onclick="
-                        abrirModalBebidas('Refrigerante 2L', [
+                        abrirModalBebidas('Refrigerante 2L', 'img/bebidas/refrigerante-2L.png', [
                           { nome: 'Coca Cola', preco: 13 },
                           { nome: 'Guaraná Antarctica', preco: 13 },
                           { nome: 'Guaraná Jesus', preco: 13 },
@@ -1443,7 +1443,7 @@
               <h4 class="titulo-itens-sacola">Método de consumo *</h4>
 
               <div class="consumo-buttons">
-                <button id="btn-retirada" class="consumo-btn active" onclick="selecionarConsumo('retirada')">
+                <button id="btn-retirada" class="consumo-btn" onclick="selecionarConsumo('retirada')">
                   Retirada
                 </button>
 
@@ -1459,8 +1459,7 @@
               <div class="pagamento-botoes">
                 <!-- PIX -->
                 <div class="pagamento-item">
-                  <button type="button" class="btn-pagamento active" data-value="Pix"
-                    onclick="selecionarPagamento(this)">
+                  <button type="button" class="btn-pagamento" data-value="Pix" onclick="selecionarPagamento(this)">
                     PIX
                   </button>
                 </div>
@@ -1615,97 +1614,12 @@
                   </div>
 
                   <span class="add-texto">
-                    Ovo frito
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 2,50
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-cebola">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Cebola caramelizada
+                    Frango extra
                   </span>
                 </div>
 
                 <span class="add-preco">
                   + R$ 3,00
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-molho">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Molho especial
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 2,00
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-batata">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Batata palha
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 2,00
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-catupiry">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Catupiry
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 3,50
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-pimenta">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Pimenta jalapeño
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 2,00
                 </span>
               </label>
 
@@ -1725,7 +1639,6 @@
           </div>
 
           <button class="add-carrinho" onclick="addAoCarrinho()">
-            <!-- <p class="add-carrinho-text">Adicionar ao Carrinho</p> -->
             Adicionar ao Carrinho
           </button>
         </div>
@@ -1738,7 +1651,7 @@
       <div class="modal-conteudo">
 
         <div class="modal-topo">
-          <img id="m-img" class="modal-img" src="img/bebidas/agua-mineral.png" alt="Produto">
+          <img id="m-img-bebida" class="modal-img" src="" />
           <div class="container-img"></div>
           <button onclick="fecharModalBebida()" class="botao-fechar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -1756,9 +1669,6 @@
         <div class="modal-info">
           <!-- NOME -->
           <h2 id="m-nome-bebida" class="modal-titulo">Nome</h2>
-
-          <!-- DESCRIÇÃO -->
-          <!-- <p id="m-desc-bebida" class="desc-bebida"></p> -->
 
           <!-- QUANTIDADE -->
           <div class="quantida-lanche">
@@ -1795,19 +1705,18 @@
           <div id="bebida-opcoes" class="lista-adicionais"></div>
         </div>
 
-        <!-- TOTAL -->
-        <div class="subtotal-tag">
-          <p>Total:</p>
-          <span>R$ <span id="m-total-bebida">0.00</span></span>
-        </div>
+        <div class="modal-prod-footer">
+          <!-- TOTAL -->
+          <div class="subtotal-tag">
+            <p>Total:</p>
+            <p class="subtotal">R$ <span id="m-total-bebida">0.00</span></p>
+          </div>
 
-        <!-- BUTTON -->
-        <button class="add-carrinho" onclick="addBebidaCarrinho()">
-          <p class="add-carrinho-text">
+          <!-- BUTTON -->
+          <button class="add-carrinho" onclick="addBebidaCarrinho()">
             Adicionar ao Carrinho
-          </p>
-        </button>
-
+          </button>
+        </div>
       </div>
     </div>
 

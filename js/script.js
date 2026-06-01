@@ -321,7 +321,7 @@ function abrirModalBebidas(nome, imagem, opcoes) {
 
   document.getElementById("m-nome-bebida").innerText = nome;
 
-  // document.getElementById("m-img-bebida").src = imagem;
+  document.getElementById("m-img-bebida").src = imagem;
 
   document.getElementById("bebida-qtd").innerText = qtdBebida;
 
@@ -329,36 +329,32 @@ function abrirModalBebidas(nome, imagem, opcoes) {
 
   container.innerHTML = "";
 
-  opcoes.forEach((op) => {
+  opcoes.forEach((op, index) => {
     container.innerHTML += `
-    
-      <div 
-        class="add-card"
-        onclick="selecionarBebida(
-          '${op.nome}',
-          ${op.preco},
-          this
-        )"
-      >
+    <label class="add-card">
 
-        <div class="opcao-topo">
+      <div class="add-left">
 
-          <p class="opcao-nome">
-            ${op.nome}
-          </p>
+        <label class="checkbox-custom">
+          <input
+            class="bebida-checkbox"
+            type="checkbox"
+            onchange="selecionarBebida(this, '${op.nome}', ${op.preco})"
+          >
+          <span></span>
+        </label>
 
-          <span class="opcao-preco">
-            R$ ${op.preco.toFixed(2)}
-          </span>
-
-        </div>
-
-        <p class="opcao-info">
-          ${op.info || ""}
-        </p>
+        <span class="add-texto">
+          ${op.nome}
+        </span>
 
       </div>
 
+      <span class="add-preco">
+        + R$ ${op.preco.toFixed(2)}
+      </span>
+
+    </label>
     `;
   });
 
@@ -367,17 +363,25 @@ function abrirModalBebidas(nome, imagem, opcoes) {
   document.getElementById("modalBebida").style.display = "flex";
 }
 
-function selecionarBebida(nome, preco, el) {
-  bebidaSelecionada = {
-    nome,
-    preco,
-  };
+function selecionarBebida(input, nome, preco) {
+  document.querySelectorAll(".checkbox-bebida").forEach((cb) => {
+    if (cb !== input) {
+      cb.checked = false;
+      cb.parentElement.classList.remove("ativo");
+    }
+  });
 
-  document
-    .querySelectorAll(".opcao-bebida")
-    .forEach((e) => e.classList.remove("ativo"));
+  if (input.checked) {
+    input.parentElement.classList.add("ativo");
 
-  el.classList.add("ativo");
+    bebidaSelecionada = {
+      nome,
+      preco,
+    };
+  } else {
+    input.parentElement.classList.remove("ativo");
+    bebidaSelecionada = null;
+  }
 
   atualizarTotalBebida();
 }
