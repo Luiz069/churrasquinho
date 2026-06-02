@@ -20,7 +20,9 @@
 
 <body>
   <!-- LOGIN -->
-  <div class="card-login" id="loginBox">
+  <div class="login-bg-container" id="loginBox">
+
+  <div class="card-login" >
 
     <div class="logo-area">
       <div class="logo-circle">
@@ -37,22 +39,19 @@
       Informe seu número de telefone para continuar
     </p>
 
-    <!-- TELEFONE -->
     <label for="telefone">NÚMERO DE TELEFONE</label>
     <input type="text" id="telefone" placeholder="(11) 99999-9999" oninput="mostrarNome()">
 
-    <!-- NOME APARECE DEPOIS -->
     <div id="nomeArea">
-
       <label for="nome">NOME</label>
-
       <input type="text" id="nome" placeholder="Seu nome">
-
     </div>
 
     <button type="button" onclick="entrar()">
       Entrar
     </button>
+
+  </div>
 
   </div>
   <!-- ========================================================= -->
