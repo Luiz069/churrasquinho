@@ -989,75 +989,156 @@ header {
 /* } */
 
 /* ===== CARD LOGIN ===== */
+/* ==========================================================================
+   CONTAINER ISOLADO DE BACKGROUND (TOTALMENTE FIXO E TRAVADO)
+   ========================================================================== */
+.login-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh; /* Altura dinâmica para cravar o tamanho exato da tela no mobile */
+  background-color: #050202;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  overflow: hidden; /* Trava as rolagens da página por completo */
+  touch-action: none; /* Impede arrastos elásticos e gestures em smartphones */
+  
+  padding: 16px;
+  z-index: 9999;
+}
+
+/* Brilho da Brasa na base da tela */
+.login-bg-container::before {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 90, 0, 0.25) 0%,
+    rgba(26, 8, 6, 0.6) 50%,
+    transparent 80%
+  );
+  filter: blur(50px);
+  z-index: 1;
+  pointer-events: none;
+  animation: pulsarBrasa 4s ease-in-out infinite alternate;
+}
+
+/* PARTÍCULAS DE CINZA E FAÍSCAS (VOLUME MÁXIMO SUBINDO) */
+.login-bg-container::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffaa75;
+  opacity: 0.8;
+  z-index: 1;
+  pointer-events: none;
+
+  box-shadow: 
+    /* Coluna da Esquerda */
+    5vw -10vh 3px #ff7b42,   8vw -25vh 4px #ff5a00,   3vw -45vh 2px #8a7878,
+    12vw -55vh 4px #ffaa75,  15vw -70vh 3px #a09090,  7vw -85vh 5px #ff7b42,
+    18vw -95vh 3px #ff5a00,  22vw -110vh 4px #ffaa75, 2vw -130vh 2px #8a7878,
+    28vw -20vh 4px #ffaa75,  25vw -50vh 3px #ff7b42,  20vw -75vh 4px #a09090,
+    10vw -120vh 3px #ff5a00, 14vw -35vh 2px #ff7b42,  27vw -85vh 4px #ffaa75,
+
+    /* Coluna do Meio */
+    32vw -15vh 4px #ff5a00,  35vw -35vh 3px #ffaa75,  38vw -55vh 5px #8a7878,
+    42vw -25vh 2px #ff7b42,  45vw -45vh 4px #ff5a00,  48vw -65vh 3px #a09090,
+    52vw -10vh 4px #ffaa75,  55vw -30vh 3px #ff7b42,  58vw -50vh 5px #ff5a00,
+    62vw -40vh 2px #8a7878,  65vw -60vh 4px #ffaa75,  68vw -80vh 3px #a09090,
+    34vw -90vh 4px #ff7b42,  40vw -105vh 3px #ff5a00, 47vw -115vh 4px #ffaa75,
+    50vw -130vh 2px #ff7b42, 57vw -100vh 5px #ff5a00, 64vw -125vh 3px #8a7878,
+
+    /* Coluna da Direita */
+    72vw -15vh 4px #ff7b42,  75vw -30vh 3px #ffaa75,  78vw -45vh 5px #ff5a00,
+    82vw -25vh 2px #8a7878,  85vw -55vh 4px #a09090,  88vw -70vh 3px #ff7b42,
+    92vw -20vh 4px #ff5a00,  95vw -40vh 3px #ffaa75,  98vw -65vh 5px #ff7b42,
+    70vw -95vh 4px #ffaa75,  74vw -110vh 3px #ff5a00, 80vw -120vh 4px #8a7878,
+    84vw -90vh 2px #ff7b42,  89vw -135vh 5px #ffaa75, 96vw -105vh 3px #ff5a00;
+
+  animation: cinzasSubindo 6s linear infinite;
+}
+
+@keyframes cinzasSubindo {
+  0% { transform: translateY(110vh) translateX(0) scale(0.6); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-20vh) translateX(70px) scale(1.4); opacity: 0; }
+}
+
+@keyframes pulsarBrasa {
+  0% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+
+/* ==========================================================================
+   CARD DE LOGIN (TOTALMENTE TRAVADO E SEM ROLAGEM)
+   ========================================================================== */
 .card-login {
   width: 100%;
   max-width: 430px;
-
-  height: 100vh;
-  max-height: 100%;
-
+  height: auto; 
+  
+  /* CORREÇÃO: overflow mudado para hidden e travamento de toque adicionado */
+  overflow: hidden; 
+  touch-action: none; 
+  -webkit-overflow-scrolling: none;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  padding: 40px 30px;
-  margin: 0 auto;
+  padding: 35px 24px; 
+  margin: auto; 
 
   position: relative;
-  overflow: hidden;
-
-  border-radius: 0;
+  border-radius: 24px; 
 
   background:
-    radial-gradient(
-      circle at top right,
-      rgba(255, 120, 60, 0.18) 0%,
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(255, 90, 0, 0.12) 0%,
-      transparent 35%
-    ),
-    linear-gradient(180deg, rgba(18, 6, 6, 0.98), rgba(8, 2, 2, 0.98));
+    radial-gradient(circle at top right, rgba(255, 120, 60, 0.15) 0%, transparent 38%),
+    radial-gradient(circle at bottom left, rgba(255, 90, 0, 0.1) 0%, transparent 35%),
+    linear-gradient(180deg, rgba(18, 6, 6, 0.60), rgba(8, 2, 2, 0.55));
 
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   box-shadow:
-    0 0 40px rgba(255, 98, 0, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(255, 98, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+  z-index: 2; 
 }
 
-/* ===== MOBILE ===== */
-@media (min-width: 768px) {
-  .card-login {
-    min-height: 900px;
-    /* border-radius: 32px; */
-  }
-}
-
-/* ===== EFEITOS ===== */
+/* ===== EFEITOS INTERNOS ===== */
 .card-login::before,
 .card-login::after {
   content: "";
   position: absolute;
   border-radius: 50%;
-  z-index: 0;
+  z-index: -1; 
   pointer-events: none;
 }
 
 .card-login::before {
   width: 420px;
   height: 420px;
-
-  background: radial-gradient(
-    circle,
-    rgba(255, 100, 40, 0.12) 0%,
-    rgba(255, 100, 40, 0.04) 45%,
-    transparent 75%
-  );
-
+  background: radial-gradient(circle, rgba(255, 100, 40, 0.08) 0%, rgba(255, 100, 40, 0.02) 45%, transparent 75%);
   top: -180px;
   right: -180px;
 }
@@ -1065,185 +1146,184 @@ header {
 .card-login::after {
   width: 320px;
   height: 320px;
-
-  background: radial-gradient(
-    circle,
-    rgba(255, 80, 20, 0.1) 0%,
-    rgba(255, 80, 20, 0.03) 50%,
-    transparent 75%
-  );
-
+  background: radial-gradient(circle, rgba(255, 80, 20, 0.06) 0%, rgba(255, 80, 20, 0.01) 50%, transparent 75%);
   bottom: -170px;
   left: -170px;
 }
 
-/* ===== CONTEÚDO ===== */
 .card-login > * {
   position: relative;
   z-index: 2;
+  flex-shrink: 0; /* Impede que os elementos internos encolham */
 }
 
 /* ===== LOGO ===== */
 .logo-area {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  flex-shrink: 0;
 }
 
 .logo-circle {
-  width: 140px;
-  height: 140px;
-
+  width: 110px;
+  height: 110px;
   margin: auto;
-
   border-radius: 50%;
-
   border: 4px solid #6b321f;
-
-  background: #100606;
-
+  background: rgba(16, 6, 6, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  box-shadow:
-    0 0 30px rgba(255, 98, 0, 0.15),
-    inset 0 0 15px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 30px rgba(255, 98, 0, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.03);
 }
 
 .logo-circle img {
-  width: 95px;
+  width: 75px;
 }
 
-/* ===== TÍTULO ===== */
 .logo-area h1 {
-  margin-top: 24px;
-
+  margin-top: 18px;
   color: #ff8b5b;
-
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
 }
 
 .logo-area p {
-  margin-top: 8px;
-
-  color: #756767;
-
-  font-size: 1.15rem;
+  margin-top: 6px;
+  color: #a39595;
+  font-size: 1rem;
 }
 
 /* ===== TEXTOS ===== */
 .card-login h2 {
   color: #fff;
-
-  font-size: 2rem;
-
-  margin-bottom: 14px;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
 }
 
 .subtexto {
-  color: #7b6e6e;
-
-  font-size: 1.08rem;
-  line-height: 1.6;
-
-  margin-bottom: 34px;
+  color: #bfaeae;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
 }
 
 /* ===== LABEL ===== */
 .card-login label {
   display: block;
-
-  margin-top: 20px;
-  margin-bottom: 12px;
-
+  margin-top: 16px;
+  margin-bottom: 10px;
   color: #ff8b5b;
-
   font-size: 0.95rem;
   font-weight: 700;
-
   letter-spacing: 1px;
 }
 
 /* ===== INPUT ===== */
 .card-login input {
   width: 100%;
-  height: 68px;
-
-  padding: 0 22px;
-
+  height: 58px;
+  min-height: 58px; 
+  flex-shrink: 0;
+  padding: 0 18px;
   border: none;
   outline: none;
-
-  border-radius: 22px;
-
-  background: #160b0b !important;
-
-  border: 1px solid rgba(255, 255, 255, 0.04);
-
+  border-radius: 16px;
+  background: rgba(22, 11, 11, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   color: #fff;
-
-  font-size: 1.1rem;
-
+  font-size: 1rem;
   transition: 0.3s;
 }
 
 .card-login input::placeholder {
-  color: #726767;
+  color: #8c7e7e;
 }
 
 .card-login input:focus {
   border: 1px solid #ff7b42;
-
-  box-shadow:
-    0 0 0 3px rgba(255, 123, 66, 0.08),
-    0 0 20px rgba(255, 123, 66, 0.18);
+  background: rgba(22, 11, 11, 0.9) !important;
+  box-shadow: 0 0 0 3px rgba(255, 123, 66, 0.08), 0 0 20px rgba(255, 123, 66, 0.18);
 }
 
 /* ===== BOTÃO ===== */
 .card-login button {
   width: 100%;
-  height: 72px;
-
-  margin-top: 34px;
-
+  height: 62px;
+  min-height: 62px;
+  flex-shrink: 0;
+  margin-top: 24px;
   border: none;
-  border-radius: 24px;
-
+  border-radius: 18px;
   cursor: pointer;
-
   background: linear-gradient(90deg, #ff824d, #f5652d);
-
   color: #111;
-
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-
   transition: 0.3s;
-
   box-shadow: 0 0 25px rgba(255, 120, 60, 0.35);
 }
 
 .card-login button:hover {
   transform: translateY(-2px);
-
   box-shadow: 0 8px 30px rgba(255, 120, 60, 0.45);
 }
 
 /* ===== CAMPO NOME ===== */
 #nomeArea {
   display: none;
+  flex-direction: column;
+  flex-shrink: 0;
   animation: fade 0.4s ease;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* ==========================================================================
+   ADAPTAÇÃO REFINADA PARA DESKTOP / TELAS MAIORES
+   ========================================================================== */
+@media (min-width: 768px) {
+  .login-bg-container {
+    padding: 0; 
+  }
+  .card-login {
+    padding: 40px 30px;
+    border-radius: 32px;
+  }
+  .logo-circle {
+    width: 140px;
+    height: 140px;
+  }
+  .logo-circle img {
+    width: 95px;
+  }
+  .logo-area h1 {
+    font-size: 2.2rem;
+  }
+  .logo-area p {
+    font-size: 1.15rem;
+  }
+  .card-login h2 {
+    font-size: 2rem;
+  }
+  .subtexto {
+    font-size: 1.08rem;
+    margin-bottom: 34px;
+  }
+  .card-login input {
+    height: 68px;
+    min-height: 68px;
+    border-radius: 22px;
+    font-size: 1.1rem;
+  }
+  .card-login button {
+    height: 72px;
+    min-height: 72px;
+    border-radius: 24px;
+    font-size: 1.5rem;
+    margin-top: 34px;
   }
 }
