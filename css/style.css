@@ -873,13 +873,6 @@ textarea {
 
 /* =============== CARRINHO =============== */
 
-/* .cart-item-card {
-  border: 3px solid var(--preto);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-} */
-
 .header-card {
   display: flex;
   justify-content: space-between;
@@ -887,22 +880,12 @@ textarea {
   margin-bottom: 0.3em;
 }
 
-/* .carrinho-nome-produto {
-  font-size: 18px;
-  font-weight: 100;
-} */
-
 .carrinho-subtotal-produto {
   color: var(--vermelho);
   font-size: 14px;
   font-weight: 800;
   font-family: var(--font-secundaria);
 }
-
-/* .carrinho-nome-produto,
-.carrinho-subtotal-produto {
-  margin: 0;
-} */
 
 .botoes-add-obs {
   display: flex;
@@ -922,11 +905,6 @@ textarea {
   margin: 0;
 }
 
-/* .carrinho-quantidade-produto {
-  display: flex;
-  text-align: center;
-} */
-
 .botao-menos,
 .botao-mais {
   background: oklch(92.8% 0.006 264.531);
@@ -941,16 +919,6 @@ textarea {
   margin: 2px auto;
   /* stroke: 10px !important; */
 }
-
-/* .numero-qtd {
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  color: var(--preto);
-  margin: 0;
-  width: 31px;
-  height: 23px;
-} */
 
 /* LIXEIRA */
 .botao-excluir {
@@ -1145,16 +1113,16 @@ textarea {
 
 /* teste de css do login */
 /* ===== CARD LOGIN ===== */
-.card {
+/* .card-login {
   width: 100%;
   max-width: 420px;
   padding: 40px 30px;
   border-radius: 32px;
-  position: relative;
-  overflow: hidden;
+  position: relative !important;
+  overflow: hidden; */
 
-  /* BACKGROUND IGUAL DA IMAGEM */
-  background:
+/* BACKGROUND IGUAL DA IMAGEM */
+/* background:
     radial-gradient(
       circle at top right,
       rgba(255, 120, 60, 0.18) 0%,
@@ -1172,20 +1140,20 @@ textarea {
   box-shadow:
     0 0 40px rgba(255, 98, 0, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-}
+} */
 
 /* ===== EFEITOS GRANDES DO FUNDO ===== */
-.card::before,
+/* .card::before,
 .card::after {
   content: "";
   position: absolute;
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
-}
+} */
 
 /* BOLA SUPERIOR */
-.card::before {
+/* .card::before {
   width: 420px;
   height: 420px;
   background: radial-gradient(
@@ -1197,10 +1165,10 @@ textarea {
 
   top: -180px;
   right: -180px;
-}
+} */
 
 /* BOLA INFERIOR */
-.card::after {
+/* .card::after {
   width: 320px;
   height: 320px;
 
@@ -1213,21 +1181,21 @@ textarea {
 
   bottom: -170px;
   left: -170px;
-}
+} */
 
 /* ===== CONTEÚDO ===== */
-.card > * {
+/* .card > * {
   position: relative;
   z-index: 2;
-}
+} */
 
 /* ===== LOGO ===== */
-.logo-area {
+/* .logo-area {
   text-align: center;
   margin-bottom: 40px;
-}
+} */
 
-.logo-circle {
+/* .logo-circle {
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -1244,43 +1212,43 @@ textarea {
   box-shadow:
     0 0 30px rgba(255, 98, 0, 0.15),
     inset 0 0 15px rgba(255, 255, 255, 0.03);
-}
+} */
 
-.logo-circle img {
+/* .logo-circle img {
   width: 95px;
-}
+} */
 
 /* ===== TÍTULO ===== */
-.logo-area h1 {
+/* .logo-area h1 {
   margin-top: 24px;
   color: #ff8b5b;
   font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-}
+} */
 
-.logo-area p {
+/* .logo-area p {
   margin-top: 8px;
   color: #756767;
   font-size: 1.15rem;
-}
+} */
 
 /* ===== TEXTO ===== */
-.card h2 {
+/* .card h2 {
   color: #fff;
   font-size: 2rem;
   margin-bottom: 14px;
-}
+} */
 
-.subtexto {
+/* .subtexto {
   color: #7b6e6e;
   font-size: 1.08rem;
   line-height: 1.6;
   margin-bottom: 34px;
-}
+} */
 
 /* ===== LABEL ===== */
-.card label {
+/* .card label {
   display: block;
   color: #ff8b5b;
   font-size: 0.95rem;
@@ -1288,10 +1256,10 @@ textarea {
   letter-spacing: 1px;
   margin-bottom: 12px;
   margin-top: 20px;
-}
+} */
 
 /* ===== INPUT ===== */
-.card input {
+/* .card input {
   width: 100%;
   height: 68px;
 
@@ -1322,10 +1290,10 @@ textarea {
   box-shadow:
     0 0 0 3px rgba(255, 123, 66, 0.08),
     0 0 20px rgba(255, 123, 66, 0.18);
-}
+} */
 
 /* ===== BOTÃO ===== */
-.card button {
+/* .card button {
   width: 100%;
   height: 72px;
 
@@ -1352,10 +1320,10 @@ textarea {
   transform: translateY(-2px);
 
   box-shadow: 0 8px 30px rgba(255, 120, 60, 0.45);
-}
+} */
 
 /* ===== CAMPO NOME ===== */
-#nomeArea {
+/* #nomeArea {
   display: none;
   animation: fade 0.4s ease;
 }
@@ -1370,4 +1338,4 @@ textarea {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
