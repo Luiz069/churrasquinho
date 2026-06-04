@@ -74,10 +74,8 @@ header {
 
 .aviso-icone {
   color: oklch(0.73 0.17 46);
-  width: calc(0.25rem * 7);
-  height: calc(0.25rem * 7);
-  border-radius: 3.40282e38px;
-  /* background: linear-gradient(135deg, oklch(0.73 0.17 46), oklch(0.65 0.18 38)); */
+  width: calc(0.25rem * 9);
+  height: calc(0.25rem * 9);
   justify-content: center;
   align-items: center;
   display: flex;
@@ -85,8 +83,9 @@ header {
 
 .aviso-texto {
   color: black;
-  font-size: 0.875rem;
-  line-height: calc(1.25 / 0.875);
+  font-size: 1rem;
+  line-height: calc(1.5 / 1);
+  font-weight: 600;
   margin: 0;
 }
 
