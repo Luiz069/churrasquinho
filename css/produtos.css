@@ -356,6 +356,7 @@
   color: oklch(0.6 0.01 50);
   font-size: 0.875rem;
   line-height: calc(1.25 / 0.875);
+  margin-bottom: 0;
 }
 
 .subtotal {

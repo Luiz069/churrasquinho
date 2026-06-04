@@ -8,12 +8,6 @@
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-
-  <!-- ======= FONTS ====== -->
-  <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap"
-      rel="stylesheet"
-    /> -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
 </head>
@@ -22,36 +16,36 @@
   <!-- LOGIN -->
   <div class="login-bg-container" id="loginBox">
 
-  <div class="card-login" >
+    <div class="card-login">
 
-    <div class="logo-area">
-      <div class="logo-circle">
-        <img src="img/logo-03.png" alt="Logo">
+      <div class="logo-area">
+        <div class="logo-circle">
+          <img src="img/logo-03.png" alt="Logo">
+        </div>
+
+        <h1>Churrasquinho Durans</h1>
+        <p>Sabor que conquista</p>
       </div>
 
-      <h1>Churrasquinho Durans</h1>
-      <p>Sabor que conquista</p>
+      <h2>Bem-vindo!</h2>
+
+      <p class="subtexto">
+        Informe seu número de telefone para continuar
+      </p>
+
+      <label for="telefone">NÚMERO DE TELEFONE</label>
+      <input type="text" id="telefone" placeholder="(11) 99999-9999" oninput="mostrarNome()">
+
+      <div id="nomeArea">
+        <label for="nome">NOME</label>
+        <input type="text" id="nome" placeholder="Seu nome">
+      </div>
+
+      <button type="button" onclick="entrar()">
+        Entrar
+      </button>
+
     </div>
-
-    <h2>Bem-vindo!</h2>
-
-    <p class="subtexto">
-      Informe seu número de telefone para continuar
-    </p>
-
-    <label for="telefone">NÚMERO DE TELEFONE</label>
-    <input type="text" id="telefone" placeholder="(11) 99999-9999" oninput="mostrarNome()">
-
-    <div id="nomeArea">
-      <label for="nome">NOME</label>
-      <input type="text" id="nome" placeholder="Seu nome">
-    </div>
-
-    <button type="button" onclick="entrar()">
-      Entrar
-    </button>
-
-  </div>
 
   </div>
   <!-- ========================================================= -->
@@ -71,6 +65,13 @@
     </header>
 
     <main>
+      <!-- ================= AVISO DE ENTREGA ================ -->
+      <!-- <div class="aviso-entrega">
+        <img src="/img/icons/entrega-rapida.png" alt="Ícone de entrega" class="aviso-icone" />
+        <p class="aviso-texto">Entrega grátis para pedidos acima de R$ 20,00</p>
+      </div> -->
+
+
       <!-- ============= BANNER ============== -->
       <div class="banner">
         <div class="bola-flutuante"></div>
@@ -1570,6 +1571,90 @@
             <p><b class="add">Adicionais:</b></p>
 
             <div class="lista-adicionais">
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-queijo">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Queijo extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-calabresa">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Calabresa extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-ovo">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Ovo extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-carneIndustrial">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Carne industrial extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 3,00
+                </span>
+              </label>
+
+              <label class="add-card">
+                <div class="add-left">
+                  <div class="checkbox-custom">
+                    <input type="checkbox" id="extra-carneCaseira">
+                    <span></span>
+                  </div>
+
+                  <span class="add-texto">
+                    Carne caseira extra
+                  </span>
+                </div>
+
+                <span class="add-preco">
+                  + R$ 4,00
+                </span>
+              </label>
 
               <label class="add-card">
                 <div class="add-left">
@@ -1591,24 +1676,7 @@
               <label class="add-card">
                 <div class="add-left">
                   <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-queijo">
-                    <span></span>
-                  </div>
-
-                  <span class="add-texto">
-                    Queijo extra
-                  </span>
-                </div>
-
-                <span class="add-preco">
-                  + R$ 3,00
-                </span>
-              </label>
-
-              <label class="add-card">
-                <div class="add-left">
-                  <div class="checkbox-custom">
-                    <input type="checkbox" id="extra-ovo">
+                    <input type="checkbox" id="extra-frango">
                     <span></span>
                   </div>
 
@@ -1618,7 +1686,7 @@
                 </div>
 
                 <span class="add-preco">
-                  + R$ 3,00
+                  + R$ 4,00
                 </span>
               </label>
 
@@ -1707,7 +1775,7 @@
         <div class="modal-prod-footer">
           <!-- TOTAL -->
           <div class="subtotal-tag">
-            <p>Total:</p>
+            <p class="titulo-subtotal">Total:</p>
             <p class="subtotal">R$ <span id="m-total-bebida">0.00</span></p>
           </div>
 

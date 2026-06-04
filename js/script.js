@@ -36,7 +36,7 @@ function sair() {
   });
 }
 
-// ========== TESTE COD NOVO ==========
+// ========== TESTE COD Nfrango ==========
 
 // Máscara inteligente
 
@@ -186,28 +186,28 @@ let qtdModal = 1;
 let extras = {
   bacon: false,
   queijo: false,
+  frango: false,
+  calabresa: false,
   ovo: false,
-  cebola: false,
-  molho: false,
-  batata: false,
+  carneCaseira: false,
+  carneIndustrial: false,
   catupiry: false,
-  pimenta: false,
 };
 
 const precosExtras = {
   bacon: 4.0,
   queijo: 3.0,
-  ovo: 2.5,
-  cebola: 3.0,
-  molho: 2.0,
-  batata: 2.0,
-  catupiry: 3.5,
-  pimenta: 2.0,
+  frango: 4.0,
+  calabresa: 3.0,
+  ovo: 3.0,
+  carneCaseira: 4.0,
+  carneIndustrial: 3.0,
+  catupiry: 4.0,
 };
 
 let valorPagamento = "";
 
-let metodoConsumo = ""; // 👈 NOVO
+let metodoConsumo = ""; // 👈 Nfrango
 
 // ================= MODAL PRODUTO =================
 
@@ -224,12 +224,12 @@ function abrirModal(nome, preco, desc, imagem) {
   extras = {
     bacon: false,
     queijo: false,
+    frango: false,
+    calabresa: false,
     ovo: false,
-    cebola: false,
-    molho: false,
-    batata: false,
+    carneCaseira: false,
+    carneIndustrial: false,
     catupiry: false,
-    pimenta: false,
   };
 
   setTimeout(() => {
@@ -270,17 +270,20 @@ function capturarExtras() {
 
   extras.queijo = document.getElementById("extra-queijo")?.checked || false;
 
+  extras.frango = document.getElementById("extra-frango")?.checked || false;
+
   extras.ovo = document.getElementById("extra-ovo")?.checked || false;
 
-  extras.cebola = document.getElementById("extra-cebola")?.checked || false;
+  extras.carneCaseira =
+    document.getElementById("extra-carneCaseira")?.checked || false;
 
-  extras.molho = document.getElementById("extra-molho")?.checked || false;
-
-  extras.batata = document.getElementById("extra-batata")?.checked || false;
+  extras.carneIndustrial =
+    document.getElementById("extra-carneIndustrial")?.checked || false;
 
   extras.catupiry = document.getElementById("extra-catupiry")?.checked || false;
 
-  extras.pimenta = document.getElementById("extra-pimenta")?.checked || false;
+  extras.calabresa =
+    document.getElementById("extra-calabresa")?.checked || false;
 }
 
 function atualizarInterfaceModal() {
@@ -458,24 +461,24 @@ function addAoCarrinho() {
     custoExtras += precosExtras.queijo;
   }
 
+  if (extras.frango) {
+    listaExtras.push("frango frito");
+    custoExtras += precosExtras.frango;
+  }
+
   if (extras.ovo) {
-    listaExtras.push("Ovo frito");
+    listaExtras.push("ovo ");
     custoExtras += precosExtras.ovo;
   }
 
-  if (extras.cebola) {
-    listaExtras.push("Cebola caramelizada");
-    custoExtras += precosExtras.cebola;
+  if (extras.carneCaseira) {
+    listaExtras.push("carneCaseira");
+    custoExtras += precosExtras.carneCaseira;
   }
 
-  if (extras.molho) {
-    listaExtras.push("Molho especial");
-    custoExtras += precosExtras.molho;
-  }
-
-  if (extras.batata) {
-    listaExtras.push("Batata palha");
-    custoExtras += precosExtras.batata;
+  if (extras.carneIndustrial) {
+    listaExtras.push("carneIndustrial");
+    custoExtras += precosExtras.carneIndustrial;
   }
 
   if (extras.catupiry) {
@@ -483,9 +486,9 @@ function addAoCarrinho() {
     custoExtras += precosExtras.catupiry;
   }
 
-  if (extras.pimenta) {
-    listaExtras.push("Pimenta jalapeño");
-    custoExtras += precosExtras.pimenta;
+  if (extras.calabresa) {
+    listaExtras.push("Calabresa");
+    custoExtras += precosExtras.calabresa;
   }
 
   carrinho.push({
@@ -1470,15 +1473,15 @@ function editarPerfil() {
 
   if (!user) return;
 
-  const novoNome = prompt("Digite seu novo nome:", user.nome);
+  const nfrangoNome = prompt("Digite seu nfrango nome:", user.nome);
 
-  if (!novoNome || novoNome.trim() === "") {
+  if (!nfrangoNome || nfrangoNome.trim() === "") {
     return;
   }
 
   // atualiza objeto
 
-  user.nome = novoNome.trim();
+  user.nome = nfrangoNome.trim();
 
   // salva
 
@@ -1563,9 +1566,9 @@ function fecharModalPerfil() {
 // ================= SALVAR NOME =================
 
 function salvarPerfilEditado() {
-  const novoNome = document.getElementById("editar-nome").value;
+  const nfrangoNome = document.getElementById("editar-nome").value;
 
-  if (!novoNome) {
+  if (!nfrangoNome) {
     alert("Digite um nome!");
 
     return;
@@ -1573,7 +1576,7 @@ function salvarPerfilEditado() {
 
   const user = JSON.parse(localStorage.getItem("usuario"));
 
-  user.nome = novoNome;
+  user.nome = nfrangoNome;
 
   localStorage.setItem("usuario", JSON.stringify(user));
 
@@ -1582,7 +1585,7 @@ function salvarPerfilEditado() {
   const perfilNome = document.getElementById("perfil-nome");
 
   if (perfilNome) {
-    perfilNome.innerText = novoNome;
+    perfilNome.innerText = nfrangoNome;
   }
 
   // atualiza input carrinho
@@ -1590,7 +1593,7 @@ function salvarPerfilEditado() {
   const inputNome = document.getElementById("c-nome");
 
   if (inputNome) {
-    inputNome.value = novoNome;
+    inputNome.value = nfrangoNome;
   }
 
   fecharModalPerfil();
@@ -1599,7 +1602,7 @@ function salvarPerfilEditado() {
   const bannerNome = document.getElementById("banner-nome");
 
   if (bannerNome) {
-    bannerNome.innerText = `${novoNome}! 👋`;
+    bannerNome.innerText = `${nfrangoNome}! 👋`;
   }
 
   mostrarToast("✅ Nome atualizado!");
