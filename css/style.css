@@ -1,16 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-
-/* @import url("inicio.css"); */
 @import url("inicioNovo.css");
-/* @import url("historico.css"); */
 @import url("produtos.css");
-/* @import url("responsivo.css"); */
 
 :root {
   --background: oklch(14.1% 0.005 285.823);
   --branco: #fff;
-  /* --vermelho: #e7000b; */
-  --amarelo: #ffd700;
   --fundo: #fff5f5;
   --preto: oklch(0.11 0.008 30);
   --preto-claro: #333333;
@@ -18,10 +11,6 @@
   --cinza-claro02: #3d3e3f;
   --cinza: oklch(92.8% 0.006 264.531);
   --cinza-2: oklch(69.306% 0.00152 285.587);
-
-  /* --font-principal: segoe-ui, Tahoma, Geneva, Verdana, sans-serif; */
-  /* --font-secundaria: "Poppins", sans-serif; */
-  /* --font-terciaria: "Chewy", cursive; */
 }
 
 * {
@@ -34,15 +23,10 @@
 
 body {
   background-color: var(--background) !important;
-  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   font-family: Inter, sans-serif;
 
   min-height: 100vh;
-
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
 main {
@@ -55,9 +39,12 @@ main {
 
 /* ============== SCROLLBAR =============== */
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE e Edge antigo */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE e Edge antigo */
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -70,53 +57,6 @@ html {
 /* IE e Edge antigo */
 body {
   -ms-overflow-style: none;
-}
-/* ============================================== */
-
-/* =============== ICON DO CARRINHO =============== */
-.footer-btn {
-  position: fixed;
-  bottom: 0;
-  width: 10%;
-  padding: 15px;
-  text-align: end;
-  margin: 0;
-
-  display: flex;
-  justify-content: flex-end;
-  z-index: 0;
-}
-
-.btn-carrinho {
-  background: var(--vermelho);
-  color: white;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  gap: 0;
-}
-
-.btn-carrinho svg {
-  fill: white;
-  width: 24px;
-  height: 24px;
-  /* margin: 0 auto; */
-  margin-top: 0.2rem;
-}
-
-#cart-count {
-  font-family: var(--font-secundaria);
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 0.2rem;
 }
 
 /* =============== MODAL DO CARRINHO =============== */
@@ -156,9 +96,6 @@ body {
   gap: 0.5rem;
   min-width: 0;
   min-width: 0;
-
-  display: flex;
-  align-items: center;
 
   border-bottom: 1px solid oklch(0.22 0.008 30);
   padding-block: calc(0.25rem * 4);
@@ -391,8 +328,6 @@ body {
   color: oklch(0.1 0.01 30);
 }
 
-/* ======================================== */
-
 /* ============== pagamento ============== */
 .pagamento-botoes {
   gap: calc(0.25rem * 2);
@@ -535,7 +470,7 @@ body {
   inset: calc(0.25rem * 0);
   position: fixed;
   min-width: 0;
-  min-width: 0;
+  min-height: 0;
 
   right: 9999px;
 }
@@ -566,9 +501,6 @@ body {
   min-width: 0;
   min-width: 0;
 
-  display: flex;
-  align-items: center;
-
   border-bottom: 1px solid oklch(0.22 0.008 30);
   padding-block: calc(0.25rem * 4);
   padding-inline: calc(0.25rem * 6);
@@ -594,7 +526,6 @@ body {
   background-color: oklch(0.18 0.008 30);
   padding: calc(0.25rem * 4);
   border-radius: 1rem;
-  /* gap: calc(0.25rem * 3); */
   margin-bottom: calc(0.25rem * 5);
 }
 
@@ -651,7 +582,6 @@ body {
 
 .editar-perfil-btn {
   background: oklch(0.22 0.008 30);
-  /* color: oklch(0.8 0.005 50); */
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.15s;
@@ -772,7 +702,6 @@ body {
   color: oklch(0.6 0.01 50);
   font-size: 0.75rem;
   line-height: calc(1 / 0.75);
-  /* margin-bottom: calc(0.25rem * 1); */
 }
 
 .item-nome-historico {
@@ -838,8 +767,6 @@ body {
   width: 100%;
 }
 
-/* ======================================== */
-
 /* ======= DADOS DO PEDIDO ========== */
 .dados-cliente {
   gap: calc(0.25rem * 6);
@@ -854,8 +781,6 @@ footer p {
   color: #fff !important;
 }
 
-/* ============================ */
-
 .cart-sidebar.active {
   right: 0;
 }
@@ -869,174 +794,6 @@ textarea {
   border-radius: 10px;
   margin-top: 5px;
 }
-/* -============================== */
-
-/* =============== CARRINHO =============== */
-
-.header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.3em;
-}
-
-.carrinho-subtotal-produto {
-  color: var(--vermelho);
-  font-size: 14px;
-  font-weight: 800;
-  font-family: var(--font-secundaria);
-}
-
-.botoes-add-obs {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-left: 6px;
-  font-size: 12px;
-  font-weight: 100;
-  margin-bottom: 1.5em;
-}
-
-/* Quantidade */
-.carrinho-card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-}
-
-.botao-menos,
-.botao-mais {
-  background: oklch(92.8% 0.006 264.531);
-  border: 0;
-  border-radius: 10%;
-}
-
-.botao-menos-svg,
-.botao-mais-svg {
-  display: flex;
-  stroke-width: 50px;
-  margin: 2px auto;
-  /* stroke: 10px !important; */
-}
-
-/* LIXEIRA */
-.botao-excluir {
-  display: flex;
-  background: none;
-  border: 0;
-}
-
-.lixeira {
-  fill: var(--preto);
-  background: none;
-}
-
-.lixeira path {
-  fill: var(--vermelho);
-}
-
-/* TOTAL */
-.pedido-total {
-  display: flex;
-  opacity: 1;
-  text-align: center;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-secundaria);
-  font-size: 18px;
-  font-weight: 700;
-  margin: 12px 0 20px 0;
-}
-
-/* .total,
-#total-final {
-  font-family: var(--font-secundaria);
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--vermelho);
-} */
-
-/* =============== DADOS CLIENTE =============== */
-/* .dados-cliente {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-} */
-
-.titulo-dados {
-  font-weight: 100;
-  font-family: var(--font-principal);
-}
-
-/* .dados {
-  margin-bottom: 8px;
-} */
-
-/* ========= FORMA DE PAGAMENTO ========== */
-.select-custom {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-}
-
-.selected {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 12px;
-  font-family: var(--font-secundaria);
-  color: var(--cinza-2);
-  font-weight: 600;
-  border: 2px solid var(--preto);
-  border-radius: 10px;
-  margin-top: 5px;
-}
-
-.bi {
-  margin-bottom: -3px;
-}
-
-.options {
-  position: absolute;
-  width: 100%;
-  border: 1px solid var(--preto);
-  /* border-top: none; */
-  margin-top: -5.5px;
-  background: var(--cinza);
-  display: none;
-  z-index: 10;
-}
-
-.options div {
-  padding: 10px;
-  font-family: var(--font-secundaria);
-  font-weight: 600;
-  border: 0.5px solid var(--fundo);
-}
-
-.options div:hover {
-  background: #f0f0f0;
-}
-
-/* quando aberto */
-.select-custom.active .options {
-  display: block;
-}
-
-.voltar-carrinho {
-  color: var(--preto);
-  background-color: rgba(189, 189, 189, 0.457);
-}
-
-/* =============== consumo =============== */
-/* .select-custom .options {
-  display: none;
-}
-
-.select-custom.active .options {
-  display: block;
-} */
 
 /* ===== TOAST ===== */
 .toast {
@@ -1044,26 +801,18 @@ textarea {
   top: 20px;
   left: 50%;
   transform: translateX(-50%) translateY(-20px);
-
   min-width: 320px;
   max-width: 90%;
-
   padding: 16px 18px;
-
   border-radius: 14px;
-
   display: flex;
   align-items: center;
   gap: 12px;
-
   font-size: 15px;
   font-weight: 600;
-
   opacity: 0;
   pointer-events: none;
-
   transition: 0.25s ease;
-
   z-index: 999999;
 }
 
@@ -1098,244 +847,11 @@ textarea {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 13px;
   font-weight: bold;
-
   flex-shrink: 0;
-
   background: rgba(255, 255, 255, 0.15);
 }
-
-/* teste de css do login */
-/* ===== CARD LOGIN ===== */
-/* .card-login {
-  width: 100%;
-  max-width: 420px;
-  padding: 40px 30px;
-  border-radius: 32px;
-  position: relative !important;
-  overflow: hidden; */
-
-/* BACKGROUND IGUAL DA IMAGEM */
-/* background:
-    radial-gradient(
-      circle at top right,
-      rgba(255, 120, 60, 0.18) 0%,
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(255, 90, 0, 0.12) 0%,
-      transparent 35%
-    ),
-    linear-gradient(180deg, rgba(18, 6, 6, 0.98), rgba(8, 2, 2, 0.98));
-
-  border: 1px solid rgba(255, 255, 255, 0.05);
-
-  box-shadow:
-    0 0 40px rgba(255, 98, 0, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-} */
-
-/* ===== EFEITOS GRANDES DO FUNDO ===== */
-/* .card::before,
-.card::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
-  pointer-events: none;
-} */
-
-/* BOLA SUPERIOR */
-/* .card::before {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 100, 40, 0.12) 0%,
-    rgba(255, 100, 40, 0.04) 45%,
-    transparent 75%
-  );
-
-  top: -180px;
-  right: -180px;
-} */
-
-/* BOLA INFERIOR */
-/* .card::after {
-  width: 320px;
-  height: 320px;
-
-  background: radial-gradient(
-    circle,
-    rgba(255, 80, 20, 0.1) 0%,
-    rgba(255, 80, 20, 0.03) 50%,
-    transparent 75%
-  );
-
-  bottom: -170px;
-  left: -170px;
-} */
-
-/* ===== CONTEÚDO ===== */
-/* .card > * {
-  position: relative;
-  z-index: 2;
-} */
-
-/* ===== LOGO ===== */
-/* .logo-area {
-  text-align: center;
-  margin-bottom: 40px;
-} */
-
-/* .logo-circle {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  margin: auto;
-
-  border: 4px solid #6b321f;
-
-  background: #100606;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  box-shadow:
-    0 0 30px rgba(255, 98, 0, 0.15),
-    inset 0 0 15px rgba(255, 255, 255, 0.03);
-} */
-
-/* .logo-circle img {
-  width: 95px;
-} */
-
-/* ===== TÍTULO ===== */
-/* .logo-area h1 {
-  margin-top: 24px;
-  color: #ff8b5b;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-} */
-
-/* .logo-area p {
-  margin-top: 8px;
-  color: #756767;
-  font-size: 1.15rem;
-} */
-
-/* ===== TEXTO ===== */
-/* .card h2 {
-  color: #fff;
-  font-size: 2rem;
-  margin-bottom: 14px;
-} */
-
-/* .subtexto {
-  color: #7b6e6e;
-  font-size: 1.08rem;
-  line-height: 1.6;
-  margin-bottom: 34px;
-} */
-
-/* ===== LABEL ===== */
-/* .card label {
-  display: block;
-  color: #ff8b5b;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  margin-top: 20px;
-} */
-
-/* ===== INPUT ===== */
-/* .card input {
-  width: 100%;
-  height: 68px;
-
-  border: none;
-  outline: none;
-
-  border-radius: 22px;
-
-  padding: 0 22px;
-
-  background: #160b0b;
-
-  border: 1px solid rgba(255, 255, 255, 0.04);
-
-  color: #fff;
-  font-size: 1.1rem;
-
-  transition: 0.3s;
-}
-
-.card input::placeholder {
-  color: #726767;
-}
-
-.card input:focus {
-  border: 1px solid #ff7b42;
-
-  box-shadow:
-    0 0 0 3px rgba(255, 123, 66, 0.08),
-    0 0 20px rgba(255, 123, 66, 0.18);
-} */
-
-/* ===== BOTÃO ===== */
-/* .card button {
-  width: 100%;
-  height: 72px;
-
-  margin-top: 34px;
-
-  border: none;
-  border-radius: 24px;
-
-  cursor: pointer;
-
-  background: linear-gradient(90deg, #ff824d, #f5652d);
-
-  color: #111;
-
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  transition: 0.3s;
-
-  box-shadow: 0 0 25px rgba(255, 120, 60, 0.35);
-}
-
-.card button:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 30px rgba(255, 120, 60, 0.45);
-} */
-
-/* ===== CAMPO NOME ===== */
-/* #nomeArea {
-  display: none;
-  animation: fade 0.4s ease;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */

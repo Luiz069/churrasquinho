@@ -91,11 +91,9 @@ header {
 
 /* =============== BANNER =============== */
 .banner {
-  background: linear-gradient(
-    135deg,
-    oklch(0.2 0.015 35) 0%,
-    oklch(0.18 0.012 40) 100%
-  );
+  background: linear-gradient(135deg,
+      oklch(0.2 0.015 35) 0%,
+      oklch(0.18 0.012 40) 100%);
   border: 1px solid oklch(0.28 0.01 40);
   padding: calc(0.25rem * 5);
   margin: 16px 16px 24px;
@@ -147,6 +145,7 @@ header {
   color: oklch(0.6 0.01 50);
   margin: 0;
 }
+
 /* ======================================= */
 
 /* ==============titulo da seção ============== */
@@ -187,6 +186,7 @@ header {
   flex: 1;
   height: 1px;
 }
+
 /* ============================================= */
 
 /* ================== CARROCEL ================= */
@@ -270,7 +270,8 @@ header {
   /* --- ADICIONADO PARA TRATAR O CONTEÚDO TEXTUAL COMO COLUNA --- */
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Força esta div a esticar e ocupar todo o espaço restante do card */
+  flex-grow: 1;
+  /* Força esta div a esticar e ocupar todo o espaço restante do card */
 }
 
 /* Modificando levemente a classe que você já tem para empurrar o bloco para baixo */
@@ -282,10 +283,10 @@ header {
   min-width: 0;
 
   /* --- ALTERADO DE padding-top PARA margin-top: auto --- */
-  margin-top: auto; /* Empurra o bloco de preço e botão sempre para o rodapé */
-  padding-top: calc(
-    0.25rem * 2
-  ); /* Mantém um espaçamento mínimo seguro caso o texto seja muito longo */
+  margin-top: auto;
+  /* Empurra o bloco de preço e botão sempre para o rodapé */
+  padding-top: calc(0.25rem * 2);
+  /* Mantém um espaçamento mínimo seguro caso o texto seja muito longo */
 }
 
 .img-lanche {
@@ -306,12 +307,6 @@ header {
   height: 100%;
   max-width: 100%;
 }
-
-/* .lanche-info {
-  padding-bottom: calc(0.25rem * 3);
-  padding-top: calc(0.25rem * 1);
-  padding-inline: calc(0.25rem * 3);
-} */
 
 .titulo-lanche {
   color: oklch(0.96 0.005 50);
@@ -335,15 +330,6 @@ header {
   overflow: hidden;
   margin-bottom: calc(0.25rem * 2);
 }
-
-/* .preco-add {
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  margin-top: calc(0.25rem * 2);
-  min-height: 0;
-  min-width: 0;
-} */
 
 .lanche-preco {
   color: oklch(0.73 0.17 46);
@@ -386,9 +372,9 @@ header {
   z-index: 40;
   left: 50%;
   bottom: calc(0.25rem * 0);
-  position: fixed; /* ou sticky */
+  position: fixed;
   width: 100%;
-  z-index: 9998px; /* bem alto pra garantir */
+  z-index: 9998px;
 }
 
 .nav-opcoes {
@@ -420,30 +406,24 @@ header {
   position: relative;
   min-width: 0;
   min-height: 0;
-  /* cursor: pointer; */
-
   font: inherit;
   font-feature-settings: inherit;
   font-variation-settings: inherit;
   letter-spacing: inherit;
-  /* color: inherit; */
-  /* border-radius: 0; */
   background-color: transparent;
   opacity: 1;
 }
 
 .botao-nav {
-  color: #8e8e8e; /* cinza (inativo) */
-}
-
-.botao-nav.ativo {
-  color: #ff6600; /* laranja (ativo) */
+  color: #8e8e8e;
 }
 
 .botao-nav.ativo {
   color: #ff6600;
-  /* transform: translateY(-2px); */
-  /* background: rgba(255, 102, 0, 0.08); */
+}
+
+.botao-nav.ativo {
+  color: #ff6600;
 }
 
 .botao-nav span {
@@ -476,404 +456,7 @@ header {
 .sacola-vazia svg {
   opacity: 0.6;
 }
-/* ================== CARRINHO ================== */
-/* .consumo-buttons {
-  display: flex;
-  gap: 8px;
-}
 
-.consumo-btn {
-  flex: 1;
-  border: none;
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-
-  background: oklch(0.18 0.008 30);
-  color: oklch(0.8 0.005 50);
-}
-
-.consumo-btn.active {
-  background: oklch(0.73 0.17 46);
-  color: oklch(0.1 0.01 30);
-} */
-
-/* .pagamento-botoes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.btn-pagamento {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.2s;
-
-  background: oklch(0.18 0.008 30);
-  color: oklch(0.8 0.005 50);
-}
-
-.btn-pagamento.active {
-  background: oklch(0.73 0.17 46);
-  color: oklch(0.1 0.01 30);
-}
-
-.btn-pagamento:hover {
-  transform: scale(1.02);
-} */
-
-/* .pagamento-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.box-extra-pagamento {
-  padding: 12px;
-  border-radius: 12px;
-  background: oklch(0.16 0.008 30);
-  color: white;
-  font-size: 14px;
-
-  animation: aparecerBox 0.2s ease;
-}
-
-@keyframes aparecerBox {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */
-
-/* ================= MODAL PERFIL ================= */
-
-/* .perfil-sidebar {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100vh;
-
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-
-  z-index: 9999;
-
-  display: none;
-  flex-direction: column;
-} */
-
-/* ================= CONTAINER ================= */
-
-/* .perfil-sidebar.active {
-  display: flex;
-}
-
-.perfil-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 22px 18px;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-  background: #0f0606;
-}
-
-.perfil-header h2 {
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.btn-fechar-perfil {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-
-  border: none;
-
-  background: rgba(255, 255, 255, 0.08);
-
-  color: #999;
-
-  font-size: 20px;
-  cursor: pointer;
-} */
-
-/* ================= CONTENT ================= */
-
-/* .perfil-content {
-  flex: 1;
-  overflow-y: auto;
-
-  padding: 18px;
-
-  background: #0a0404;
-} */
-
-/* ================= USER CARD ================= */
-
-/* .perfil-user-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  background: #140909;
-
-  border-radius: 18px;
-
-  padding: 18px;
-
-  margin-bottom: 28px;
-}
-
-.perfil-avatar {
-  width: 54px;
-  height: 54px;
-
-  border-radius: 50%;
-
-  background: #ff6b2c;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #000;
-  font-weight: 700;
-  font-size: 22px;
-}
-
-.perfil-user-info {
-  flex: 1;
-}
-
-.perfil-user-info h3 {
-  color: #fff;
-  font-size: 24px;
-  margin-bottom: 4px;
-}
-
-.perfil-user-info p {
-  color: #8d8d8d;
-  font-size: 18px;
-}
-
-.btn-editar-perfil {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  border: none;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  color: #ff7a2f;
-
-  cursor: pointer;
-
-  font-size: 18px;
-} */
-
-/* ================= HISTÓRICO ================= */
-
-/* .historico-header {
-  margin-bottom: 18px;
-}
-
-.historico-header h3 {
-  color: #ff6b2c;
-  font-size: 22px;
-  font-weight: 700;
-} */
-
-/* ================= CARD PEDIDO ================= */
-
-/* .pedido-card {
-  background: #120707;
-
-  border-radius: 22px;
-
-  padding: 18px;
-
-  margin-bottom: 18px;
-}
-
-.pedido-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-
-  margin-bottom: 18px;
-}
-
-.pedido-topo h3 {
-  color: #ff7a2f;
-  font-size: 20px;
-}
-
-.data-historico {
-  color: #777;
-  font-size: 14px;
-}
-
-.total-historico {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.badges {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-
-  margin-bottom: 14px;
-}
-
-.badge {
-  padding: 8px 12px;
-  border-radius: 999px;
-
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.badge.status {
-  background: rgba(255, 140, 70, 0.15);
-  color: #ff7a2f;
-}
-
-.badge.entrega {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ddd;
-}
-
-.badge.pagamento {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ddd;
-}
-
-.linha-historico {
-  width: 100%;
-  height: 1px;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  margin: 16px 0;
-} */
-
-/* ================= ITENS ================= */
-
-/* .item-historico {
-  margin-bottom: 12px;
-}
-
-.item-nome-historico {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-
-
-.observacao-historico-item {
-  color: #777;
-  font-size: 14px;
-  font-style: italic;
-
-  margin-top: 4px;
-} */
-
-/* ================= BOTÃO REPETIR ================= */
-
-/* .btn-repetir {
-  width: 100%;
-  height: 50px;
-
-  border: none;
-  border-radius: 14px;
-
-  background: rgba(255, 122, 47, 0.2);
-
-  color: #ff7a2f;
-
-  font-size: 17px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  margin-top: 18px;
-} */
-
-/* ================= HISTÓRICO VAZIO ================= */
-
-/* .historico-vazio {
-  background: #140909;
-
-  border-radius: 22px;
-
-  padding: 40px 20px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  color: #666;
-  text-align: center;
-
-  gap: 14px;
-}
-
-.historico-vazio svg {
-  opacity: 0.5;
-} */
-
-/* ================= FOOTER ================= */
-
-/* .perfil-footer {
-  padding: 18px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-  background: #0f0606;
-}
-
-.btn-logout {
-  width: 100%;
-  height: 56px;
-
-  border: none;
-  border-radius: 18px;
-
-  background: #5a0707;
-
-  color: #ff3b3b;
-
-  font-size: 22px;
-  font-weight: 700;
-
-  cursor: pointer;
-} */
-
-/* ========================================================== */
 .modal-editar-perfil {
   position: fixed;
   inset: 0;
@@ -956,55 +539,6 @@ header {
   cursor: pointer;
 }
 
-/* ======================================= */
-/* .toast {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-
-  background: #111;
-  color: #fff;
-
-  padding: 12px 18px;
-  border-radius: 12px;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  opacity: 0;
-  pointer-events: none;
-
-  transition: 0.3s;
-
-  z-index: 99999;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-} */
-
-/* ===== BODY ===== */
-/* body { */
-/* padding: 20px; */
-
-/* overflow: hidden; */
-
-/* background:
-    radial-gradient(
-      circle at top right,
-      rgba(255, 120, 60, 0.08) 0%,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(255, 90, 0, 0.06) 0%,
-      transparent 30%
-    ),
-    #050101; */
-/* } */
-
 /* ===== CARD LOGIN ===== */
 /* ==========================================================================
    CONTAINER ISOLADO DE BACKGROUND (TOTALMENTE FIXO E TRAVADO)
@@ -1014,14 +548,17 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100dvh; /* Altura dinâmica para cravar o tamanho exato da tela no mobile */
+  height: 100dvh;
+  /* Altura dinâmica para cravar o tamanho exato da tela no mobile */
   background-color: #050202;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  overflow: hidden; /* Trava as rolagens da página por completo */
-  touch-action: none; /* Impede arrastos elásticos e gestures em smartphones */
+  overflow: hidden;
+  /* Trava as rolagens da página por completo */
+  touch-action: none;
+  /* Impede arrastos elásticos e gestures em smartphones */
 
   padding: 16px;
   z-index: 9999;
@@ -1036,12 +573,10 @@ header {
   transform: translateX(-50%);
   width: 140%;
   height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 90, 0, 0.25) 0%,
-    rgba(26, 8, 6, 0.6) 50%,
-    transparent 80%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 90, 0, 0.25) 0%,
+      rgba(26, 8, 6, 0.6) 50%,
+      transparent 80%);
   filter: blur(50px);
   z-index: 1;
   pointer-events: none;
@@ -1062,7 +597,7 @@ header {
   z-index: 1;
   pointer-events: none;
 
-  box-shadow: 
+  box-shadow:
     /* Coluna da Esquerda */
     5vw -10vh 3px #ff7b42,
     8vw -25vh 4px #ff5a00,
@@ -1079,7 +614,8 @@ header {
     10vw -120vh 3px #ff5a00,
     14vw -35vh 2px #ff7b42,
     27vw -85vh 4px #ffaa75,
-    /* Coluna do Meio */ 32vw -15vh 4px #ff5a00,
+    /* Coluna do Meio */
+    32vw -15vh 4px #ff5a00,
     35vw -35vh 3px #ffaa75,
     38vw -55vh 5px #8a7878,
     42vw -25vh 2px #ff7b42,
@@ -1097,7 +633,8 @@ header {
     50vw -130vh 2px #ff7b42,
     57vw -100vh 5px #ff5a00,
     64vw -125vh 3px #8a7878,
-    /* Coluna da Direita */ 72vw -15vh 4px #ff7b42,
+    /* Coluna da Direita */
+    72vw -15vh 4px #ff7b42,
     75vw -30vh 3px #ffaa75,
     78vw -45vh 5px #ff5a00,
     82vw -25vh 2px #8a7878,
@@ -1121,12 +658,15 @@ header {
     transform: translateY(110vh) translateX(0) scale(0.6);
     opacity: 0;
   }
+
   10% {
     opacity: 0.8;
   }
+
   90% {
     opacity: 0.5;
   }
+
   100% {
     transform: translateY(-20vh) translateX(70px) scale(1.4);
     opacity: 0;
@@ -1138,6 +678,7 @@ header {
     opacity: 0.7;
     transform: translateX(-50%) scale(1);
   }
+
   100% {
     opacity: 1;
     transform: translateX(-50%) scale(1.05);
@@ -1168,16 +709,12 @@ header {
   border-radius: 24px;
 
   background:
-    radial-gradient(
-      circle at top right,
+    radial-gradient(circle at top right,
       rgba(255, 120, 60, 0.15) 0%,
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at bottom left,
+      transparent 38%),
+    radial-gradient(circle at bottom left,
       rgba(255, 90, 0, 0.1) 0%,
-      transparent 35%
-    ),
+      transparent 35%),
     linear-gradient(180deg, rgba(18, 6, 6, 0.6), rgba(8, 2, 2, 0.55));
 
   backdrop-filter: blur(8px);
@@ -1206,12 +743,10 @@ header {
 .card-login::before {
   width: 420px;
   height: 420px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 100, 40, 0.08) 0%,
-    rgba(255, 100, 40, 0.02) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 100, 40, 0.08) 0%,
+      rgba(255, 100, 40, 0.02) 45%,
+      transparent 75%);
   top: -180px;
   right: -180px;
 }
@@ -1219,20 +754,19 @@ header {
 .card-login::after {
   width: 320px;
   height: 320px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 80, 20, 0.06) 0%,
-    rgba(255, 80, 20, 0.01) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 80, 20, 0.06) 0%,
+      rgba(255, 80, 20, 0.01) 50%,
+      transparent 75%);
   bottom: -170px;
   left: -170px;
 }
 
-.card-login > * {
+.card-login>* {
   position: relative;
   z-index: 2;
-  flex-shrink: 0; /* Impede que os elementos internos encolham */
+  flex-shrink: 0;
+  /* Impede que os elementos internos encolham */
 }
 
 /* ===== LOGO ===== */
@@ -1364,6 +898,7 @@ header {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1377,36 +912,45 @@ header {
   .login-bg-container {
     padding: 0;
   }
+
   .card-login {
     padding: 40px 30px;
     border-radius: 32px;
   }
+
   .logo-circle {
     width: 140px;
     height: 140px;
   }
+
   .logo-circle img {
     width: 95px;
   }
+
   .logo-area h1 {
     font-size: 2.2rem;
   }
+
   .logo-area p {
     font-size: 1.15rem;
   }
+
   .card-login h2 {
     font-size: 2rem;
   }
+
   .subtexto {
     font-size: 1.08rem;
     margin-bottom: 34px;
   }
+
   .card-login input {
     height: 68px;
     min-height: 68px;
     border-radius: 22px;
     font-size: 1.1rem;
   }
+
   .card-login button {
     height: 72px;
     min-height: 72px;
