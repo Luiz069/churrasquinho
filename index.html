@@ -107,65 +107,86 @@
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="misto">
             <div class="carrocel-item">
+
               <div class="img-lanche">
-                <img src="img/lanches/misto-quente.png" alt="" />
+
+                <img src="img/churrasco/espetinho.png" alt="Espetinho">
+
                 <div class="booton-img"></div>
+
               </div>
 
               <div class="lanche-info">
-                <p class="titulo-lanche">Misto Quente Sem Ovo</p>
-                <p class="lanche-desc">Pão, queijo, presunto</p>
+                <p class="titulo-lanche">
+                  Espetinho
+                </p>
+
+                <p class="lanche-desc">
+                  Escolha sua carne
+                </p>
 
                 <div class="preco-add">
-                  <span class="lanche-preco">R$ 5,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Misto Quente Sem Ovo',
-                          5,
-                          'Pão, queijo, presunto',
-                          'img/lanches/misto-quente.png',
-                        )
-                      ">
+
+                  <span class="lanche-preco">
+                    R$ 15,00
+                  </span>
+
+                  <button class="btn-add" onclick="abrirModalEspetinho()">
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      stroke="currentColor" stroke-width="2">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
+
                   </button>
+
                 </div>
+
               </div>
+
             </div>
 
             <div class="carrocel-item">
+
               <div class="img-lanche">
-                <img src="img/lanches/misto-com-ovo.png" alt="" />
+
+                <img src="img/churrasco/churrasco-completo.png" alt="Churrasco Completo">
+
                 <div class="booton-img"></div>
+
               </div>
 
               <div class="lanche-info">
-                <p class="titulo-lanche">Misto Quente Com Ovo</p>
-                <p class="lanche-desc">Pão, queijo, presunto, ovo</p>
+
+                <p class="titulo-lanche">
+                  Churrasco Completo
+                </p>
+
+                <p class="lanche-desc">
+                  Escolha sua carne
+                </p>
 
                 <div class="preco-add">
-                  <span class="lanche-preco">R$ 7,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Misto Quente Com Ovo',
-                          7,
-                          'Pão, queijo, presunto, ovo',
-                          'img/lanches/misto-com-ovo.png',
-                        )
-                      ">
+
+                  <span class="lanche-preco">
+                    R$ 20,00
+                  </span>
+
+                  <button class="btn-add" onclick="abrirModalChurrasco()">
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      stroke="currentColor" stroke-width="2">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
+
                   </button>
+
                 </div>
+
               </div>
+
             </div>
           </div>
         </section>
@@ -1619,6 +1640,210 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MODAL PRODUTO ESPETINHO -->
+    <div id="modalEspetinho" class="modal-produto">
+
+      <div class="modal-conteudo">
+
+        <div class="modal-topo">
+
+          <img id="imgEspetinho" class="modal-img" src="img/churrasco/espetinho.png">
+
+          <button onclick="fecharModalEspetinho()" class="botao-fechar">
+            ✕
+          </button>
+
+        </div>
+
+        <div class="modal-info">
+
+          <h2 id="tituloEspetinho" class="modal-titulo">
+            Espetinho
+          </h2>
+
+          <p class="modal-desc">
+
+            Escolha seu espetinho favorito
+
+          </p>
+
+          <div class="quantida-lanche">
+
+            <label>
+              <b class="quantidade">
+                Quantidade:
+              </b>
+            </label>
+
+            <div class="quantidade-produto">
+
+              <button class="botao-qtd" onclick="mudarQtdEspetinho(-1)">
+                -
+              </button>
+
+              <span id="qtdEspetinho">
+                1
+              </span>
+
+              <button class="botao-qtd" onclick="mudarQtdEspetinho(1)">
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="adicionais-container">
+
+            <p>
+
+              <b class="add">
+
+                ESCOLHA SEU ESPETINHO
+
+              </b>
+
+            </p>
+
+            <div id="listaEspetinhos" class="lista-adicionais"></div>
+
+          </div>
+
+        </div>
+
+        <div class="modal-prod-footer">
+
+          <div class="subtotal-tag">
+
+            <p class="titulo-subtotal">
+              Total:
+            </p>
+
+            <p class="subtotal">
+
+              R$
+
+              <span id="subtotalEspetinho">
+                0,00
+              </span>
+
+            </p>
+
+          </div>
+
+          <button class="add-carrinho" onclick="addCarrinhoEspetinho()">
+            Adicionar ao Carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MODAL PRODUTO CHURRASQUINHO COMPLETO -->
+    <div id="modalChurrasco" class="modal-produto">
+
+      <div class="modal-conteudo">
+
+        <div class="modal-topo">
+
+          <img id="imgChurrasco" class="modal-img" src="img/churrasco/churrasco-completo.png">
+
+          <button onclick="fecharModalChurrasco()" class="botao-fechar">
+            ✕
+          </button>
+
+        </div>
+
+        <div class="modal-info">
+
+          <h2 class="modal-titulo">
+
+            Churrasco Completo
+
+          </h2>
+
+          <p id="descricaoChurrasco" class="modal-desc">
+            Carregando...
+          </p>
+
+          <div class="quantida-lanche">
+
+            <label>
+              <b class="quantidade">
+                Quantidade:
+              </b>
+            </label>
+
+            <div class="quantidade-produto">
+
+              <button class="botao-qtd" onclick="mudarQtdChurrasco(-1)">
+                -
+              </button>
+
+              <span id="qtdChurrasco">
+                1
+              </span>
+
+              <button class="botao-qtd" onclick="mudarQtdChurrasco(1)">
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="adicionais-container">
+
+            <p>
+
+              <b class="add">
+
+                ESCOLHA SUA CARNE
+
+              </b>
+
+            </p>
+
+            <div id="listaChurrasco" class="lista-adicionais"></div>
+
+          </div>
+
+        </div>
+
+        <div class="modal-prod-footer">
+
+          <div class="subtotal-tag">
+
+            <p class="titulo-subtotal">
+              Total:
+            </p>
+
+            <p class="subtotal">
+
+              R$
+
+              <span id="subtotalChurrasco">
+                0,00
+              </span>
+
+            </p>
+
+          </div>
+
+          <button class="add-carrinho" onclick="addCarrinhoChurrasco()">
+            Adicionar ao Carrinho
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
 
     <!-- ========================================================= -->

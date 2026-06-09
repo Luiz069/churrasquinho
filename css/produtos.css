@@ -14,6 +14,11 @@
   display: none;
 }
 
+#modalEspetinho,
+#modalChurrasco {
+  display: none;
+}
+
 .modal-conteudo {
   background: oklch(0.14 0.008 30);
   max-height: 90vh;
@@ -229,7 +234,7 @@
   transition: 0.2s;
 }
 
-.checkbox-custom input:checked + span {
+.checkbox-custom input:checked+span {
   background: oklch(0.73 0.17 46);
   border: 1.5px solid oklch(0.73 0.17 46);
 }
@@ -247,6 +252,7 @@
   font-size: 0.875rem;
   line-height: calc(1.25 / 0.875);
 }
+
 /* ============== */
 
 /* QUANDO SELECIONADO */
@@ -286,14 +292,14 @@
 }
 
 /* CHECKED */
-.checkbox-custom input:checked + span {
+.checkbox-custom input:checked+span {
   background: #ff7a1a;
 
   border-color: #ff7a1a;
 }
 
 /* ÍCONE */
-.checkbox-custom input:checked + span::after {
+.checkbox-custom input:checked+span::after {
   content: "✓";
 
   color: #111;
@@ -516,13 +522,13 @@
 }
 
 /* CHECKED */
-.checkbox-custom input:checked + span {
+.checkbox-custom input:checked+span {
   background: #ff7a1a;
   border-color: #ff7a1a;
 }
 
 /* ÍCONE */
-.checkbox-custom input:checked + span::after {
+.checkbox-custom input:checked+span::after {
   content: "✓";
 
   color: #111;

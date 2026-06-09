@@ -1650,3 +1650,367 @@ document.addEventListener("change", (e) => {
     atualizarInterfaceModal();
   }
 });
+
+// ====================================================
+// =====================================
+// VARIÁVEIS
+// =====================================
+
+let qtdEspetinho = 1;
+let qtdChurrasco = 1;
+
+let itemEspetinho = null;
+let itemChurrasco = null;
+
+// =====================================
+// ESPETINHO
+// =====================================
+
+function abrirModalEspetinho() {
+  document.getElementById("modalEspetinho").style.display = "flex";
+
+  qtdEspetinho = 1;
+
+  document.getElementById("qtdEspetinho").textContent = 1;
+
+  carregarEspetinhos();
+}
+
+function fecharModalEspetinho() {
+  document.getElementById("modalEspetinho").style.display = "none";
+}
+
+// =====================================
+// CHURRASCO COMPLETO
+// =====================================
+
+function abrirModalChurrasco() {
+  document.getElementById("modalChurrasco").style.display = "flex";
+
+  qtdChurrasco = 1;
+
+  document.getElementById("qtdChurrasco").textContent = 1;
+
+  carregarDescricao();
+
+  carregarChurrasco();
+}
+
+function fecharModalChurrasco() {
+  document.getElementById("modalChurrasco").style.display = "none";
+}
+
+// =====================================
+// DESCRIÇÃO
+// =====================================
+
+function carregarDescricao() {
+  db.collection("descricoes")
+
+    .doc("churrascoCompleto")
+
+    .get()
+
+    .then((doc) => {
+      if (doc.exists) {
+        document.getElementById("descricaoChurrasco").textContent =
+          doc.data().descricao;
+      }
+    })
+
+    .catch(console.error);
+}
+
+// =====================================
+// ESPETINHOS
+// =====================================
+
+function carregarEspetinhos() {
+  const lista = document.getElementById("listaEspetinhos");
+
+  lista.innerHTML = "";
+
+  db.collection("produtos")
+
+    .where("categoria", "==", "espetinho")
+
+    .where("ativo", "==", true)
+
+    .get()
+
+    .then((snapshot) => {
+      if (snapshot.empty) {
+        lista.innerHTML = `
+                <div class="sem-itens">
+                    Nenhum espetinho disponível.
+                </div>
+            `;
+
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const item = doc.data();
+
+        lista.innerHTML += `
+
+                <label class="add-card">
+
+                    <div class="add-left">
+
+                        <div class="checkbox-custom">
+
+                            <input
+                                type="radio"
+                                name="espetinho"
+
+                                onchange="
+                                selecionarEspetinho(
+                                    '${item.nome}',
+                                    ${item.preco}
+                                )
+                                "
+
+                            >
+
+                            <span></span>
+
+                        </div>
+
+                        <span class="add-texto">
+
+                            ${item.nome}
+
+                        </span>
+
+                    </div>
+
+                    <span class="add-preco">
+
+                        R$
+                        ${item.preco.toFixed(2)}
+
+                    </span>
+
+                </label>
+
+                `;
+      });
+    });
+}
+
+// =====================================
+// CHURRASCO
+// =====================================
+
+function carregarChurrasco() {
+  const lista = document.getElementById("listaChurrasco");
+
+  lista.innerHTML = "";
+
+  db.collection("produtos")
+
+    .where("categoria", "==", "churrascoCompleto")
+
+    .where("ativo", "==", true)
+
+    .get()
+
+    .then((snapshot) => {
+      if (snapshot.empty) {
+        lista.innerHTML = `
+                <div class="sem-itens">
+                    Nenhuma opção disponível.
+                </div>
+            `;
+
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const item = doc.data();
+
+        lista.innerHTML += `
+
+                <label class="add-card">
+
+                    <div class="add-left">
+
+                        <div class="checkbox-custom">
+
+                            <input
+                                type="radio"
+                                name="churrasco"
+
+                                onchange="
+                                selecionarChurrasco(
+                                    '${item.nome}',
+                                    ${item.preco}
+                                )
+                                "
+
+                            >
+
+                            <span></span>
+
+                        </div>
+
+                        <span class="add-texto">
+
+                            ${item.nome}
+
+                        </span>
+
+                    </div>
+
+                    <span class="add-preco">
+
+                        R$
+                        ${item.preco.toFixed(2)}
+
+                    </span>
+
+                </label>
+
+                `;
+      });
+    });
+}
+
+// =====================================
+// SELEÇÃO
+// =====================================
+
+function selecionarEspetinho(nome, preco) {
+  itemEspetinho = {
+    nome,
+    preco,
+  };
+
+  atualizarTotalEspetinho();
+}
+
+function selecionarChurrasco(nome, preco) {
+  itemChurrasco = {
+    nome,
+    preco,
+  };
+
+  atualizarTotalChurrasco();
+}
+
+// =====================================
+// QUANTIDADE
+// =====================================
+
+function mudarQtdEspetinho(valor) {
+  qtdEspetinho += valor;
+
+  if (qtdEspetinho < 1) {
+    qtdEspetinho = 1;
+  }
+
+  document.getElementById("qtdEspetinho").textContent = qtdEspetinho;
+
+  atualizarTotalEspetinho();
+}
+
+function mudarQtdChurrasco(valor) {
+  qtdChurrasco += valor;
+
+  if (qtdChurrasco < 1) {
+    qtdChurrasco = 1;
+  }
+
+  document.getElementById("qtdChurrasco").textContent = qtdChurrasco;
+
+  atualizarTotalChurrasco();
+}
+
+// =====================================
+// TOTAIS
+// =====================================
+
+function atualizarTotalEspetinho() {
+  let total = 0;
+
+  if (itemEspetinho) {
+    total = itemEspetinho.preco * qtdEspetinho;
+  }
+
+  document.getElementById("subtotalEspetinho").textContent = total.toFixed(2);
+}
+
+function atualizarTotalChurrasco() {
+  let total = 0;
+
+  if (itemChurrasco) {
+    total = itemChurrasco.preco * qtdChurrasco;
+  }
+
+  document.getElementById("subtotalChurrasco").textContent = total.toFixed(2);
+}
+
+// =====================================
+// CARRINHO
+// =====================================
+
+function addCarrinhoEspetinho() {
+  if (!itemEspetinho) {
+    mostrarToast("Selecione um espetinho!", "warning");
+
+    return;
+  }
+
+  carrinho.push({
+    nome: "Espetinho - " + itemEspetinho.nome,
+
+    qtd: qtdEspetinho,
+
+    obs: "",
+
+    adicionais: [],
+
+    precoUn: itemEspetinho.preco,
+
+    imagem: "img/churrasco/espetinho.png",
+  });
+
+  salvarCarrinho();
+
+  renderCarrinho();
+
+  mostrarToast("Pedido adicionado à sacola!");
+
+  fecharModalEspetinho();
+}
+
+function addCarrinhoChurrasco() {
+  if (!itemChurrasco) {
+    mostrarToast("Selecione uma carne!", "warning");
+
+    return;
+  }
+
+  carrinho.push({
+    nome: "Churrasco Completo - " + itemChurrasco.nome,
+
+    qtd: qtdChurrasco,
+
+    obs: "",
+
+    adicionais: [],
+
+    precoUn: itemChurrasco.preco,
+
+    imagem: "img/churrasco/completo.png",
+  });
+
+  salvarCarrinho();
+
+  renderCarrinho();
+
+  mostrarToast("Pedido adicionado à sacola!");
+
+  fecharModalChurrasco();
+}
