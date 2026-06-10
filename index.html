@@ -1645,15 +1645,17 @@
     <!-- ========================================================= -->
     <!-- MODAL PRODUTO ESPETINHO -->
     <div id="modalEspetinho" class="modal-produto">
-
       <div class="modal-conteudo">
-
         <div class="modal-topo">
-
           <img id="imgEspetinho" class="modal-img" src="img/churrasco/espetinho.png">
-
+          <div class="container-img"></div>
           <button onclick="fecharModalEspetinho()" class="botao-fechar">
-            ✕
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="oklch(0.6 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-x" data-loc="client/src/components/ui/dialog.tsx:139">
+              <path class="x-icon" d="M18 6 6 18"></path>
+              <path class="x-icon" d="m6 6 12 12"></path>
+            </svg>
           </button>
 
         </div>
@@ -1681,15 +1683,22 @@
             <div class="quantidade-produto">
 
               <button class="botao-qtd" onclick="mudarQtdEspetinho(-1)">
-                -
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
+                  <path d="M5 12h14"></path>
+                </svg>
               </button>
 
-              <span id="qtdEspetinho">
-                1
-              </span>
+              <span id="qtdEspetinho" class="quantidade-numero">1</span>
 
               <button class="botao-qtd" onclick="mudarQtdEspetinho(1)">
-                +
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
               </button>
 
             </div>
@@ -1747,15 +1756,17 @@
     <!-- ========================================================= -->
     <!-- MODAL PRODUTO CHURRASQUINHO COMPLETO -->
     <div id="modalChurrasco" class="modal-produto">
-
       <div class="modal-conteudo">
-
         <div class="modal-topo">
-
           <img id="imgChurrasco" class="modal-img" src="img/churrasco/churrasco-completo.png">
-
+          <div class="container-img"></div>
           <button onclick="fecharModalChurrasco()" class="botao-fechar">
-            ✕
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="oklch(0.6 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-x" data-loc="client/src/components/ui/dialog.tsx:139">
+              <path class="x-icon" d="M18 6 6 18"></path>
+              <path class="x-icon" d="m6 6 12 12"></path>
+            </svg>
           </button>
 
         </div>
@@ -1783,15 +1794,24 @@
             <div class="quantidade-produto">
 
               <button class="botao-qtd" onclick="mudarQtdChurrasco(-1)">
-                -
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
+                  <path d="M5 12h14"></path>
+                </svg>
               </button>
 
-              <span id="qtdChurrasco">
+              <span id="qtdChurrasco" class="quantidade-numero">
                 1
               </span>
 
               <button class="botao-qtd" onclick="mudarQtdChurrasco(1)">
-                +
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
               </button>
 
             </div>
