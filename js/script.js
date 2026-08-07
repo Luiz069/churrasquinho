@@ -794,73 +794,97 @@ function removerItem(i) {
 
 // ================= FINALIZAR PEDIDO =================
 
-async function finalizarPedido() {
-  if (!carrinho || carrinho.length === 0) {
-    alert("Seu carrinho está vazio! Adicione itens antes de finalizar.");
+function finalizarPedido() {
+  // ================= USUÁRIO =================
+
+  const user = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!user) {
+    alert("Faça login!");
+
     return;
   }
 
-  // 1. Captura dos dados do formulário no HTML
-  const elNome = document.getElementById("clienteNome") || document.getElementById("nome");
-  const elNumero = document.getElementById("clienteTelefone") || document.getElementById("celular") || document.getElementById("telefone");
-  const elObservacao = document.getElementById("observacaoGeral") || document.getElementById("observacao") || document.getElementById("obs");
-  const elPagamento = document.getElementById("formaPagamento") || document.getElementById("pagamento");
-  const elTroco = document.getElementById("trocoPara") || document.getElementById("troco");
-  const elConsumo = document.querySelector('input[name="consumo"]:checked') || document.getElementById("consumo");
+  // ================= CAMPOS =================
 
-  const nome = elNome ? elNome.value.trim() : "";
-  const numero = elNumero ? elNumero.value.replace(/\D/g, "") : "";
-  const observacao = elObservacao ? elObservacao.value.trim() : "";
-  const valorPagamento = elPagamento ? elPagamento.value : "Não informado";
-  const troco = elTroco ? elTroco.value.trim() : "";
-  const metodoConsumo = elConsumo ? elConsumo.value : "retirada";
+  const nome = document.getElementById("c-nome")?.value || "";
 
-  // Validações básicas de preenchimento
-  if (!nome) {
-    alert("Por favor, informe seu nome.");
-    if (elNome) elNome.focus();
+  const numero = document.getElementById("c-numero")?.value || "";
+
+  const observacao = document.getElementById("c-obs")?.value || "";
+
+  const troco = document.getElementById("input-troco")?.value || "";
+
+  // ================= VALIDAÇÕES =================
+
+  if (!valorPagamento) {
+    alert("Selecione uma forma de pagamento!");
+
     return;
   }
 
-  if (!numero || numero.length < 10) {
-    alert("Por favor, informe um número de celular válido com DDD.");
-    if (elNumero) elNumero.focus();
+  if (!metodoConsumo) {
+    alert("Selecione o método de consumo!");
+
     return;
   }
 
-  // 2. Cálculos e identificadores do pedido
-  const total = typeof calcularTotalCarrinho === "function"
-    ? calcularTotalCarrinho()
-    : carrinho.reduce((acc, item) => acc + (item.precoUn || item.preco || 0) * (item.qtd || item.quantidade || 1), 0);
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
 
-  const numeroPedidoAleatorio = Math.floor(1000 + Math.random() * 9000);
-  const user = (typeof auth !== "undefined" && auth.currentUser) 
-    ? auth.currentUser 
-    : { telefone: numero };
-
-  // 3. Formatação dos itens e emojis para a mensagem do WhatsApp
-  const textoItens = carrinho
-    .map((item) => {
-      const qtd = item.qtd || item.quantidade || 1;
-      const nomeProd = item.nome;
-      let obs = item.obs ? ` (Obs: ${item.obs})` : "";
-      let adic = item.adicionais && item.adicionais.length > 0 ? ` + ${item.adicionais.join(", ")}` : "";
-      return `• ${qtd}x ${nomeProd}${adic}${obs}`;
-    })
-    .join("\n    ");
-
-  const emojiPagamento = valorPagamento.toLowerCase().includes("pix") ? "📲" : "💳";
-  const emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🛍️";
-
-  // Desabilita o botão temporariamente para evitar múltiplos cliques
-  const btnFinalizar = document.getElementById("btnFinalizarPedido") || document.getElementById("btn-finalizar");
-  if (btnFinalizar) {
-    btnFinalizar.disabled = true;
-    btnFinalizar.innerText = "Enviando pedido...";
+    return;
   }
 
-  // 4. Gravação no Firebase Firestore (com os mesmos campos exatos)
+  // ================= TOTAL =================
+
+  let total = 0;
+
+  let textoItens = "";
+
+  carrinho.forEach((item) => {
+    const subtotal = item.precoUn * item.qtd;
+
+    total += subtotal;
+
+    textoItens += `➡️ ${item.qtd}x ${item.nome}\n`;
+
+    // adicionais
+
+    if (item.adicionais?.length > 0) {
+      textoItens += `➕ ${item.adicionais.join(" | ")}\n`;
+    }
+
+    // observação
+
+    if (item.obs) {
+      textoItens += `📝 ${item.obs}\n`;
+    }
+
+    textoItens += "";
+  });
+
+  // ================= EMOJIS =================
+
+  let emojiPagamento = "💳";
+
+  if (valorPagamento.includes("Pix")) {
+    emojiPagamento = "🏦";
+  }
+
+  if (valorPagamento.includes("Dinheiro")) {
+    emojiPagamento = "💵";
+  }
+
+  const emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🏪";
+
+  // ================= NÚMERO PEDIDO =================
+
+  const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
+
+  // ================= FIREBASE =================
+
   db.collection("pedidos")
+
     .add({
       uid: user.telefone,
 
@@ -883,13 +907,10 @@ async function finalizarPedido() {
       total: total,
 
       status: "pendente",
-      
-      // Flags para integração do bot WhatsApp
-      notificadoCriado: false,
-      notificarCliente: false,
-      
+
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
+
     .then(() => {
       // ================= WHATSAPP =================
 
@@ -898,50 +919,98 @@ async function finalizarPedido() {
 
 📦 *Itens:*
     ${textoItens}
-
 ${emojiPagamento} *Pagamento:* ${valorPagamento}
-${troco ? `💵 Troco para: R$ ${troco}\n` : ""}${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
+${troco ? `💵 Troco para: R$ ${troco}` : ""}
+${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
 ⏱️ Estimativa: 35~45 min
 💰 *Total: R$ ${total.toFixed(2)}*
 
 Obrigado pela preferência 😉`;
 
-      // Número do WhatsApp da lanchonete (Substitua se necessário)
-      const numeroEmpresa = "5598981234567"; 
-      const linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroEmpresa}&text=${encodeURIComponent(mensagem)}`;
+      const numeroLanchonete = "559885213506";
 
-      alert(`✅ Pedido #${numeroPedidoAleatorio} realizado com sucesso!`);
+      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
-      // Limpa carrinho e formulário local
+      // ================= RESET CARRINHO =================
+
       carrinho = [];
-      if (typeof atualizarInterfaceCarrinho === "function") {
-        atualizarInterfaceCarrinho();
+
+      salvarCarrinho();
+
+      renderCarrinho();
+
+      // ================= RESET PAGAMENTO =================
+
+      valorPagamento = "Pix";
+
+      document.querySelectorAll(".btn-pagamento").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      const btnPix = document.querySelector('.btn-pagamento[data-value="Pix"]');
+
+      if (btnPix) {
+        btnPix.classList.add("active");
       }
 
-      if (elNome) elNome.value = "";
-      if (elNumero) elNumero.value = "";
-      if (elObservacao) elObservacao.value = "";
-      if (elTroco) elTroco.value = "";
+      // ================= RESET CONSUMO =================
 
-      const modalCheckout = document.getElementById("modalCheckout") || document.getElementById("modal-carrinho");
-      if (modalCheckout) {
-        modalCheckout.style.display = "none";
+      metodoConsumo = "retirada";
+
+      const btnRetirada = document.getElementById("btn-retirada");
+
+      const btnLocal = document.getElementById("btn-local");
+
+      if (btnRetirada && btnLocal) {
+        btnRetirada.classList.add("active");
+
+        btnLocal.classList.remove("active");
       }
 
-      // Redireciona/Abre o WhatsApp do cliente
-      window.open(linkWhatsApp, "_blank");
+      // ================= RESET TROCO =================
+
+      const inputTroco = document.getElementById("input-troco");
+
+      if (inputTroco) {
+        inputTroco.value = "";
+      }
+
+      // ================= ESCONDER BOXES =================
+
+      const boxTroco = document.getElementById("box-troco");
+
+      const taxaDebito = document.getElementById("taxa-debito");
+
+      const taxaCredito = document.getElementById("taxa-credito");
+
+      if (boxTroco) {
+        boxTroco.style.display = "none";
+      }
+
+      if (taxaDebito) {
+        taxaDebito.style.display = "none";
+      }
+
+      if (taxaCredito) {
+        taxaCredito.style.display = "none";
+      }
+
+      mostrarToast("Pedido realizado com sucesso!");
+
+      // ================= ABRIR WHATSAPP =================
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1500);
     })
-    .catch((erro) => {
-      console.error("❌ Erro ao salvar pedido:", erro);
-      alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
-    })
-    .finally(() => {
-      if (btnFinalizar) {
-        btnFinalizar.disabled = false;
-        btnFinalizar.innerText = "Finalizar Pedido";
-      }
+
+    .catch((error) => {
+      console.error("Erro ao salvar pedido:", error);
+
+      mostrarToast("Erro ao processar pedido. Tente novamente.", "error");
     });
 }
+
 
 function voltarPagina() {
   window.history.back();
