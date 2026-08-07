@@ -796,103 +796,217 @@ function removerItem(i) {
 
 function finalizarPedido() {
   // ================= USUÁRIO =================
+
   const user = JSON.parse(localStorage.getItem("usuario"));
 
   if (!user) {
     alert("Faça login!");
+
     return;
   }
 
   // ================= CAMPOS =================
+
   const nome = document.getElementById("c-nome")?.value || "";
+
   const numero = document.getElementById("c-numero")?.value || "";
+
   const observacao = document.getElementById("c-obs")?.value || "";
+
   const troco = document.getElementById("input-troco")?.value || "";
 
   // ================= VALIDAÇÕES =================
+
   if (!valorPagamento) {
     alert("Selecione uma forma de pagamento!");
+
     return;
   }
 
   if (!metodoConsumo) {
     alert("Selecione o método de consumo!");
+
     return;
   }
 
   if (carrinho.length === 0) {
     alert("Carrinho vazio!");
+
     return;
   }
 
   // ================= TOTAL =================
+
   let total = 0;
+
+  let textoItens = "";
+
   carrinho.forEach((item) => {
-    total += item.precoUn * item.qtd;
+    const subtotal = item.precoUn * item.qtd;
+
+    total += subtotal;
+
+    textoItens += `➡️ ${item.qtd}x ${item.nome}\n`;
+
+    // adicionais
+
+    if (item.adicionais?.length > 0) {
+      textoItens += `➕ ${item.adicionais.join(" | ")}\n`;
+    }
+
+    // observação
+
+    if (item.obs) {
+      textoItens += `📝 ${item.obs}\n`;
+    }
+
+    textoItens += "";
   });
 
+  // ================= EMOJIS =================
+
+  let emojiPagamento = "💳";
+
+  if (valorPagamento.includes("Pix")) {
+    emojiPagamento = "🏦";
+  }
+
+  if (valorPagamento.includes("Dinheiro")) {
+    emojiPagamento = "💵";
+  }
+
+  const emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🏪";
+
   // ================= NÚMERO PEDIDO =================
+
   const numeroPedidoAleatorio = Math.floor(10000 + Math.random() * 90000);
 
   // ================= FIREBASE =================
+
   db.collection("pedidos")
+
     .add({
       uid: user.telefone,
+
       nome: nome,
-      numeroCelular: numero || user.telefone,
+
+      numeroCelular: numero,
+
       pedidoNumero: numeroPedidoAleatorio,
+
       observacaoGeral: observacao,
+
       pagamento: valorPagamento,
+
       troco: troco || null,
+
       consumo: metodoConsumo,
+
       itens: carrinho,
+
       total: total,
+
       status: "pendente",
+
       criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
     })
+
     .then(() => {
+      // ================= WHATSAPP =================
+
+      const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
+👤 *Cliente:* ${nome}
+
+📦 *Itens:*
+    ${textoItens}
+${emojiPagamento} *Pagamento:* ${valorPagamento}
+${troco ? `💵 Troco para: R$ ${troco}` : ""}
+${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
+⏱️ Estimativa: 35~45 min
+💰 *Total: R$ ${total.toFixed(2)}*
+
+Obrigado pela preferência 😉`;
+
+      const numeroLanchonete = "559885213506";
+
+      const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
+
       // ================= RESET CARRINHO =================
+
       carrinho = [];
+
       salvarCarrinho();
+
       renderCarrinho();
 
       // ================= RESET PAGAMENTO =================
+
       valorPagamento = "Pix";
+
       document.querySelectorAll(".btn-pagamento").forEach((btn) => {
         btn.classList.remove("active");
       });
+
       const btnPix = document.querySelector('.btn-pagamento[data-value="Pix"]');
+
       if (btnPix) {
         btnPix.classList.add("active");
       }
 
       // ================= RESET CONSUMO =================
+
       metodoConsumo = "retirada";
+
       const btnRetirada = document.getElementById("btn-retirada");
+
       const btnLocal = document.getElementById("btn-local");
+
       if (btnRetirada && btnLocal) {
         btnRetirada.classList.add("active");
+
         btnLocal.classList.remove("active");
       }
 
       // ================= RESET TROCO =================
+
       const inputTroco = document.getElementById("input-troco");
+
       if (inputTroco) {
         inputTroco.value = "";
       }
 
       // ================= ESCONDER BOXES =================
+
       const boxTroco = document.getElementById("box-troco");
+
       const taxaDebito = document.getElementById("taxa-debito");
+
       const taxaCredito = document.getElementById("taxa-credito");
-      if (boxTroco) boxTroco.style.display = "none";
-      if (taxaDebito) taxaDebito.style.display = "none";
-      if (taxaCredito) taxaCredito.style.display = "none";
+
+      if (boxTroco) {
+        boxTroco.style.display = "none";
+      }
+
+      if (taxaDebito) {
+        taxaDebito.style.display = "none";
+      }
+
+      if (taxaCredito) {
+        taxaCredito.style.display = "none";
+      }
 
       mostrarToast("Pedido realizado com sucesso!");
+
+      // ================= ABRIR WHATSAPP =================
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1500);
     })
+
     .catch((error) => {
       console.error("Erro ao salvar pedido:", error);
+
       mostrarToast("Erro ao processar pedido. Tente novamente.", "error");
     });
 }
