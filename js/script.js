@@ -795,79 +795,142 @@ function removerItem(i) {
 // ================= FINALIZAR PEDIDO =================
 
 async function finalizarPedido() {
-  // 1. Validação de carrinho vazio
   if (!carrinho || carrinho.length === 0) {
-    alert("Seu carrinho está vazio. Adicione itens antes de finalizar!");
+    alert("Seu carrinho está vazio! Adicione itens antes de finalizar.");
     return;
   }
 
-  // 2. Captura dos dados do formulário do cliente
-  const nome = document.getElementById("nome")?.value.trim();
-  const telefone = document.getElementById("telefone")?.value.trim();
-  const endereco = document.getElementById("endereco")?.value.trim();
-  const formaPagamento = document.getElementById("formaPagamento")?.value;
-  const trocoPara = document.getElementById("trocoPara")?.value.trim() || "Não necessário";
-  const observacao = document.getElementById("observacao")?.value.trim() || "Nenhuma";
+  // 1. Captura dos dados do formulário no HTML
+  const elNome = document.getElementById("clienteNome") || document.getElementById("nome");
+  const elNumero = document.getElementById("clienteTelefone") || document.getElementById("celular") || document.getElementById("telefone");
+  const elObservacao = document.getElementById("observacaoGeral") || document.getElementById("observacao") || document.getElementById("obs");
+  const elPagamento = document.getElementById("formaPagamento") || document.getElementById("pagamento");
+  const elTroco = document.getElementById("trocoPara") || document.getElementById("troco");
+  const elConsumo = document.querySelector('input[name="consumo"]:checked') || document.getElementById("consumo");
 
-  // Validação de campos obrigatórios
-  if (!nome || !endereco || !formaPagamento) {
-    alert("Por favor, preencha nome, endereço e forma de pagamento.");
+  const nome = elNome ? elNome.value.trim() : "";
+  const numero = elNumero ? elNumero.value.replace(/\D/g, "") : "";
+  const observacao = elObservacao ? elObservacao.value.trim() : "";
+  const valorPagamento = elPagamento ? elPagamento.value : "Não informado";
+  const troco = elTroco ? elTroco.value.trim() : "";
+  const metodoConsumo = elConsumo ? elConsumo.value : "retirada";
+
+  // Validações básicas de preenchimento
+  if (!nome) {
+    alert("Por favor, informe seu nome.");
+    if (elNome) elNome.focus();
     return;
   }
 
-  // 3. Cálculo do valor total
-  const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-
-  // 4. Estruturação do objeto do pedido
-  const novoPedido = {
-    cliente: {
-      nome,
-      telefone,
-      endereco
-    },
-    itens: carrinho.map(item => ({
-      id: item.id,
-      nome: item.nome,
-      preco: item.preco,
-      quantidade: item.quantidade,
-      observacao: item.observacao || ""
-    })),
-    pagamento: {
-      metodo: formaPagamento,
-      trocoPara: formaPagamento === "Dinheiro" ? trocoPara : null
-    },
-    observacao,
-    total,
-    status: "pendente",
-    criadoEm: firebase.firestore.FieldValue.serverTimestamp()
-  };
-
-  try {
-    // Desabilitar botão para evitar envios duplicados
-    const btnFinalizar = document.getElementById("btnFinalizarPedido");
-    if (btnFinalizar) btnFinalizar.disabled = true;
-
-    // 5. Salvar pedido no Firestore
-    const docRef = await db.collection("pedidos").add(novoPedido);
-
-    // 6. Limpar estado local do carrinho
-    carrinho = [];
-    if (typeof salvarCarrinhoLocalStorage === "function") salvarCarrinhoLocalStorage();
-    if (typeof atualizarCarrinhoUI === "function") atualizarCarrinhoUI();
-
-    // 7. Notificar usuário e fechar modal
-    alert(`Pedido #${docRef.id.slice(-5).toUpperCase()} enviado com sucesso!`);
-    
-    const modal = document.getElementById("modalCarrinho");
-    if (modal) modal.style.display = "none";
-
-  } catch (error) {
-    console.error("Erro ao registrar pedido:", error);
-    alert("Houve um erro ao processar o seu pedido. Tente novamente em instantes.");
-  } finally {
-    const btnFinalizar = document.getElementById("btnFinalizarPedido");
-    if (btnFinalizar) btnFinalizar.disabled = false;
+  if (!numero || numero.length < 10) {
+    alert("Por favor, informe um número de celular válido com DDD.");
+    if (elNumero) elNumero.focus();
+    return;
   }
+
+  // 2. Cálculos e identificadores do pedido
+  const total = typeof calcularTotalCarrinho === "function"
+    ? calcularTotalCarrinho()
+    : carrinho.reduce((acc, item) => acc + (item.precoUn || item.preco || 0) * (item.qtd || item.quantidade || 1), 0);
+
+  const numeroPedidoAleatorio = Math.floor(1000 + Math.random() * 9000);
+  const user = (typeof auth !== "undefined" && auth.currentUser) 
+    ? auth.currentUser 
+    : { telefone: numero };
+
+  // 3. Formatação dos itens e emojis para a mensagem do WhatsApp
+  const textoItens = carrinho
+    .map((item) => {
+      const qtd = item.qtd || item.quantidade || 1;
+      const nomeProd = item.nome;
+      let obs = item.obs ? ` (Obs: ${item.obs})` : "";
+      let adic = item.adicionais && item.adicionais.length > 0 ? ` + ${item.adicionais.join(", ")}` : "";
+      return `• ${qtd}x ${nomeProd}${adic}${obs}`;
+    })
+    .join("\n    ");
+
+  const emojiPagamento = valorPagamento.toLowerCase().includes("pix") ? "📲" : "💳";
+  const emojiEntrega = metodoConsumo === "local" ? "🍽️" : "🛍️";
+
+  // Desabilita o botão temporariamente para evitar múltiplos cliques
+  const btnFinalizar = document.getElementById("btnFinalizarPedido") || document.getElementById("btn-finalizar");
+  if (btnFinalizar) {
+    btnFinalizar.disabled = true;
+    btnFinalizar.innerText = "Enviando pedido...";
+  }
+
+  // 4. Gravação no Firebase Firestore (com os mesmos campos exatos)
+  db.collection("pedidos")
+    .add({
+      uid: user.telefone || user.uid || numero,
+      nome: nome,
+      numeroCelular: numero,
+      pedidoNumero: numeroPedidoAleatorio,
+      observacaoGeral: observacao,
+      pagamento: valorPagamento,
+      troco: troco || null,
+      consumo: metodoConsumo,
+      itens: carrinho,
+      total: total,
+      status: "pendente",
+      
+      // Flags para integração do bot WhatsApp
+      notificadoCriado: false,
+      notificarCliente: false,
+      
+      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(() => {
+      // ================= WHATSAPP =================
+
+      const mensagem = `*PEDIDO Nº ${numeroPedidoAleatorio}* 🍔
+👤 *Cliente:* ${nome}
+
+📦 *Itens:*
+    ${textoItens}
+
+${emojiPagamento} *Pagamento:* ${valorPagamento}
+${troco ? `💵 Troco para: R$ ${troco}\n` : ""}${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Retirada"}
+⏱️ Estimativa: 35~45 min
+💰 *Total: R$ ${total.toFixed(2)}*
+
+Obrigado pela preferência 😉`;
+
+      // Número do WhatsApp da lanchonete (Substitua se necessário)
+      const numeroEmpresa = "5598981234567"; 
+      const linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroEmpresa}&text=${encodeURIComponent(mensagem)}`;
+
+      alert(`✅ Pedido #${numeroPedidoAleatorio} realizado com sucesso!`);
+
+      // Limpa carrinho e formulário local
+      carrinho = [];
+      if (typeof atualizarInterfaceCarrinho === "function") {
+        atualizarInterfaceCarrinho();
+      }
+
+      if (elNome) elNome.value = "";
+      if (elNumero) elNumero.value = "";
+      if (elObservacao) elObservacao.value = "";
+      if (elTroco) elTroco.value = "";
+
+      const modalCheckout = document.getElementById("modalCheckout") || document.getElementById("modal-carrinho");
+      if (modalCheckout) {
+        modalCheckout.style.display = "none";
+      }
+
+      // Redireciona/Abre o WhatsApp do cliente
+      window.open(linkWhatsApp, "_blank");
+    })
+    .catch((erro) => {
+      console.error("❌ Erro ao salvar pedido:", erro);
+      alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
+    })
+    .finally(() => {
+      if (btnFinalizar) {
+        btnFinalizar.disabled = false;
+        btnFinalizar.innerText = "Finalizar Pedido";
+      }
+    });
 }
 
 function voltarPagina() {
