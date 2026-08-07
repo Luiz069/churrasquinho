@@ -862,16 +862,26 @@ async function finalizarPedido() {
   // 4. Gravação no Firebase Firestore (com os mesmos campos exatos)
   db.collection("pedidos")
     .add({
-      uid: user.telefone || user.uid || numero,
+      uid: user.telefone,
+
       nome: nome,
+
       numeroCelular: numero,
+
       pedidoNumero: numeroPedidoAleatorio,
+
       observacaoGeral: observacao,
+
       pagamento: valorPagamento,
+
       troco: troco || null,
+
       consumo: metodoConsumo,
+
       itens: carrinho,
+
       total: total,
+
       status: "pendente",
       
       // Flags para integração do bot WhatsApp
