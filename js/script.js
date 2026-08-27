@@ -927,7 +927,7 @@ ${emojiEntrega} *Consumo:* ${metodoConsumo === "local" ? "Comer no local" : "Ret
 
 Obrigado pela preferência 😉`;
 
-      const numeroLanchonete = "5598985213506";
+      const numeroLanchonete = "559885213506";
 
       const url = `https://wa.me/${numeroLanchonete}?text=${encodeURIComponent(mensagem)}`;
 
