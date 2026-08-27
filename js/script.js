@@ -1011,6 +1011,8 @@ Obrigado pela preferência 😉`;
     });
 }
 
+
+
 function voltarPagina() {
   window.history.back();
 }
