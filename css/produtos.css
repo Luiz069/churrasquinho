@@ -546,3 +546,13 @@
   font-size: 13px;
   font-weight: 900;
 }
+
+#bebida-qtd {
+  color: oklch(0.96 0.005 50);
+  --tw-font-weight: 600;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
+  text-align: center;
+  width: calc(0.25rem * 6);
+}

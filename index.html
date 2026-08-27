@@ -7,21 +7,11 @@
   <link rel="icon" type="image/x-icon" href="img/icons/favcon-_1_.ico" />
 
   <title>Churrasquinho Durans - cardápio</title>
-
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-  <!-- ========================================================= -->
-  <!-- FIREBASE -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="js/script.js"></script>
-  <!-- ========================================================= -->
-
 </head>
 
 <body>
@@ -95,7 +85,7 @@
       <!-- ================================================== -->
       <!-- CARDÁPIO -->
       <div class="container-inicio">
-        <!-- ============== Misto Quente ============== -->
+        <!-- ============== Churrasquinho ============== -->
         <section class="categoria-box">
           <div class="categoria-titulo">
             <h2 class="categoria">Churrasquinho</h2>
@@ -1477,6 +1467,7 @@
       </div>
     </main>
 
+    <!-- ============== NavBar ============== -->
     <nav class="nav-container">
       <div class="nav-opcoes">
         <button class="button-home botao-nav ativo" onclick="irHome()">
@@ -1517,6 +1508,7 @@
         </button>
       </div>
     </nav>
+    <!-- ==================================== -->
 
     <!-- ======================= MODASIS =========================== -->
 
@@ -2198,14 +2190,24 @@
         </button>
       </div>
     </div>
+    <!-- ======================================================= -->
 
+    <!-- ============== notificação ============== -->
     <div id="toast" class="toast">
       <div class="toast-icon" id="toast-icon">✓</div>
 
       <span id="toast-text"></span>
     </div>
+    <!-- ========================================= -->
   </div>
 
+  <!-- ========================================================= -->
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="js/script.js"></script>
+  <!-- ========================================================= -->
 
 </body>
 
