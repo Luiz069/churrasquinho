@@ -1011,8 +1011,6 @@ Obrigado pela preferência 😉`;
     });
 }
 
-
-
 function voltarPagina() {
   window.history.back();
 }
@@ -1975,7 +1973,7 @@ function addCarrinhoEspetinho() {
 
     precoUn: itemEspetinho.preco,
 
-    imagem: "img/churrasco/espetinho.png",
+    imagem: "img/churrasco/espetinho.webp",
   });
 
   salvarCarrinho();
@@ -2005,7 +2003,7 @@ function addCarrinhoChurrasco() {
 
     precoUn: itemChurrasco.preco,
 
-    imagem: "img/churrasco/completo.png",
+    imagem: "img/churrasco/completo.webp",
   });
 
   salvarCarrinho();

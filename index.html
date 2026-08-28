@@ -21,7 +21,7 @@
     <div class="card-login">
       <div class="logo-area">
         <div class="logo-circle">
-          <img src="img/logo-03.png" alt="Logo" />
+          <img src="img/logo-03.webp" alt="Logo" />
         </div>
 
         <h1>Churrasquinho Durans</h1>
@@ -50,7 +50,7 @@
     <!-- TOPO -->
     <header class="header-inicio">
       <div class="logo">
-        <img class="logo" src="img/logo-03.png" alt="Logo do Churrasquinho Durans" />
+        <img class="logo" src="img/logo-03.webp" alt="Logo do Churrasquinho Durans" />
       </div>
 
       <div class="cliente">
@@ -62,7 +62,7 @@
     <main>
       <!-- ================= AVISO DE ENTREGA ================ -->
       <div class="aviso-entrega">
-        <img src="/img/icons/entrega-rapida.png" alt="Ícone de entrega" class="aviso-icone" />
+        <img src="/img/icons/entrega-rapida.webp" alt="Ícone de entrega" class="aviso-icone" />
         <p class="aviso-texto">Entrega indisponível no momento</p>
       </div>
 
@@ -91,14 +91,14 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Churrasquinho</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('misto', -1)" aria-label="Voltar">
+              <button class="btn-voltar" onclick="scrollCarrossel('churrasco', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
                 </svg>
               </button>
-              <button class="btn-rolar" onclick="scrollCarrossel('misto', 1)" aria-label="Próximo">
+              <button class="btn-rolar" onclick="scrollCarrossel('churrasco', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
@@ -108,12 +108,12 @@
             </div>
           </div>
           <!-- ============== Roleta ============== -->
-          <div class="carrocel" id="misto">
-            <div class="carrocel-item">
+          <div class="carrocel" id="churrasco">
+            <button class="carrocel-item" onclick="abrirModalEspetinho()" aria-label="Abrir seção de espetinho">
 
               <div class="img-lanche">
 
-                <img src="img/churrasco/espetinho.png" alt="Espetinho">
+                <img src="img/churrasco/espetinho.webp" alt="Espetinho" fetchpriority="high" loading="eager" />
 
                 <div class="booton-img"></div>
 
@@ -134,27 +134,28 @@
                     R$ 15,00
                   </span>
 
-                  <button class="btn-add" onclick="abrirModalEspetinho()" alt="Abrir seção de espetinho">
+                  <div class="btn-add">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" alt="Seção de espetinho">
+                      stroke="currentColor" stroke-width="2" aria-label="Seção de espetinho">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
 
-                  </button>
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="abrirModalChurrasco()"
+              aria-label="Abrir seção de churrasco completo">
 
               <div class="img-lanche">
 
-                <img src="img/churrasco/churrasco-completo.png" alt="Churrasco Completo">
+                <img src="img/churrasco/churrasco-completo.webp" alt="Churrasco Completo">
 
                 <div class="booton-img"></div>
 
@@ -176,21 +177,21 @@
                     R$ 20,00
                   </span>
 
-                  <button class="btn-add" onclick="abrirModalChurrasco()" alt="Abrir seção de churrasco completo">
+                  <div class="btn-add">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" alt="Seção de churrasco completo">
+                      stroke="currentColor" stroke-width="2" aria-label="Seção de churrasco completo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
 
-                  </button>
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
+            </button>
           </div>
         </section>
 
@@ -199,7 +200,7 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Hambúrguer Industrial</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('industrial', -1)" alt="Voltar">
+              <button class="btn-voltar" onclick="scrollCarrossel('industrial', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" aria-label="Voltar">
@@ -208,7 +209,7 @@
                 aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" aria-label="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -222,11 +223,11 @@
                           'X-Burguer',
                           8,
                           'Pão, carne, queijo, presunto, salada',
-                          'img/x_burguer_final.png',
+                          'img/x_burguer_final.webp',
                         )
-                      " alt="Abrir seção do X-Burguer">
+                      " aria-label="Abrir seção do X-Burguer">
               <div class="img-lanche">
-                <img src="img/lanches/x-burguer.png" alt="" />
+                <img src="img/lanches/x-burguer.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -241,7 +242,8 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Burguer">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      aria-label="Seção de X-Burguer">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -255,11 +257,11 @@
                           'Egg-Burguer',
                           8,
                           'Pão, carne, queijo, ovo, salada',
-                          'img/lanches/egg-burguer.png',
+                          'img/lanches/egg-burguer.webp',
                         )
-                      " alt="Abrir seção do Egg-Burguer">
+                      " aria-label="Abrir seção do Egg-Burguer">
               <div class="img-lanche">
-                <img src="img/lanches/egg-burguer.png" alt="" />
+                <img src="img/lanches/egg-burguer.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -272,7 +274,7 @@
                   <div class="btn-add"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                       viewBox="0 0 24 24" fill="none" stroke="oklch(0.10 0.01 30)" stroke-width="2.5"
                       stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"
-                      data-loc="client/src/pages/Home.tsx:100" alt="Seção de Egg-Burguer">
+                      data-loc="client/src/pages/Home.tsx:100" aria-label="Seção de Egg-Burguer">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -286,11 +288,11 @@
                           'Americano',
                           10,
                           'Pão, carne, queijo, ovo, presunto, salada',
-                          'img/lanches/americano.png',
+                          'img/lanches/americano.webp',
                         )
-                      " alt="Abrir seção do Americano">
+                      " aria-label="Abrir seção do Americano">
               <div class="img-lanche">
-                <img src="img/lanches/americano.png" alt="" />
+                <img src="img/lanches/americano.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -305,7 +307,8 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de Americano">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      aria-label="Seção de Americano">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -319,11 +322,11 @@
                           'X-Bacon',
                           13,
                           'Pão, carne, queijo, ovo, presunto, salada, bacon',
-                          'img/lanches/bacon.png',
+                          'img/lanches/bacon.webp',
                         )
-                      " alt="Abrir seção do X-Bacon">
+                      " aria-label="Abrir seção do X-Bacon">
               <div class="img-lanche">
-                <img src="img/lanches/bacon.png" alt="" />
+                <img src="img/lanches/bacon.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -338,7 +341,7 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Bacon">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" aria-label="Seção de X-Bacon">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -352,11 +355,11 @@
                           'Bauru',
                           13,
                           'Pão, carne, queijo, ovo, presunto, salada, calabresa',
-                          'img/lanches/bauru.png',
+                          'img/lanches/bauru.webp',
                         )
-                      " alt="Abrir seção do Bauru">
+                      " aria-label="Abrir seção do Bauru">
               <div class="img-lanche">
-                <img src="img/lanches/bauru.png" alt="Bauru" />
+                <img src="img/lanches/bauru.webp" alt="Bauru" />
                 <div class="booton-img"></div>
               </div>
 
@@ -371,7 +374,7 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de Bauru">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" aria-label="Seção de Bauru">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -385,11 +388,11 @@
                           'X-Tudo',
                           15,
                           'Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon',
-                          'img/lanches/x-tudo.png',
+                          'img/lanches/x-tudo.webp',
                         )
-                      " alt="Abrir seção do X-Tudo">
+                      " aria-label="Abrir seção do X-Tudo">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudo.png" alt="X-Tudo" />
+                <img src="img/lanches/x-tudo.webp" alt="X-Tudo" />
                 <div class="booton-img"></div>
               </div>
 
@@ -404,7 +407,7 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Tudo">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" aria-label="Seção de X-Tudo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -418,11 +421,11 @@
                           'X-Frango',
                           15,
                           'Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha',
-                          'img/lanches/x-frango.png',
+                          'img/lanches/x-frango.webp',
                         )
-                      " alt="Abrir seção do X-Frango">
+                      " aria-label="Abrir seção do X-Frango">
               <div class="img-lanche">
-                <img src="img/lanches/x-frango.png" alt="X-Frango" />
+                <img src="img/lanches/x-frango.webp" alt="X-Frango" />
                 <div class="booton-img"></div>
               </div>
 
@@ -438,7 +441,8 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Frango">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      aria-label="Seção de X-Frango">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -452,11 +456,11 @@
                           'X-Burguer Duplo',
                           16,
                           'Pão, 2 carne, 2 queijo, presunto, salada',
-                          'img/lanches/burguer-duplo.png',
+                          'img/lanches/burguer-duplo.webp',
                         )
-                      " alt="Abrir seção do X-Burguer Duplo">
+                      " aria-label="Abrir seção do X-Burguer Duplo">
               <div class="img-lanche">
-                <img src="img/lanches/burguer-duplo.png" alt="X-Burguer Duplo" />
+                <img src="img/lanches/burguer-duplo.webp" alt="X-Burguer Duplo" />
                 <div class="booton-img"></div>
               </div>
 
@@ -472,7 +476,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Burguer Duplo">
+                      aria-label="Seção de X-Burguer Duplo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -486,11 +490,11 @@
                           'X-Bacon Especial',
                           19,
                           'Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
-                          'img/lanches/bacon-especial.png',
+                          'img/lanches/bacon-especial.webp',
                         )
-                      " alt="Abrir seção do X-Bacon Especial">
+                      " aria-label="Abrir seção do X-Bacon Especial">
               <div class="img-lanche">
-                <img src="img/lanches/bacon-especial.png" alt="X-Bacon Especial" />
+                <img src="img/lanches/bacon-especial.webp" alt="X-Bacon Especial" />
                 <div class="booton-img"></div>
               </div>
 
@@ -507,7 +511,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Bacon Especial">
+                      aria-label="Seção de X-Bacon Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -521,11 +525,11 @@
                           'X-Tudão',
                           22,
                           'Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
-                          'img/lanches/x-tudao.png',
+                          'img/lanches/x-tudao.webp',
                         )
-                      " alt="Abrir seção do X-Tudão">
+                      " aria-label="Abrir seção do X-Tudão">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudao.png" alt="X-Tudão" />
+                <img src="img/lanches/x-tudao.webp" alt="X-Tudão" />
                 <div class="booton-img"></div>
               </div>
 
@@ -541,7 +545,7 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Tudão">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" aria-label="Seção de X-Tudão">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -578,11 +582,11 @@
                           'X-Burguer Artesanal',
                           12,
                           'Pão, carne artesanal, queijo, presunto, salada',
-                          'img/lanches/x-burguer.png',
+                          'img/lanches/x-burguer.webp',
                         )
-                      " alt="Abrir seção do X-Burguer Artesanal">
+                      " aria-label="Abrir seção do X-Burguer Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/x-burguer.png" alt="" />
+                <img src="img/lanches/x-burguer.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -598,7 +602,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Burguer Artesanal">
+                      aria-label="Seção de X-Burguer Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -612,11 +616,11 @@
                           'Egg-Burguer Artesanal',
                           12,
                           'Pão, carne artesanal, queijo, ovo, salada',
-                          'img/lanches/egg-burguer.png',
+                          'img/lanches/egg-burguer.webp',
                         )
-                      " alt="Abrir seção do Egg-Burguer Artesanal">
+                      " aria-label="Abrir seção do Egg-Burguer Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/egg-burguer.png" alt="" />
+                <img src="img/lanches/egg-burguer.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -632,7 +636,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de Egg-Burguer Artesanal">
+                      aria-label="Seção de Egg-Burguer Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -646,11 +650,11 @@
                           'Americano Artesanal',
                           14,
                           'Pão, carne artesanal, queijo, ovo, presunto, salada',
-                          'img/lanches/americano.png',
+                          'img/lanches/americano.webp',
                         )
-                      " alt="Abrir seção do Americano Artesanal">
+                      " aria-label="Abrir seção do Americano Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/americano.png" alt="" />
+                <img src="img/lanches/americano.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -666,7 +670,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Americano Artesanal">
+                      aria-label="Seção do Americano Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -680,11 +684,11 @@
                           'X-Bacon Artesanal',
                           17,
                           'Pão, carne artesanal, queijo, ovo, presunto, salada, bacon',
-                          'img/lanches/bacon.png',
+                          'img/lanches/bacon.webp',
                         )
-                      " alt="Abrir seção do X-Bacon Artesanal">
+                      " aria-label="Abrir seção do X-Bacon Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/bacon.png" alt="" />
+                <img src="img/lanches/bacon.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -700,7 +704,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Bacon Artesanal">
+                      aria-label="Seção de X-Bacon Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -714,11 +718,11 @@
                           'Bauru Artesanal',
                           17,
                           'Pão, carne artesanal, queijo, ovo, presunto, salada, calabresa',
-                          'img/lanches/bauru.png',
+                          'img/lanches/bauru.webp',
                         )
-                      " alt="Abrir seção do Bauru Artesanal">
+                      " aria-label="Abrir seção do Bauru Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/bauru.png" alt="" />
+                <img src="img/lanches/bauru.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -735,7 +739,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de Bauru Artesanal">
+                      aria-label="Seção de Bauru Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -749,11 +753,11 @@
                           'X-Tudo Artesanal',
                           18,
                           'Pão, carne artesanal, ovo, presunto, queijo, salada, calabresa, bacon',
-                          'img/lanches/x-tudo.png',
+                          'img/lanches/x-tudo.webp',
                         )
-                      " alt="Abrir seção do X-Tudo Artesanal">
+                      " aria-label="Abrir seção do X-Tudo Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudo.png" alt="" />
+                <img src="img/lanches/x-tudo.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -770,7 +774,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Tudo Artesanal">
+                      aria-label="Seção de X-Tudo Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -784,11 +788,11 @@
                           'X-Frango Artesanal',
                           18,
                           'Pão, carne artesanal, ovo, presunto, queijo, salada, file de frango, batata palha',
-                          'img/lanches/x-frango.png',
+                          'img/lanches/x-frango.webp',
                         )
-                      " alt="Abrir seção do X-Frango Artesanal">
+                      " aria-label="Abrir seção do X-Frango Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/x-frango.png" alt="" />
+                <img src="img/lanches/x-frango.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -805,7 +809,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Frango Artesanal">
+                      aria-label="Seção de X-Frango Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -816,7 +820,7 @@
 
             <div class="carrocel-item">
               <div class="img-lanche">
-                <img src="img/lanches/burguer-duplo.png" alt="" />
+                <img src="img/lanches/burguer-duplo.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -833,13 +837,13 @@
                           'X-Burguer Duplo Artesanal',
                           19,
                           'Pão, 2 carne artesanal, 2 queijo, presunto, salada',
-                          'img/lanches/burguer-duplo.png',
+                          'img/lanches/burguer-duplo.webp',
                         )
-                      " alt="Abrir seção do X-Burguer Duplo Artesanal">
+                      " aria-label="Abrir seção do X-Burguer Duplo Artesanal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Burguer Duplo Artesanal">
+                      aria-label="Seção de X-Burguer Duplo Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -853,11 +857,11 @@
                           'X-Bacon Especial Artesanal',
                           22,
                           'Pão, carne artesanal, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
-                          'img/lanches/bacon-especial.png',
+                          'img/lanches/bacon-especial.webp',
                         )
-                      " alt="Abrir seção do X-Bacon Especial Artesanal">
+                      " aria-label="Abrir seção do X-Bacon Especial Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/bacon-especial.png" alt="" />
+                <img src="img/lanches/bacon-especial.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -874,7 +878,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção de X-Bacon Especial Artesanal">
+                      aria-label="Seção de X-Bacon Especial Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -888,11 +892,11 @@
                           'X-Tudão Artesanal',
                           27,
                           'Pão, 2 carne artesanal, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
-                          'img/lanches/x-tudao.png',
+                          'img/lanches/x-tudao.webp',
                         )
-                      " alt="Abrir seção do X-Tudão Artesanal">
+                      " aria-label="Abrir seção do X-Tudão Artesanal">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudao.png" alt="" />
+                <img src="img/lanches/x-tudao.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -909,7 +913,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do X-Tudão Artesanal">
+                      aria-label="Seção do X-Tudão Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -946,11 +950,11 @@
                           'Misto Quente Sem Ovo',
                           5,
                           'Pão, queijo, presunto',
-                          'img/lanches/misto-quente.png',
+                          'img/lanches/misto-quente.webp',
                         )
-                      " alt="Abrir seção do Misto Quente Sem Ovo">
+                      " aria-label="Abrir seção do Misto Quente Sem Ovo">
               <div class="img-lanche">
-                <img src="img/lanches/misto-quente.png" alt="" />
+                <img src="img/lanches/misto-quente.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -965,7 +969,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                         stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                        alt="Seção de Misto Quente Sem Ovo">
+                        aria-label="Seção de Misto Quente Sem Ovo">
                         <path d="M5 12h14"></path>
                         <path d="M12 5v14"></path>
                       </svg>
@@ -979,11 +983,11 @@
                           'Misto Quente Com Ovo',
                           7,
                           'Pão, queijo, presunto, ovo',
-                          'img/lanches/misto-com-ovo.png',
+                          'img/lanches/misto-com-ovo.webp',
                         )
-                      " alt="Abrir seção do Misto Quente Com Ovo">
+                      " aria-label="Abrir seção do Misto Quente Com Ovo">
               <div class="img-lanche">
-                <img src="img/lanches/misto-com-ovo.png" alt="" />
+                <img src="img/lanches/misto-com-ovo.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -997,7 +1001,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Misto Quente Com Ovo">
+                      aria-label="Seção do Misto Quente Com Ovo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1034,11 +1038,11 @@
                           'Cachorro Quente',
                           9,
                           'Pão, salsicha, molho, cenoura, beterraba, batata palha',
-                          'img/lanches/cachorro-quente.png',
+                          'img/lanches/cachorro-quente.webp',
                         )
-                      " alt="Abrir seção do Cachorro Quente">
+                      " aria-label="Abrir seção do Cachorro Quente">
               <div class="img-lanche">
-                <img src="img/lanches/cachorro-quente.png" alt="" />
+                <img src="img/lanches/cachorro-quente.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1054,7 +1058,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Cachorro Quente">
+                      aria-label="Seção do Cachorro Quente">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1068,11 +1072,11 @@
                           'Cachorro Quente Com Bacon',
                           12,
                           'Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon',
-                          'img/lanches/cachorro-quente-bacon.png',
+                          'img/lanches/cachorro-quente-bacon.webp',
                         )
-                      " alt="Abrir seção do Cachorro Quente Com Bacon">
+                      " aria-label="Abrir seção do Cachorro Quente Com Bacon">
               <div class="img-lanche">
-                <img src="img/lanches/cachorro-quente-bacon.png" alt="" />
+                <img src="img/lanches/cachorro-quente-bacon.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1089,7 +1093,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Cachorro Quente Com Bacon">
+                      aria-label="Seção do Cachorro Quente Com Bacon">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1103,11 +1107,11 @@
                           'Cachorro Quente Na Chapa',
                           16,
                           'Pão, salsicha, bacon, queijo, milho, batata palha',
-                          'img/lanches/cachorro-quente-chapa.png',
+                          'img/lanches/cachorro-quente-chapa.webp',
                         )
-                      " alt="Abrir seção do Cachorro Quente Na Chapa">
+                      " aria-label="Abrir seção do Cachorro Quente Na Chapa">
               <div class="img-lanche">
-                <img src="img/lanches/cachorro-quente-chapa.png" alt="" />
+                <img src="img/lanches/cachorro-quente-chapa.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1123,7 +1127,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Cachorro Quente Na Chapa">
+                      aria-label="Seção do Cachorro Quente Na Chapa">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1137,11 +1141,11 @@
                           'Cachorro Quente Especial',
                           18,
                           'Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo',
-                          'img/lanches/cachorro-quente-especial.png',
+                          'img/lanches/cachorro-quente-especial.webp',
                         )
-                      " alt="Abrir seção do Cachorro Quente Especial">
+                      " aria-label="Abrir seção do Cachorro Quente Especial">
               <div class="img-lanche">
-                <img src="img/lanches/cachorro-quente-especial.png" alt="" />
+                <img src="img/lanches/cachorro-quente-especial.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1158,7 +1162,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Cachorro Quente Especial">
+                      aria-label="Seção do Cachorro Quente Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1195,11 +1199,11 @@
                           'Batata Frita Meia Porção',
                           10,
                           'Batata palito crocante',
-                          'img/lanches/batata-frita.png',
+                          'img/lanches/batata-frita.webp',
                         )
-                      " alt="Abrir seção da Batata Frita Meia Porção">
+                      " aria-label="Abrir seção da Batata Frita Meia Porção">
               <div class="img-lanche">
-                <img src="img/lanches/batata-frita.png" alt="" />
+                <img src="img/lanches/batata-frita.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1213,7 +1217,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção da Batata Frita Meia Porção">
+                      aria-label="Seção Batata Frita Meia Porção">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1227,11 +1231,11 @@
                           'Batata Frita uma Porção',
                           19,
                           'Batata palito crocante',
-                          'img/lanches/batata-frita.png',
+                          'img/lanches/batata-frita.webp',
                         )
-                      " alt="Abrir seção da Batata Frita uma Porção">
+                      " aria-label="Abrir seção da Batata Frita uma Porção">
               <div class="img-lanche">
-                <img src="img/lanches/batata-frita.png" alt="Batata Frita" />
+                <img src="img/lanches/batata-frita.webp" alt="Batata Frita" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1245,7 +1249,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção da Batata Frita uma Porção">
+                      aria-label="Seção da Batata Frita uma Porção">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1259,11 +1263,11 @@
                           'Batata Frita Especial',
                           28,
                           'Batata palito crocante, queijo, bacon, calabresa',
-                          'img/lanches/batata-frita-especial.png',
+                          'img/lanches/batata-frita-especial.webp',
                         )
-                      " alt="Abrir seção da Batata Frita Especial">
+                      " aria-label="Abrir seção da Batata Frita Especial">
               <div class="img-lanche">
-                <img src="img/lanches/batata-frita-especial.png" alt="" />
+                <img src="img/lanches/batata-frita-especial.webp" alt="" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1279,7 +1283,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção da Batata Frita Especial">
+                      aria-label="Seção da Batata Frita Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1314,12 +1318,12 @@
             <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Água Mineral',
-                          'img/bebidas/agua-mineral.png',
+                          'img/bebidas/agua-mineral.webp',
                           [{ nome: 'Água - 500ml', preco: 3 }],
                         )
-                      " alt="Abrir seção da Água Mineral">
+                      " aria-label="Abrir seção da Água Mineral">
               <div class="img-lanche">
-                <img src="img/bebidas/agua-mineral.png" alt="Água Mineral" />
+                <img src="img/bebidas/agua-mineral.webp" alt="Água Mineral" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1332,7 +1336,8 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção da Água Mineral">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      aria-label="Seção da Água Mineral">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1344,16 +1349,16 @@
             <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Suco Natural',
-                          'img/bebidas/suco-natural.jpg',
+                          'img/bebidas/suco-natural.webp',
                           [
                             { nome: 'Maracuja', preco: 6 },
                             { nome: 'Cupuaçu', preco: 6 },
                             { nome: 'Acerola', preco: 6 },
                           ],
                         )
-                      " alt="Abrir seção do Suco Natural">
+                      " aria-label="Abrir seção do Suco Natural">
               <div class="img-lanche">
-                <img src="img/bebidas/suco-natural.jpg" alt="Suco Natural" />
+                <img src="img/bebidas/suco-natural.webp" alt="Suco Natural" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1366,7 +1371,8 @@
                   <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção do Suco Natural">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      aria-label="Seção do Suco Natural">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1378,7 +1384,7 @@
             <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Refrigerante Lata 350ml',
-                          'img/bebidas/refrigerante-lata.jpg',
+                          'img/bebidas/refrigerante-lata.webp',
                           [
                             { nome: 'Coca Cola', preco: 5 },
                             { nome: 'Coca Cola Zero', preco: 5 },
@@ -1387,9 +1393,9 @@
                             { nome: 'Fanta Uva', preco: 5 },
                           ],
                         )
-                      " alt="Abrir seção do Refrigerante Lata 350ml">
+                      " aria-label="Abrir seção do Refrigerante Lata 350ml">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-lata.jpg" alt="Refrigerante 350ml" />
+                <img src="img/bebidas/refrigerante-lata.webp" alt="Refrigerante 350ml" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1405,7 +1411,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Refrigerante Lata 350ml">
+                      aria-label="Seção do Refrigerante Lata 350ml">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1417,7 +1423,7 @@
             <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Refrigerante 1L',
-                          'img/bebidas/refrigerante-1L.png',
+                          'img/bebidas/refrigerante-1L.webp',
                           [
                             { nome: 'Coca Cola', preco: 10 },
                             { nome: 'Coca Cola Zero', preco: 10 },
@@ -1428,9 +1434,9 @@
                             { nome: 'Guaraná Jesus LS', preco: 10 },
                           ],
                         )
-                      " alt="Abrir seção do Refrigerante 1L">
+                      " aria-label="Abrir seção do Refrigerante 1L">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-1L.png" alt="Refrigerante 1L" />
+                <img src="img/bebidas/refrigerante-1L.webp" alt="Refrigerante 1L" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1447,7 +1453,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Refrigerante 1L">
+                      aria-label="Seção do Refrigerante 1L">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1459,16 +1465,16 @@
             <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Refrigerante 2L',
-                          'img/bebidas/refrigerante-2L.png',
+                          'img/bebidas/refrigerante-2L.webp',
                           [
                             { nome: 'Coca Cola', preco: 13 },
                             { nome: 'Guaraná Antarctica', preco: 13 },
                             { nome: 'Guaraná Jesus', preco: 13 },
                           ],
                         )
-                      " alt="Abrir seção do Refrigerante 2L">
+                      " aria-label="Abrir seção do Refrigerante 2L">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-2L.png" alt="Refrigerante 2L" />
+                <img src="img/bebidas/refrigerante-2L.webp" alt="Refrigerante 2L" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1484,7 +1490,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
-                      alt="Seção do Refrigerante 2L">
+                      aria-label="Seção do Refrigerante 2L">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -1500,7 +1506,7 @@
     <!-- ============== NavBar ============== -->
     <nav class="nav-container">
       <div class="nav-opcoes">
-        <button class="button-home botao-nav ativo" onclick="irHome()">
+        <button class="button-home botao-nav ativo" onclick="irHome()" aria-label="Abrir seção da Home">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-house" data-loc="client/src/pages/Home.tsx:346">
@@ -1512,7 +1518,7 @@
           <span>Home</span>
         </button>
 
-        <button class="button-sacola botao-nav" onclick="abrirCart()">
+        <button class="button-sacola botao-nav" onclick="abrirCart()" aria-label="Abrir seção da Sacola">
           <div class="butao-svg-nav">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -1527,7 +1533,7 @@
           <span class="">Sacola</span>
         </button>
 
-        <button class="button-perfil botao-nav" onclick="abrirPerfil()">
+        <button class="button-perfil botao-nav" onclick="abrirPerfil()" aria-label="Abrir seção do Perfil">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-user" data-loc="client/src/pages/Home.tsx:384">
@@ -1679,7 +1685,7 @@
     <div id="modalEspetinho" class="modal-produto">
       <div class="modal-conteudo">
         <div class="modal-topo">
-          <img id="imgEspetinho" class="modal-img" src="img/churrasco/espetinho.png">
+          <img id="imgEspetinho" class="modal-img" src="img/churrasco/espetinho.webp">
           <div class="container-img"></div>
           <button onclick="fecharModalEspetinho()" class="botao-fechar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -1790,7 +1796,7 @@
     <div id="modalChurrasco" class="modal-produto">
       <div class="modal-conteudo">
         <div class="modal-topo">
-          <img id="imgChurrasco" class="modal-img" src="img/churrasco/churrasco-completo.png">
+          <img id="imgChurrasco" class="modal-img" src="img/churrasco/churrasco-completo.webp">
           <div class="container-img"></div>
           <button onclick="fecharModalChurrasco()" class="botao-fechar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
