@@ -7,11 +7,12 @@
   <link rel="icon" type="image/x-icon" href="img/icons/favcon-_1_.ico" />
 
   <title>Churrasquinho Durans - cardápio</title>
+
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
 </head>
 
 <body>
@@ -90,15 +91,17 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Churrasquinho</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('misto', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('misto', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('misto', 1)">
+                </svg>
+              </button>
+              <button class="btn-rolar" onclick="scrollCarrossel('misto', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -131,10 +134,10 @@
                     R$ 15,00
                   </span>
 
-                  <button class="btn-add" onclick="abrirModalEspetinho()">
+                  <button class="btn-add" onclick="abrirModalEspetinho()" alt="Abrir seção de espetinho">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2">
+                      stroke="currentColor" stroke-width="2" alt="Seção de espetinho">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -173,10 +176,10 @@
                     R$ 20,00
                   </span>
 
-                  <button class="btn-add" onclick="abrirModalChurrasco()">
+                  <button class="btn-add" onclick="abrirModalChurrasco()" alt="Abrir seção de churrasco completo">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2">
+                      stroke="currentColor" stroke-width="2" alt="Seção de churrasco completo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -196,15 +199,16 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Hambúrguer Industrial</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('industrial', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('industrial', -1)" alt="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" aria-label="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('industrial', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('industrial', 1)"
+                aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -212,7 +216,15 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="industrial">
-            <div class="carrocel-item">
+
+            <button class="carrocel-item" onclick="
+                abrirModal(
+                          'X-Burguer',
+                          8,
+                          'Pão, carne, queijo, presunto, salada',
+                          'img/x_burguer_final.png',
+                        )
+                      " alt="Abrir seção do X-Burguer">
               <div class="img-lanche">
                 <img src="img/lanches/x-burguer.png" alt="" />
                 <div class="booton-img"></div>
@@ -226,26 +238,26 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 8,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Burguer',
-                          8,
-                          'Pão, carne, queijo, presunto, salada',
-                          'img/x_burguer_final.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Burguer">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Egg-Burguer',
+                          8,
+                          'Pão, carne, queijo, ovo, salada',
+                          'img/lanches/egg-burguer.png',
+                        )
+                      " alt="Abrir seção do Egg-Burguer">
               <div class="img-lanche">
                 <img src="img/lanches/egg-burguer.png" alt="" />
                 <div class="booton-img"></div>
@@ -257,26 +269,26 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 8,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Egg-Burguer',
-                          8,
-                          'Pão, carne, queijo, ovo, salada',
-                          'img/lanches/egg-burguer.png',
-                        )
-                      ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                  <div class="btn-add"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                      viewBox="0 0 24 24" fill="none" stroke="oklch(0.10 0.01 30)" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"
+                      data-loc="client/src/pages/Home.tsx:100" alt="Seção de Egg-Burguer">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Americano',
+                          10,
+                          'Pão, carne, queijo, ovo, presunto, salada',
+                          'img/lanches/americano.png',
+                        )
+                      " alt="Abrir seção do Americano">
               <div class="img-lanche">
                 <img src="img/lanches/americano.png" alt="" />
                 <div class="booton-img"></div>
@@ -290,26 +302,26 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 10,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Americano',
-                          10,
-                          'Pão, carne, queijo, ovo, presunto, salada',
-                          'img/lanches/americano.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de Americano">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Bacon',
+                          13,
+                          'Pão, carne, queijo, ovo, presunto, salada, bacon',
+                          'img/lanches/bacon.png',
+                        )
+                      " alt="Abrir seção do X-Bacon">
               <div class="img-lanche">
                 <img src="img/lanches/bacon.png" alt="" />
                 <div class="booton-img"></div>
@@ -323,28 +335,28 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 13,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Bacon',
-                          13,
-                          'Pão, carne, queijo, ovo, presunto, salada, bacon',
-                          'img/lanches/x-bacon.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Bacon">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Bauru',
+                          13,
+                          'Pão, carne, queijo, ovo, presunto, salada, calabresa',
+                          'img/lanches/bauru.png',
+                        )
+                      " alt="Abrir seção do Bauru">
               <div class="img-lanche">
-                <img src="img/lanches/bauru.png" alt="" />
+                <img src="img/lanches/bauru.png" alt="Bauru" />
                 <div class="booton-img"></div>
               </div>
 
@@ -356,28 +368,28 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 13,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Bauru',
-                          13,
-                          'Pão, carne, queijo, ovo, presunto, salada, calabresa',
-                          'img/lanches/bauru.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de Bauru">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Tudo',
+                          15,
+                          'Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon',
+                          'img/lanches/x-tudo.png',
+                        )
+                      " alt="Abrir seção do X-Tudo">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudo.png" alt="" />
+                <img src="img/lanches/x-tudo.png" alt="X-Tudo" />
                 <div class="booton-img"></div>
               </div>
 
@@ -389,28 +401,28 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 15,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Tudo',
-                          15,
-                          'Pão, carne, ovo, presunto, queijo, salada, calabresa, bacon',
-                          'img/lanches/x-tudo.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Tudo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Frango',
+                          15,
+                          'Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha',
+                          'img/lanches/x-frango.png',
+                        )
+                      " alt="Abrir seção do X-Frango">
               <div class="img-lanche">
-                <img src="img/lanches/x-frango.png" alt="" />
+                <img src="img/lanches/x-frango.png" alt="X-Frango" />
                 <div class="booton-img"></div>
               </div>
 
@@ -423,28 +435,28 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 15,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Frango',
-                          15,
-                          'Pão, carne, ovo, presunto, queijo, salada, file de frango, batata palha',
-                          'img/lanches/x-frango.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Frango">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Burguer Duplo',
+                          16,
+                          'Pão, 2 carne, 2 queijo, presunto, salada',
+                          'img/lanches/burguer-duplo.png',
+                        )
+                      " alt="Abrir seção do X-Burguer Duplo">
               <div class="img-lanche">
-                <img src="img/lanches/burguer-duplo.png" alt="" />
+                <img src="img/lanches/burguer-duplo.png" alt="X-Burguer Duplo" />
                 <div class="booton-img"></div>
               </div>
 
@@ -456,28 +468,29 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 16,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Burguer Duplo',
-                          16,
-                          'Pão, 2 carne, 2 queijo, presunto, salada',
-                          'img/lanches/burguer-duplo.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Burguer Duplo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Bacon Especial',
+                          19,
+                          'Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
+                          'img/lanches/bacon-especial.png',
+                        )
+                      " alt="Abrir seção do X-Bacon Especial">
               <div class="img-lanche">
-                <img src="img/lanches/bacon-especial.png" alt="" />
+                <img src="img/lanches/bacon-especial.png" alt="X-Bacon Especial" />
                 <div class="booton-img"></div>
               </div>
 
@@ -490,28 +503,29 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 19,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Bacon Especial',
-                          19,
-                          'Pão, carne, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
-                          'img/lanches/bacon-especial.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Bacon Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Tudão',
+                          22,
+                          'Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
+                          'img/lanches/x-tudao.png',
+                        )
+                      " alt="Abrir seção do X-Tudão">
               <div class="img-lanche">
-                <img src="img/lanches/x-tudao.png" alt="" />
+                <img src="img/lanches/x-tudao.png" alt="X-Tudão" />
                 <div class="booton-img"></div>
               </div>
 
@@ -524,24 +538,17 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 22,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Tudão',
-                          22,
-                          'Pão, 2 carne, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
-                          'img/lanches/x-tudao.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção de X-Tudão">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -550,15 +557,15 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Hambúrguer Artesanal</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('artesanal', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('artesanal', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('artesanal', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('artesanal', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -566,7 +573,14 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="artesanal">
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Burguer Artesanal',
+                          12,
+                          'Pão, carne artesanal, queijo, presunto, salada',
+                          'img/lanches/x-burguer.png',
+                        )
+                      " alt="Abrir seção do X-Burguer Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/x-burguer.png" alt="" />
                 <div class="booton-img"></div>
@@ -580,26 +594,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 12,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Burguer Artesanal',
-                          12,
-                          'Pão, carne artesanal, queijo, presunto, salada',
-                          'img/lanches/x-burguer.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Burguer Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Egg-Burguer Artesanal',
+                          12,
+                          'Pão, carne artesanal, queijo, ovo, salada',
+                          'img/lanches/egg-burguer.png',
+                        )
+                      " alt="Abrir seção do Egg-Burguer Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/egg-burguer.png" alt="" />
                 <div class="booton-img"></div>
@@ -613,26 +628,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 12,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Egg-Burguer Artesanal',
-                          12,
-                          'Pão, carne artesanal, queijo, ovo, salada',
-                          'img/lanches/egg-burguer.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de Egg-Burguer Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Americano Artesanal',
+                          14,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada',
+                          'img/lanches/americano.png',
+                        )
+                      " alt="Abrir seção do Americano Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/americano.png" alt="" />
                 <div class="booton-img"></div>
@@ -646,26 +662,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 14,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Americano Artesanal',
-                          14,
-                          'Pão, carne artesanal, queijo, ovo, presunto, salada',
-                          'img/lanches/americano.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Americano Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Bacon Artesanal',
+                          17,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada, bacon',
+                          'img/lanches/bacon.png',
+                        )
+                      " alt="Abrir seção do X-Bacon Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/bacon.png" alt="" />
                 <div class="booton-img"></div>
@@ -679,26 +696,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 17,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Bacon Artesanal',
-                          17,
-                          'Pão, carne artesanal, queijo, ovo, presunto, salada, bacon',
-                          'img/lanches/bacon.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Bacon Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Bauru Artesanal',
+                          17,
+                          'Pão, carne artesanal, queijo, ovo, presunto, salada, calabresa',
+                          'img/lanches/bauru.png',
+                        )
+                      " alt="Abrir seção do Bauru Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/bauru.png" alt="" />
                 <div class="booton-img"></div>
@@ -713,26 +731,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 17,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Bauru Artesanal',
-                          17,
-                          'Pão, carne artesanal, queijo, ovo, presunto, salada, calabresa',
-                          'img/lanches/bauru.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de Bauru Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Tudo Artesanal',
+                          18,
+                          'Pão, carne artesanal, ovo, presunto, queijo, salada, calabresa, bacon',
+                          'img/lanches/x-tudo.png',
+                        )
+                      " alt="Abrir seção do X-Tudo Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/x-tudo.png" alt="" />
                 <div class="booton-img"></div>
@@ -747,26 +766,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 18,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Tudo Artesanal',
-                          18,
-                          'Pão, carne artesanal, ovo, presunto, queijo, salada, calabresa, bacon',
-                          'img/lanches/x-tudo.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Tudo Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Frango Artesanal',
+                          18,
+                          'Pão, carne artesanal, ovo, presunto, queijo, salada, file de frango, batata palha',
+                          'img/lanches/x-frango.png',
+                        )
+                      " alt="Abrir seção do X-Frango Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/x-frango.png" alt="" />
                 <div class="booton-img"></div>
@@ -781,24 +801,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 18,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Frango Artesanal',
-                          18,
-                          'Pão, carne artesanal, ovo, presunto, queijo, salada, file de frango, batata palha',
-                          'img/lanches/x-frango.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Frango Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
             <div class="carrocel-item">
               <div class="img-lanche">
@@ -821,10 +835,11 @@
                           'Pão, 2 carne artesanal, 2 queijo, presunto, salada',
                           'img/lanches/burguer-duplo.png',
                         )
-                      ">
+                      " alt="Abrir seção do X-Burguer Duplo Artesanal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Burguer Duplo Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
@@ -833,7 +848,14 @@
               </div>
             </div>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Bacon Especial Artesanal',
+                          22,
+                          'Pão, carne artesanal, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
+                          'img/lanches/bacon-especial.png',
+                        )
+                      " alt="Abrir seção do X-Bacon Especial Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/bacon-especial.png" alt="" />
                 <div class="booton-img"></div>
@@ -848,26 +870,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 22,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Bacon Especial Artesanal',
-                          22,
-                          'Pão, carne artesanal, ovo, salada, bacon, milho, queijo presunto, salsicha, batata palha',
-                          'img/lanches/bacon-especial.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção de X-Bacon Especial Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'X-Tudão Artesanal',
+                          27,
+                          'Pão, 2 carne artesanal, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
+                          'img/lanches/x-tudao.png',
+                        )
+                      " alt="Abrir seção do X-Tudão Artesanal">
               <div class="img-lanche">
                 <img src="img/lanches/x-tudao.png" alt="" />
                 <div class="booton-img"></div>
@@ -882,24 +905,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 27,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'X-Tudão Artesanal',
-                          27,
-                          'Pão, 2 carne artesanal, 2 ovo, 2 presunto, 2 queijo, salada, file de frango, batata palha, 2 salsicha',
-                          'img/lanches/x-tudao.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do X-Tudão Artesanal">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -908,15 +925,15 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Misto Quente</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('misto', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('misto', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('misto', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('misto', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -924,7 +941,14 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="misto">
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Misto Quente Sem Ovo',
+                          5,
+                          'Pão, queijo, presunto',
+                          'img/lanches/misto-quente.png',
+                        )
+                      " alt="Abrir seção do Misto Quente Sem Ovo">
               <div class="img-lanche">
                 <img src="img/lanches/misto-quente.png" alt="" />
                 <div class="booton-img"></div>
@@ -936,26 +960,28 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 5,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Misto Quente Sem Ovo',
-                          5,
-                          'Pão, queijo, presunto',
-                          'img/lanches/misto-quente.png',
-                        )
-                      ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5v14"></path>
-                    </svg>
-                  </button>
+                  <div class="btn-add">
+                    <div class="btn-add">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                        alt="Seção de Misto Quente Sem Ovo">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Misto Quente Com Ovo',
+                          7,
+                          'Pão, queijo, presunto, ovo',
+                          'img/lanches/misto-com-ovo.png',
+                        )
+                      " alt="Abrir seção do Misto Quente Com Ovo">
               <div class="img-lanche">
                 <img src="img/lanches/misto-com-ovo.png" alt="" />
                 <div class="booton-img"></div>
@@ -967,24 +993,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 7,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Misto Quente Com Ovo',
-                          7,
-                          'Pão, queijo, presunto, ovo',
-                          'img/lanches/misto-com-ovo.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Misto Quente Com Ovo">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -993,15 +1013,15 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Cachorro Quente</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('hot-dog', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('hot-dog', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('hot-dog', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('hot-dog', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -1009,7 +1029,14 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="hot-dog">
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Cachorro Quente',
+                          9,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha',
+                          'img/lanches/cachorro-quente.png',
+                        )
+                      " alt="Abrir seção do Cachorro Quente">
               <div class="img-lanche">
                 <img src="img/lanches/cachorro-quente.png" alt="" />
                 <div class="booton-img"></div>
@@ -1023,26 +1050,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 9,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Cachorro Quente',
-                          9,
-                          'Pão, salsicha, molho, cenoura, beterraba, batata palha',
-                          'img/lanches/cachorro-quente.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Cachorro Quente">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Cachorro Quente Com Bacon',
+                          12,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon',
+                          'img/lanches/cachorro-quente-bacon.png',
+                        )
+                      " alt="Abrir seção do Cachorro Quente Com Bacon">
               <div class="img-lanche">
                 <img src="img/lanches/cachorro-quente-bacon.png" alt="" />
                 <div class="booton-img"></div>
@@ -1057,26 +1085,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 12,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Cachorro Quente Com Bacon',
-                          12,
-                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, bacon',
-                          'img/lanches/cachorro-quente-bacon.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Cachorro Quente Com Bacon">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Cachorro Quente Na Chapa',
+                          16,
+                          'Pão, salsicha, bacon, queijo, milho, batata palha',
+                          'img/lanches/cachorro-quente-chapa.png',
+                        )
+                      " alt="Abrir seção do Cachorro Quente Na Chapa">
               <div class="img-lanche">
                 <img src="img/lanches/cachorro-quente-chapa.png" alt="" />
                 <div class="booton-img"></div>
@@ -1090,26 +1119,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 16,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Cachorro Quente Na Chapa',
-                          16,
-                          'Pão, salsicha, bacon, queijo, milho, batata palha',
-                          'img/lanches/cachorro-quente-chapa.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Cachorro Quente Na Chapa">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Cachorro Quente Especial',
+                          18,
+                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo',
+                          'img/lanches/cachorro-quente-especial.png',
+                        )
+                      " alt="Abrir seção do Cachorro Quente Especial">
               <div class="img-lanche">
                 <img src="img/lanches/cachorro-quente-especial.png" alt="" />
                 <div class="booton-img"></div>
@@ -1124,24 +1154,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 18,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Cachorro Quente Especial',
-                          18,
-                          'Pão, salsicha, molho, cenoura, beterraba, batata palha, file de frango, queijo',
-                          'img/lanches/cachorro-quente-especial.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Cachorro Quente Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -1150,15 +1174,15 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Batata Frita</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('batata', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('batata', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('batata', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('batata', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -1166,7 +1190,14 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="batata">
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Batata Frita Meia Porção',
+                          10,
+                          'Batata palito crocante',
+                          'img/lanches/batata-frita.png',
+                        )
+                      " alt="Abrir seção da Batata Frita Meia Porção">
               <div class="img-lanche">
                 <img src="img/lanches/batata-frita.png" alt="" />
                 <div class="booton-img"></div>
@@ -1178,26 +1209,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 10,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Batata Frita Meia Porção',
-                          10,
-                          'Batata palito crocante',
-                          'img/lanches/batata-frita.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção da Batata Frita Meia Porção">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Batata Frita uma Porção',
+                          19,
+                          'Batata palito crocante',
+                          'img/lanches/batata-frita.png',
+                        )
+                      " alt="Abrir seção da Batata Frita uma Porção">
               <div class="img-lanche">
                 <img src="img/lanches/batata-frita.png" alt="Batata Frita" />
                 <div class="booton-img"></div>
@@ -1209,26 +1241,27 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 19,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Batata Frita uma Porção',
-                          19,
-                          'Batata palito crocante',
-                          'img/lanches/batata-frita.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção da Batata Frita uma Porção">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModal(
+                          'Batata Frita Especial',
+                          28,
+                          'Batata palito crocante, queijo, bacon, calabresa',
+                          'img/lanches/batata-frita-especial.png',
+                        )
+                      " alt="Abrir seção da Batata Frita Especial">
               <div class="img-lanche">
                 <img src="img/lanches/batata-frita-especial.png" alt="" />
                 <div class="booton-img"></div>
@@ -1242,24 +1275,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco">R$ 28,00</span>
-                  <button class="btn-add" onclick="
-                        abrirModal(
-                          'Batata Frita Especial',
-                          28,
-                          'Batata palito crocante, queijo, bacon, calabresa',
-                          'img/lanches/batata-frita-especial.png',
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção da Batata Frita Especial">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -1268,15 +1295,15 @@
           <div class="categoria-titulo">
             <h2 class="categoria">Bebidas</h2>
             <div class="botoes-carrocel">
-              <button class="btn-voltar" onclick="scrollCarrossel('bebidas', -1)">
+              <button class="btn-voltar" onclick="scrollCarrossel('bebidas', -1)" aria-label="Voltar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142">
+                  class="lucide lucide-chevron-left" data-loc="client/src/pages/Home.tsx:142" alt="Voltar">
                   <path d="m15 18-6-6 6-6"></path>
-                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('bebidas', 1)">
+                </svg></button><button class="btn-rolar" onclick="scrollCarrossel('bebidas', 1)" aria-label="Próximo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.60 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149">
+                  class="lucide lucide-chevron-right" data-loc="client/src/pages/Home.tsx:149" alt="Próximo">
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </button>
@@ -1284,9 +1311,15 @@
           </div>
           <!-- ============== Roleta ============== -->
           <div class="carrocel" id="bebidas">
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModalBebidas(
+                          'Água Mineral',
+                          'img/bebidas/agua-mineral.png',
+                          [{ nome: 'Água - 500ml', preco: 3 }],
+                        )
+                      " alt="Abrir seção da Água Mineral">
               <div class="img-lanche">
-                <img src="img/bebidas/agua-mineral.png" alt="" />
+                <img src="img/bebidas/agua-mineral.png" alt="Água Mineral" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1296,37 +1329,19 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
-                  <button class="btn-add" onclick="
-                        abrirModalBebidas(
-                          'Água Mineral',
-                          'img/bebidas/agua-mineral.png',
-                          [{ nome: 'Água - 500ml', preco: 3 }],
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção da Água Mineral">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
-              <div class="img-lanche">
-                <img src="img/bebidas/suco-natural.jpg" alt="" />
-                <div class="booton-img"></div>
-              </div>
-
-              <div class="lanche-info">
-                <p class="titulo-lanche">Suco Natural</p>
-                <p class="lanche-desc">Maracuja, Cupuaçu, Acerola</p>
-
-                <div class="preco-add">
-                  <span class="lanche-preco"></span>
-                  <button class="btn-add" onclick="
+            <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Suco Natural',
                           'img/bebidas/suco-natural.jpg',
@@ -1336,33 +1351,31 @@
                             { nome: 'Acerola', preco: 6 },
                           ],
                         )
-                      ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5v14"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="carrocel-item">
+                      " alt="Abrir seção do Suco Natural">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-lata.jpg" alt="" />
+                <img src="img/bebidas/suco-natural.jpg" alt="Suco Natural" />
                 <div class="booton-img"></div>
               </div>
 
               <div class="lanche-info">
-                <p class="titulo-lanche">Refrigerante 350ml</p>
-                <p class="lanche-desc">
-                  Coca Cola, Coca Cola Zero, Jesus, Fanta Laranja, Fanta Uva
-                </p>
+                <p class="titulo-lanche">Suco Natural</p>
+                <p class="lanche-desc">Maracuja, Cupuaçu, Acerola</p>
 
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
-                  <button class="btn-add" onclick="
+                  <div class="btn-add">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100" alt="Seção do Suco Natural">
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5v14"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <button class="carrocel-item" onclick="
                         abrirModalBebidas(
                           'Refrigerante Lata 350ml',
                           'img/bebidas/refrigerante-lata.jpg',
@@ -1374,21 +1387,50 @@
                             { nome: 'Fanta Uva', preco: 5 },
                           ],
                         )
-                      ">
+                      " alt="Abrir seção do Refrigerante Lata 350ml">
+              <div class="img-lanche">
+                <img src="img/bebidas/refrigerante-lata.jpg" alt="Refrigerante 350ml" />
+                <div class="booton-img"></div>
+              </div>
+
+              <div class="lanche-info">
+                <p class="titulo-lanche">Refrigerante 350ml</p>
+                <p class="lanche-desc">
+                  Coca Cola, Coca Cola Zero, Jesus, Fanta Laranja, Fanta Uva
+                </p>
+
+                <div class="preco-add">
+                  <span class="lanche-preco"></span>
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Refrigerante Lata 350ml">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModalBebidas(
+                          'Refrigerante 1L',
+                          'img/bebidas/refrigerante-1L.png',
+                          [
+                            { nome: 'Coca Cola', preco: 10 },
+                            { nome: 'Coca Cola Zero', preco: 10 },
+                            { nome: 'Guaraná Jesus', preco: 10 },
+                            { nome: 'Fanta Laranja', preco: 10 },
+                            { nome: 'Guaraná Antarctica', preco: 10 },
+                            { nome: 'Coca Cola LS', preco: 10 },
+                            { nome: 'Guaraná Jesus LS', preco: 10 },
+                          ],
+                        )
+                      " alt="Abrir seção do Refrigerante 1L">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-1L.png" alt="" />
+                <img src="img/bebidas/refrigerante-1L.png" alt="Refrigerante 1L" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1401,35 +1443,32 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
-                  <button class="btn-add" onclick="
-                        abrirModalBebidas(
-                          'Refrigerante 1L',
-                          'img/bebidas/refrigerante-1L.png',
-                          [
-                            { nome: 'Coca Cola', preco: 10 },
-                            { nome: 'Coca Cola Zero', preco: 10 },
-                            { nome: 'Jesus', preco: 10 },
-                            { nome: 'Fanta Laranja', preco: 10 },
-                            { nome: 'Guaraná Antarctica', preco: 10 },
-                            { nome: 'Coca Cola LS', preco: 6 },
-                            { nome: 'Guaraná Jesus LS', preco: 6 },
-                          ],
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Refrigerante 1L">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
 
-            <div class="carrocel-item">
+            <button class="carrocel-item" onclick="
+                        abrirModalBebidas(
+                          'Refrigerante 2L',
+                          'img/bebidas/refrigerante-2L.png',
+                          [
+                            { nome: 'Coca Cola', preco: 13 },
+                            { nome: 'Guaraná Antarctica', preco: 13 },
+                            { nome: 'Guaraná Jesus', preco: 13 },
+                          ],
+                        )
+                      " alt="Abrir seção do Refrigerante 2L">
               <div class="img-lanche">
-                <img src="img/bebidas/refrigerante-2L.png" alt="" />
+                <img src="img/bebidas/refrigerante-2L.png" alt="Refrigerante 2L" />
                 <div class="booton-img"></div>
               </div>
 
@@ -1441,27 +1480,18 @@
 
                 <div class="preco-add">
                   <span class="lanche-preco"></span>
-                  <button class="btn-add" onclick="
-                        abrirModalBebidas(
-                          'Refrigerante 2L',
-                          'img/bebidas/refrigerante-2L.png',
-                          [
-                            { nome: 'Coca Cola', preco: 13 },
-                            { nome: 'Guaraná Antarctica', preco: 13 },
-                            { nome: 'Guaraná Jesus', preco: 13 },
-                          ],
-                        )
-                      ">
+                  <div class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                       stroke="oklch(0.10 0.01 30)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100">
+                      class="lucide lucide-plus" data-loc="client/src/pages/Home.tsx:100"
+                      alt="Seção do Refrigerante 2L">
                       <path d="M5 12h14"></path>
                       <path d="M12 5v14"></path>
                     </svg>
-                  </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
       </div>
@@ -1510,7 +1540,7 @@
     </nav>
     <!-- ==================================== -->
 
-    <!-- ======================= MODASIS =========================== -->
+    <!-- ======================= MODAIS =========================== -->
 
     <!-- ========================================================= -->
     <!-- MODAL SACOLA -->
@@ -1528,10 +1558,10 @@
             <h2>Sacola</h2>
           </div>
 
-          <button onclick="fecharCart()" class="fechar-sacola">
+          <button onclick="fecharCart()" class="fechar-sacola" alt="Fechar sacola">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
               stroke="oklch(0.6 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-x" data-loc="client/src/components/ui/dialog.tsx:139">
+              class="lucide lucide-x" data-loc="client/src/components/ui/dialog.tsx:139" alt="Fechar sacola">
               <path class="x-icon" d="M18 6 6 18"></path>
               <path class="x-icon" d="m6 6 12 12"></path>
             </svg>
@@ -1684,7 +1714,7 @@
 
             <div class="quantidade-produto">
 
-              <button class="botao-qtd" onclick="mudarQtdEspetinho(-1)">
+              <button class="botao-qtd" onclick="mudarQtdEspetinho(-1)" alt="Diminuir quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
@@ -1694,7 +1724,7 @@
 
               <span id="qtdEspetinho" class="quantidade-numero">1</span>
 
-              <button class="botao-qtd" onclick="mudarQtdEspetinho(1)">
+              <button class="botao-qtd" onclick="mudarQtdEspetinho(1)" alt="Aumentar quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
@@ -1745,7 +1775,7 @@
 
           </div>
 
-          <button class="add-carrinho" onclick="addCarrinhoEspetinho()">
+          <button class="add-carrinho" onclick="addCarrinhoEspetinho()" alt="Adicionar ao carrinho">
             Adicionar ao Carrinho
           </button>
 
@@ -1795,7 +1825,7 @@
 
             <div class="quantidade-produto">
 
-              <button class="botao-qtd" onclick="mudarQtdChurrasco(-1)">
+              <button class="botao-qtd" onclick="mudarQtdChurrasco(-1)" alt="Diminuir quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
@@ -1807,10 +1837,11 @@
                 1
               </span>
 
-              <button class="botao-qtd" onclick="mudarQtdChurrasco(1)">
+              <button class="botao-qtd" onclick="mudarQtdChurrasco(1)" alt="Aumentar quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
+                  class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164"
+                  alt="Aumentar quantidade">
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>
                 </svg>
@@ -1858,7 +1889,7 @@
 
           </div>
 
-          <button class="add-carrinho" onclick="addCarrinhoChurrasco()">
+          <button class="add-carrinho" onclick="addCarrinhoChurrasco()" alt="Adicionar ao carrinho">
             Adicionar ao Carrinho
           </button>
 
@@ -1875,10 +1906,10 @@
         <div class="modal-topo">
           <img id="m-img" class="modal-img" src="" alt="Produto" />
           <div class="container-img"></div>
-          <button onclick="fecharModal()" class="botao-fechar">
+          <button onclick="fecharModal()" class="botao-fechar" aria-label="Fechar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
               stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"
-              data-loc="client/src/components/AddToCartModal.tsx:105">
+              data-loc="client/src/components/AddToCartModal.tsx:105" alt="Fechar">
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
             </svg>
@@ -1892,7 +1923,7 @@
           <div class="quantida-lanche">
             <label><b class="quantidade">Quantidade:</b></label>
             <div class="quantidade-produto">
-              <button class="botao-qtd" onclick="mudarQtdModal(-1)">
+              <button class="botao-qtd" onclick="mudarQtdModal(-1)" alt="Diminuir quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-minus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:151">
@@ -1900,7 +1931,7 @@
                 </svg>
               </button>
               <span id="m-qtd-val">1</span>
-              <button class="botao-qtd" onclick="mudarQtdModal(1)">
+              <button class="botao-qtd" onclick="mudarQtdModal(1)" alt="Aumentar quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-plus btn-qtd" data-loc="client/src/components/AddToCartModal.tsx:164">
@@ -2022,7 +2053,7 @@
             </p>
           </div>
 
-          <button class="add-carrinho" onclick="addAoCarrinho()">
+          <button class="add-carrinho" onclick="addAoCarrinho()" alt="Adicionar ao carrinho">
             Adicionar ao Carrinho
           </button>
         </div>
@@ -2036,10 +2067,10 @@
         <div class="modal-topo">
           <img id="m-img-bebida" class="modal-img" src="" />
           <div class="container-img"></div>
-          <button onclick="fecharModalBebida()" class="botao-fechar">
+          <button onclick="fecharModalBebida()" class="botao-fechar" aria-label="Fechar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
               stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"
-              data-loc="client/src/components/AddToCartModal.tsx:105">
+              data-loc="client/src/components/AddToCartModal.tsx:105" alt="Fechar">
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
             </svg>
@@ -2059,7 +2090,7 @@
               <b class="quantidade">Quantidade:</b>
             </label>
             <div class="quantidade-produto">
-              <button class="botao-qtd" onclick="alterarQtdBebida(-1)">
+              <button class="botao-qtd" onclick="alterarQtdBebida(-1)" alt="Diminuir quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-minus btn-qtd">
@@ -2069,7 +2100,7 @@
 
               <span id="bebida-qtd">1</span>
 
-              <button class="botao-qtd" onclick="alterarQtdBebida(1)">
+              <button class="botao-qtd" onclick="alterarQtdBebida(1)" alt="Aumentar quantidade">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.45 0.008 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-plus btn-qtd">
@@ -2094,7 +2125,7 @@
           </div>
 
           <!-- BUTTON -->
-          <button class="add-carrinho" onclick="addBebidaCarrinho()">
+          <button class="add-carrinho" onclick="addBebidaCarrinho()" alt="Adicionar ao carrinho">
             Adicionar ao Carrinho
           </button>
         </div>
@@ -2109,10 +2140,10 @@
         <div class="perfil-header">
           <h2>Meu Perfil</h2>
 
-          <button onclick="fecharPerfil()" class="fechar-sacola">
+          <button onclick="fecharPerfil()" class="fechar-sacola" alt="Fechar perfil">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
               stroke="oklch(0.6 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-x">
+              class="lucide lucide-x" alt="Fechar perfil">
               <path class="x-icon" d="M18 6 6 18"></path>
               <path class="x-icon" d="m6 6 12 12"></path>
             </svg>
@@ -2131,7 +2162,7 @@
                 <p id="perfil-telefone">(98) 98530-1953</p>
               </div>
 
-              <button class="editar-perfil-btn" onclick="abrirModalPerfil()">
+              <button class="editar-perfil-btn" onclick="abrirModalPerfil()" alt="Editar perfil">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="oklch(0.73 0.17 46)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-pen">
@@ -2162,7 +2193,7 @@
 
         <!-- FOOTER -->
         <div class="perfil-footer">
-          <button class="btn-logout" onclick="sair()">Logout</button>
+          <button class="btn-logout" onclick="sair()" alt="Logout">Logout</button>
         </div>
       </div>
     </div>
@@ -2174,8 +2205,13 @@
         <div class="topo-editar">
           <h3>Alterar Nome</h3>
 
-          <button onclick="fecharModalPerfil()" class="fechar-modal-perfil">
-            ✕
+          <button onclick="fecharModalPerfil()" class="fechar-modal-perfil" alt="Fechar editar perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="oklch(0.6 0.01 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-x" alt="Fechar editar perfil">
+              <path class="x-icon" d="M18 6 6 18"></path>
+              <path class="x-icon" d="m6 6 12 12"></path>
+            </svg>
           </button>
         </div>
 
@@ -2185,7 +2221,7 @@
           <input type="text" id="editar-nome" placeholder="Digite seu nome" />
         </div>
 
-        <button class="btn-salvar-perfil" onclick="salvarPerfilEditado()">
+        <button class="btn-salvar-perfil" onclick="salvarPerfilEditado()" alt="Salvar perfil">
           Salvar
         </button>
       </div>

@@ -309,32 +309,37 @@ header {
 }
 
 .titulo-lanche {
-  color: oklch(0.96 0.005 50);
+  /* color: oklch(0.96 0.005 50); */
+  color: white;
   font-weight: 600;
   line-height: 1.25rem;
-  font-size: 0.875rem;
+  font-size: 0.975rem;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
   margin-bottom: calc(0.25rem * 1);
+  text-align: left;
 }
 
 .lanche-desc {
-  color: oklch(0.55 0.01 50);
+  /* color: oklch(0.55 0.01 50); */
+  color: var(--cinza-2);
   line-height: 1.25;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 300;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
   margin-bottom: calc(0.25rem * 2);
+  text-align: left;
 }
 
 .lanche-preco {
   color: oklch(0.73 0.17 46);
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 0.985rem;
   line-height: calc(1.25rem / 0.875);
 }
 
