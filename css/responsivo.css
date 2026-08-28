@@ -1,0 +1,35 @@
+@media (min-width: 768px) {
+    header {
+        padding: 3% calc(20px + 1.8vw);
+    }
+
+    .painel-inicio {
+        max-width: 100%;
+        /* padding: 0 20px; */
+    }
+
+    main {
+        /* max-width: 100%; */
+        padding: 0 20px;
+    }
+
+    .nav-container {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .painel-inicio {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    main {
+        /* max-width: 100%; */
+        padding: 0 6%;
+    }
+
+    .nav-container {
+        max-width: 100%;
+    }
+}

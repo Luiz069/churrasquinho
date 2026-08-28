@@ -1,5 +1,6 @@
 @import url("inicioNovo.css");
 @import url("produtos.css");
+@import url("responsivo.css");
 
 :root {
   --background: oklch(14.1% 0.005 285.823);

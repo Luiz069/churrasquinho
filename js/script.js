@@ -1741,7 +1741,7 @@ function carregarEspetinhos() {
     .then((snapshot) => {
       if (snapshot.empty) {
         lista.innerHTML = `
-                <div class="sem-itens">
+                <div class="sem-itens" style="color: #888; font-size: 14px;">
                     Nenhum espetinho disponível.
                 </div>
             `;
@@ -1819,7 +1819,7 @@ function carregarChurrasco() {
     .then((snapshot) => {
       if (snapshot.empty) {
         lista.innerHTML = `
-                <div class="sem-itens">
+                <div class="sem-itens" style="color: #888; font-size: 14px;">
                     Nenhuma opção disponível.
                 </div>
             `;
