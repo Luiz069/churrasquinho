@@ -160,6 +160,7 @@ function iniciarApp() {
 
   // ================= RENDERS =================
 
+  renderizarProdutosPreview();
   renderCarrinho();
   carregarDadosPerfil();
   carregarHistorico();
@@ -328,11 +329,32 @@ function abrirModalBebidas(nome, imagem, opcoes) {
 
   document.getElementById("bebida-qtd").innerText = qtdBebida;
 
+  const categoriaBebida = {
+    "Água Mineral": "agua",
+    "Suco Natural": "suco",
+    "Refrigerante Lata 350ml": "350ml",
+    "Refrigerante 1L": "1l",
+    "Refrigerante 2L": "2l"
+  }[nome];
+  const produtosFonte = produtosPreviewCarregado ? produtosPreviewCache : lerProdutosPreview();
+  const produtosPreview = produtosFonte.filter((produto) =>
+    produto.ativo !== false &&
+    produto.categoria === "bebidas" &&
+    produto.categoriaBebida === categoriaBebida
+  );
+  const opcoesComProdutosPreview = [
+    ...opcoes,
+    ...produtosPreview.map((produto) => ({
+      nome: produto.nome,
+      preco: Number(produto.preco || 0)
+    }))
+  ];
+
   const container = document.getElementById("bebida-opcoes");
 
   container.innerHTML = "";
 
-  opcoes.forEach((op, index) => {
+  opcoesComProdutosPreview.forEach((op) => {
     container.innerHTML += `
     <label class="add-card">
 
@@ -2014,3 +2036,117 @@ function addCarrinhoChurrasco() {
 
   fecharModalChurrasco();
 }
+
+// =====================================================
+// PRODUTOS ADICIONADOS PELO PAINEL LOCAL (PREVIEW VS CODE)
+// Usa localStorage apenas nesta prévia; integração Firestore virá depois.
+// =====================================================
+const CHAVE_PRODUTOS_PREVIEW = "churrasquinho_produtos_preview";
+var produtosPreviewCache = [];
+var produtosPreviewCarregado = false;
+var pararProdutosPreview = null;
+
+function lerProdutosPreview() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_PRODUTOS_PREVIEW) || "[]");
+    return Array.isArray(dados) ? dados : [];
+  } catch (erro) {
+    console.error("Não foi possível ler os produtos de prévia:", erro);
+    return [];
+  }
+}
+
+function renderizarProdutosPreview(produtosRecebidos) {
+  const fonte = produtosRecebidos || (produtosPreviewCarregado ? produtosPreviewCache : lerProdutosPreview());
+  const produtos = fonte.filter((produto) => produto.ativo !== false);
+  const categoriasPermitidas = ["industrial", "artesanal", "misto", "hot-dog", "batata", "bebidas"];
+
+  categoriasPermitidas.forEach((categoria) => {
+    const container = document.getElementById(categoria);
+    if (!container) return;
+
+    // Remove somente os cards dinâmicos, mantendo os cards originais do cardápio.
+    container.querySelectorAll("[data-produto-preview='true']").forEach((card) => card.remove());
+
+    // Bebidas são opções dentro dos cards Água, Suco, 350ml, 1L e 2L.
+    if (categoria === "bebidas") return;
+
+    produtos.filter((produto) => produto.categoria === categoria).forEach((produto) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "carrocel-item";
+      card.dataset.produtoPreview = "true";
+      card.setAttribute("aria-label", `Adicionar ${produto.nome} à sacola`);
+
+      const imagem = produto.imagem || "img/lanches/x-burguer.webp";
+      const descricaoBase = produto.descricao || "Preparado com muito sabor";
+      const categoriaBebidaNome = {
+        agua: "Água", suco: "Suco", "350ml": "350ml", "1l": "1L", "2l": "2L"
+      }[produto.categoriaBebida];
+      const descricao = produto.categoria === "bebidas" && categoriaBebidaNome
+        ? `${categoriaBebidaNome} · ${descricaoBase}`
+        : descricaoBase;
+      const precoFormatado = Number(produto.preco || 0).toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      card.innerHTML = `
+        <div class="img-lanche">
+          <img src="${escapeHtmlPreview(imagem)}" alt="${escapeHtmlPreview(produto.nome)}" loading="lazy"
+               onerror="this.onerror=null;this.src='img/lanches/x-burguer.webp';">
+          <div class="booton-img"></div>
+        </div>
+        <div class="lanche-info">
+          <p class="titulo-lanche">${escapeHtmlPreview(produto.nome)}</p>
+          <p class="lanche-desc">${escapeHtmlPreview(descricao)}</p>
+          <div class="preco-add">
+            <span class="lanche-preco">R$ ${precoFormatado}</span>
+            <div class="btn-add">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"></path><path d="M12 5v14"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => abrirModal(
+        produto.nome,
+        Number(produto.preco || 0),
+        descricao,
+        imagem
+      ));
+      container.appendChild(card);
+    });
+  });
+}
+
+function ouvirProdutosPreviewFirestore() {
+  if (typeof db === "undefined") return;
+  if (pararProdutosPreview) pararProdutosPreview();
+  pararProdutosPreview = db.collection("produtos")
+    .where("ativo", "==", true)
+    .onSnapshot((snapshot) => {
+      produtosPreviewCache = [];
+      snapshot.forEach((doc) => produtosPreviewCache.push({ id: doc.id, ...doc.data() }));
+      produtosPreviewCarregado = true;
+      renderizarProdutosPreview(produtosPreviewCache);
+    }, (erro) => {
+      console.error("Não foi possível carregar produtos do Firebase:", erro);
+      produtosPreviewCarregado = false;
+    });
+}
+
+function escapeHtmlPreview(valor) {
+  return String(valor ?? "").replace(/[&<>"']/g, (caractere) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[caractere]);
+}
+
+window.addEventListener("storage", (evento) => {
+  if (evento.key === CHAVE_PRODUTOS_PREVIEW && !produtosPreviewCarregado) renderizarProdutosPreview();
+});
+
+ouvirProdutosPreviewFirestore();
