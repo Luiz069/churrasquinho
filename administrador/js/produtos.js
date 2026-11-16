@@ -68,7 +68,7 @@
 
   function limparFormulario() {
     form.reset();
-    imagem.value = "img/lanches/x-burguer.webp";
+    imagem.value = "";
     editandoId = null;
     formTitulo.textContent = "＋ Adicionar produto";
     btnSalvar.textContent = "Adicionar produto ao cardápio";
@@ -137,7 +137,7 @@
       categoria.value = produto.categoria || "industrial";
       atualizarCategoriaBebida();
       categoriaBebida.value = normalizarCategoriaBebida(produto.categoriaBebida);
-      imagem.value = produto.imagem || "img/lanches/x-burguer.webp";
+      imagem.value = produto.imagem || "";
       descricao.value = produto.descricao || "";
       formTitulo.textContent = "✎ Editar produto";
       btnSalvar.textContent = "Salvar alterações";
@@ -231,13 +231,26 @@
     return `${principal}${bebida}`;
   }
 
+  function imagemPadraoPorCategoria(categoria) {
+    const imagens = {
+      industrial: "img/lanches/x-burguer.webp",
+      artesanal: "img/lanches/x-burguer.webp",
+      misto: "img/lanches/misto-quente.webp",
+      "hot-dog": "img/lanches/cachorro-quente.webp",
+      batata: "img/lanches/batata-frita.webp",
+      bebidas: "img/bebidas/agua-mineral.webp",
+      espetinho: "img/churrasco/espetinho.webp",
+      churrascoCompleto: "img/churrasco/churrasco-completo.webp"
+    };
+    return imagens[categoria] || "img/lanches/x-burguer.webp";
+  }
+
   function renderizar(snapshot) {
     const produtos = [];
     snapshot.forEach((doc) => produtos.push({ id: doc.id, ...doc.data() }));
     produtos.sort((a, b) => {
-      const dataA = a.criadoEm?.toMillis ? a.criadoEm.toMillis() : 0;
-      const dataB = b.criadoEm?.toMillis ? b.criadoEm.toMillis() : 0;
-      return dataB - dataA;
+      const diferenca = Number(a.preco || 0) - Number(b.preco || 0);
+      return diferenca || String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
     });
     const filtrados = produtos.filter((produto) => filtroAtual === "todos" ||
       (filtroAtual === "ativos" && produto.ativo !== false) ||
@@ -266,8 +279,9 @@
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
-      const caminhoImagem = produto.imagem || "img/lanches/x-burguer.webp";
-      const imagemAdmin = /^(https?:|data:|\/)/i.test(caminhoImagem) ? caminhoImagem : `../../${caminhoImagem}`;
+      const caminhoImagem = produto.imagem || imagemPadraoPorCategoria(produto.categoria);
+      const prefixoImagem = "../../";
+      const imagemAdmin = /^(https?:|data:|\/)/i.test(caminhoImagem) ? caminhoImagem : `${prefixoImagem}${caminhoImagem}`;
       return `
         <article class="item">
           <img class="thumb" src="${esc(imagemAdmin)}" alt="" onerror="this.onerror=null;this.src='../img/favcon.png'">
