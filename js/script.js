@@ -2029,10 +2029,23 @@ let pararDeOuvirCardapio = null;
 const CATEGORIAS_BEBIDAS = {
   agua: { titulo: "Água", imagem: "img/bebidas/agua-mineral.webp" },
   suco: { titulo: "Suco", imagem: "img/bebidas/suco-natural.webp" },
-  "Refrigerante 350ml": { titulo: "Refrigerante 350ml", imagem: "img/bebidas/refrigerante-lata.webp" },
-  "Refrigerante 1L": { titulo: "Refrigerante 1L", imagem: "img/bebidas/refrigerante-1L.webp" },
-  "Refrigerante 2L": { titulo: "Refrigerante 2L", imagem: "img/bebidas/refrigerante-2L.webp" }
+  "350ml": { titulo: "Refrigerante de 350 ml", imagem: "img/bebidas/refrigerante-lata.webp" },
+  "1l": { titulo: "Refrigerante de 1 L", imagem: "img/bebidas/refrigerante-1L.webp" },
+  "2l": { titulo: "Refrigerante de 2 L", imagem: "img/bebidas/refrigerante-2L.webp" }
 };
+
+const ALIASES_CATEGORIAS_BEBIDAS = {
+  "Refrigerante 350ml": "350ml",
+  "Refrigerante 1L": "1l",
+  "Refrigerante 2L": "2l",
+  "350 ml": "350ml",
+  "1 L": "1l",
+  "2 L": "2l"
+};
+
+function normalizarCategoriaBebida(valor) {
+  return ALIASES_CATEGORIAS_BEBIDAS[valor] || valor || "";
+}
 
 function iniciarCardapioFirebase() {
   if (pararDeOuvirCardapio) return;
@@ -2141,7 +2154,7 @@ function renderizarCardapioFirebase() {
 
   Object.entries(CATEGORIAS_BEBIDAS).forEach(([chave, config]) => {
     const opcoes = produtosCardapio.filter((produto) =>
-      produto.categoria === "bebidas" && produto.categoriaBebida === chave
+      produto.categoria === "bebidas" && normalizarCategoriaBebida(produto.categoriaBebida) === chave
     );
     const nomes = opcoes.slice(0, 5).map((produto) => produto.nome).filter(Boolean);
     const descricao = nomes.length ? nomes.join(", ") : "Nenhuma bebida cadastrada";
