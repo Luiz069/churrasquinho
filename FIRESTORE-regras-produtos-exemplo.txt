@@ -1,0 +1,21 @@
+REGRAS PARA A COLEÇÃO produtos (EXEMPLO PARA MESCLAR)
+
+O ZIP do projeto não contém as regras atuais do Firestore. NÃO substitua todas as regras existentes por este trecho sem revisar as regras das coleções pedidos, usuarios e demais dados.
+
+Dentro de:
+match /databases/{database}/documents {
+
+adicione o bloco:
+
+match /produtos/{produtoId} {
+  // O cardápio público precisa ler os produtos.
+  allow read: if true;
+
+  // Somente o e-mail administrativo pode cadastrar, editar ou excluir.
+  allow create, update, delete: if request.auth != null
+    && request.auth.token.email == 'shirlianedurans@gmail.com';
+}
+
+}
+
+A autenticação da página administrativa também valida o e-mail. As regras do Firestore são a proteção efetiva do banco e precisam ser publicadas no Console do Firebase. Atenção: regras do Firestore são permissivas por união (OR); revise regras genéricas existentes que possam permitir gravação na coleção produtos para que elas não anulem esta restrição.

@@ -22,7 +22,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;color:#c8b4a6;letter-spacing:.7px}
 input,select,textarea{width:100%;border:1px solid #3c2920;background:#120c0a;color:white;border-radius:12px;padding:13px 14px;font:inherit;font-size:14px;outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px #f477211c}
-textarea{min-height:78px;resize:vertical}
+textarea{min-height:78px;resize:vertical}\n[hidden]{display:none!important}
 .btn-primary{grid-column:1/-1;border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;font-weight:800;cursor:pointer;font-size:14px}
 .helper{color:#9d897b;font-size:11px;line-height:1.5;margin-top:4px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.filter{border:1px solid var(--line);background:#20140f;color:#bda99b;padding:10px 15px;border-radius:999px;font-weight:700;cursor:pointer;font-size:12px}.filter.active{background:var(--orange);border-color:var(--orange);color:white}
@@ -40,7 +40,7 @@ textarea{min-height:78px;resize:vertical}
 <div class="brand"><div class="brand-mark">🍔</div><div><h1>Churrasquinho Durans</h1><p>PAINEL DE PRODUTOS • PRÉVIA LOCAL</p></div></div>
 <a class="btn-site" href="index.html" target="_blank">↗ Ver cardápio</a>
 </header>
-<section class="intro"><h2>Gerenciar produtos</h2><p>Cadastre os produtos que aparecerão no cardápio. Os cards adicionados seguem o mesmo visual dos cards existentes.</p></section>
+<section class="intro"><h2>Gerenciar produtos</h2><p>Cadastre lanches ou bebidas. Para bebidas, escolha em qual categoria existente o produto será listado (Água, Suco, 350ml, 1L ou 2L).</p></section>
 <div class="notice">⚠️ Esta é uma prévia para testar no VS Code. Os produtos ficam salvos no armazenamento local deste navegador (localStorage), ainda não no Firebase nem entre dispositivos.</div>
 <section class="panel">
 <h3 id="formTitulo">＋ Adicionar produto</h3>
@@ -50,9 +50,7 @@ textarea{min-height:78px;resize:vertical}
 <div class="field"><label for="categoria">CATEGORIA DO CARDÁPIO</label><select id="categoria" required>
 <option value="industrial">Hambúrguer Industrial</option><option value="artesanal">Hambúrguer Artesanal</option><option value="misto">Misto Quente</option><option value="hot-dog">Cachorro Quente</option><option value="batata">Batata Frita</option><option value="bebidas">Bebidas</option>
 </select></div>
-<div class="field" id="categoriaBebidaContainer" hidden><label for="categoriaBebida">CATEGORIA DA BEBIDA</label><select id="categoriaBebida">
-<option value="">Selecione a categoria da bebida</option><option value="agua">Água</option><option value="suco">Suco</option><option value="350ml">350ml</option><option value="1l">1L</option><option value="2l">2L</option>
-</select><span class="helper">Cada categoria corresponde a um card de bebidas no cardápio.</span></div>
+<div class="field" id="campoCategoriaBebida" hidden><label for="categoriaBebida">CATEGORIA DA BEBIDA</label><select id="categoriaBebida"><option value="">Selecione a categoria</option><option value="agua">Água</option><option value="suco">Suco</option><option value="350ml">350ml</option><option value="1l">1L</option><option value="2l">2L</option></select><span class="helper">O produto será exibido dentro do card desta categoria de bebida.</span></div>
 <div class="field"><label for="imagem">IMAGEM (CAMINHO OU URL)</label><input id="imagem" value="img/lanches/x-burguer.webp" placeholder="img/lanches/meu-lanche.webp" required><span class="helper">Use o caminho de uma imagem que exista na pasta do projeto ou uma URL direta.</span></div>
 <div class="field full"><label for="descricao">DESCRIÇÃO</label><textarea id="descricao" maxlength="180" placeholder="Descreva os ingredientes do lanche" required></textarea></div>
 <button class="btn-primary" type="submit" id="btnSalvar">Adicionar produto ao cardápio</button>

@@ -5,7 +5,7 @@
   const preco = document.getElementById("preco");
   const categoria = document.getElementById("categoria");
   const categoriaBebida = document.getElementById("categoriaBebida");
-  const categoriaBebidaContainer = document.getElementById("categoriaBebidaContainer");
+  const campoCategoriaBebida = document.getElementById("campoCategoriaBebida");
   const imagem = document.getElementById("imagem");
   const descricao = document.getElementById("descricao");
   const lista = document.getElementById("lista");
@@ -13,6 +13,15 @@
   const btnSalvar = document.getElementById("btnSalvar");
   let filtroAtual = "todos";
   let editandoId = null;
+
+  function atualizarCampoBebida() {
+    const ehBebida = categoria.value === "bebidas";
+    campoCategoriaBebida.hidden = !ehBebida;
+    categoriaBebida.required = ehBebida;
+    if (!ehBebida) categoriaBebida.value = "";
+  }
+  categoria.addEventListener("change", atualizarCampoBebida);
+  atualizarCampoBebida();
 
   const getProdutos = () => {
     try {
@@ -34,16 +43,6 @@
     industrial:"Hambúrguer Industrial", artesanal:"Hambúrguer Artesanal",
     misto:"Misto Quente", "hot-dog":"Cachorro Quente", batata:"Batata Frita", bebidas:"Bebidas"
   })[cat] || cat;
-  const categoriaBebidaNome = (cat) => ({
-    agua:"Água", suco:"Suco", "350ml":"350ml", "1l":"1L", "2l":"2L"
-  })[cat] || cat;
-
-  function atualizarCategoriaBebida() {
-    const ehBebida = categoria.value === "bebidas";
-    categoriaBebidaContainer.hidden = !ehBebida;
-    categoriaBebida.required = ehBebida;
-    if (!ehBebida) categoriaBebida.value = "";
-  }
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -72,7 +71,9 @@
     salvarProdutos(items);
     form.reset();
     imagem.value = "img/lanches/x-burguer.webp";
-    atualizarCategoriaBebida();
+    categoria.value = "industrial";
+    categoriaBebida.value = "";
+    atualizarCampoBebida();
     editandoId = null;
     formTitulo.textContent = "＋ Adicionar produto";
     btnSalvar.textContent = "Adicionar produto ao cardápio";
@@ -85,8 +86,8 @@
     nome.value = produto.nome;
     preco.value = produto.preco;
     categoria.value = produto.categoria;
-    atualizarCategoriaBebida();
     categoriaBebida.value = produto.categoriaBebida || "";
+    atualizarCampoBebida();
     imagem.value = produto.imagem;
     descricao.value = produto.descricao;
     formTitulo.textContent = "✎ Editar produto";
@@ -116,7 +117,7 @@
       <article class="item">
         <img class="thumb" src="${esc(p.imagem)}" alt="" onerror="this.onerror=null;this.src='img/lanches/x-burguer.webp'">
         <div class="info"><strong>${esc(p.nome)} ${p.ativo === false ? '<span style="color:#fcd34d;font-size:10px">• INATIVO</span>' : ''}</strong>
-          <p>${esc(categoriaNome(p.categoria))}${p.categoria === "bebidas" && p.categoriaBebida ? ` · ${esc(categoriaBebidaNome(p.categoriaBebida))}` : ""} · ${esc(p.descricao)}</p>
+          <p>${esc(categoriaNome(p.categoria))}${p.categoria === "bebidas" && p.categoriaBebida ? " · " + esc(({agua:"Água",suco:"Suco","350ml":"350ml","1l":"1L","2l":"2L"})[p.categoriaBebida] || p.categoriaBebida) : ""} · ${esc(p.descricao)}</p>
           <div class="price">R$ ${Number(p.preco).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
         </div>
         <div class="actions">
@@ -132,7 +133,5 @@
     filtroAtual = button.dataset.filter;
     renderizar();
   }));
-  categoria.addEventListener("change", atualizarCategoriaBebida);
-  atualizarCategoriaBebida();
   renderizar();
 })();

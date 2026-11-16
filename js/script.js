@@ -160,7 +160,7 @@ function iniciarApp() {
 
   // ================= RENDERS =================
 
-  renderizarProdutosPreview();
+  iniciarCardapioFirebase();
   renderCarrinho();
   carregarDadosPerfil();
   carregarHistorico();
@@ -314,82 +314,64 @@ function fecharModal() {
 let bebidaSelecionada = null;
 let qtdBebida = 1;
 
-function abrirModalBebidas(nome, imagem, opcoes) {
-  itemAtual = {
-    nome,
-    imagem,
-  };
-
+function abrirModalBebidas(nome, imagem, opcoes = []) {
+  itemAtual = { nome, imagem };
   bebidaSelecionada = null;
   qtdBebida = 1;
 
   document.getElementById("m-nome-bebida").innerText = nome;
-
   document.getElementById("m-img-bebida").src = imagem;
-
   document.getElementById("bebida-qtd").innerText = qtdBebida;
 
-  const categoriaBebida = {
-    "Água Mineral": "agua",
-    "Suco Natural": "suco",
-    "Refrigerante Lata 350ml": "350ml",
-    "Refrigerante 1L": "1l",
-    "Refrigerante 2L": "2l"
-  }[nome];
-  const produtosFonte = produtosPreviewCarregado ? produtosPreviewCache : lerProdutosPreview();
-  const produtosPreview = produtosFonte.filter((produto) =>
-    produto.ativo !== false &&
-    produto.categoria === "bebidas" &&
-    produto.categoriaBebida === categoriaBebida
-  );
-  const opcoesComProdutosPreview = [
-    ...opcoes,
-    ...produtosPreview.map((produto) => ({
-      nome: produto.nome,
-      preco: Number(produto.preco || 0)
-    }))
-  ];
-
   const container = document.getElementById("bebida-opcoes");
-
   container.innerHTML = "";
 
-  opcoesComProdutosPreview.forEach((op) => {
-    container.innerHTML += `
-    <label class="add-card">
+  if (!opcoes.length) {
+    const vazio = document.createElement("p");
+    vazio.className = "menu-status";
+    vazio.textContent = "Nenhuma bebida disponível nesta categoria.";
+    container.appendChild(vazio);
+  }
 
-      <div class="add-left">
+  opcoes.forEach((op) => {
+    const preco = Number(op.preco || 0);
+    const linha = document.createElement("label");
+    linha.className = "add-card";
 
-        <label class="checkbox-custom">
-          <input
-            class="bebida-checkbox"
-            type="checkbox"
-            onchange="selecionarBebida(this, '${op.nome}', ${op.preco})"
-          >
-          <span></span>
-        </label>
+    const esquerda = document.createElement("div");
+    esquerda.className = "add-left";
 
-        <span class="add-texto">
-          ${op.nome}
-        </span>
+    const seletor = document.createElement("div");
+    seletor.className = "checkbox-custom";
 
-      </div>
+    const input = document.createElement("input");
+    input.className = "bebida-checkbox";
+    input.type = "checkbox";
+    input.addEventListener("change", () => selecionarBebida(input, op.nome, preco));
 
-      <span class="add-preco">
-        + R$ ${op.preco.toFixed(2)}
-      </span>
+    const marca = document.createElement("span");
+    seletor.append(input, marca);
 
-    </label>
-    `;
+    const texto = document.createElement("span");
+    texto.className = "add-texto";
+    texto.textContent = op.nome || "Bebida";
+
+    esquerda.append(seletor, texto);
+
+    const valor = document.createElement("span");
+    valor.className = "add-preco";
+    valor.textContent = `+ R$ ${preco.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+    linha.append(esquerda, valor);
+    container.appendChild(linha);
   });
 
   document.getElementById("m-total-bebida").innerText = "0.00";
-
   document.getElementById("modalBebida").style.display = "flex";
 }
 
 function selecionarBebida(input, nome, preco) {
-  document.querySelectorAll(".checkbox-bebida").forEach((cb) => {
+  document.querySelectorAll(".bebida-checkbox").forEach((cb) => {
     if (cb !== input) {
       cb.checked = false;
       cb.parentElement.classList.remove("ativo");
@@ -2038,105 +2020,146 @@ function addCarrinhoChurrasco() {
 }
 
 // =====================================================
-// PRODUTOS ADICIONADOS PELO PAINEL LOCAL (PREVIEW VS CODE)
-// Usa localStorage apenas nesta prévia; integração Firestore virá depois.
+// CARDÁPIO DINÂMICO - FIRESTORE
+// Produtos cadastrados no painel administrativo são exibidos em tempo real.
 // =====================================================
-const CHAVE_PRODUTOS_PREVIEW = "churrasquinho_produtos_preview";
-var produtosPreviewCache = [];
-var produtosPreviewCarregado = false;
-var pararProdutosPreview = null;
+let produtosCardapio = [];
+let pararDeOuvirCardapio = null;
 
-function lerProdutosPreview() {
-  try {
-    const dados = JSON.parse(localStorage.getItem(CHAVE_PRODUTOS_PREVIEW) || "[]");
-    return Array.isArray(dados) ? dados : [];
-  } catch (erro) {
-    console.error("Não foi possível ler os produtos de prévia:", erro);
-    return [];
-  }
-}
+const CATEGORIAS_BEBIDAS = {
+  agua: { titulo: "Água", imagem: "img/bebidas/agua-mineral.webp" },
+  suco: { titulo: "Suco", imagem: "img/bebidas/suco-natural.webp" },
+  "350ml": { titulo: "350ml", imagem: "img/bebidas/refrigerante-lata.webp" },
+  "1l": { titulo: "1L", imagem: "img/bebidas/refrigerante-1L.webp" },
+  "2l": { titulo: "2L", imagem: "img/bebidas/refrigerante-2L.webp" }
+};
 
-function renderizarProdutosPreview(produtosRecebidos) {
-  const fonte = produtosRecebidos || (produtosPreviewCarregado ? produtosPreviewCache : lerProdutosPreview());
-  const produtos = fonte.filter((produto) => produto.ativo !== false);
-  const categoriasPermitidas = ["industrial", "artesanal", "misto", "hot-dog", "batata", "bebidas"];
+function iniciarCardapioFirebase() {
+  if (pararDeOuvirCardapio) return;
 
-  categoriasPermitidas.forEach((categoria) => {
-    const container = document.getElementById(categoria);
-    if (!container) return;
+  const containers = ["industrial", "artesanal", "misto", "hot-dog", "batata", "bebidas"];
+  containers.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<p class="menu-status" aria-live="polite">Carregando produtos...</p>';
+  });
 
-    // Remove somente os cards dinâmicos, mantendo os cards originais do cardápio.
-    container.querySelectorAll("[data-produto-preview='true']").forEach((card) => card.remove());
-
-    // Bebidas são opções dentro dos cards Água, Suco, 350ml, 1L e 2L.
-    if (categoria === "bebidas") return;
-
-    produtos.filter((produto) => produto.categoria === categoria).forEach((produto) => {
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "carrocel-item";
-      card.dataset.produtoPreview = "true";
-      card.setAttribute("aria-label", `Adicionar ${produto.nome} à sacola`);
-
-      const imagem = produto.imagem || "img/lanches/x-burguer.webp";
-      const descricaoBase = produto.descricao || "Preparado com muito sabor";
-      const categoriaBebidaNome = {
-        agua: "Água", suco: "Suco", "350ml": "350ml", "1l": "1L", "2l": "2L"
-      }[produto.categoriaBebida];
-      const descricao = produto.categoria === "bebidas" && categoriaBebidaNome
-        ? `${categoriaBebidaNome} · ${descricaoBase}`
-        : descricaoBase;
-      const precoFormatado = Number(produto.preco || 0).toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-
-      card.innerHTML = `
-        <div class="img-lanche">
-          <img src="${escapeHtmlPreview(imagem)}" alt="${escapeHtmlPreview(produto.nome)}" loading="lazy"
-               onerror="this.onerror=null;this.src='img/lanches/x-burguer.webp';">
-          <div class="booton-img"></div>
-        </div>
-        <div class="lanche-info">
-          <p class="titulo-lanche">${escapeHtmlPreview(produto.nome)}</p>
-          <p class="lanche-desc">${escapeHtmlPreview(descricao)}</p>
-          <div class="preco-add">
-            <span class="lanche-preco">R$ ${precoFormatado}</span>
-            <div class="btn-add">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14"></path><path d="M12 5v14"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      `;
-
-      card.addEventListener("click", () => abrirModal(
-        produto.nome,
-        Number(produto.preco || 0),
-        descricao,
-        imagem
-      ));
-      container.appendChild(card);
+  pararDeOuvirCardapio = db.collection("produtos").onSnapshot((snapshot) => {
+    produtosCardapio = snapshot.docs
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
+      .filter((produto) => produto.ativo !== false);
+    renderizarCardapioFirebase();
+  }, (erro) => {
+    console.error("Erro ao carregar cardápio do Firebase:", erro);
+    containers.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<p class="menu-status" role="status">Não foi possível carregar o cardápio. Verifique a conexão com o Firebase.</p>';
     });
   });
 }
 
-function ouvirProdutosPreviewFirestore() {
-  if (typeof db === "undefined") return;
-  if (pararProdutosPreview) pararProdutosPreview();
-  pararProdutosPreview = db.collection("produtos")
-    .where("ativo", "==", true)
-    .onSnapshot((snapshot) => {
-      produtosPreviewCache = [];
-      snapshot.forEach((doc) => produtosPreviewCache.push({ id: doc.id, ...doc.data() }));
-      produtosPreviewCarregado = true;
-      renderizarProdutosPreview(produtosPreviewCache);
-    }, (erro) => {
-      console.error("Não foi possível carregar produtos do Firebase:", erro);
-      produtosPreviewCarregado = false;
+function criarCardVisual({ titulo, descricao, imagem, aoClicar, desativado = false, mostrarPreco = true }) {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "carrocel-item";
+  card.setAttribute("aria-label", titulo);
+  if (desativado) {
+    card.disabled = true;
+    card.style.opacity = "0.55";
+    card.style.cursor = "not-allowed";
+  }
+
+  const blocoImagem = document.createElement("div");
+  blocoImagem.className = "img-lanche";
+  const img = document.createElement("img");
+  img.src = imagem || "img/lanches/x-burguer.webp";
+  img.alt = titulo;
+  img.loading = "lazy";
+  img.onerror = () => { img.onerror = null; img.src = "img/lanches/x-burguer.webp"; };
+  const camada = document.createElement("div");
+  camada.className = "booton-img";
+  blocoImagem.append(img, camada);
+
+  const info = document.createElement("div");
+  info.className = "lanche-info";
+  const nome = document.createElement("p");
+  nome.className = "titulo-lanche";
+  nome.textContent = titulo;
+  const desc = document.createElement("p");
+  desc.className = "lanche-desc";
+  desc.textContent = descricao || "Preparado com muito sabor";
+  const rodape = document.createElement("div");
+  rodape.className = "preco-add";
+  const preco = document.createElement("span");
+  preco.className = "lanche-preco";
+  preco.textContent = mostrarPreco ? "" : "";
+  const botao = document.createElement("div");
+  botao.className = "btn-add";
+  botao.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>';
+  rodape.append(preco, botao);
+  info.append(nome, desc, rodape);
+  card.append(blocoImagem, info);
+  if (!desativado && typeof aoClicar === "function") card.addEventListener("click", aoClicar);
+  return card;
+}
+
+function renderizarCardapioFirebase() {
+  const categoriasLanches = ["industrial", "artesanal", "misto", "hot-dog", "batata"];
+
+  categoriasLanches.forEach((categoria) => {
+    const container = document.getElementById(categoria);
+    if (!container) return;
+    container.innerHTML = "";
+
+    const produtos = produtosCardapio.filter((produto) => produto.categoria === categoria);
+    if (!produtos.length) {
+      container.innerHTML = '<p class="menu-status">Nenhum produto disponível nesta categoria.</p>';
+      return;
+    }
+
+    produtos.forEach((produto) => {
+      const card = criarCardVisual({
+        titulo: produto.nome || "Produto",
+        descricao: produto.descricao || "Preparado com muito sabor",
+        imagem: produto.imagem || "img/lanches/x-burguer.webp",
+        mostrarPreco: false,
+        aoClicar: () => abrirModal(
+          produto.nome || "Produto",
+          Number(produto.preco || 0),
+          produto.descricao || "",
+          produto.imagem || "img/lanches/x-burguer.webp"
+        )
+      });
+      const precoEl = card.querySelector(".lanche-preco");
+      precoEl.textContent = `R$ ${Number(produto.preco || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      container.appendChild(card);
     });
+  });
+
+  const bebidasContainer = document.getElementById("bebidas");
+  if (!bebidasContainer) return;
+  bebidasContainer.innerHTML = "";
+
+  Object.entries(CATEGORIAS_BEBIDAS).forEach(([chave, config]) => {
+    const opcoes = produtosCardapio.filter((produto) =>
+      produto.categoria === "bebidas" && produto.categoriaBebida === chave
+    );
+    const nomes = opcoes.slice(0, 5).map((produto) => produto.nome).filter(Boolean);
+    const descricao = nomes.length ? nomes.join(", ") : "Nenhuma bebida cadastrada";
+    const imagem = opcoes.find((produto) => produto.imagem)?.imagem || config.imagem;
+
+    const card = criarCardVisual({
+      titulo: config.titulo,
+      descricao,
+      imagem,
+      desativado: opcoes.length === 0,
+      mostrarPreco: false,
+      aoClicar: () => abrirModalBebidas(config.titulo, imagem, opcoes.map((produto) => ({
+        nome: produto.nome,
+        preco: Number(produto.preco || 0)
+      })))
+    });
+    bebidasContainer.appendChild(card);
+  });
 }
 
 function escapeHtmlPreview(valor) {
@@ -2144,9 +2167,3 @@ function escapeHtmlPreview(valor) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   })[caractere]);
 }
-
-window.addEventListener("storage", (evento) => {
-  if (evento.key === CHAVE_PRODUTOS_PREVIEW && !produtosPreviewCarregado) renderizarProdutosPreview();
-});
-
-ouvirProdutosPreviewFirestore();

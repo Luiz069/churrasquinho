@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../img/favcon.png" />
+    <title>Painel de Controle - Pedidos</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="header-top">
+      <div class="header-fixed">
+        <div class="header-atualizar">
+          <button onclick="voltarPagina()" class="btn-back">
+            <svg class="voltar" width="38" height="38" viewBox="0 0 100 100">
+              <polyline
+                points="60,20 30,50 60,80"
+                fill="none"
+                stroke="#000"
+                stroke-width="7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div>
+            <h1 class="titulo-painel-controle">Painel de Controle</h1>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn-header" onclick="location.reload()">
+              <i class="fa-solid fa-rotate"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="aba-pesquisa"
+          style="display: flex; gap: 8px; align-items: center; padding: 10px"
+        >
+          <input
+            type="text"
+            id="buscaInput"
+            class="search-box"
+            placeholder="Buscar cliente..."
+            style="flex: 1"
+          />
+          <input
+            type="date"
+            id="dataFiltro"
+            style="
+              padding: 8px;
+              border-radius: 8px;
+              border: 1px solid #ddd;
+              font-family: inherit;
+            "
+          />
+          <button
+            onclick="limparData()"
+            title="Resetar para hoje"
+            style="
+              background: #e67e22;
+              color: white;
+              border: none;
+              padding: 10px;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <i class="fa-solid fa-calendar-day"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="pendente">
+          <h3 class="status-pedid">Pendentes</h3>
+          <div class="number n-pendente" id="count-pendente">0</div>
+        </div>
+        <div class="svg-pendente">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            opacity="0.2"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-clock w-10 h-10 text-amber-100"
+            data-loc="client/src/pages/OrderDashboard.tsx:148"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="preparo">
+          <h3 class="status-pedid">Em Preparo</h3>
+          <div class="number n-preparo" id="count-preparo">0</div>
+        </div>
+
+        <div class="svg-preparo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            opacity="0.2"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-zap w-10 h-10 text-yellow-300"
+            data-loc="client/src/pages/OrderDashboard.tsx:156"
+          >
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="pronto">
+          <h3 class="status-pedid">Prontos</h3>
+          <div class="number n-pronto" id="count-pronto">0</div>
+        </div>
+
+        <div class="svg-pronto">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            opacity="0.2"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-check-circle w-10 h-10 text-green-300"
+            data-loc="client/src/pages/OrderDashboard.tsx:164"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="6 12 10 16 18 8"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-status="pendente">Pendentes</div>
+      <div class="tab" data-status="preparo">Em Preparo</div>
+      <div class="tab" data-status="pronto">Prontos</div>
+    </div>
+
+    <div id="pedidosContainer" class="orders-grid"></div>
+
+    <!-- =======================Moda l de Detalhes do Pedido======================= -->
+    <div
+      id="modalEdicao"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+      "
+    >
+      <div
+        style="
+          background: white;
+          width: 100%;
+          max-width: 550px;
+          max-height: 90vh;
+          border-radius: 15px;
+          overflow-y: auto;
+          position: relative;
+          padding: 25px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f4f4f4;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+          "
+        >
+          <h3 style="margin: 0; color: #333">
+            Editar Pedido
+            <span id="edit-id-display" style="color: #e67e22"></span>
+          </h3>
+          <button
+            onclick="fecharModalEdicao()"
+            style="
+              background: #eee;
+              border: none;
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+              font-size: 20px;
+              cursor: pointer;
+            "
+          >
+            &times;
+          </button>
+        </div>
+
+        <div id="lista-itens-edit" style="margin-bottom: 25px"></div>
+
+        <div
+          style="
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+          "
+        >
+          <h4 style="margin: 0 0 15px 0; color: #e67e22">
+            <i class="fa-solid fa-plus-circle"></i> Adicionar Produto
+          </h4>
+          <select
+            id="select-categoria"
+            onchange="carregarProdutosCategoria(this.value)"
+            style="
+              width: 100%;
+              padding: 12px;
+              border-radius: 8px;
+              border: 1px solid #ddd;
+              margin-bottom: 15px;
+              font-size: 1rem;
+            "
+          >
+            <option value="">Selecione uma Categoria</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Artesanal">Artesanal</option>
+            <option value="Misto">Misto</option>
+            <option value="HotDog">HotDog</option>
+            <option value="Batata">Batata</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Adicional">Adicionais</option>
+          </select>
+          <div
+            id="lista-produtos-categoria"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px"
+          ></div>
+        </div>
+
+        <div
+          style="
+            margin-top: 25px;
+            border-top: 2px solid #f4f4f4;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h3 id="edit-total-display" style="margin: 0; color: #27ae60">
+            Total: R$ 0,00
+          </h3>
+          <button
+            onclick="salvarEdicaoPedido()"
+            style="
+              background: #27ae60;
+              color: white;
+              border: none;
+              padding: 12px 25px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-weight: bold;
+              font-size: 1rem;
+            "
+          >
+            <i class="fa-solid fa-floppy-disk"></i> SALVAR
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="../js/painel.js"></script>
+  </body>
+</html>

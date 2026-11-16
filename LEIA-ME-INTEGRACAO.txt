@@ -1,0 +1,36 @@
+CHURRASQUINHO DURANS - CARDÁPIO DINÂMICO COM FIREBASE
+
+ESTRUTURA
+- index.html: cardápio público do cliente.
+- js/script.js: lógica do cardápio, carrinho e leitura em tempo real da coleção Firestore "produtos".
+- administrador/index.html: login administrativo existente com Google.
+- administrador/dashboard.html: painel central.
+- administrador/html/produtos.html: cadastro, edição, ativação e exclusão dos produtos.
+
+PRIMEIRA CONFIGURAÇÃO
+1. Faça backup da pasta atual do projeto.
+2. Publique/abra esta pasta integrada mantendo a estrutura de pastas.
+3. Entre em /administrador/index.html com a conta administrativa já autorizada.
+4. Abra Gerenciamento de Produtos.
+5. Se a coleção "produtos" ainda não contém os itens antigos do cardápio, clique UMA VEZ em "Importar cards do site". O importador ignora produtos com mesmo nome e categoria já existentes.
+6. Confira os produtos na lista administrativa e depois abra o cardápio público.
+
+COMO FUNCIONA
+- Os cards de lanches das categorias Industrial, Artesanal, Misto, Cachorro Quente e Batata são criados a partir do Firestore.
+- Os cards de bebidas são categorias fixas Água, Suco, 350ml, 1L e 2L; as opções dentro de cada card vêm do Firestore.
+- Espetinho e Churrasco Completo mantêm seus cards de entrada e modais especiais já existentes; as opções desses modais já consultam a coleção "produtos".
+- Desativar um produto o oculta do cardápio público, mas mantém no painel administrativo.
+- Alterações no Firestore aparecem em tempo real no cardápio.
+- O carrinho e os pedidos mantêm a lógica existente.
+
+IMPORTANTE SOBRE SEGURANÇA
+- A verificação de e-mail administrativo existente foi preservada.
+- O ZIP não inclui as regras atuais do Firestore, então não é seguro presumir que a autorização do navegador proteja o banco.
+- Leia FIRESTORE-regras-produtos-exemplo.txt e mescle somente o bloco da coleção produtos nas regras atuais, preservando pedidos, usuarios e demais coleções.
+- O cardápio público precisa ter permissão de leitura na coleção produtos; gravações devem ser restritas ao e-mail administrativo.
+
+IMAGENS
+Os caminhos das imagens cadastradas no painel devem ser relativos à raiz pública, por exemplo:
+img/lanches/x-burguer.webp
+img/bebidas/refrigerante-lata.webp
+Ou use uma URL HTTPS pública.

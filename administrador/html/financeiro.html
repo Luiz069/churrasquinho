@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../img/favcon.png" />
+
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f7f6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      /* Container Principal */
+      main {
+        padding: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background: #333; color: white; padding: 20px">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+        "
+      >
+        <div class="header-atualizar">
+          <button onclick="voltarPagina()" class="btn-back">
+            <svg class="voltar" width="38" height="38" viewBox="0 0 100 100">
+              <polyline
+                points="60,20 30,50 60,80"
+                fill="none"
+                stroke="#000"
+                stroke-width="7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div>
+            <h1 class="titulo-painel-financeiro">Painel de Finanças</h1>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn-header" onclick="location.reload()">
+              <i class="fa-solid fa-rotate"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="filtros"
+          style="display: flex; gap: 15px; align-items: center"
+        >
+          <input
+            type="date"
+            id="filtroData"
+            style="padding: 8px; border-radius: 5px; border: none"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 20px">
+      <div class="table-container">
+        <table style="width: 100%; border-collapse: collapse; text-align: left">
+          <thead style="background: #f8f9fa">
+            <tr style="text-align: center">
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Nº Pedido
+              </th>
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Cliente
+              </th>
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Produtos
+              </th>
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Qtd Total
+              </th>
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Valor
+              </th>
+              <th style="padding: 15px; border-bottom: 2px solid #eee">
+                Pagamento
+              </th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabelaPedidos"></tbody>
+        </table>
+      </div>
+
+      <div class="resumo-grid">
+        <div class="resumo-card">
+          <h3>🍔 Resumo por Lanche</h3>
+          <div id="resumoLanches"></div>
+        </div>
+        <div class="resumo-card">
+          <h3>💳 Resumo Financeiro</h3>
+          <div id="resumoFinanceiro"></div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="modalPedido"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          max-width: 500px;
+          width: 90%;
+          position: relative;
+        "
+      >
+        <span
+          onclick="fecharModal()"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 25px;
+          "
+          >&times;</span
+        >
+        <div id="detalhesPedidoContent"></div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="../js/financeiro.js"></script>
+  </body>
+</html>
