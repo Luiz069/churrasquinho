@@ -35,8 +35,25 @@
     churrascoCompleto: "Churrasco Completo"
   };
   const categoriasBebidas = {
-    agua: "Água", suco: "Suco", "350ml": "350ml", "1l": "1L", "2l": "2L"
+    agua: "Água",
+    suco: "Suco",
+    "350ml": "Refrigerante de 350 ml",
+    "1l": "Refrigerante de 1 L",
+    "2l": "Refrigerante de 2 L"
   };
+
+  const aliasesCategoriasBebidas = {
+    "Refrigerante 350ml": "350ml",
+    "Refrigerante 1L": "1l",
+    "Refrigerante 2L": "2l",
+    "350 ml": "350ml",
+    "1 L": "1l",
+    "2 L": "2l"
+  };
+  function normalizarCategoriaBebida(valor) {
+    return aliasesCategoriasBebidas[valor] || valor || "";
+  }
+
 
   const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -75,11 +92,11 @@
       ativo: true
     };
 
-    if (!produto.nome || !produto.descricao || !produto.imagem || !Number.isFinite(produto.preco) || produto.preco <= 0) {
-      mostrarErro("Confira nome, descrição, imagem e preço.");
+    if (!produto.nome || !produto.imagem || !Number.isFinite(produto.preco) || produto.preco <= 0) {
+      mostrarErro("Confira nome, imagem e preço.");
       return;
     }
-    if (produto.categoria === "bebidas" && !produto.categoriaBebida) {
+    if (produto.categoria === "bebidas" && !Object.prototype.hasOwnProperty.call(categoriasBebidas, produto.categoriaBebida)) {
       mostrarErro("Selecione a categoria da bebida: água, suco, 350ml, 1L ou 2L.");
       return;
     }
@@ -102,7 +119,7 @@
       limparFormulario();
     } catch (error) {
       console.error("Erro ao salvar produto:", error);
-      mostrarErro("Não foi possível salvar o produto no Firebase.");
+      mostrarErro(`Não foi possível salvar o produto no Firebase. ${error.code || error.message || "Verifique sua conexão e as permissões do Firestore."}`);
     } finally {
       btnSalvar.disabled = false;
     }
@@ -119,7 +136,7 @@
       preco.value = produto.preco ?? "";
       categoria.value = produto.categoria || "industrial";
       atualizarCategoriaBebida();
-      categoriaBebida.value = produto.categoriaBebida || "";
+      categoriaBebida.value = normalizarCategoriaBebida(produto.categoriaBebida);
       imagem.value = produto.imagem || "img/lanches/x-burguer.webp";
       descricao.value = produto.descricao || "";
       formTitulo.textContent = "✎ Editar produto";
