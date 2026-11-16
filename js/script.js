@@ -2126,6 +2126,20 @@ function criarCardVisual({ titulo, descricao, imagem, aoClicar, desativado = fal
   return card;
 }
 
+function imagemPadraoProduto(produto) {
+  const imagens = {
+    industrial: "img/lanches/x-burguer.webp",
+    artesanal: "img/lanches/x-burguer.webp",
+    misto: "img/lanches/misto-quente.webp",
+    "hot-dog": "img/lanches/cachorro-quente.webp",
+    batata: "img/lanches/batata-frita.webp",
+    bebidas: "img/bebidas/agua-mineral.webp",
+    espetinho: "img/churrasco/espetinho.webp",
+    churrascoCompleto: "img/churrasco/churrasco-completo.webp"
+  };
+  return imagens[produto.categoria] || "img/lanches/x-burguer.webp";
+}
+
 function renderizarCardapioFirebase() {
   const categoriasLanches = ["industrial", "artesanal", "misto", "hot-dog", "batata"];
 
@@ -2144,13 +2158,13 @@ function renderizarCardapioFirebase() {
       const card = criarCardVisual({
         titulo: produto.nome || "Produto",
         descricao: produto.descricao || "Preparado com muito sabor",
-        imagem: produto.imagem || "img/lanches/x-burguer.webp",
+        imagem: produto.imagem || imagemPadraoProduto(produto),
         mostrarPreco: false,
         aoClicar: () => abrirModal(
           produto.nome || "Produto",
           Number(produto.preco || 0),
           produto.descricao || "",
-          produto.imagem || "img/lanches/x-burguer.webp"
+          produto.imagem || imagemPadraoProduto(produto)
         )
       });
       const precoEl = card.querySelector(".lanche-preco");
