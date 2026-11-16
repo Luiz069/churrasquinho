@@ -2025,6 +2025,16 @@ function addCarrinhoChurrasco() {
 // =====================================================
 let produtosCardapio = [];
 let pararDeOuvirCardapio = null;
+const CHAVE_CACHE_CARDAPIO = "cardapioProdutosCache";
+
+function ordenarProdutosCardapio(produtos) {
+  return produtos
+    .filter((produto) => produto && produto.ativo !== false)
+    .sort((a, b) => {
+      const diferenca = Number(a.preco || 0) - Number(b.preco || 0);
+      return diferenca || String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
+    });
+}
 
 const CATEGORIAS_BEBIDAS = {
   agua: { titulo: "Água", imagem: "img/bebidas/agua-mineral.webp" },
@@ -2051,22 +2061,46 @@ function iniciarCardapioFirebase() {
   if (pararDeOuvirCardapio) return;
 
   const containers = ["industrial", "artesanal", "misto", "hot-dog", "batata", "bebidas"];
-  containers.forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = '<p class="menu-status" aria-live="polite">Carregando produtos...</p>';
-  });
+  let cacheExibido = false;
+
+  // Exibe imediatamente a última versão salva no navegador, sem esperar o Firebase.
+  try {
+    const cache = JSON.parse(localStorage.getItem(CHAVE_CACHE_CARDAPIO) || "null");
+    if (Array.isArray(cache)) {
+      produtosCardapio = ordenarProdutosCardapio(cache);
+      renderizarCardapioFirebase();
+      cacheExibido = true;
+    }
+  } catch (erroCache) {
+    console.warn("Não foi possível ler o cache do cardápio:", erroCache);
+  }
+
+  if (!cacheExibido) {
+    containers.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<p class="menu-status" aria-live="polite">Carregando produtos...</p>';
+    });
+  }
 
   pararDeOuvirCardapio = db.collection("produtos").onSnapshot((snapshot) => {
-    produtosCardapio = snapshot.docs
-      .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .filter((produto) => produto.ativo !== false)
-      .sort((a, b) => {
-        const diferenca = Number(a.preco || 0) - Number(b.preco || 0);
-        return diferenca || String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
-      });
+    produtosCardapio = ordenarProdutosCardapio(
+      snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+    );
+
+    // Mantém o cache atualizado para a próxima abertura do cardápio.
+    try {
+      localStorage.setItem(CHAVE_CACHE_CARDAPIO, JSON.stringify(produtosCardapio));
+    } catch (erroCache) {
+      console.warn("Não foi possível salvar o cache do cardápio:", erroCache);
+    }
+
     renderizarCardapioFirebase();
   }, (erro) => {
     console.error("Erro ao carregar cardápio do Firebase:", erro);
+
+    // Se já existem produtos em cache, mantém os cards visíveis.
+    if (cacheExibido) return;
+
     containers.forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = '<p class="menu-status" role="status">Não foi possível carregar o cardápio. Verifique a conexão com o Firebase.</p>';
