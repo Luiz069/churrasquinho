@@ -352,18 +352,11 @@ function abrirModalBebidas(nome, imagem, opcoes = []) {
     const marca = document.createElement("span");
     seletor.append(input, marca);
 
-    const miniatura = document.createElement("img");
-    miniatura.src = op.imagem || imagem;
-    miniatura.alt = "";
-    miniatura.loading = "lazy";
-    miniatura.style.cssText = "width:42px;height:42px;object-fit:cover;border-radius:8px;flex:0 0 42px";
-    miniatura.onerror = () => { miniatura.onerror = null; miniatura.src = imagem; };
-
     const texto = document.createElement("span");
     texto.className = "add-texto";
     texto.textContent = op.nome || "Bebida";
 
-    esquerda.append(seletor, miniatura, texto);
+    esquerda.append(seletor, texto);
 
     const valor = document.createElement("span");
     valor.className = "add-preco";
