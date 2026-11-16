@@ -352,11 +352,18 @@ function abrirModalBebidas(nome, imagem, opcoes = []) {
     const marca = document.createElement("span");
     seletor.append(input, marca);
 
+    const miniatura = document.createElement("img");
+    miniatura.src = op.imagem || imagem;
+    miniatura.alt = "";
+    miniatura.loading = "lazy";
+    miniatura.style.cssText = "width:42px;height:42px;object-fit:cover;border-radius:8px;flex:0 0 42px";
+    miniatura.onerror = () => { miniatura.onerror = null; miniatura.src = imagem; };
+
     const texto = document.createElement("span");
     texto.className = "add-texto";
     texto.textContent = op.nome || "Bebida";
 
-    esquerda.append(seletor, texto);
+    esquerda.append(seletor, miniatura, texto);
 
     const valor = document.createElement("span");
     valor.className = "add-preco";
@@ -2059,7 +2066,11 @@ function iniciarCardapioFirebase() {
   pararDeOuvirCardapio = db.collection("produtos").onSnapshot((snapshot) => {
     produtosCardapio = snapshot.docs
       .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .filter((produto) => produto.ativo !== false);
+      .filter((produto) => produto.ativo !== false)
+      .sort((a, b) => {
+        const diferenca = Number(a.preco || 0) - Number(b.preco || 0);
+        return diferenca || String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
+      });
     renderizarCardapioFirebase();
   }, (erro) => {
     console.error("Erro ao carregar cardápio do Firebase:", erro);
@@ -2153,12 +2164,14 @@ function renderizarCardapioFirebase() {
   bebidasContainer.innerHTML = "";
 
   Object.entries(CATEGORIAS_BEBIDAS).forEach(([chave, config]) => {
-    const opcoes = produtosCardapio.filter((produto) =>
-      produto.categoria === "bebidas" && normalizarCategoriaBebida(produto.categoriaBebida) === chave
-    );
+    const opcoes = produtosCardapio
+      .filter((produto) =>
+        produto.categoria === "bebidas" && normalizarCategoriaBebida(produto.categoriaBebida) === chave
+      )
+      .sort((a, b) => Number(a.preco || 0) - Number(b.preco || 0));
     const nomes = opcoes.slice(0, 5).map((produto) => produto.nome).filter(Boolean);
     const descricao = nomes.length ? nomes.join(", ") : "Nenhuma bebida cadastrada";
-    const imagem = opcoes.find((produto) => produto.imagem)?.imagem || config.imagem;
+    const imagem = config.imagem;
 
     const card = criarCardVisual({
       titulo: config.titulo,
@@ -2168,7 +2181,8 @@ function renderizarCardapioFirebase() {
       mostrarPreco: false,
       aoClicar: () => abrirModalBebidas(config.titulo, imagem, opcoes.map((produto) => ({
         nome: produto.nome,
-        preco: Number(produto.preco || 0)
+        preco: Number(produto.preco || 0),
+        imagem: produto.imagem || config.imagem
       })))
     });
     bebidasContainer.appendChild(card);
