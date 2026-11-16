@@ -2029,7 +2029,7 @@ let pararDeOuvirCardapio = null;
 const CATEGORIAS_BEBIDAS = {
   agua: { titulo: "Água", imagem: "img/bebidas/agua-mineral.webp" },
   suco: { titulo: "Suco", imagem: "img/bebidas/suco-natural.webp" },
-  "Refrigerante 350ml": { titulo: "Refrain 350ml", imagem: "img/bebidas/refrigerante-lata.webp" },
+  "Refrigerante 350ml": { titulo: "Refrigerante 350ml", imagem: "img/bebidas/refrigerante-lata.webp" },
   "Refrigerante 1L": { titulo: "Refrigerante 1L", imagem: "img/bebidas/refrigerante-1L.webp" },
   "Refrigerante 2L": { titulo: "Refrigerante 2L", imagem: "img/bebidas/refrigerante-2L.webp" }
 };
