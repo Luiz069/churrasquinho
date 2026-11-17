@@ -1,2 +1,0 @@
---> mudar pedido para numero
---> criar um painel com quantidades de cada status
